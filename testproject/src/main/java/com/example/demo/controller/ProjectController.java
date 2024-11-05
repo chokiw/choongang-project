@@ -69,12 +69,12 @@ public class ProjectController {
 		
 		model.addAttribute("result",result);
 		
-		return "membershipresult";
+		 return "membershipresult";
 	}
 	
 	@RequestMapping("/snspage")
 	public String snspage() {
-		return "snspage";
+		return  "snspage";
 	}
 	
 	@RequestMapping("/snslist")
