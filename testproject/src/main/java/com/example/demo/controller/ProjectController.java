@@ -204,6 +204,11 @@ public class ProjectController {
 		return "sns_board";
 	}
 	
+	@RequestMapping("/sns_write")
+	public String sns_write() {
+		return "sns_write";
+	}
+	
 	@RequestMapping("/sns_detail")
 	public String sns_detail(@RequestParam(value="pageNum",defaultValue="1") String pageNum,@RequestParam(value="sns_no",defaultValue="227") String sns_no,Model model) {
 		

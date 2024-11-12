@@ -65,160 +65,82 @@
         </div>
         
         <div class="content">
-        <form name="memberForm" method="post" action="/membership" enctype="multipart/form-data" onsubmit="return check()">
+        <form name="memberForm" method="post" action="/membership" onsubmit="return check()">
             <span style="font-size: 36px; font-weight: 700;">트랙 게시판</span><br><br>
-
             <div class="sns_title">
-                <span style="font-size: 30px; font-weight: 600;">${board.sns_subject}</span>&nbsp;&nbsp;
-                <!-- select로 설정한 지역 -->
-                <span style="font-family: 'Gothic A1', sans-serif; color: #747474;">${board.sns_address1} ${board.sns_address2}</span>
+            	<span>제목 : </span><input type="text" style="font-size: 30px; font-weight: 600;">
             </div>
-
+            
             <div class="sns_writer">
-                <img src="${pageContext.request.contextPath}/img/Jellyfish.jpg" class="myimg">
-                <span
-                    style="font-size: 14px; font-weight: 600; font-family: 'Gothic A1', sans-serif; margin-top: 15px; margin-left: 10px;">${board.user_id }</span>
+                	<img src="${pageContext.request.contextPath}/uimg/${member.user_photo}" class="myimg">
+                	<span style="font-size: 14px; font-weight: 600; font-family: 'Gothic A1', sans-serif; margin-top: 15px; margin-left: 10px;">${member.user_nickname}</span>
             </div>
+            
+            <span>지역</span><br>
+                <select id="sns_address1" name="user_address1" class="box3">
+                    <option value="">광역시선택</option>
+                    <option value="서울시">서울시</option>
+                </select>
+                <select id="sns_address2" name="user_address2" class="box3">
+                    <option value="">지역선택</option>
+                    <option value="강남구">강남구</option>
+                    <option value="강동구">강동구</option>
+                    <option value="강북구">강북구</option>
+                    <option value="강서구">강서구</option>
+                    <option value="관악구">관악구</option>
+                    <option value="광진구">광진구</option>
+                    <option value="구로구">구로구</option>
+                    <option value="금천구">금천구</option>
+                    <option value="노원구">노원구</option>
+                    <option value="도봉구">도봉구</option>
+                    <option value="동대문구">동대문구</option>
+                    <option value="동작구">동작구</option>
+                    <option value="마포구">마포구</option>
+                    <option value="서대문구">서대문구</option>
+                    <option value="서초구">서초구</option>
+                    <option value="성동구">성동구</option>
+                    <option value="성북구">성북구</option>
+                    <option value="송파구">송파구</option>
+                    <option value="양천구">양천구</option>
+                    <option value="영등포구">영등포구</option>
+                    <option value="용산구">용산구</option>
+                    <option value="은평구">은평구</option>
+                    <option value="종로구">종로구</option>
+                    <option value="중구">중구</option>
+                    <option value="중랑구">중랑구</option>
+                </select> <br><br>
 
-            <div class="date_read">
-                <span style="font-size: 14px; font-family: 'Gothic A1', sans-serif;"><fmt:formatDate value="${board.sns_date}" pattern="yyyy-MM-dd HH:mm:ss" /></span>
-                <span style="font-size: 14px; font-family: 'Gothic A1', sans-serif; float: right; font-weight: 600;">조회수
-                    : ${board.sns_readcount}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;추천수 : ${board.sns_good}</span>
-            </div>
             <hr><br><br>
             
             <div class="maincontent">
-                <div id="map" style="width: 800px; height: 600px; float: left;"></div>
-		 		<script>
-    				var mapContainer = document.getElementById('map'), // 지도를 표시할 div  
-						   			   mapOption = {
-    								   		center : new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
-											// 지도의 확대 레벨
-											level: 3
-										};
-
-					var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
-
-					//일반 지도와 스카이뷰로 지도 타입을 전환할 수 있는 지도타입 컨트롤을 생성합니다
-					var mapTypeControl = new kakao.maps.MapTypeControl();
-
-					// 지도에 컨트롤을 추가해야 지도위에 표시됩니다
-					// kakao.maps.ControlPosition은 컨트롤이 표시될 위치를 정의하는데 TOPRIGHT는 오른쪽 위를 의미합니다
-					map.addControl(mapTypeControl, kakao.maps.ControlPosition.TOPRIGHT);
-
-					// 지도 확대 축소를 제어할 수 있는  줌 컨트롤을 생성합니다
-					var zoomControl = new kakao.maps.ZoomControl();
-					map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
-
-					var path;
-					var distance;
-					var content;
-					var clickLine // 마우스로 클릭한 좌표로 그려질 선 객체입니다
-					var distanceOverlay; // 선의 거리정보를 표시할 커스텀오버레이 입니다
-					let cnt=0;
-		
-					//좌표생성
-					var coords = new kakao.maps.LatLng(${c[0].lat}, ${c[0].lng});
-					// 마커를 생성합니다
-					var marker = new kakao.maps.Marker({
-		    						position: coords
-								 });
-
-					// 마커가 지도 위에 표시되도록 설정합니다
-					marker.setMap(map);
-					//지도 처음 중앙 위치 지정
-					map.setCenter(coords);
-		
-					//경로 생성
-					clickLine = new kakao.maps.Polyline({
-						map: map, // 선을 표시할 지도입니다 
-						path: [coords], // 선을 구성하는 좌표 배열입니다 클릭한 위치를 넣어줍니다
-						strokeWeight: 3, // 선의 두께입니다 
-						strokeColor: '#db4040', // 선의 색깔입니다
-						strokeOpacity: 1, // 선의 불투명도입니다 0에서 1 사이값이며 0에 가까울수록 투명합니다
-						strokeStyle: 'solid' // 선의 스타일입니다
-					});
-					displayCircleDot(coords, 0);
-					cnt++;
-		
-					<c:forEach var="i" begin="1" end="${fn:length(c)-1}">
-						cnt++;
-						coords = new kakao.maps.LatLng(${c[i].lat}, ${c[i].lng});
-						path = clickLine.getPath();
-						path.push(coords);
-						clickLine.setPath(path);
-						distance = Math.round(clickLine.getLength());
-						displayCircleDot(coords, distance);
-					</c:forEach>
-
-					// 선이 그려지고 있는 상태일 때 지도를 클릭하면 호출하여 
-					// 클릭 지점에 대한 정보 (동그라미와 클릭 지점까지의 총거리)를 표출하는 함수입니다
-					function displayCircleDot(position, distance) {
-						// 클릭 지점을 표시할 빨간 동그라미 커스텀오버레이를 생성합니다
-						var circleOverlay = new kakao.maps.CustomOverlay({
-							content: '<span class="dot"></span>',
-							position: position,
-							zIndex: 1
-						});
-
-						// 지도에 표시합니다
-						circleOverlay.setMap(map);
-
-	
-						if (distance > 0) {
-							var dc;	 
-	
-							if(cnt==${fn:length(c)}) dc='<div class="dotOverlay">거리 <span class="number">'+ distance + '</span>m<br><span>도착지점</span></div>';
-							else dc='<div class="dotOverlay">거리 <span class="number">'+ distance + '</span>m</div>';
-	
-							// 클릭한 지점까지의 그려진 선의 총 거리를 표시할 커스텀 오버레이를 생성합니다
-							var distanceOverlay = new kakao.maps.CustomOverlay({
-								content: dc,
-								position: position,
-								yAnchor: 1,
-								zIndex: 2
-							});
-
-							// 지도에 표시합니다
-							distanceOverlay.setMap(map);
-						};
-	
-	
-					}
-				</script>
+		 		
 		
 		
 		
 		  	<div style="margin-left: 100px; margin-top: 50px; width: 500px; text-align: center; float: right;">
             	<span class="content1">달린 거리</span> <br><br>
-                <span class="content2">${rd.runner_data_distance}m</span><br><br><br><br>
+                <span class="content2">0m</span><br><br><br><br>
 
                 <span class="content1">달린 시간</span><br><br>
                 <span class="content2">
-                    <fmt:formatNumber type="number" maxFractionDigits="0" value="${(rd.runner_data_time/60)}"></fmt:formatNumber>분                     
-                    ${rd.runner_data_time%60}초                     
+<%--                     <fmt:formatNumber type="number" maxFractionDigits="0" value="${(rd.runner_data_time/60)}"></fmt:formatNumber> --%>0분
+                    <%--${rd.runner_data_time%60} --%>초                     
                  </span><br><br><br><br>
 
                  <span class="content1">평균 페이스</span><br><br>
                  <span class="content2">
-                     <fmt:formatNumber type="number" maxFractionDigits="0" value="${rd.runner_data_time*1000/rd.runner_data_distance/60}"/>'
-                     <fmt:formatNumber type="number" maxFractionDigits="0" value="${rd.runner_data_time*1000/rd.runner_data_distance%60}"/>"
+                     <%--<fmt:formatNumber type="number" maxFractionDigits="0" value="${rd.runner_data_time*1000/rd.runner_data_distance/60}"/> --%>0'
+                     <%--<fmt:formatNumber type="number" maxFractionDigits="0" value="${rd.runner_data_time*1000/rd.runner_data_distance%60}"/> --%>0"
                   </span>
            </div>
           </div>
 
             <div style="margin-left: 50px; margin-top: 20px; width: 1400px;  height: auto;">
-                <span style="font-size: 24px; font-family: 'Gothic A1', sans-serif;">${board.sns_content}</span>
+                <span style="font-size: 24px; font-family: 'Gothic A1', sans-serif;">내용작성</span><br>
+                <textarea name="sns_content"  id="sns_content" rows="8" cols="50" ></textarea>
             </div>
 			</form>
-            <!-- 추천버튼 -->
-            <div align=center style="margin-top: 40px;">
-            <a href="qeqwe" class="recomend">
-            <br><i class="fa-solid fa-fire" style="font-size: 32px; color: #333333;"></i><br>
-                <span class="run">RUN</span>
-            </a>
-            </div>
-
+            
             <!-- 수정, 삭제 글목록 -->
              <div align="right" style="margin-top: 10px;">
                 <a class="delete" href="asd"><i class="fa-solid fa-file-pen"></i>&nbsp;수정</a>&nbsp;&nbsp;&nbsp;
