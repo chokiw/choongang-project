@@ -3,6 +3,8 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.example.demo.dao.ProjectDAO">
+
+	<!-- sns게시판 갯수 불러오기 -->
 	<select id="getTotal" parameterType="sns" resultType="int">
 		select count(*) from sns
 		<where>
@@ -15,6 +17,8 @@
 			</if>
 		</where>
 	</select>
+	
+	<!-- 페이지 처리에 의한 sns게시판 데이터리스트 불러오기 -->
 	<select id="list" parameterType="sns" resultType="sns">
 		select * from (select a.*,rowNum rn from (
 			select * from sns
@@ -30,6 +34,8 @@
 			 order by sns_no desc) a )
 			where rn between #{startRow} and #{endRow}
 	</select>
+	
+	<!-- 회원가입을 위한 sql -->
 	<insert id="insert" parameterType="runner">
 		insert into runner values(#{user_id},#{user_passwd},#{user_name},
 								  #{user_nickname},#{user_jumin1},#{user_jumin2},
@@ -88,7 +94,6 @@
 	</select>
 	
 	<!-- 비번 찾기 -->
-
 	<select id="findpass" parameterType="runner" resultType="runner">
 
 		select * from runner where  user_id = #{user_id}   and  user_jumin1 = #{user_jumin1} and user_jumin2 = #{user_jumin2}
