@@ -1,0 +1,30 @@
+@charset "UTF-8";
+
+span {
+	font-size: 20px;
+	font-family: "Gothic A1", sans-serif;
+	font-weight: bold;
+	text-align: center;
+}
+
+.box {
+	border-style: ridge;
+	border-radius: 5px;
+	border-width: 1px;
+	border-color: gray;
+	height: 20px;
+	width: 150px;
+	font-size: 18px;
+	font-family: "Gothic A1", sans-serif;
+}
+
+.idok {
+	width: 120px;
+	height: 50px;
+	border-radius: 20px;
+	margin-top: 30px;
+	right: 240px;
+	font-weight: 500;
+	font-family: "Gothic A1", sans-serif;
+	font-size: 18px;
+}

@@ -1,0 +1,137 @@
+@charset "UTF-8";
+
+.member {
+	width: 600px;
+	height: 1000px;
+	margin-left: auto;
+	margin-right: auto;
+	background-color: white;
+	position: relative;
+}
+
+.logo {
+	font-family: "Bangers", system-ui;
+	font-style: normal;
+	color: #cf3e00;
+	font-size: 60px;
+	font-weight: 800;
+	text-align: center;
+}
+
+.title {
+	font-size: 20px;
+	font-family: "Gothic A1", sans-serif;
+	font-weight: bold;
+	text-align: center;
+}
+
+.form {
+	width: 580px;
+	margin-left: 40px;
+	margin-right: auto;
+}
+
+.imgform {
+	position: absolute;
+	top: 160px;
+	right: 40px;
+	width: 200px;
+	height: 250px;
+}
+
+.box {
+	border-style: ridge;
+	border-radius: 5px;
+	border-width: 1px;
+	border-color: gray;
+	height: 20px;
+	width: 200px;
+	font-size: 18px;
+	font-family: "Gothic A1", sans-serif;
+}
+
+.box1 {
+	border-style: ridge;
+	border-radius: 5px;
+	border-width: 1px;
+	border-color: gray;
+	height: 20px;
+	width: 150px;
+	font-size: 18px;
+	font-family: "Gothic A1", sans-serif;
+}
+
+.box2 {
+	border-style: ridge;
+	border-radius: 5px;
+	border-width: 1px;
+	border-color: gray;
+	height: 18px;
+	width: 80px;
+	font-size: 14px;
+	font-family: "Gothic A1", sans-serif;
+}
+
+.box3 {
+	border-style: ridge;
+	border-radius: 5px;
+	border-width: 1px;
+	border-color: gray;
+	height: 18px;
+	width: 100px;
+	font-size: 14px;
+	font-family: "Gothic A1", sans-serif;
+}
+
+span {
+	font-size: 16px;
+	font-family: "Gothic A1", sans-serif;
+	font-weight: 600;
+}
+
+input:focus {
+	outline: 2px solid #cf3e00;
+	;
+}
+
+.alertmsg {
+	display: none;
+	font-size: 12px;
+	font-weight: 600;
+	font-family: "Gothic A1", sans-serif;
+	margin-top: 5px;
+}
+
+.profile_img {
+	border-radius: 50%;
+	width: 150px;
+	height: 150px;
+	border-style: ridge;
+	margin-top: 20px;
+	margin-left: auto;
+	margin-right: auto;
+	overflow: hidden;
+	/* 이미지가 div를 벗어나지 않도록 처리 */
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.profile_img img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	/* 이미지가 div 안에 맞게 채워지도록 */
+}
+
+.memberok {
+	width: 100px;
+	height: 50px;
+	border-radius: 20px;
+	margin-top: 50px;
+	right: 240px;
+	position: absolute;
+	font-weight: 500;
+	font-family: "Gothic A1", sans-serif;
+	font-size: 18px;
+}
