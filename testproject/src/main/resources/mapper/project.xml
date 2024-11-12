@@ -27,8 +27,8 @@
 				${search} like '%'||#{keyword}||'%'
 			</if>
 			<if test="keyword != null and search=='subcon'">
-				subject like '%'||#{keyword}||'%' or
-				content like '%'||#{keyword}||'%'
+				sns_subject like '%'||#{keyword}||'%' or
+				sns_content like '%'||#{keyword}||'%'
 			</if>
 		</where>			
 			 order by sns_no desc) a )

@@ -170,7 +170,7 @@
           </div>
 
             <div style="margin-top: 20px; height: auto;">
-                <span style="font-size: 24px; font-family: 'Gothic A1', sans-serif;">여기에 내용입력</span>
+                <span style="font-size: 24px; font-family: 'Gothic A1', sans-serif;">${board.sns_content}</span>
             </div>
 
             <!-- 추천버튼 -->
