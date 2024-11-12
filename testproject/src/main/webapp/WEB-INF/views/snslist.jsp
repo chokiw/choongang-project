@@ -6,7 +6,7 @@
 
 
 <!DOCTYPE html>
-<html>
+<html  lang="ko">
 <head>
 
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -18,16 +18,30 @@
 <link href="/css/sns_board.css" rel="stylesheet">
 <link href="/css/snslist.css" rel="stylesheet">
 <script type="text/javascript">
+
+<c:if test="${not empty search}">var search='${search}' </c:if>
+<c:if test="${not empty keyword}">var keyword='${keyword}' </c:if>
+
 function getlist(pageNum){
 	var uri = '${path}/snslist?pageNum='+pageNum;
 	$('#board').load(uri);
 }
 
-function getsearch(pageNum, search, keyword) {
+function getsearch(pageNum) {
     var uri = '${path}/snslist?pageNum='+pageNum+'&search='+search+'&keyword='+keyword;
     $('#board').load(uri);
 }
 
+function getsearchfisrt() {
+	if($("select[name='search']").val()=="") return false; 
+	else if($("#keyword").val()=="") return false; 
+	else{
+    	var uri = '${path}/snslist?pageNum='+1+'&search='
+    			  +$("select[name='search']").val()
+    			  +'&keyword='+$("#keyword").val();
+   	 	$('#board').load(uri);
+	}
+}
 </script>
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <meta charset="UTF-8">
@@ -63,8 +77,8 @@ function getsearch(pageNum, search, keyword) {
 				<c:forEach var="board" items="${list }">
 					<tr>
 						<td>${no1}</td>
-						<td><a href="">  ${board.user_id}</a></td>
-						<td>${board.sns_subject}</td>
+						<td>${board.user_id}</td>
+						<td><a href="sns_detail?pageNum=${pageNum}&sns_no=${board.sns_no}">${board.sns_subject}</a></td>
 						<td><fmt:formatDate value="${board.sns_date}"
 							pattern="yyyy-MM-dd HH:mm:ss" /></td>
 						<td>${board.sns_readcount}</td>
@@ -83,11 +97,11 @@ function getsearch(pageNum, search, keyword) {
 				</c:if>
 				<c:forEach var="i" begin="${pp.startPage}" end="${pp.endPage}">
 					<li <c:if test="${pp.currentPage==i}">class="active"</c:if>><a
-						href="javascript:getsearch(${i}&search=${search}&keyword=${keyword})">${i}</a></li>
+						href="javascript:getsearch(${i})">${i}</a></li>
 				</c:forEach>
 				<c:if test="${pp.endPage < pp.totalPage}">
 					<li><a
-						href="javascript:getsearch(${pp.endPage + 1}&search=${search}&keyword=${keyword})">다음</a></li>
+						href="javascript:getsearch(${pp.endPage + 1})">다음</a></li>
 				</c:if>
 			</c:if>
 			
@@ -105,7 +119,6 @@ function getsearch(pageNum, search, keyword) {
 				</c:if>
 			</c:if>
 		</ul>
-		  <form action="snslist">
 			<select name="search" style="width: 100px; height: 30px; font-size: 14px;">
 				<option value="">검색</option>
 				<option value="user_id">아이디</option>
@@ -113,9 +126,8 @@ function getsearch(pageNum, search, keyword) {
 				<option value="sns_content">내용</option>
 				<option value="subcon">제목+내용</option>
 			</select> 
-			<input type="text" name="keyword"> 
-			<input type="submit" value="확인">
-		</form>
+			<input type="text" id="keyword" name="keyword"> 
+			<button type="button" onclick="getsearchfisrt()">확인</button>
 	</div>
 </body>
 </html>

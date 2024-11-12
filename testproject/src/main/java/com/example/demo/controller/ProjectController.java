@@ -4,7 +4,6 @@ import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
-import java.util.UUID;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,8 +14,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.example.demo.model.Coordinate;
 import com.example.demo.model.Member;
 import com.example.demo.model.Runner;
+import com.example.demo.model.Runner_data;
 import com.example.demo.model.SnsBoard;
 import com.example.demo.service.PagingPgm;
 import com.example.demo.service.ProjectService;
@@ -36,6 +37,10 @@ public class ProjectController {
 	@RequestMapping("/main")
 	public String main() {
 		return "main";
+	}
+	@RequestMapping("/main2")
+	public String main2() {
+		return "main2";
 	}
 	
 	@RequestMapping("/mainpage")
@@ -200,7 +205,16 @@ public class ProjectController {
 	}
 	
 	@RequestMapping("/sns_detail")
-	public String sns_detail() {
+	public String sns_detail(@RequestParam(value="pageNum",defaultValue="1") String pageNum,@RequestParam(value="sns_no",defaultValue="227") String sns_no,Model model) {
+		
+		SnsBoard board=service.getboard(Integer.parseInt(sns_no));
+		Runner_data rd= service.getrdata(board.getRunner_data_no());
+		Coordinate[] c= service.getcdata(board.getRunner_data_no());
+		
+		model.addAttribute("rd",rd);
+		model.addAttribute("c",c);
+		model.addAttribute("pageNum",pageNum);
+		model.addAttribute("board",board);
 		return "sns_detail";
 	}
 	
@@ -223,6 +237,7 @@ public class ProjectController {
 		System.out.println("no:"+no);
 		List<SnsBoard> list = service.list(sns);
 		model.addAttribute("list", list);
+		model.addAttribute("pageNum",pageNum);
 		model.addAttribute("no", no);
 		model.addAttribute("pp", pp);
 		// 검색
