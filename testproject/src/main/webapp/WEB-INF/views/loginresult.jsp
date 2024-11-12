@@ -14,7 +14,7 @@
 			location.href="mainpage";
 		</script>
 	</c:if>
-	<c:if test="${result!=1}">
+	<c:if test="${result==-1}">
 		<script>
 			alert("회원정보가 일치하지 않습니다.");
 			history.go(-1);

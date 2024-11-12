@@ -12,6 +12,7 @@
     <script src="http://code.jquery.com/jquery-latest.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://kit.fontawesome.com/5e485453d8.js" crossorigin="anonymous"></script>
+    <link href="/css/common.css" rel="stylesheet">
     <link href="/css/mate_detail.css" rel="stylesheet">
     <script src="/js/mate_detail.js"></script>
     <title>Document</title>
@@ -19,97 +20,54 @@
 
 <body>
     <div class="container">
-        <div class="head">
-            <!-- 페이지 제목 누르면 메인페이지로 이동 -->
-            <a href="mainpage" class="title">RUNAWAY</a>
-
-            <!-- 마이페이지 버튼 -->
-            <div class="mypage">
-                <a href="mypage" class="mypage_text">마이페이지</a>
-            </div>
-
-            <!-- 로그아웃 버튼 -->
-            <div class="logout">
-
-                <a href="sadad" class="logout_text"> <i class="fa-solid fa-right-from-bracket"
-                        style="color: #f4efe2;"></i>&nbsp;&nbsp;로그아웃</a>
-            </div>
-
-        </div>
+    
+          <!-- 탑 메뉴 -->
+        <jsp:include page="header.jsp"></jsp:include>
+        
+        <!-- 사이드(왼쪽) 메뉴 -->
+        <jsp:include page="side.jsp"></jsp:include>
 
 
-
-        <!-- 사이드바 -->
-        <div class="side" align="center">
-
-            <div class="sns">
-
-                <a href="sns_board" class="sns_text"><i class="fa-solid fa-person-running"
-                        style="font-size: 30px;"></i>&nbsp;&nbsp;&nbsp;&nbsp;트랙</a>
-            </div>
-
-            <div class="mate">
-
-                <a href="mate_board" class="mate_text"><i class="fa-solid fa-people-group"
-                        style="font-size: 30px;"></i>&nbsp;&nbsp;&nbsp;&nbsp;메이트</a>
-            </div>
-
-            <div class="record">
-
-                <a href="run" class="sns_text"><i class="fa-solid fa-stopwatch"
-                        style="font-size: 30px;"></i>&nbsp;&nbsp;&nbsp;&nbsp;기록</a>
-            </div>
-
-           
-        </div>
-
-        <div class="content">
+         <main class="content">
             <span style="font-size: 36px; font-weight: 700;">메이트 게시판</span><br><br>
-
             <div class="sns_title">
                 <span style="font-size: 30px; font-weight: 600;">오늘 같이 달리실분~</span>&nbsp;&nbsp;
-                <!-- select로 설정한 지역 -->
                 <span style="font-family: 'Gothic A1', sans-serif; color: #747474;">서울시 강남구</span>
             </div>
-
             <div class="sns_writer">
-                <img src="/img/Penguins.jpg" class="myimg">
+                <img src="Penguins.jpg" class="myimg">
                 <span
                     style="font-size: 14px; font-weight: 600; font-family: 'Gothic A1', sans-serif; margin-top: 15px; margin-left: 10px;">강남구
                     퀵실버</span>
             </div>
-
             <div class="date_read">
                 <span style="font-size: 14px; font-family: 'Gothic A1', sans-serif;">2024-11-01 12:34</span>
                 <span style="font-size: 14px; font-family: 'Gothic A1', sans-serif; float: right; font-weight: 600;">조회수
                     : 1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;모집인원 : 2/5</span>
             </div>
             <hr><br><br>
-
             <div class="maincontent">
-                <img src="/img/Penguins.jpg" style="width: 800px; height: 600px; margin-left: 300px;">
-
+                <img src="/img/Hydrangeas.jpg" alt="Route">
+                
             </div>
-
-            <div style="margin-left: 50px; margin-top: 20px; width: 1400px;  height: auto;">
-                <span style="font-size: 20px; font-family: 'Gothic A1', sans-serif; font-style: normal;">오늘 오후 8시에 위 루트
+            <div style="margin-top: 20px; height: auto;">
+                <span style="font-size: 24px; font-family: 'Gothic A1', sans-serif;">오늘 오후 8시에 위 루트
                     달릴 사람 구합니다 8시에 강남역 12번출구 앞에서 만나요</span>
-
             </div>
 
-            <!-- 추천버튼 -->
-            <div align=center style="margin-top: 50px;">
-                <a href="asd" class="request">참가신청</a>
-                <a href="asd" class="cancel" style="margin-left: 60px;">참가취소</a>
+            <div class="button-container">
+                <button class="action-button start">참가신청</button>
+                <button class="action-button stop">신청취소</button>
             </div>
 
-            <!-- 수정, 삭제 글목록 -->
-            <div align="right" style="margin-top: 10px;">
-                <a class="delete" href="asd"><i class="fa-solid fa-file-pen"></i>&nbsp;수정</a>&nbsp;&nbsp;&nbsp;
-                <a class="delete" href="das"><i class="fa-regular fa-trash-can"></i>&nbsp;삭제</a>&nbsp;&nbsp;&nbsp;
-                <a class="delete" href="das"><i class="fa-solid fa-table-list"></i>&nbsp;글목록</a>
+           
+
+            <div class="action-buttons">
+                <a class="delete" href="#"><i class="fa-solid fa-file-pen"></i>&nbsp;수정</a>
+                <a class="delete" href="#"><i class="fa-regular fa-trash-can"></i>&nbsp;삭제</a>
+                <a class="delete" href="#"><i class="fa-solid fa-table-list"></i>&nbsp;글목록</a>
             </div>
-        </div>
+        </main>
     </div>
 </body>
 

@@ -63,4 +63,14 @@ public class ProjectService {
 		return dao.listfromrd(rd);
 	}
 
+	public Runner findid(Runner runner) {
+		
+		return dao.findid(runner);
+	}
+
+	public Runner findpass(Runner runner) {
+		
+		return dao.findpass(runner);
+	}
+
 }
