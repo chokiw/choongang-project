@@ -58,4 +58,16 @@
 	<select id="getcdata" parameterType="int" resultType="coordinate">
 		select * from coordinate where runner_data_no=#{runner_data_no}
 	</select>
+	<select id="getTotalfromrd" parameterType="String" resultType="int">
+		select count(*) from runner_data where user_id = #{user_id}
+	</select>
+	
+	<select id="listfromrd" parameterType="runner_data" resultType="runner_data">
+		select * 
+		from (select a.*,rowNum rn 
+			  from ( select * 
+			  		 from runner_data 
+			  		 order by runner_data_date desc) a )
+			where rn between #{startRow} and #{endRow}
+	</select>
 </mapper>

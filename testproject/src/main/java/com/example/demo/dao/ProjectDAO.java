@@ -30,4 +30,8 @@ public interface ProjectDAO {
 
 	Coordinate[] getcdata(int runner_data_no);
 
+	int getTotalfromrd(String user_id);
+
+	List<Runner_data> listfromrd(Runner_data rd);
+
 }

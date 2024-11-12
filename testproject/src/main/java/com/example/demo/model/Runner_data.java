@@ -14,4 +14,8 @@ public class Runner_data {
 	private String runner_data_time;
 	private Date runner_data_date;
 	private int runner_data_del;
+	
+	// page
+	private int startRow;
+	private int endRow;
 }

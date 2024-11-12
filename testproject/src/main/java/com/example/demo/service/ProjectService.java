@@ -55,4 +55,12 @@ public class ProjectService {
 		return dao.getcdata(runner_data_no);
 	}
 
+	public int getTotalfromrd(String user_id) {
+		return dao.getTotalfromrd(user_id);
+	}
+
+	public List<Runner_data> listfromrd(Runner_data rd) {
+		return dao.listfromrd(rd);
+	}
+
 }
