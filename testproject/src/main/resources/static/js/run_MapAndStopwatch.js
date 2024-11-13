@@ -38,6 +38,7 @@
 
 	} else { // HTML5의 GeoLocation을 사용할 수 없을때 마커 표시 위치와 인포윈도우 내용을 설정합니다
 		var locPosition = new kakao.maps.LatLng(33.450701, 126.570667);
+		alert("현재위치를 불러오기에 실패했습니다.");
 		map.setCenter(locPosition);
 
 	}
@@ -56,6 +57,7 @@
 			});
 		} else { // HTML5의 GeoLocation을 사용할 수 없을때 마커 표시 위치와 인포윈도우 내용을 설정합니다
 			l_position = new kakao.maps.LatLng(33.450701, 126.570667);
+			alert("현재위치를 불러오기에 실패했습니다.");
 		}
 	
 		return l_position;
