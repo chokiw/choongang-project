@@ -70,7 +70,7 @@
             
             <div class="sns_writer">
                 <select id="sns_address1" name="user_address1">
-                    <option value="">광역시선택</option>
+                    <option value="">광역시선택</option> 
                     <option value="서울시">서울시</option>
                 </select>
                 <select id="sns_address2" name="user_address2">
