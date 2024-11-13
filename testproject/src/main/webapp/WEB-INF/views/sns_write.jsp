@@ -24,7 +24,7 @@
     <script src="/js/sns_detail.js"></script>
     <title>Document</title>
 	<script>
-		function openPopup(url) {
+		function openPopup(url) { 
 			// 화면 크기 가져오기
 			var screenWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
 			var screenHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
