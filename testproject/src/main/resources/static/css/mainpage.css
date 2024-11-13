@@ -1,267 +1,326 @@
-@charset "UTF-8";
-
 .track {
-	margin-left: 50px;
-	margin-top: 14px;
+    margin-left: 50px;
+    margin-top: 14px;
 }
 
 .rankbox {
-	width: 100%;
-	max-width: 1300px;
-	height: auto;
-	border-style: solid;
-	margin: 20px auto;
-	display: flex;
-	flex-wrap: wrap;
-	justify-content: center;
+    width: 100%;
+    max-width: 1300px;
+    height: auto;
+    border-style: solid;
+    margin: 20px auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+
 }
+
+
+
 
 .pricebox {
-	display: flex;
-	flex-wrap: wrap;
-	width: 1000px;
-	max-width: 1000px;
-	height: auto;
-	margin: 100px auto 0;
-	justify-content: center;
+    display: flex;
+    flex-wrap: wrap;
+    width: 1000px;
+    max-width: 1000px;
+    height: auto;
+    margin: 100px auto 0;
+    justify-content: center;
+
 }
+
+
 
 .gold {
-	width: 100%;
-	max-width: 400px;
-	height: auto;
-	margin: 0 25px 50px;
-	text-align: center;
+    width: 100%;
+    max-width: 400px;
+    height: auto;
+    margin: 0 25px 50px;
+    text-align: center;
+    flex-basis: 100%;
+    margin-bottom: 20px;    
 }
+
 
 img {
-	object-fit: cover;
-	max-width: 100%;
-	height: auto;
+    object-fit: cover;
+    max-width: 100%;
+    height: auto;
+
 }
 
+
 .nickname {
-	font-family: "Gothic A1", sans-serif;
-	font-weight: 600;
-	font-style: normal;
-	font-size: 28px;
-	color: black;
+    font-family: "Gothic A1", sans-serif;
+    font-weight: 600;
+    font-style: normal;
+    font-size: 28px;
+    color: black;
 }
 
 .location {
-	font-family: "Gothic A1", sans-serif;
-	font-style: normal;
-	font-size: 16px;
-	color: darkgray;
+    font-family: "Gothic A1", sans-serif;
+    font-style: normal;
+    font-size: 16px;
+    color: darkgray;
 }
+
+#track1{
+    padding-left: 200px;
+    padding-right: 200px;
+}
+
 
 
 .trackimg {
-	width: 400px;
-	max-width: 400px;
-	height: 300px;
-	border-style: ridge;
-	border-radius: 10%;
-	border-color: black;
-	image-rendering: -webkit-optimize-contrast;
-	image-rendering: crisp-edges;
-	transform: translateZ(0);
-	backface-visibility: hidden;
+    width: 400px;
+    max-width: 400px;
+    height: 300px;
+    border-style: ridge;
+    border-radius: 10%;
+    border-color: black;
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+
 }
 
 .trackimg:hover {
-	/* img 마우스 오버시*/
-	cursor: pointer;
-	transform: scale(1.5);
-	/* 마우스 오버시 이미지 크기를 1.1 배만큼 확대시킨다. */
-	-o-transform: scale(1.5);
-	-moz-transform: scale(1.5);
-	-webkit-transform: scale(1.5);
-	transition: transform .35s;
-	-o-transition: transform .35s;
-	-moz-transition: transform .35s;
-	-webkit-transition: transform .35s;
-	/* 마우스 오버시 이미지가 즉시 커지지않고 30.5 second 의 시간에 걸쳐 커진다 애니메이션 효과*/
+    /* img 마우스 오버시*/
+    cursor: pointer;
+    transform: scale(1.5);
+    /* 마우스 오버시 이미지 크기를 1.1 배만큼 확대시킨다. */
+    -o-transform: scale(1.5);
+    -moz-transform: scale(1.5);
+    -webkit-transform: scale(1.5);
+    transition: transform .35s;
+    -o-transition: transform .35s;
+    -moz-transition: transform .35s;
+    -webkit-transition: transform .35s;
+    /* 마우스 오버시 이미지가 즉시 커지지않고 30.5 second 의 시간에 걸쳐 커진다 애니메이션 효과*/
+
 }
 
 .runner-grid {
-	display: flex;
-	flex-wrap: wrap;
-	justify-content: space-around;
-	align-items: flex-end;
-	width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: flex-end;
+    width: 100%;
 }
 
 .runner-item {
-	flex: 1 1 18%;
-	/* 5개 항목을 가로로 배치하기 위해 약 20%에서 여백을 뺀 값 */
-	margin: 10px;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	text-align: center;
-	position: relative;
+    flex: 1 1 18%;
+    /* 5개 항목을 가로로 배치하기 위해 약 20%에서 여백을 뺀 값 */
+    margin: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    position: relative;
 }
 
 .runner-item img {
-	border-radius: 50%;
-	width: 200px;
-	height: 200px;
-	border-style: ridge;
-	position: relative;
-	/* 추가 */
+    border-radius: 50%;
+    width: 200px;
+    height: 200px;
+    border-style: ridge;
+    position: relative;
+    /* 추가 */
 }
 
 .dot {
-	border-radius: 50%;
-	width: 40px;
-	height: 40px;
-	margin-bottom: 10px;
-	background-color: goldenrod;
-	position: absolute;
-	z-index: 1;
-	margin-top: 4px;
-	margin-left: 10px;
-	display: flex;
-	justify-content: center;
-	color: white;
-	font-family: 'Paytone One';
-	font-size: 24px;
-	top: 0;
-	left: 0;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    margin-bottom: 10px;
+    background-color: goldenrod;
+    position: absolute;
+    z-index: 1;
+    margin-top: 4px;
+    margin-left: 10px;
+    display: flex;
+    justify-content: center;
+    color: white;
+    font-family: 'Paytone One';
+    font-size: 24px;
+    top: 0;
+    left: 0;
 }
 
 .nickname2 {
-	font-family: "Gothic A1", sans-serif;
-	font-style: normal;
-	font-size: 24px;
-	color: gray;
+    font-family: "Gothic A1", sans-serif;
+    font-style: normal;
+    font-size: 24px;
+    color: gray;
 }
 
 .distance {
-	font-family: "Bangers", system-ui;
-	font-size: 30px;
-	font-style: normal;
-	letter-spacing: 1px;
+    font-family: "Bangers", system-ui;
+    font-size: 30px;
+    font-style: normal;
+    letter-spacing: 1px;
 }
 
 a {
-	text-decoration: none;
+    text-decoration: none;
 }
 
 .profile_go:link {
-	color: gray;
+    color: gray;
 }
 
 .profile_go:visited {
-	color: gray;
+    color: gray;
 }
 
 .profile_go:hover {
-	text-decoration: underline;
+    text-decoration: underline;
 }
 
-@media ( max-width : 1200px) {
-	.track {
-		margin-left: 20px;
-	}
-	.rankbox, .pricebox {
-		width: 95%;
-	}
-	table {
-		width: 95%;
-	}
-}
+@media (max-width: 1200px) {
 
-@media ( max-width : 768px) {
-	.track {
-		margin-left: 10px;
-	}
-	.gold {
-		max-width: 300px;
-	}
-	.nickname {
-		font-size: 24px;
-	}
-	.location {
-		font-size: 14px;
-	}
-	
-	.pricebox{
-		width:500px;
-		
-	}
-	 
-	.trackimg {
-		max-width: 250px;
-		max-height: 200px;
-	}
-	.nickname2 {
-		font-size: 18px;
-	}
-	.distance {
-		font-size: 26px;
-	}
-	.runner-grid {
-		min-height: auto;
-		/* 작은 화면에서는 최소 높이 제거 */
-	}
-	.runner-item {
-		flex-basis: calc(33.333% - 20px);
-		margin-bottom: 20px;
-	}
-	.runner-item:nth-child(4), .runner-item:nth-child(5) {
-		flex-basis: calc(50% - 20px);
-	}
-	.img1 {
-		width: 100px;
-		height: 100px;
-	}
-	.img2 {
-		width: 80px;
-		width: 80px;
-	}
-}
-
-@media ( max-width : 425px) {
-	.track {
-		margin-left: 5px;
-	}
-	.gold {
-		max-width: 250px;
-	}
-	.nickname {
-		font-size: 20px;
-	}
-	.location {
-		font-size: 12px;
-	}
-	.trackimg {
-		max-width: 200px;
-	}
-	.nickname2 {
-		font-size: 16px;
-	}
-	.distance {
-		font-size: 22px;
-	}
-	.dot {
-		width: 30px;
-		height: 30px;
-		font-size: 18px;
-	}
-	.runner-item {
-		flex-basis: 100%;
-	}
-	.img1 {
-		width: 80px;
-		height: 80px;
-	}
-	.img2 {
-		width: 50px;
-		width: 50px;
-	}
-	 .pricebox{
-        width: 100%;
+    .track {
+        margin-left: 20px;
     }
+
+    .rankbox,
+    .pricebox {
+        width: 95%;
+    }
+
+    table {
+        width: 95%;
+    }
+
+
+}
+
+
+@media (max-width: 768px) {
+
+    .track {
+        margin-left: 10px;
+    }
+
+    .gold {
+        max-width: 300px;
+    }
+
+    .nickname {
+        font-size: 24px;
+    }
+
+    .location {
+        font-size: 14px;
+    }
+
+    .pricebox{
+        width: 500px;
+    }
+
+    .trackimg {
+        max-width: 250px;
+        max-height: 200px;
+    }
+
+    .nickname2 {
+        font-size: 18px;
+    }
+
+    .distance {
+        font-size: 26px;
+    }
+
+    .runner-grid {
+        min-height: auto;
+        /* 작은 화면에서는 최소 높이 제거 */
+    }
+
+    .runner-item {
+        flex-basis: calc(33.333% - 20px);
+        margin-bottom: 20px;
+    }
+
+    .runner-item:nth-child(4),
+    .runner-item:nth-child(5) {
+        flex-basis: calc(50% - 20px);
+    }
+
+    .img1 {
+        width: 100px;
+        height: 100px;
+    }
+
+    .img2 {
+        width: 80px;
+        width: 80px;
+    }
+    
+
+
+}
+
+
+@media (max-width: 425px) {
+
+    .track {
+        margin-left: 5px;
+    }
+
+    .gold {
+        max-width: 250px;
+    }
+
+    .nickname {
+        font-size: 20px;
+    }
+
+    .location {
+        font-size: 12px;
+    }
+
+    .trackimg {
+        max-width: 200px;
+    }
+
+    .nickname2 {
+        font-size: 16px;
+    }
+
+    .distance {
+        font-size: 22px;
+    }
+
+    .dot {
+        width: 30px;
+        height: 30px;
+        font-size: 18px;
+    }
+
+    .runner-item {
+        flex-basis: 100%;
+        margin-left: 150px;
+        margin-right: 150px;
+    }
+
+    .img1 {
+        width: 80px;
+        height: 80px;
+    }
+
+    .img2 {
+        width: 50px;
+        width: 50px;
+    }
+
+    .pricebox{
+        width: 90%;
+    }
+
+    .dot{
+        left: 50px;
+    }
+
 }
