@@ -189,8 +189,7 @@ a {
 	
 	.pricebox{
 		width:500px;
-		margin-right: auto;
-		margin-left: auto;
+		
 	}
 	 
 	.trackimg {
@@ -262,4 +261,7 @@ a {
 		width: 50px;
 		width: 50px;
 	}
+	 .pricebox{
+        width: 100%;
+    }
 }
