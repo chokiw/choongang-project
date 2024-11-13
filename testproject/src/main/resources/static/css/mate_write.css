@@ -72,8 +72,13 @@ select {
     color: white;
 }
 
-.upload {
+.remove {
     background-color: #008CBA;
+    color: white;
+}
+
+.action-button.delete {
+    background-color: #f44336; /* 빨간색 계열 */
     color: white;
 }
 
@@ -170,7 +175,7 @@ textarea{
     font-family: 'Gothic A1', sans-serif;
 }
 
-/* Chrome, Safari, Edge, Opera에 대한 스타일 */
+/* input : 넘버 화살표 지우기 Chrome, Safari, Edge, Opera에 대한 스타일 */
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;

@@ -28,33 +28,10 @@
 
 <script type="text/javascript"
 	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=e6146d72cd45f3c8d130a2c1504d9647"></script>
-<script src="/js/sns_detail.js"></script>
+<script src="/js/mate_write.js"></script>
 <title>Document</title>
 
 
-<script>
-	function numberMaxLength(e) {
-
-		if (e.value.length > e.maxLength) {
-
-			e.value = e.value.slice(0, e.maxLength);
-		}
-
-	}
-
-	function loadFile(input) {
-		if (input.files && input.files[0]) {
-			var reader = new FileReader();
-
-			reader.onload = function(e) {
-				var imgElement = document.querySelector('.maincontent img'); // maincontent 클래스 내의 img 요소 선택
-				imgElement.src = e.target.result; // 선택된 이미지로 src 변경
-			};
-
-			reader.readAsDataURL(input.files[0]); // 선택된 파일을 데이터 URL로 읽기
-		}
-	}
-</script>
 
 
 </head>
@@ -72,21 +49,21 @@
 
 		 <main class="content">
             <span style="font-size: 36px; font-weight: 700;">메이트 게시판</span><br><br>
-            
 
 
-            <form>
+
+            <form method="post" action="matewrite" onsubmit="return check()">
                 <div class="sns_title">
                     <span style="font-size: 24px; font-weight: 600;">제목</span>&nbsp;&nbsp;
                     <input type="text" style="font-size: 20px; font-weight: 500; width: 60%;" maxlength="50"
-                        placeholder="제목을 입력하세요">
+                        id="recruit_subject" name="recruit_subject" placeholder="제목을 입력하세요">
                 </div>
                 <div class="sns_writer">
-                    <select id="sns_address1" name="user_address1">
+                    <select id="recruit_address1" name="recruit_address1">
                         <option value="">광역시선택</option>
                         <option value="서울시">서울시</option>
                     </select>
-                    <select id="sns_address2" name="user_address2">
+                    <select id="recruit_address2" name="recruit_address2">
                         <option value="">지역선택</option>
                         <option value="강남구">강남구</option>
                         <option value="강동구">강동구</option>
@@ -117,7 +94,8 @@
                     <span class="mate_count">
 
                         모집 인원 :
-                        <input type="number" maxlength="2" oninput="numberMaxLength(this);" style="width: 2rem;">명
+                        <input type="number" maxlength="2" oninput="numberMaxLength(this);" style="width: 2rem;"
+                            id="recruit_recruitnum" name="recruit_recruitnum">명
 
                     </span>
 
@@ -127,7 +105,7 @@
 
                 <hr><br><br>
                 <div class="maincontent">
-                    <img src="route.png">
+                    <img src="/img/route.png">
                     <div class="content-info">
 
                     </div>
@@ -136,14 +114,14 @@
                     <span
                         style="font-size: 20px; font-family: 'Gothic A1', sans-serif; font-style: normal; font-weight: 600;">내용작성</span><br>
                     <textarea name="sns_content" id="sns_content" rows="8" cols="50" style="width: 90%;"
-                        placeholder="내용을 입력해주세요"></textarea>
+                        id="recruit_content" name="recruit_content" placeholder="내용을 입력해주세요"></textarea>
                 </div>
 
                 <div class="button-container">
 
-                    <input type="file" id="fileInput" accept="image/*" onchange="loadFile(this)" style="display: none;">
-                    <label for="fileInput" class="action-button upload">파일 선택</label>
-                    <button type="button" class="action-button save" onclick="startClock()">저장</button>
+                    <button type="button" class="action-button remove" >경로 뒤로 한칸 이동</button>
+                    <button type="button" class="action-button delete" >경로 삭제</button>
+                    <button type="submit" class="action-button save">글 작성</button>
                 </div>
 
 
