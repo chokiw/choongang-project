@@ -21,7 +21,7 @@
 	<script type="text/javascript">
     	$(function() {
 			//댓글목록 요청
-			$('#board').load('${path}/snslist');
+			$('#board').load('${path}/userPostList');
 		});
     </script>
     <title>Document</title>
@@ -30,18 +30,18 @@
 
 <body>
     <div class="container">
-         <!-- 탑 메뉴 -->
+        <!-- 탑 메뉴 -->
         <jsp:include page="header.jsp"></jsp:include>
         
         <!-- 사이드(왼쪽) 메뉴 -->
         <jsp:include page="side.jsp"></jsp:include>
-
-        <main class="content">
-            <div class="track">
-                <span style="font-size: 36px; font-weight: 700;">트랙 게시판</span><br><br>
-                <span style="color: gray;">자신이 달린 루트를 공유하고 상대방의 루트를 추천, 저장할 수 있습니다.</span>
+           
+       
+        <main class="content">	
+			<div class="track">
+                <span style="font-size: 36px; font-weight: 700;">내가 쓴글 게시판</span><br><br>
+                <span style="color: gray;">내가 썼던 글 게시판</span>
             </div>
-			<br>
             <div class="locationbox">
                 <select>
                     <option value="서울시">서울시</option>
@@ -74,20 +74,12 @@
                     <option value="강남구">중구</option>
                     <option value="강남구">중랑구</option>
                 </select>
-
-
-                <!-- 인기글 버튼 -->
-                <div class="hot">
-                    <a href="sd" class="hot_text"> <i class="fa-solid fa-fire"></i> 인기글</a>
-                </div>
             </div>
 
             <div id="board"></div>
 			
-            <a href="sns_write" class="write">글작성</a><br><br>
-        </main>
-
-    </div>
+		</main>
+	</div>
 </body>
 
 </html>
