@@ -92,10 +92,10 @@
             </div>
 
 
-
+ 
 
             <div class="pricebox">
-                <div class="gold" id="track1">
+                <div class="gold" id="track1" style=" padding-left: 200px; padding-right: 200px;">
                     <a href="asd"><img src="/img/route.png" class="trackimg"></a> <br><br>
                     <span class="nickname">writer1님</span><br>
                     <span class="location">서울시 강남구</span><br>
