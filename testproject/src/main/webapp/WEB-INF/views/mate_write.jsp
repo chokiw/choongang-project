@@ -1,28 +1,60 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
-<%@ taglib prefix="fn"  uri="http://java.sun.com/jsp/jstl/functions"%>
-<%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core" %>
-<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <!DOCTYPE html>
 <html lang="ko">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Gothic+A1&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Gothic+A1&display=swap" rel="stylesheet">
-    <script src="http://code.jquery.com/jquery-latest.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <script src="https://kit.fontawesome.com/5e485453d8.js" crossorigin="anonymous"></script>
-    <link href="/css/common.css" rel="stylesheet">
-    <link href="/css/mate_write.css" rel="stylesheet">
-    
-    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=e6146d72cd45f3c8d130a2c1504d9647"></script>
-    <script src="/js/sns_detail.js"></script>
-    <title>Document</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link
+	href="https://fonts.googleapis.com/css2?family=Bangers&family=Gothic+A1&display=swap"
+	rel="stylesheet">
+<link
+	href="https://fonts.googleapis.com/css2?family=Gothic+A1&display=swap"
+	rel="stylesheet">
+<script src="http://code.jquery.com/jquery-latest.js"></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script src="https://kit.fontawesome.com/5e485453d8.js"
+	crossorigin="anonymous"></script>
+<link href="/css/common.css" rel="stylesheet">
+<link href="/css/mate_write.css" rel="stylesheet">
+
+<script type="text/javascript"
+	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=e6146d72cd45f3c8d130a2c1504d9647"></script>
+<script src="/js/sns_detail.js"></script>
+<title>Document</title>
+
+
+<script>
+	function numberMaxLength(e) {
+
+		if (e.value.length > e.maxLength) {
+
+			e.value = e.value.slice(0, e.maxLength);
+		}
+
+	}
+
+	function loadFile(input) {
+		if (input.files && input.files[0]) {
+			var reader = new FileReader();
+
+			reader.onload = function(e) {
+				var imgElement = document.querySelector('.maincontent img'); // maincontent 클래스 내의 img 요소 선택
+				imgElement.src = e.target.result; // 선택된 이미지로 src 변경
+			};
+
+			reader.readAsDataURL(input.files[0]); // 선택된 파일을 데이터 URL로 읽기
+		}
+	}
+</script>
 
 
 </head>
@@ -30,17 +62,17 @@
 
 
 <body>
-    <div class="container">
-       	<!-- 탑 메뉴 -->
-        <jsp:include page="header.jsp"></jsp:include>
-        
-        <!-- 사이드(왼쪽) 메뉴 -->
-        <jsp:include page="side.jsp"></jsp:include>
-        
-        
-         <main class="content">
+	<div class="container">
+		<!-- 탑 메뉴 -->
+		<jsp:include page="header.jsp"></jsp:include>
+
+		<!-- 사이드(왼쪽) 메뉴 -->
+		<jsp:include page="side.jsp"></jsp:include>
+
+
+		 <main class="content">
             <span style="font-size: 36px; font-weight: 700;">메이트 게시판</span><br><br>
-            <span style="color: gray;" class="">모집인원은 2~6명 입니다.</span>
+            
 
 
             <form>
@@ -85,14 +117,7 @@
                     <span class="mate_count">
 
                         모집 인원 :
-                        <select style="width: 100px;">
-                            <option value="">인원수 선택</option>
-                            <option value="2">2명</option>
-                            <option value="3">3명</option>
-                            <option value="4">4명</option>
-                            <option value="5">5명</option>
-                            <option value="6">6명</option>
-                        </select>
+                        <input type="number" maxlength="2" oninput="numberMaxLength(this);" style="width: 2rem;">명
 
                     </span>
 
@@ -102,7 +127,7 @@
 
                 <hr><br><br>
                 <div class="maincontent">
-                    <img src="route.png" alt="Route">
+                    <img src="route.png">
                     <div class="content-info">
 
                     </div>
@@ -116,13 +141,15 @@
 
                 <div class="button-container">
 
+                    <input type="file" id="fileInput" accept="image/*" onchange="loadFile(this)" style="display: none;">
+                    <label for="fileInput" class="action-button upload">파일 선택</label>
                     <button type="button" class="action-button save" onclick="startClock()">저장</button>
                 </div>
 
 
             </form>
         </main>
-    </div>
+	</div>
 
 </body>
 

@@ -54,6 +54,9 @@ select {
     transition: background-color 0.3s, transform 0.1s;
     color: white;
     height: 35px;
+    min-width: 100px; /* 최소 너비 설정 */
+    box-sizing: border-box; /* 패딩을 포함한 크기 계산 */
+    line-height: 1; /* 줄 간격을 조정하여 수직 정렬 개선 */
 }
 
 .action-button:hover {
@@ -69,6 +72,24 @@ select {
     color: white;
 }
 
+.upload {
+    background-color: #008CBA;
+    color: white;
+}
+
+label.action-button {
+    margin: 0; /* 기본 마진 제거 */
+    padding: 0; /* 기본 패딩 제거 */
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    vertical-align: middle; /* 수직 정렬 조정 */
+}
+
+#fileInput {
+    display: none;
+}
 
 
 .myimg {
@@ -147,6 +168,18 @@ textarea{
     color: #333333;
     font-size: 18px;
     font-family: 'Gothic A1', sans-serif;
+}
+
+/* Chrome, Safari, Edge, Opera에 대한 스타일 */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox에 대한 스타일 */
+input[type=number] {
+  -moz-appearance: textfield;
 }
 
 @media (max-width: 1200px) {
