@@ -3,7 +3,7 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.example.demo.dao.ProjectDAO">
-	
+
 
 	<resultMap id="snsResultMap"
 		type="com.example.demo.model.SnsBoard">
@@ -137,12 +137,28 @@
 	</select>
 
 	<!-- 내가 추천한 게시글 불러오기 -->
-	<select id="getLikedPostsByUserId" parameterType="String"
-		resultMap="snsResultMap">
-		select s.* from sns s
+	<select id="getTotalLiked" parameterType="String"
+		resultType="int">
+		select count(*)
+		from sns s
 		join good g on s.sns_no = g.sns_no
-		where g.user_id = #{user_id} and sns_good > 0
-		order by s.sns_no desc
+		where g.user_id = #{user_id}
 	</select>
+
+
+	<!-- 내가 추천한 글 페이지 처리 -->
+	<select id="getLikedPosts" parameterType="java.util.Map"
+		resultMap="snsResultMap">
+		select * from (
+		select s.*, row_number() over (order by
+		s.sns_no desc) as rn
+		from sns s
+		join good g on s.sns_no = g.sns_no
+		where
+		g.user_id = #{user_id}
+		)
+		where rn between #{startRow} and #{endRow}
+	</select>
+
 
 </mapper>
