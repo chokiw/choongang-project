@@ -17,7 +17,9 @@
     <script src="http://code.jquery.com/jquery-latest.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://kit.fontawesome.com/5e485453d8.js" crossorigin="anonymous"></script>
-    <link href="/css/sns_detail.css" rel="stylesheet">
+    <link href="/css/common.css" rel="stylesheet">
+    <link href="/css/sns_write.css" rel="stylesheet">
+    
     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=e6146d72cd45f3c8d130a2c1504d9647"></script>
     <script src="/js/sns_detail.js"></script>
     <title>Document</title>
@@ -51,63 +53,27 @@
 
 <body>
     <div class="container">
-        <div class="head">
-            <!-- 페이지 제목 누르면 메인페이지로 이동 -->
-            <a href="mainpage" class="title">RUNAWAY</a>
-
-            <!-- 마이페이지 버튼 -->
-            <div class="mypage">
-                <a href="mypage" class="mypage_text">마이페이지</a>
-            </div>
-
-            <!-- 로그아웃 버튼 -->
-            <div class="logout">
-                <a href="sadad" class="logout_text"> <i class="fa-solid fa-right-from-bracket" style="color: #f4efe2;"></i>&nbsp;&nbsp;로그아웃</a>
-            </div>
-
-        </div>
-
-
-        <!-- 사이드바 -->
-        <div class="side" align="center">
-
-            <div class="sns">
-
-                <a href="sns_board" class="sns_text"><i class="fa-solid fa-person-running"
-                        style="font-size: 30px;"></i>&nbsp;&nbsp;&nbsp;&nbsp;트랙</a>
-            </div>
-
-            <div class="mate">
-
-                <a href="mate_board" class="mate_text"><i class="fa-solid fa-people-group"
-                        style="font-size: 30px;"></i>&nbsp;&nbsp;&nbsp;&nbsp;메이트</a>
-            </div>
-            
-            <div class="record">
-
-                <a href="run" class="sns_text"><i class="fa-solid fa-stopwatch"
-                        style="font-size: 30px;"></i>&nbsp;&nbsp;&nbsp;&nbsp;기록</a>
-            </div>
-        </div>
+       	<!-- 탑 메뉴 -->
+        <jsp:include page="header.jsp"></jsp:include>
         
-        <div class="content">
+        <!-- 사이드(왼쪽) 메뉴 -->
+        <jsp:include page="side.jsp"></jsp:include>
+        
+        
+        <main class="content">
         <form name="memberForm" method="post" action="/membership" onsubmit="return check()">
             <span style="font-size: 36px; font-weight: 700;">트랙 게시판</span><br><br>
             <div class="sns_title">
-            	<span>제목 : </span><input type="text" style="font-size: 30px; font-weight: 600;">
+            	<span style="font-size: 24px; font-weight: 600;">제목</span>&nbsp;&nbsp;
+                <input type="text" style="font-size: 20px; font-weight: 500;" placeholder="제목을 입력하세요">  
             </div>
             
             <div class="sns_writer">
-                	<img src="${pageContext.request.contextPath}/uimg/${member.user_photo}" class="myimg">
-                	<span style="font-size: 14px; font-weight: 600; font-family: 'Gothic A1', sans-serif; margin-top: 15px; margin-left: 10px;">${member.user_nickname}</span>
-            </div>
-            
-            <span>지역</span><br>
-                <select id="sns_address1" name="user_address1" class="box3">
+                <select id="sns_address1" name="user_address1">
                     <option value="">광역시선택</option>
                     <option value="서울시">서울시</option>
                 </select>
-                <select id="sns_address2" name="user_address2" class="box3">
+                <select id="sns_address2" name="user_address2">
                     <option value="">지역선택</option>
                     <option value="강남구">강남구</option>
                     <option value="강동구">강동구</option>
@@ -134,49 +100,51 @@
                     <option value="종로구">종로구</option>
                     <option value="중구">중구</option>
                     <option value="중랑구">중랑구</option>
-                </select> <br><br>
+                </select>
+
+               
+            </div>
 
             <hr><br><br>
             
             <div class="maincontent">
-            	<div id="map" style="width: 800px; height: 600px; float: left;"></div>
-		 		<button type="button" onclick="openPopup('sns_write_list')">내가 달린 트랙 가져오기</button>
+            	 <img src="/img/route.png" alt="Route">
+		 		
 		
-		
-		
-		  	<div style="margin-left: 100px; margin-top: 50px; width: 500px; text-align: center; float: right;">
-            	<span class="content1">달린 거리</span> <br><br>
-                <span class="content2">0m</span><br><br><br><br>
-
-                <span class="content1">달린 시간</span><br><br>
-                <span class="content2">
-<%--                     <fmt:formatNumber type="number" maxFractionDigits="0" value="${(rd.runner_data_time/60)}"></fmt:formatNumber> --%>0분
-                    <%--${rd.runner_data_time%60} --%>초                     
-                 </span><br><br><br><br>
-
-                 <span class="content1">평균 페이스</span><br><br>
-                 <span class="content2">
-                     <%--<fmt:formatNumber type="number" maxFractionDigits="0" value="${rd.runner_data_time*1000/rd.runner_data_distance/60}"/> --%>0'
-                     <%--<fmt:formatNumber type="number" maxFractionDigits="0" value="${rd.runner_data_time*1000/rd.runner_data_distance%60}"/> --%>0"
-                  </span>
+			  <div class="content-info">
+                    <div>
+                        <span class="content1">달린 거리</span><br>
+                        <span class="content2">4.62km</span><br><br><br>
+                    </div>
+                    <div>
+                        <span class="content1">달린 시간</span><br>
+                        <span class="content2"><%--                     <fmt:formatNumber type="number" maxFractionDigits="0" value="${(rd.runner_data_time/60)}"></fmt:formatNumber> --%>0분
+                    <%--${rd.runner_data_time%60} --%>초         </span><br><br><br>
+                    </div>
+                    <div>
+                        <span class="content1">평균 페이스</span><br>
+                        <span class="content2">   <%--<fmt:formatNumber type="number" maxFractionDigits="0" value="${rd.runner_data_time*1000/rd.runner_data_distance/60}"/> --%>0'
+                     <%--<fmt:formatNumber type="number" maxFractionDigits="0" value="${rd.runner_data_time*1000/rd.runner_data_distance%60}"/> --%>0"</span><br><br><br>
+                    </div>    
            </div>
-          </div>
+           </div>
+          
+          
 
-            <div style="margin-left: 50px; margin-top: 20px; width: 1400px;  height: auto;">
-                <span style="font-size: 24px; font-family: 'Gothic A1', sans-serif;">내용작성</span><br>
-                <textarea name="sns_content"  id="sns_content" rows="8" cols="50" ></textarea>
+            <div style="margin-top: 20px; height: auto;">
+                <span style="font-size: 20px; font-family: 'Gothic A1', sans-serif; font-style: normal; font-weight: 600;">내용작성</span><br>
+                <textarea name="sns_content"  id="sns_content" rows="8" cols="50" style="width: 90%;" placeholder="내용을 입력해주세요"></textarea>
             </div>
+
+            <div class="button-container">
+                <button type="button" onclick="openPopup('sns_write_list')" class="action-button load">내가 달린 트랙 가져오기</button>
+                <button type="button" class="action-button save" onclick="startClock()">저장</button>
+            </div>
+
 			</form>
             
-            <!-- 수정, 삭제 글목록 -->
-             <div align="right" style="margin-top: 10px;">
-                <a class="delete" href="asd"><i class="fa-solid fa-file-pen"></i>&nbsp;수정</a>&nbsp;&nbsp;&nbsp;
-                <a class="delete" href="das"><i class="fa-regular fa-trash-can"></i>&nbsp;삭제</a>&nbsp;&nbsp;&nbsp;
-                <a class="delete" href="das"><i class="fa-solid fa-table-list"></i>&nbsp;글목록</a>
-             </div>
-             <div id="reboard">
-            </div>
-        </div>
+           
+        </main>
     </div>
 
 </body>
