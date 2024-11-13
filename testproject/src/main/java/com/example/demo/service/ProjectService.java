@@ -15,9 +15,9 @@ import lombok.RequiredArgsConstructor;
 @Service
 @RequiredArgsConstructor
 public class ProjectService {
-	
+
 	private final ProjectDAO dao;
-		
+
 	public int getTotal(SnsBoard sns) {
 		return dao.getTotal(sns);
 	}
@@ -27,7 +27,7 @@ public class ProjectService {
 	}
 
 	public int insert(Runner runner) {
-		
+
 		return dao.insert(runner);
 	}
 
@@ -64,13 +64,17 @@ public class ProjectService {
 	}
 
 	public Runner findid(Runner runner) {
-		
+
 		return dao.findid(runner);
 	}
 
 	public Runner findpass(Runner runner) {
-		
+
 		return dao.findpass(runner);
+	}
+
+	public List<SnsBoard> getLikedPostsByUserId(String user_id) {
+		return dao.getLikedPostsByUserId(user_id);
 	}
 
 }

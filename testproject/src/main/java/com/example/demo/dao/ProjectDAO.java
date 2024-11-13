@@ -38,4 +38,6 @@ public interface ProjectDAO {
 
 	Runner findpass(Runner runner);
 
+	List<SnsBoard> getLikedPostsByUserId(String user_id);
+
 }

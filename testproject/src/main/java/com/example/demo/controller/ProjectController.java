@@ -35,59 +35,60 @@ public class ProjectController {
 
 	private final ProjectService service;
 
-	//메인페이지로 이동
+	// 메인페이지로 이동
 	@RequestMapping("/mainpage")
 	public String mainpage() {
 		return "mainpage";
 	}
 
-	//마이페이지로 이동
+	// 마이페이지로 이동
 	@RequestMapping("/mypage")
 	public String mypage() {
 		return "mypage";
 	}
-	
-	//모집게시판
+
+	// 모집게시판
 	@RequestMapping("/mate_board")
 	public String mate_board() {
 		return "mate_board";
 	}
-	
-	//모집 글상세
+
+	// 모집 글상세
 	@RequestMapping("/mate_detail")
 	public String mate_detail() {
 		return "mate_detail";
 	}
-	
-	//로그인 페이지로 이동
+
+	// 로그인 페이지로 이동
 	@RequestMapping("/loginpage")
 	public String loginpage() {
 		return "login";
 	}
-	//아이디 찾기 창으로 이동
+
+	// 아이디 찾기 창으로 이동
 	@RequestMapping("/find_id")
 	public String find_id() {
 		return "find_id";
 	}
 
-	//비번찾기창으로 이동
+	// 비번찾기창으로 이동
 	@RequestMapping("/find_pass")
 	public String find_pass() {
 		return "find_pass";
 	}
 
-	//측정페이지로 이동
+	// 측정페이지로 이동
 	@RequestMapping("/run")
 	public String run() {
 		return "run";
 	}
-	
-	//회원가입 창으로 이동
+
+	// 회원가입 창으로 이동
 	@RequestMapping("/member")
 	public String member() {
 		return "member";
 	}
-	
+
 	@RequestMapping("/sns_board")
 	public String sns_board() {
 		return "sns_board";
@@ -162,7 +163,8 @@ public class ProjectController {
 
 		}
 	}
-	//test용 서비스 ->지워도됌 최종때는 반드시 지워야함
+
+	// test용 서비스 ->지워도됌 최종때는 반드시 지워야함
 	@RequestMapping("/runnerdata")
 	public String runnerdata(@RequestParam(value = "path") String[] path,
 			@RequestParam(value = "distance") String distance, @RequestParam(value = "time") String time) {
@@ -176,9 +178,8 @@ public class ProjectController {
 
 		return "mypage";
 	}
-	
-	
-	//로그인 서비스
+
+	// 로그인 서비스
 	@RequestMapping("/login")
 	public String login(@ModelAttribute Runner runner, HttpSession session, Model model) {
 		int result = 0;
@@ -199,8 +200,8 @@ public class ProjectController {
 		model.addAttribute("result", result);
 		return "loginresult";
 	}
-	
-	//회원가입 아이디 중복확인
+
+	// 회원가입 아이디 중복확인
 	@RequestMapping("/member_idcheck")
 	@ResponseBody
 	public int member_idcheck(@RequestParam(value = "memid") String id) {
@@ -209,7 +210,7 @@ public class ProjectController {
 		return result;
 	}
 
-	//회원가입 닉네임확인
+	// 회원가입 닉네임확인
 	@RequestMapping("/member_nicknamecheck")
 	@ResponseBody
 	public int member_nicknamecheck(@RequestParam(value = "memnickname") String nickname) {
@@ -219,13 +220,13 @@ public class ProjectController {
 		System.out.println(result);
 		return result;
 	}
-	
-	//회원가입 진행
+
+	// 회원가입 진행
 	@RequestMapping("/membership")
 	public String membership(@ModelAttribute Runner runner, @RequestParam("file1") MultipartFile mf,
 			HttpSession session, HttpServletRequest request, Model model) throws Exception {
-		
-		//프로필사진 불러오기
+
+		// 프로필사진 불러오기
 		String filename = mf.getOriginalFilename(); // 첨부파일명
 		int size = (int) mf.getSize(); // 첨부파일의 크기 (단위:Byte)
 		int result = 0;
@@ -236,8 +237,8 @@ public class ProjectController {
 //		System.out.println("size=" + size);
 //		System.out.println("Path=" + path);
 		if (size > 0) { // 첨부파일이 전송된 경우
-			
-			//날짜에 따라서 프로플사진 이름 변경
+
+			// 날짜에 따라서 프로플사진 이름 변경
 			Date d = new Date();
 			SimpleDateFormat sd = new SimpleDateFormat("_yyyyMMdd_HH_mm_ss");
 			String newdate = sd.format(d);
@@ -247,13 +248,13 @@ public class ProjectController {
 			newfilename = runner.getUser_id() + newdate + extension;
 //			System.out.println("newfilename:"+newfilename);		
 
-			//용량 초과시
+			// 용량 초과시
 			if (size > 100000) { // 100KB
 				result = 2;
 				model.addAttribute("result", result);
 
 				return "membershipresult";
-			//지정된 확장자가 아니면
+				// 지정된 확장자가 아니면
 			} else if (!extension.equals(".jpg") && !extension.equals(".jpeg") && !extension.equals(".gif")
 					&& !extension.equals(".png")) {
 
@@ -277,16 +278,14 @@ public class ProjectController {
 		return "membershipresult";
 	}
 
-	
-
 	@RequestMapping("/sns_detail")
 	public String sns_detail(@RequestParam(value = "pageNum", defaultValue = "1") String pageNum,
 			@RequestParam(value = "sns_no", defaultValue = "227") String sns_no, Model model) {
-		//글정보 불러오기
+		// 글정보 불러오기
 		SnsBoard board = service.getboard(Integer.parseInt(sns_no));
-		//맵에 경로 표현을 위한 테이터 불러오기
+		// 맵에 경로 표현을 위한 테이터 불러오기
 		Runner_data rd = service.getrdata(board.getRunner_data_no());
-		//좌표값 불러오기
+		// 좌표값 불러오기
 		Coordinate[] c = service.getcdata(board.getRunner_data_no());
 
 		model.addAttribute("rd", rd);
@@ -304,22 +303,22 @@ public class ProjectController {
 			pageNum = "1";
 		}
 		int currentPage = Integer.parseInt(pageNum);
-		//전체데이터 갯수
-		int total = service.getTotal(sns); 
-		//System.out.println("total:" + total);
-		//페이지 이동에 따라서 10개의 데이터를 어디서 어디까지 가져올지 알기위한 변수
+		// 전체데이터 갯수
+		int total = service.getTotal(sns);
+		// System.out.println("total:" + total);
+		// 페이지 이동에 따라서 10개의 데이터를 어디서 어디까지 가져올지 알기위한 변수
 		int startRow = (currentPage - 1) * rowPerPage + 1;
 		int endRow = startRow + rowPerPage - 1;
-		//페이지 이동 변수들을 담아놓는 DTO에 저장
+		// 페이지 이동 변수들을 담아놓는 DTO에 저장
 		PagingPgm pp = new PagingPgm(total, rowPerPage, currentPage);
-		
-		//DTO에 페이지 변수가져가는 이유는 mapper파일 이동시 매개변수는 1개만 가져갈 수 있다.
-		//따라서  map같은 거에 많은 데이터를 한번에 가져가야한다.
+
+		// DTO에 페이지 변수가져가는 이유는 mapper파일 이동시 매개변수는 1개만 가져갈 수 있다.
+		// 따라서 map같은 거에 많은 데이터를 한번에 가져가야한다.
 		sns.setStartRow(startRow);
 		sns.setEndRow(endRow);
 		int no = total - startRow + 1;
-		//System.out.println("no:" + no);
-		//불러온 게시판 데이터 리스트에 담기
+		// System.out.println("no:" + no);
+		// 불러온 게시판 데이터 리스트에 담기
 		List<SnsBoard> list = service.list(sns);
 		model.addAttribute("list", list);
 		model.addAttribute("pageNum", pageNum);
@@ -331,8 +330,8 @@ public class ProjectController {
 
 		return "snslist";
 	}
-	
-	//sns글 쓸때 자신의 데이터를 게시판 형태로 보기위한 서비스코드
+
+	// sns글 쓸때 자신의 데이터를 게시판 형태로 보기위한 서비스코드
 	@RequestMapping("/sns_write_list")
 	public String sns_write_list(@RequestParam(value = "pageNum", defaultValue = "1") String pageNum, Model model,
 			HttpServletRequest request) {
@@ -366,6 +365,33 @@ public class ProjectController {
 		model.addAttribute("pp", pp);
 
 		return "sns_write_list";
+	}
+
+	// 로그인 한 유저가 좋아요 한 게시글 목록 불러오기
+	@RequestMapping("/likedPosts")
+	public String likedPosts(HttpSession session, Model model) {
+		Member member = (Member) session.getAttribute("member");
+		if (member == null) {
+			return "redirect:/loginpage";
+		}
+
+		String userId = member.getUser_id(); // 세션에서 사용자 ID를 가져옴
+		// String userId = "test"; // 세션에서 사용자 ID를 가져옴
+
+		try {
+			List<SnsBoard> likedPosts = service.getLikedPostsByUserId(userId);
+			System.out.println("likedPosts: " + likedPosts);
+			if (likedPosts.isEmpty()) {
+				System.out.println("No liked posts found for user: " + userId);
+			}
+			model.addAttribute("likedPosts", likedPosts);
+		} catch (Exception e) {
+			System.out.println("Error retrieving liked posts: " + e.getMessage());
+			e.printStackTrace(); // 스택 트레이스를 출력하여 문제의 원인을 정확하게 파이콘
+			return "errorPage"; // 에러 페이지로 리다이레크 (필요시)
+		}
+
+		return "likedPosts";
 	}
 
 }
