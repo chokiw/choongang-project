@@ -40,6 +40,11 @@ select {
     outline: none;
 }
 
+textarea{
+    font-size: 16px;
+    font-family: "Gothic A1", sans-serif;   
+}
+
 .action-button {
     padding: 5px 20px;
     font-size: 18px;

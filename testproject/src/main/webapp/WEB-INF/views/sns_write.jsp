@@ -65,7 +65,7 @@
             <span style="font-size: 36px; font-weight: 700;">트랙 게시판</span><br><br>
             <div class="sns_title">
             	<span style="font-size: 24px; font-weight: 600;">제목</span>&nbsp;&nbsp;
-                <input type="text" style="font-size: 20px; font-weight: 500;" placeholder="제목을 입력하세요">  
+                <input type="text" style="font-size: 20px; font-weight: 500; width: 60%;" placeholder="제목을 입력하세요">  
             </div>
             
             <div class="sns_writer">
