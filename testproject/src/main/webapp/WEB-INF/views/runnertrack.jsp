@@ -23,7 +23,7 @@
 	crossorigin="anonymous"></script>
 <link href="/css/common.css" rel="stylesheet">
 <link href="/css/sns_board.css" rel="stylesheet">
-<script src="/js/sns_board.js"></script>
+<link href="/css/snslist.css" rel="stylesheet">
 <title>Document</title>
 
 </head>
