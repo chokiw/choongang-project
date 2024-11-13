@@ -1,6 +1,7 @@
 package com.example.demo.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
@@ -33,9 +34,12 @@ public interface ProjectDAO {
 	int getTotalfromrd(String user_id);
 
 	List<Runner_data> listfromrd(Runner_data rd);
-	
+
 	Runner findid(Runner runner);
 
 	Runner findpass(Runner runner);
 
+	int getTotalLiked(String user_id);
+
+	List<SnsBoard> getLikedPosts(Map<String, Object> params);
 }

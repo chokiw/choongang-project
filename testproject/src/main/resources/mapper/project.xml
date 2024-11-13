@@ -4,6 +4,23 @@
 
 <mapper namespace="com.example.demo.dao.ProjectDAO">
 
+
+	<resultMap id="snsResultMap"
+		type="com.example.demo.model.SnsBoard">
+		<id property="sns_no" column="sns_no" />
+		<result property="user_id" column="user_id" />
+		<result property="sns_address1" column="sns_address1" />
+		<result property="sns_address2" column="sns_address2" />
+		<result property="sns_subject" column="sns_subject" />
+		<result property="sns_content" column="sns_content" />
+		<result property="sns_date" column="sns_date" />
+		<result property="sns_proofshot" column="sns_proofshot" />
+		<result property="sns_good" column="sns_good" />
+		<result property="sns_readcount" column="sns_readcount" />
+	</resultMap>
+
+
+
 	<!-- sns게시판 갯수 불러오기 -->
 	<select id="getTotal" parameterType="sns" resultType="int">
 		select count(*) from sns
@@ -13,90 +30,135 @@
 			</if>
 			<if test="keyword != null and search=='subcon'">
 				sns_subject like '%'||#{keyword}||'%' or
-				sns_content like '%'||#{keyword}||'%'
+				sns_content like
+				'%'||#{keyword}||'%'
 			</if>
 		</where>
 	</select>
-	
+
 	<!-- 페이지 처리에 의한 sns게시판 데이터리스트 불러오기 -->
 	<select id="list" parameterType="sns" resultType="sns">
 		select * from (select a.*,rowNum rn from (
-			select * from sns
+		select * from sns
 		<where>
 			<if test="keyword != null and search!='subcon'">
 				${search} like '%'||#{keyword}||'%'
 			</if>
 			<if test="keyword != null and search=='subcon'">
 				sns_subject like '%'||#{keyword}||'%' or
-				sns_content like '%'||#{keyword}||'%'
+				sns_content like
+				'%'||#{keyword}||'%'
 			</if>
-		</where>			
-			 order by sns_no desc) a )
-			where rn between #{startRow} and #{endRow}
+		</where>
+		order by sns_no desc) a )
+		where rn between #{startRow} and #{endRow}
 	</select>
-	
+
 	<!-- 회원가입을 위한 sql -->
 	<insert id="insert" parameterType="runner">
-		insert into runner values(#{user_id},#{user_passwd},#{user_name},
-								  #{user_nickname},#{user_jumin1},#{user_jumin2},
-								  #{user_emailid},#{user_domain},#{user_phone1},
-								  #{user_phone2},#{user_phone3},#{user_address1},
-								  #{user_address2},#{user_photo},0,0,#{user_gender},sysdate)
+		insert into runner
+		values(#{user_id},#{user_passwd},#{user_name},
+		#{user_nickname},#{user_jumin1},#{user_jumin2},
+		#{user_emailid},#{user_domain},#{user_phone1},
+		#{user_phone2},#{user_phone3},#{user_address1},
+		#{user_address2},#{user_photo},0,0,#{user_gender},sysdate)
 	</insert>
-	
+
 	<!-- 세션값 설정을 위한 membetDTO생성 -->
-	<select id="getMember" parameterType="String" resultType="runner">
+	<select id="getMember" parameterType="String"
+		resultType="runner">
 		select * from runner where user_id=#{user_id}
 	</select>
-	
+
 	<!-- id확인 -->
 	<select id="idcheck" parameterType="String" resultType="int">
-		select count(*) from runner where user_id=#{user_id}
+		select
+		count(*) from runner where user_id=#{user_id}
 	</select>
 	<!-- 닉네임확인 -->
-	<select id="nicknamecheck" parameterType="String" resultType="int">
-		select count(*) from runner where user_nickname=#{user_nickname}
+	<select id="nicknamecheck" parameterType="String"
+		resultType="int">
+		select count(*) from runner where
+		user_nickname=#{user_nickname}
 	</select>
-	
+
 	<!-- sns게시판 목록 가져오기 -->
 	<select id="getboard" parameterType="int" resultType="sns">
-		select * from sns where sns_no=#{sns_no}
+		select *
+		from sns where sns_no=#{sns_no}
 	</select>
-	
-	<!-- runner_date에서 특정 runner_date_no에 따라서 리스트 가져오기  -->
-	<select id="getrdata" parameterType="int" resultType="runner_data">
-		select * from runner_data where runner_data_no=#{runner_data_no}
+
+	<!-- runner_date에서 특정 runner_date_no에 따라서 리스트 가져오기 -->
+	<select id="getrdata" parameterType="int"
+		resultType="runner_data">
+		select * from runner_data where
+		runner_data_no=#{runner_data_no}
 	</select>
-	
-	<!-- coordinate에서 특정 runner_date_no에 따라서 리스트 가져오기  -->
-	<select id="getcdata" parameterType="int" resultType="coordinate">
-		select * from coordinate where runner_data_no=#{runner_data_no}
+
+	<!-- coordinate에서 특정 runner_date_no에 따라서 리스트 가져오기 -->
+	<select id="getcdata" parameterType="int"
+		resultType="coordinate">
+		select * from coordinate where
+		runner_data_no=#{runner_data_no}
 	</select>
 	<!-- runner_data에서 특정 id의 리스트 갯수 가져오기 -->
-	<select id="getTotalfromrd" parameterType="String" resultType="int">
+	<select id="getTotalfromrd" parameterType="String"
+		resultType="int">
 		select count(*) from runner_data where user_id = #{user_id}
 	</select>
 	<!-- runner_data에서 특정 id의 리스트 가져오기 -->
-	<select id="listfromrd" parameterType="runner_data" resultType="runner_data">
-		select * 
-		from (select a.*,rowNum rn 
-			  from ( select * 
-			  		 from runner_data 
-			  		 order by runner_data_date desc) a )
-			where rn between #{startRow} and #{endRow}
+	<select id="listfromrd" parameterType="runner_data"
+		resultType="runner_data">
+		select *
+		from (select a.*,rowNum rn
+		from ( select *
+		from
+		runner_data
+		order by runner_data_date desc) a )
+		where rn between
+		#{startRow} and #{endRow}
 	</select>
 	<!-- 아이디 찾기 -->
 	<select id="findid" parameterType="runner" resultType="runner">
 
-		select * from runner where user_jumin1 = #{user_jumin1} and user_jumin2 =
+		select *
+		from runner where user_jumin1 = #{user_jumin1} and user_jumin2 =
 		#{user_jumin2}
 
 	</select>
-	
+
 	<!-- 비번 찾기 -->
 	<select id="findpass" parameterType="runner" resultType="runner">
 
-		select * from runner where  user_id = #{user_id}   and  user_jumin1 = #{user_jumin1} and user_jumin2 = #{user_jumin2}
+		select *
+		from runner where user_id = #{user_id} and user_jumin1 =
+		#{user_jumin1} and user_jumin2 = #{user_jumin2}
 
 	</select>
+
+	<!-- 내가 추천한 게시글 불러오기 -->
+	<select id="getTotalLiked" parameterType="String"
+		resultType="int">
+		select count(*)
+		from sns s
+		join good g on s.sns_no = g.sns_no
+		where g.user_id = #{user_id}
+	</select>
+
+
+	<!-- 내가 추천한 글 페이지 처리 -->
+	<select id="getLikedPosts" parameterType="java.util.Map"
+		resultMap="snsResultMap">
+		select * from (
+		select s.*, row_number() over (order by
+		s.sns_no desc) as rn
+		from sns s
+		join good g on s.sns_no = g.sns_no
+		where
+		g.user_id = #{user_id}
+		)
+		where rn between #{startRow} and #{endRow}
+	</select>
+
+
 </mapper>

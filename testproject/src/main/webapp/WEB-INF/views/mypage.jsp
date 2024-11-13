@@ -17,6 +17,9 @@
 <script src="/js/mypage.js"></script>
 <title>Document</title>
 
+
+
+
 </head>
 
 <body>
@@ -95,7 +98,7 @@
 
 				<tr>
 					<td><i class="fa-solid fa-fire"></i></td>
-					<td><a href="asd" style="color: black;">추천 누른 글</a></td>
+					<td><a href="/liked_board" style="color: black;">추천 누른 글</a></td>
 				</tr>
 
 				<tr>
