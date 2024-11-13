@@ -93,7 +93,7 @@
 
 				<tr>
 					<td><i class="fa-solid fa-pen"></i></td>
-					<td><a href="asd" style="color: black;">내가 작성한 글</a></td>
+					<td><a href="/mywriting" style="color: black;">내가 작성한 글</a></td>
 				</tr>
 
 				<tr>
