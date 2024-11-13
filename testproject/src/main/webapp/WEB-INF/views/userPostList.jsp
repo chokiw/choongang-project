@@ -5,25 +5,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-<style>
-  .pagination {
-    display: flex;
-    justify-content: center;
-    list-style-type: none;
-    padding: 0;
-  }
-  .pagination li {
-    margin: 0 5px;
-  }
-  .pagination li a {
-    text-decoration: none;
-    color: blue;
-  }
-  .pagination .active a {
-    font-weight: bold;
-    color: blue;
-  }
-</style>
 
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Gothic+A1&display=swap" rel="stylesheet">
@@ -32,7 +13,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script src="https://kit.fontawesome.com/5e485453d8.js" crossorigin="anonymous"></script>
 <link href="./css/sns_board.css" rel="stylesheet">
-
+<link href="/css/snslist.css" rel="stylesheet">
 <meta charset="UTF-8">
 <title>User's Post List</title>
 </head>
@@ -40,7 +21,7 @@
 	<div align="center">
 		<h2>내가 쓴 글</h2>
 		<table>
-<colgroup>
+			<colgroup>
                     <col class="col1">
                     <col class="col2">
                     <col class="col3">
@@ -59,11 +40,12 @@
             <!-- 게시글이 없을 경우 -->
             <c:if test="${empty list}">
                 <tr>
-                    <td colspan="6">작성된 게시글이 없습니다.</td>
+                    <td colspan="5">작성된 게시글이 없습니다.</td>
                 </tr>
 			</c:if>
             <!-- 게시글이 있을 경우 -->
 			<c:if test="${not empty list}">
+				<c:set var="no" value="${no}"></c:set>
                 <c:forEach var="post" items="${list}">
                     <tr>
                         <td>${no}</td>
@@ -87,7 +69,7 @@
 			
 			<!-- 페이지 번호 출력 -->
 			<c:forEach var="i" begin="${pp.startPage}" end="${pp.endPage}">
-				<li class="${pp.currentPage == i ? 'active' : ''}">
+				<li <c:if test="${pp.currentPage==i}">class="active"</c:if>>
 					<a href="userPostList?pageNum=${i}">${i}</a>
 				</li>
 			</c:forEach>

@@ -43,7 +43,6 @@
             </div>
 			<br>
             <div class="locationbox">
-
                 <select>
                     <option value="서울시">서울시</option>
                 </select>
