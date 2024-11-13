@@ -76,7 +76,7 @@ function getlist(pageNum){
 		<ul class="pagination">
 			<!-- 이전 버튼 -->
 			<c:if test="${pp.startPage > pp.pagePerBlk}">
-				<li><a href="javascript:getlist(${pp.startPage - 1}">이전</a></li>
+				<li><a href="javascript:getlist(${pp.startPage - 1})">이전</a></li>
 			</c:if>
 			
 			<!-- 페이지 번호 출력 -->
