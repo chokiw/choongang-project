@@ -1,10 +1,10 @@
 package com.example.demo.dao;
 
 import java.util.List;
-import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.example.demo.model.Alarm;
 import com.example.demo.model.Coordinate;
 import com.example.demo.model.Runner;
 import com.example.demo.model.Runner_data;
@@ -39,7 +39,7 @@ public interface ProjectDAO {
 
 	Runner findpass(Runner runner);
 
-	int getTotalLiked(String user_id);
+	Alarm getAlarm(String user_id);
 
-	List<SnsBoard> getLikedPosts(Map<String, Object> params);
+
 }

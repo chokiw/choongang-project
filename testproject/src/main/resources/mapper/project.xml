@@ -4,23 +4,6 @@
 
 <mapper namespace="com.example.demo.dao.ProjectDAO">
 
-
-	<resultMap id="snsResultMap"
-		type="com.example.demo.model.SnsBoard">
-		<id property="sns_no" column="sns_no" />
-		<result property="user_id" column="user_id" />
-		<result property="sns_address1" column="sns_address1" />
-		<result property="sns_address2" column="sns_address2" />
-		<result property="sns_subject" column="sns_subject" />
-		<result property="sns_content" column="sns_content" />
-		<result property="sns_date" column="sns_date" />
-		<result property="sns_proofshot" column="sns_proofshot" />
-		<result property="sns_good" column="sns_good" />
-		<result property="sns_readcount" column="sns_readcount" />
-	</resultMap>
-
-
-
 	<!-- sns게시판 갯수 불러오기 -->
 	<select id="getTotal" parameterType="sns" resultType="int">
 		select count(*) from sns
@@ -136,29 +119,10 @@
 
 	</select>
 
-	<!-- 내가 추천한 게시글 불러오기 -->
-	<select id="getTotalLiked" parameterType="String"
-		resultType="int">
-		select count(*)
-		from sns s
-		join good g on s.sns_no = g.sns_no
-		where g.user_id = #{user_id}
-	</select>
 
 
-	<!-- 내가 추천한 글 페이지 처리 -->
-	<select id="getLikedPosts" parameterType="java.util.Map"
-		resultMap="snsResultMap">
-		select * from (
-		select s.*, row_number() over (order by
-		s.sns_no desc) as rn
-		from sns s
-		join good g on s.sns_no = g.sns_no
-		where
-		g.user_id = #{user_id}
-		)
-		where rn between #{startRow} and #{endRow}
-	</select>
-
+	<select id="getAlarm" parameterType="String" resultType="alarm">
+        select * from alarm where user_id = #{user_id}
+    </select>
 
 </mapper>
