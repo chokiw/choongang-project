@@ -45,6 +45,10 @@
 				',top=' + top +
 				',scrollbars=yes,resizable=yes');
 		}
+		
+		function setNo(runner_data_no){
+			
+		}
 	</script>
 
 </head>
@@ -138,7 +142,7 @@
 
             <div class="button-container">
                 <button type="button" onclick="openPopup('sns_write_list')" class="action-button load">내가 달린 트랙 가져오기</button>
-                <button type="button" class="action-button save" onclick="startClock()">저장</button>
+                <button type="button" class="action-button save" onclick="">저장</button>
             </div>
 
 			</form>
