@@ -85,7 +85,7 @@
 				</colgroup>
 				<tr>
 					<td><i class="fa-solid fa-stopwatch"></i></td>
-					<td><a href="asd" style="color: black;">내가 달린 트랙</a></td>
+					<td><a href="runnertrack" style="color: black;">내가 달린 트랙</a></td>
 				</tr>
 
 				<tr>

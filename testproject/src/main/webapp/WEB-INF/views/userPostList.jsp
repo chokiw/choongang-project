@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
 <!DOCTYPE html>
 <html>
@@ -12,8 +14,18 @@
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script src="https://kit.fontawesome.com/5e485453d8.js" crossorigin="anonymous"></script>
-<link href="./css/sns_board.css" rel="stylesheet">
+<link href="/css/sns_board.css" rel="stylesheet">
 <link href="/css/snslist.css" rel="stylesheet">
+<script type="text/javascript">
+
+function getlist(pageNum){
+	var uri = '${path}/userPostList?pageNum='+pageNum;
+	$('#board').load(uri);
+  }
+
+</script>
+<script src="http://code.jquery.com/jquery-latest.js"></script>
+
 <meta charset="UTF-8">
 <title>User's Post List</title>
 </head>
@@ -64,19 +76,19 @@
 		<ul class="pagination">
 			<!-- 이전 버튼 -->
 			<c:if test="${pp.startPage > pp.pagePerBlk}">
-				<li><a href="userPostList?pageNum=${pp.startPage - 1}">이전</a></li>
+				<li><a href="javascript:getlist(${pp.startPage - 1})">이전</a></li>
 			</c:if>
 			
 			<!-- 페이지 번호 출력 -->
 			<c:forEach var="i" begin="${pp.startPage}" end="${pp.endPage}">
 				<li <c:if test="${pp.currentPage==i}">class="active"</c:if>>
-					<a href="userPostList?pageNum=${i}">${i}</a>
+					<a href="javascript:getlist(${i})">${i}</a>
 				</li>
 			</c:forEach>
 
 			<!-- 다음 버튼 -->
 			<c:if test="${pp.endPage < pp.totalPage}">
-				<li><a href="userPostList?pageNum=${pp.endPage + 1}">다음</a></li>
+				<li><a href="javascript:getlist(${pp.endPage + 1})">다음</a></li>
 			</c:if>
 		</ul>
 	</div>
