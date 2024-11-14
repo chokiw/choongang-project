@@ -115,6 +115,7 @@
 		from ( select *
 		from
 		runner_data
+		where user_id = #{user_id}
 		order by runner_data_date desc) a )
 		where rn between
 		#{startRow} and #{endRow}

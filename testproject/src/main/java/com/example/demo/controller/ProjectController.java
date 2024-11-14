@@ -366,7 +366,7 @@ public class ProjectController {
 		int startRow = (currentPage - 1) * rowPerPage + 1;
 		int endRow = startRow + rowPerPage - 1;
 		PagingPgm pp = new PagingPgm(total, rowPerPage, currentPage);
-
+		
 		rd.setStartRow(startRow);
 		rd.setEndRow(endRow);
 		int no = total - startRow + 1;
