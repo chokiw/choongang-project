@@ -73,4 +73,12 @@ public class HyunHoController {
 		return "liked_list";
 
 	}
+
+	@RequestMapping("/logout")
+	public String logout(HttpSession session, Model model) {
+		session.invalidate(); // 세션 무효화하여 로그아웃 처리
+		model.addAttribute("result", 1); // 로그아웃 성공 여부를 모델에 추가
+		return "logout"; // 로그아웃 JSP 페이지로 이동
+	}
+
 }
