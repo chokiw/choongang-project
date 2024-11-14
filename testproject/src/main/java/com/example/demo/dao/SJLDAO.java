@@ -25,7 +25,7 @@ public interface SJLDAO {
 
 	RecruitBoard getrecruitD(int recruit_no);
 
-	Recruit_c getrecruitC(int recruit_no);
+	Recruit_c[] getrecruitC(int recruit_no);
 
 	Runner getMember(String user_id);
 

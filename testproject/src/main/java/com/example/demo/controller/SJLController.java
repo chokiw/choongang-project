@@ -94,7 +94,7 @@ public class SJLController {
 		// 글정보 불러오기
 		RecruitBoard board = service.getrecruitD(Integer.parseInt(recruit_no));
 		// 맵에 경로 표현을 위한 테이터 불러오기
-		Recruit_c rc = service.getrecruitC(board.getRecruit_no());
+		Recruit_c[] rc = service.getrecruitC(board.getRecruit_no());
 		//글쓴이 정보 불러오기
 		Runner r = service.getMember(board.getUser_id());
 		

@@ -42,7 +42,7 @@ public class SJLService {
 		return dao.getrecruitD(recruit_no);
 	}
 
-	public Recruit_c getrecruitC(int recruit_no) {
+	public Recruit_c[] getrecruitC(int recruit_no) {
 		return dao.getrecruitC(recruit_no);
 	}
 
