@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.demo.model.Coordinate;
 import com.example.demo.model.Runner_data;
@@ -21,11 +22,12 @@ public class SJLController {
 	private final SJLService service;
 	
 	@RequestMapping("/getMyData")
-	public List getMyData(@RequestParam(value = "runner_data_no") int runner_data_no) {
+	@ResponseBody
+	public List getMyData(@RequestParam(value = "runner_data_no") String runner_data_no) {
 		List list = new ArrayList();
 		
-		Runner_data rd = service.getrd(runner_data_no);
-		Coordinate[] cd =  service.getc(runner_data_no);
+		Runner_data rd = service.getrd(Integer.parseInt(runner_data_no));
+		Coordinate[] cd =  service.getc(Integer.parseInt(runner_data_no));
 		
 		String[] cdarr = new String[cd.length*2];
 		
