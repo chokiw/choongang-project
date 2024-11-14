@@ -20,17 +20,14 @@
     <script src="https://kit.fontawesome.com/5e485453d8.js" crossorigin="anonymous"></script>
     <link href="/css/common.css" rel="stylesheet">
     <link href="/css/sns_write.css" rel="stylesheet">
-    
+    <script src="/js/sns_write.js"></script>
     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=e6146d72cd45f3c8d130a2c1504d9647"></script>
-    <script src="/js/sns_detail.js"></script>
+
     <title>Document</title>
 	<script>
 		let coord;
 		let distanse;
 		let time;
-		$(document).ready(function(){
-			$("#map").hide();
-		})
 		
 		function openPopup(url) { 
 			// 화면 크기 가져오기
@@ -53,35 +50,34 @@
 				',top=' + top +
 				',scrollbars=yes,resizable=yes');
 		}
-		
-		function setNo(runner_data_no){
-			var data = "runner_data_no="+runner_data_no;
-			
-			$.post('${path}/getMyData',data, function(data) {
+		function setNo(runner_data_no) {
+			var data = "runner_data_no=" + runner_data_no;
+
+			$.post('${path}/getMyData', data, function(data) {
 				$("#defaultImg").hide();
 				$("#map").show();
-				coord=data[0];
-				distanse=data[1];
-				time=data[2];
-				let time_h=parseInt(String(time/60));
-				let time_s=time%60;
-				let phase_h=parseInt(String(time*1000/distanse/60));
-				let phase_s=parseInt(String(time*1000/distanse%60));
-				
+				coord = data[0];
+				distanse = data[1];
+				time = data[2];
+				let time_h = parseInt(String(time / 60));
+				let time_s = time % 60;
+				let phase_h = parseInt(String(time * 1000 / distanse / 60));
+				let phase_s = parseInt(String(time * 1000 / distanse % 60));
+
 				const distance_html = document.getElementById("distance");
 				const time_html = document.getElementById("time");
 				const phase_html = document.getElementById("phase");
-				distance_html.innerText=distanse+"km";
-				time_html.innerText=time_h+"분"+time_s+"초";
-				phase_html.innerText=phase_h+"'"+phase_s+'"';
-				
+				distance_html.innerText = distanse + "km";
+				time_html.innerText = time_h + "분" + time_s + "초";
+				phase_html.innerText = phase_h + "'" + phase_s + '"';
+
 				var mapContainer = document.getElementById('map'), // 지도를 표시할 div  
-					   			   mapOption = {
-										// 지도의 중심좌표
-										center : new kakao.maps.LatLng(33.450701, 126.570667),
-									// 지도의 확대 레벨
-										level: 3
-									};
+					mapOption = {
+						// 지도의 중심좌표
+						center: new kakao.maps.LatLng(33.450701, 126.570667),
+						// 지도의 확대 레벨
+						level: 3
+					};
 
 				var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
 
@@ -101,20 +97,20 @@
 				var content;
 				var clickLine // 마우스로 클릭한 좌표로 그려질 선 객체입니다
 				var distanceOverlay; // 선의 거리정보를 표시할 커스텀오버레이 입니다
-				let cnt=0;
-	
-				//좌표생성
+				let cnt = 0;
+
+				//첫번째좌표생성
 				var coords = new kakao.maps.LatLng(coord[0], coord[1]);
-				// 마커를 생성합니다
+				// 시작점마커를 생성합니다
 				var marker = new kakao.maps.Marker({
-	    						position: coords
-							 });
+					position: coords
+				});
 
 				// 마커가 지도 위에 표시되도록 설정합니다
 				marker.setMap(map);
 				//지도 처음 중앙 위치 지정
 				map.setCenter(coords);
-	
+
 				//경로 생성
 				clickLine = new kakao.maps.Polyline({
 					map: map, // 선을 표시할 지도입니다 
@@ -127,10 +123,9 @@
 				displayCircleDot(coords, 0);
 				cnt++;
 				let i;
-				for(i=2; i<coord.length;i+=2 )
-				{	
+				for (i = 2; i < coord.length; i += 2) {
 					cnt++;
-					coords = new kakao.maps.LatLng(coord[i],coord[i+1]);
+					coords = new kakao.maps.LatLng(coord[i], coord[i + 1]);
 					path = clickLine.getPath();
 					path.push(coords);
 					clickLine.setPath(path);
@@ -153,10 +148,10 @@
 
 
 					if (distance > 0) {
-						var dc;	 
+						var dc;
 
-						if(cnt==(coord.length/2)) dc='<div class="dotOverlay">거리 <span class="number">'+ distance + '</span>m<br><span>도착지점</span></div>';
-						else dc='<div class="dotOverlay">거리 <span class="number">'+ distance + '</span>m</div>';
+						if (cnt == (coord.length / 2)) dc = '<div class="dotOverlay">거리 <span class="number">' + distance + '</span>m<br><span>도착지점</span></div>';
+						else dc = '<div class="dotOverlay">거리 <span class="number">' + distance + '</span>m</div>';
 
 						// 클릭한 지점까지의 그려진 선의 총 거리를 표시할 커스텀 오버레이를 생성합니다
 						var distanceOverlay = new kakao.maps.CustomOverlay({
@@ -169,37 +164,11 @@
 						// 지도에 표시합니다
 						distanceOverlay.setMap(map);
 					};
-			
+
 				}
 			});
 		}
-		function check(){
 
-            if ($.trim($("#sns_subject").val()) == "") {
-                alert("제목을 입력해주세요!");
-                $("#sns_subject").val("").focus();
-                return false;
-            }
-
-            if ($.trim($("#sns_address1").val()) == "") {
-                alert("광역시를 선택해주세요!");
-                $("#sns_address1").val("").focus();
-                return false;
-            }
-
-            if ($.trim($("#sns_address2").val()) == "") {
-                alert("지역을 선택해주세요!");
-                $("#sns_address2").val("").focus();
-                return false;
-            }
-
-            if ($.trim($("#sns_content").val()) == "") {
-                alert("내용을 입력해주세요!");
-                $("#sns_content").val("").focus();
-                return false;
-            }
-
-        }
 	</script>
 
 </head>
