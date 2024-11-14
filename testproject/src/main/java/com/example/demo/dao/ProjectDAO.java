@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.example.demo.model.Alarm;
 import com.example.demo.model.Coordinate;
 import com.example.demo.model.Runner;
 import com.example.demo.model.Runner_data;
@@ -33,9 +34,12 @@ public interface ProjectDAO {
 	int getTotalfromrd(String user_id);
 
 	List<Runner_data> listfromrd(Runner_data rd);
-	
+
 	Runner findid(Runner runner);
 
 	Runner findpass(Runner runner);
+
+	Alarm getAlarm(String user_id);
+
 
 }

@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.dao.ProjectDAO;
+import com.example.demo.model.Alarm;
 import com.example.demo.model.Coordinate;
 import com.example.demo.model.Runner;
 import com.example.demo.model.Runner_data;
@@ -15,9 +16,9 @@ import lombok.RequiredArgsConstructor;
 @Service
 @RequiredArgsConstructor
 public class ProjectService {
-	
+
 	private final ProjectDAO dao;
-		
+
 	public int getTotal(SnsBoard sns) {
 		return dao.getTotal(sns);
 	}
@@ -27,7 +28,7 @@ public class ProjectService {
 	}
 
 	public int insert(Runner runner) {
-		
+
 		return dao.insert(runner);
 	}
 
@@ -64,13 +65,19 @@ public class ProjectService {
 	}
 
 	public Runner findid(Runner runner) {
-		
+
 		return dao.findid(runner);
 	}
 
 	public Runner findpass(Runner runner) {
-		
+
 		return dao.findpass(runner);
+	}
+
+
+	public Alarm getAlarm(String user_id) {
+		
+		return dao.getAlarm(user_id);
 	}
 
 }
