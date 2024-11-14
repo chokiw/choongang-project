@@ -382,6 +382,8 @@ public class ProjectController {
 		return "sns_write_list";
 	}
 
+	
+	//sns 리스트에서 인기글목록 순으로 나타내 기위한 컨트롤러
 	@RequestMapping("/snslist/best")
 	public String snslistBest(@RequestParam(value = "pageNum", defaultValue = "1") String pageNum, SnsBoard sns,
 			Model model) {
