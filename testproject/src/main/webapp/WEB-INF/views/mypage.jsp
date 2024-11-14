@@ -110,8 +110,6 @@
 
 					<td><a href="/liked_board" style="color: black;">추천 누른 글</a></td>
 
-					<td><a href="asd">추천 누른 글</a></td>
-
 				</tr>
 
 				<tr>
