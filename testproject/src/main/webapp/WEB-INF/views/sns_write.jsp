@@ -173,6 +173,33 @@
 				}
 			});
 		}
+		function check(){
+
+            if ($.trim($("#sns_subject").val()) == "") {
+                alert("제목을 입력해주세요!");
+                $("#sns_subject").val("").focus();
+                return false;
+            }
+
+            if ($.trim($("#sns_address1").val()) == "") {
+                alert("광역시를 선택해주세요!");
+                $("#sns_address1").val("").focus();
+                return false;
+            }
+
+            if ($.trim($("#sns_address2").val()) == "") {
+                alert("지역을 선택해주세요!");
+                $("#sns_address2").val("").focus();
+                return false;
+            }
+
+            if ($.trim($("#sns_content").val()) == "") {
+                alert("내용을 입력해주세요!");
+                $("#sns_content").val("").focus();
+                return false;
+            }
+
+        }
 	</script>
 
 </head>
@@ -189,12 +216,12 @@
         
         
         <main class="content">
-        <form method="post" action="snswrite" onsubmit="return check()">
-            <span style="font-size: 36px; font-weight: 700;">트랙 게시판</span><br><br>
-            <div class="sns_title">
-            	<span style="font-size: 24px; font-weight: 600;">제목</span>&nbsp;&nbsp;
-                <input type="text" style="font-size: 20px; font-weight: 500; width: 60%;" maxlength="50" placeholder="제목을 입력하세요"  id="sns_subject" name="sns_subject">  
-            </div>
+       		<span style="font-size: 36px; font-weight: 700;">트랙 게시판</span><br><br>
+       		<form method="post" action="snswrite" onsubmit="return check()">
+            	<div class="sns_title">
+            		<span style="font-size: 24px; font-weight: 600;">제목</span>&nbsp;&nbsp;
+                	<input type="text" style="font-size: 20px; font-weight: 500; width: 60%;" maxlength="50" placeholder="제목을 입력하세요"  id="sns_subject" name="sns_subject">  
+            	</div>
             
             <div class="sns_writer">
                  <select id="sns_address1" name="sns_address1">
@@ -238,9 +265,7 @@
             <div class="maincontent">
            		<img id="defaultImg" src="/img/route.png" alt="Route">
 		 		<div id="map" style="width: 800px; height: 600px; float: left;"></div>
-		 		
-		
-			  <div class="content-info">
+				<div class="content-info">
                     <div>
                         <span class="content1">달린 거리</span><br>
                         <span id="distance" class="content2">0km</span><br><br><br>
@@ -253,26 +278,27 @@
                         <span class="content1">평균 페이스</span><br>
                         <span id="phase" class="content2">0'0"</span><br><br><br>
                     </div>    
+           		</div>
            </div>
-           </div>
-          
-          
-
-            <div style="margin-top: 20px; height: auto;">
-                <span style="font-size: 20px; font-family: 'Gothic A1', sans-serif; font-style: normal; font-weight: 600;">내용작성</span><br>
-               <textarea name="sns_content"  id="sns_content" rows="8" cols="50" style="width: 90%;" placeholder="내용을 입력해주세요"></textarea>
-            </div>
-
-            <div class="button-container">
+          <div class="button-container">
                 <button type="button" onclick="openPopup('sns_write_list')" class="action-button load">내가 달린 트랙 가져오기</button>
-                 <button type="submit" class="action-button save">글 작성</button>
-            </div>
+          </div>
+          
 
-			</form>
+          <div style="margin-top: 20px; height: auto;">
+               <span style="font-size: 20px; font-family: 'Gothic A1', sans-serif; font-style: normal; font-weight: 600;">내용작성</span><br>
+               <textarea name="sns_content"  id="sns_content" rows="8" cols="50" style="width: 90%;" placeholder="내용을 입력해주세요"></textarea>
+          </div>
+
+          <div class="button-container">
+          		<button type="submit" class="action-button save">글 작성</button>
+          </div>
+
+		</form>
             
            
-        </main>
-    </div>
+    	</main>
+	</div>
 
 </body>
 

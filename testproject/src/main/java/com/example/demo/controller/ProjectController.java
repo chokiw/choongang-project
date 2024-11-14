@@ -353,8 +353,6 @@ public class ProjectController {
 
 		HttpSession session = request.getSession(false);
 		Member member = (Member) session.getAttribute("member");
-		System.out.println(member.getUser_id());
-		System.out.println(member.getUser_nickname());
 		Runner_data rd = new Runner_data();
 		rd.setUser_id(member.getUser_id());
 		final int rowPerPage = 10;
