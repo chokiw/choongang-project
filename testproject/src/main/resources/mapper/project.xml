@@ -99,4 +99,8 @@
 		select * from runner where  user_id = #{user_id}   and  user_jumin1 = #{user_jumin1} and user_jumin2 = #{user_jumin2}
 
 	</select>
+	
+	<select id="getAlarm" parameterType="String" resultType="alarm">
+        select * from alarm where user_id = #{user_id}
+    </select>
 </mapper>

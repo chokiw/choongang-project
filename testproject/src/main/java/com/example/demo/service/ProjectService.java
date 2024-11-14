@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.dao.ProjectDAO;
+import com.example.demo.model.Alarm;
 import com.example.demo.model.Coordinate;
 import com.example.demo.model.Runner;
 import com.example.demo.model.Runner_data;
@@ -71,6 +72,11 @@ public class ProjectService {
 	public Runner findpass(Runner runner) {
 		
 		return dao.findpass(runner);
+	}
+
+	public Alarm getAlarm(String user_id) {
+		
+		return dao.getAlarm(user_id);
 	}
 
 }

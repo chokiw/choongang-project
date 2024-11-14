@@ -20,6 +20,13 @@
 
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <meta charset="UTF-8">
+<script type="text/javascript">
+function goback(runner_data_no){
+	window.opener.setNo(runner_data_no);
+	window.close();
+}
+</script>
+
 <title>Insert title here</title>
 </head>
 <body>
@@ -50,7 +57,7 @@
 				<c:forEach var="board" items="${list}">
 					<tr>
 						<td>${no1}</td>
-						<td><a href=""><fmt:formatDate value="${board.runner_data_date}"
+						<td><a href="JAVASCRIPT:goback(${board.runner_data_no})"><fmt:formatDate value="${board.runner_data_date}"
 							pattern="yyyy-MM-dd HH:mm:ss" /></a></td>
 						<td>${board.runner_data_distance}</td>
 						<td>${board.runner_data_time}</td>

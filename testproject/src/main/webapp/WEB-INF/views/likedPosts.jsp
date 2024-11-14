@@ -23,7 +23,13 @@
 	crossorigin="anonymous"></script>
 <link href="/css/common.css" rel="stylesheet">
 <link href="/css/sns_board.css" rel="stylesheet">
-<link href="/css/snslist.css" rel="stylesheet">
+<script src="/js/sns_board.js"></script>
+<script type="text/javascript">
+	$(function() {
+		//댓글목록 요청
+		$('#board').load('${path}/snslist');
+	});
+</script>
 <title>Document</title>
 
 </head>
@@ -38,32 +44,33 @@
 
 		<main class="content">
 			<div class="track">
-				<span style="font-size: 36px; font-weight: 700;">내가 달린 트랙</span><br>
-				<br> <span style="color: gray;">그동안 달렸던 트랙을 살펴 볼까요?</span>
-				<hr>
+				<span style="font-size: 36px; font-weight: 700;">내가 추천한 글목록</span><br>
+				<br> <span style="color: gray;">자신이 추천한 글 목록을 확인하세요</span>
 			</div>
 			<br>
+			<div class="locationbox">
+				<!-- 인기글 버튼 -->
+				<div class="hot">
+					<a href="sd" class="hot_text"> <i class="fa-solid fa-fire"></i>
+						인기글
+					</a>
+				</div>
+			</div>
 
-			<table>
-				<tr>
-					<td>번호</td>
-					<td>아이디</td>
-					<td>거리</td>
-					<td>시간</td>
-					<td>날짜</td>
-				</tr>
-				<c:set var="no1" value="${runner_data_no}"></c:set>
-				<c:forEach var="runner_data" items="">
-				<tr>
-					<td>${no1}</td>
-					<td>${runner_data.user_id}</td>
-					<td>${runner_data.runner_data_distance}</td>
-					<td>${runner_data.runner_data_time}</td>
-					<td>${runner_data.runner_data_date}</td>
-				</tr>
+			<div class="locationbox">
+				<!-- 내가 추천한 글 목록 -->
+
+				<c:if test="${empty likedPosts}">
+					<p>You haven't liked any posts yet.</p>
+				</c:if>
+				<c:forEach var="post" items="${likedPosts}">
+					<h2>${post.sns_subject}</h2>
+					<p>${post.sns_content}</p>
+					<p>Liked on: ${post.sns_date}</p>
 				</c:forEach>
-			</table>
+			</div>
 
+			<a href="sns_write" class="write">글작성</a><br> <br>
 		</main>
 
 	</div>
