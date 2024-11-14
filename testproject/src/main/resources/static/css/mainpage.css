@@ -25,6 +25,8 @@
     max-width: 1000px;
     height: auto;
     margin: 100px auto 0;
+    flex-direction: column;
+    align-items: center;
     justify-content: center;
 
 }
@@ -38,7 +40,7 @@
     margin: 0 25px 50px;
     text-align: center;
     flex-basis: 100%;
-    margin-bottom: 20px;    
+    margin-bottom: 20px;
 }
 
 
@@ -65,7 +67,7 @@ img {
     color: darkgray;
 }
 
-#track1{
+#track1 {
     padding-left: 200px;
     padding-right: 200px;
 }
@@ -199,30 +201,38 @@ a {
 
 
 @media (max-width: 768px) {
-
     .track {
-        margin-left: 10px;
+        margin-left: 15px;
+        font-size: 16px;
+    }
+
+    .track span:first-child {
+        font-size: 32px;
     }
 
     .gold {
-        max-width: 300px;
+        max-width: 90%;
+        margin: 0 auto 40px;
     }
 
     .nickname {
-        font-size: 24px;
+        font-size: 22px;
     }
 
     .location {
         font-size: 14px;
     }
 
-    .pricebox{
-        width: 500px;
+    .pricebox {
+        width: 95%;
+        flex-direction: column;
+        align-items: center;
     }
 
     .trackimg {
-        max-width: 250px;
-        max-height: 200px;
+        max-width: 100%;
+        height: auto;
+        max-height: 250px;
     }
 
     .nickname2 {
@@ -230,17 +240,16 @@ a {
     }
 
     .distance {
-        font-size: 26px;
+        font-size: 24px;
     }
 
     .runner-grid {
-        min-height: auto;
-        /* 작은 화면에서는 최소 높이 제거 */
+        justify-content: space-around;
     }
 
     .runner-item {
-        flex-basis: calc(33.333% - 20px);
-        margin-bottom: 20px;
+        flex-basis: calc(50% - 20px);
+        margin-bottom: 30px;
     }
 
     .runner-item:nth-child(4),
@@ -249,78 +258,99 @@ a {
     }
 
     .img1 {
-        width: 100px;
-        height: 100px;
+        width: 150px;
+        height: 150px;
     }
 
     .img2 {
-        width: 80px;
-        width: 80px;
+        width: 120px;
+        height: 120px;
     }
-    
 
+    #track1 {
+        padding-left: 50px;
+        padding-right: 50px;
+    }
 
+    .dot {
+        width: 35px;
+        height: 35px;
+        font-size: 20px;
+        top: 0;
+        left: 10px;
+    }
 }
-
 
 @media (max-width: 425px) {
 
     .track {
-        margin-left: 5px;
+        margin-left: 10px;
+        font-size: 14px;
+    }
+
+    .track span:first-child {
+        font-size: 28px;
     }
 
     .gold {
-        max-width: 250px;
+        width: 100%;
+        max-width: 300px;
+        margin: 0 auto 30px;
+        padding: 10px;
+        box-sizing: border-box;
     }
 
     .nickname {
-        font-size: 20px;
+        font-size: 18px;
     }
 
-    .location {
-        font-size: 12px;
+    
+
+    .pricebox {
+        width: 100%;
+        padding: 0 10px;
+        box-sizing: border-box;
     }
 
     .trackimg {
-        max-width: 200px;
+        width: 100%;
+        height: auto;
+        max-width: 250px;
+        object-fit: cover;
     }
 
-    .nickname2 {
-        font-size: 16px;
-    }
-
-    .distance {
-        font-size: 22px;
+    .nickname, .location, .distance {
+        word-wrap: break-word;
+        overflow-wrap: break-word;
     }
 
     .dot {
         width: 30px;
         height: 30px;
-        font-size: 18px;
+        font-size: 16px;
+        top: -5px;
+        left: 5px;
+    }
+
+    .runner-grid {
+        flex-direction: column;
+        align-items: center;
     }
 
     .runner-item {
         flex-basis: 100%;
-        margin-left: 150px;
-        margin-right: 150px;
+        width: 80%;
+        margin: 0 auto 30px;
     }
 
-    .img1 {
-        width: 80px;
-        height: 80px;
+    .img1, .img2 {
+        width: 80%;
+        height: 80%;
     }
 
-    .img2 {
-        width: 50px;
-        width: 50px;
-    }
-
-    .pricebox{
-        width: 90%;
-    }
-
-    .dot{
-        left: 50px;
+     #track1 {
+        padding-left: 0;
+        padding-right: 0;
     }
 
 }

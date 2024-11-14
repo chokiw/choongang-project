@@ -40,11 +40,6 @@ select {
     outline: none;
 }
 
-textarea{
-    font-size: 16px;
-    font-family: "Gothic A1", sans-serif;   
-}
-
 .action-button {
     padding: 5px 20px;
     font-size: 18px;
@@ -94,7 +89,7 @@ textarea{
     flex-wrap: wrap;
     justify-content: center;
     gap: 300px;
-    margin: 20px 0;
+    margin: 20px 20px;
 }
 
 .maincontent img {
@@ -123,6 +118,11 @@ textarea{
     font-weight: 700;
     font-family: "Bangers", system-ui;
     letter-spacing: 5px;
+}
+
+textarea{
+    font-size: 16px;
+    font-family: "Gothic A1", sans-serif;   
 }
 
 

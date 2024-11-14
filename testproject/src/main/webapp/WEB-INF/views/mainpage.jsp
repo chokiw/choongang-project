@@ -30,7 +30,7 @@
 
 
         <!-- 메인 콘텐츠 -->
-        <main class="content">
+         <main class="content">
             <div class="track">
                 <span style="font-size: 40px; font-weight: 700;">Best Runner</span>
                 <span style="float: right; opacity: 80%; font-size: 14px;">랭킹은 현재 시간으로부터 7일전까지 데이터를 기준으로 정해집니다.</span>
@@ -92,10 +92,10 @@
             </div>
 
 
- 
+
 
             <div class="pricebox">
-                <div class="gold" id="track1" style=" padding-left: 200px; padding-right: 200px;">
+                <div class="gold" id="track1">
                     <a href="asd"><img src="/img/route.png" class="trackimg"></a> <br><br>
                     <span class="nickname">writer1님</span><br>
                     <span class="location">서울시 강남구</span><br>
