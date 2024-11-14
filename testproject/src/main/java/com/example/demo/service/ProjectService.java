@@ -16,9 +16,9 @@ import lombok.RequiredArgsConstructor;
 @Service
 @RequiredArgsConstructor
 public class ProjectService {
-
+	
 	private final ProjectDAO dao;
-
+		
 	public int getTotal(SnsBoard sns) {
 		return dao.getTotal(sns);
 	}
@@ -28,7 +28,7 @@ public class ProjectService {
 	}
 
 	public int insert(Runner runner) {
-
+		
 		return dao.insert(runner);
 	}
 
@@ -65,22 +65,25 @@ public class ProjectService {
 	}
 
 	public Runner findid(Runner runner) {
-
+		
 		return dao.findid(runner);
 	}
 
 	public Runner findpass(Runner runner) {
-
+		
 		return dao.findpass(runner);
 	}
 
 	public Alarm getAlarm(String user_id) {
-
+		
 		return dao.getAlarm(user_id);
 	}
 
-	public List<SnsBoard> listBest(SnsBoard sns) {
-		return dao.listBest(sns);
+	public List<Runner> rundata(Runner runner) {
+	
+		return dao.rundata(runner);
 	}
+
+
 
 }

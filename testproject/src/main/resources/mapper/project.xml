@@ -37,24 +37,6 @@
 		where rn between #{startRow} and #{endRow}
 	</select>
 
-	<!-- 추천수가 많은 순으로 sns 게시판 목록 가져오기 -->
-	<select id="listBest" parameterType="sns" resultType="sns">
-		select * from (select a.*, rowNum rn from (
-		select * from sns
-		<where>
-			<if test="keyword != null and search!='subcon'">
-				${search} like '%'||#{keyword}||'%'
-			</if>
-			<if test="keyword != null and search=='subcon'">
-				sns_subject like '%'||#{keyword}||'%' or
-				sns_content like '%'||#{keyword}||'%'
-			</if>
-		</where>
-		order by sns_good desc) a)
-		where rn between #{startRow} and #{endRow}
-	</select>
-
-
 	<!-- 회원가입을 위한 sql -->
 	<insert id="insert" parameterType="runner">
 		insert into runner
@@ -113,12 +95,9 @@
 		select *
 		from (select a.*,rowNum rn
 		from ( select *
-		from
-		runner_data
-		where user_id = #{user_id}
+		from runner_data
 		order by runner_data_date desc) a )
-		where rn between
-		#{startRow} and #{endRow}
+		where rn between #{startRow} and #{endRow}
 	</select>
 	<!-- 아이디 찾기 -->
 	<select id="findid" parameterType="runner" resultType="runner">
@@ -138,10 +117,31 @@
 
 	</select>
 
-
-
 	<select id="getAlarm" parameterType="String" resultType="alarm">
 		select * from alarm where user_id = #{user_id}
 	</select>
+
+
+	<!-- 메인 페이지에서 가장 많이 달린 상위 5명 -->
+<select id="rundata" parameterType="runner" resultType="runner">
+    SELECT * FROM (
+        SELECT r.user_id, r.user_nickname, r.user_photo, t.distance
+        FROM runner r
+        INNER JOIN (
+            SELECT
+                user_id,
+                SUM(runner_data_distance) AS distance
+            FROM
+                runner_data
+            WHERE
+                runner_data_date >= SYSDATE - 7 -- 최근 7일간의 데이터를 필터링
+            GROUP BY
+                user_id
+        ) t ON r.user_id = t.user_id
+        ORDER BY t.distance DESC NULLS LAST
+    )
+    WHERE ROWNUM &lt;= 5 -- 상위 5개만 선택
+</select>
+
 
 </mapper>
