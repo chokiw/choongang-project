@@ -49,6 +49,35 @@
 		function setNo(runner_data_no){
 			
 		}
+		
+		
+		 function check(){
+
+	            if ($.trim($("#sns_subject").val()) == "") {
+	                alert("제목을 입력해주세요!");
+	                $("#sns_subject").val("").focus();
+	                return false;
+	            }
+
+	            if ($.trim($("#sns_address1").val()) == "") {
+	                alert("광역시를 선택해주세요!");
+	                $("#sns_address1").val("").focus();
+	                return false;
+	            }
+
+	            if ($.trim($("#sns_address2").val()) == "") {
+	                alert("지역을 선택해주세요!");
+	                $("#sns_address2").val("").focus();
+	                return false;
+	            }
+
+	            if ($.trim($("#sns_content").val()) == "") {
+	                alert("내용을 입력해주세요!");
+	                $("#sns_content").val("").focus();
+	                return false;
+	            }
+
+	        }
 	</script>
 
 </head>
@@ -64,20 +93,20 @@
         <jsp:include page="side.jsp"></jsp:include>
         
         
-        <main class="content">
-        <form name="memberForm" method="post" action="/membership" onsubmit="return check()">
+       <main class="content">
             <span style="font-size: 36px; font-weight: 700;">트랙 게시판</span><br><br>
+
+            <form method="post" action="snswrite" onsubmit="return check()">
             <div class="sns_title">
-            	<span style="font-size: 24px; font-weight: 600;">제목</span>&nbsp;&nbsp;
-                <input type="text" style="font-size: 20px; font-weight: 500; width: 60%;" placeholder="제목을 입력하세요">  
+                <span style="font-size: 24px; font-weight: 600;">제목</span>&nbsp;&nbsp;
+                <input type="text" style="font-size: 20px; font-weight: 500; width: 60%;" maxlength="50" placeholder="제목을 입력하세요"  id="sns_subject" name="sns_subject">  
             </div>
-            
             <div class="sns_writer">
-                <select id="sns_address1" name="user_address1">
-                    <option value="">광역시선택</option> 
+                <select id="sns_address1" name="sns_address1">
+                    <option value="">광역시선택</option>
                     <option value="서울시">서울시</option>
                 </select>
-                <select id="sns_address2" name="user_address2">
+                <select id="sns_address2" name="sns_address2">
                     <option value="">지역선택</option>
                     <option value="강남구">강남구</option>
                     <option value="강동구">강동구</option>
@@ -109,45 +138,42 @@
                
             </div>
 
-            <hr><br><br>
             
+           
+            <hr><br><br>
             <div class="maincontent">
-            	 <img src="/img/route.png" alt="Route">
-		 		
-		
-			  <div class="content-info">
+                <img src="route.png" alt="Route">
+                <div class="content-info">
                     <div>
                         <span class="content1">달린 거리</span><br>
                         <span class="content2">4.62km</span><br><br><br>
                     </div>
                     <div>
                         <span class="content1">달린 시간</span><br>
-                        <span class="content2"><%--                     <fmt:formatNumber type="number" maxFractionDigits="0" value="${(rd.runner_data_time/60)}"></fmt:formatNumber> --%>0분
-                    <%--${rd.runner_data_time%60} --%>초         </span><br><br><br>
+                        <span class="content2">1:08:00</span><br><br><br>
                     </div>
                     <div>
                         <span class="content1">평균 페이스</span><br>
-                        <span class="content2">   <%--<fmt:formatNumber type="number" maxFractionDigits="0" value="${rd.runner_data_time*1000/rd.runner_data_distance/60}"/> --%>0'
-                     <%--<fmt:formatNumber type="number" maxFractionDigits="0" value="${rd.runner_data_time*1000/rd.runner_data_distance%60}"/> --%>0"</span><br><br><br>
-                    </div>    
-           </div>
-           </div>
-          
-          
+                        <span class="content2">5'87"</span><br><br><br>
+                    </div>
+                </div>
+            </div>
 
+            <div class="button-container">
+                <button type="button" onclick="openPopup('sns_write_list')" class="action-button load">내가 달린 트랙 가져오기</button>    
+            </div>
+         
             <div style="margin-top: 20px; height: auto;">
                 <span style="font-size: 20px; font-family: 'Gothic A1', sans-serif; font-style: normal; font-weight: 600;">내용작성</span><br>
                 <textarea name="sns_content"  id="sns_content" rows="8" cols="50" style="width: 90%;" placeholder="내용을 입력해주세요"></textarea>
             </div>
 
-            <div class="button-container">
-                <button type="button" onclick="openPopup('sns_write_list')" class="action-button load">내가 달린 트랙 가져오기</button>
-                <button type="button" class="action-button save" onclick="">저장</button>
+            <div class="button-container">  
+                <button type="submit" class="action-button save">저장</button>
             </div>
 
-			</form>
-            
            
+            </form>
         </main>
     </div>
 
