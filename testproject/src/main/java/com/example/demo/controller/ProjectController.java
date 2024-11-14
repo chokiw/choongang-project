@@ -95,11 +95,6 @@ public class ProjectController {
 		return "mate_board";
 	}
 
-	// 모집 글상세
-	@RequestMapping("/mate_detail")
-	public String mate_detail() {
-		return "mate_detail";
-	}
 
 	// 로그인 페이지로 이동
 	@RequestMapping("/loginpage")
@@ -321,8 +316,8 @@ public class ProjectController {
 	}
 
 	@RequestMapping("/sns_detail")
-	public String sns_detail(@RequestParam(value = "pageNum", defaultValue = "1") String pageNum,
-			@RequestParam(value = "sns_no", defaultValue = "227") String sns_no, Model model) {
+	public String sns_detail(@RequestParam(value = "pageNum") String pageNum,
+			@RequestParam(value = "sns_no") String sns_no, Model model) {
 		// 글정보 불러오기
 		SnsBoard board = service.getboard(Integer.parseInt(sns_no));
 		// 맵에 경로 표현을 위한 테이터 불러오기
