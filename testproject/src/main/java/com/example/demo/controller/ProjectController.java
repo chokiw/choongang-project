@@ -38,7 +38,34 @@ public class ProjectController {
 
 	// 메인페이지로 이동
 	@RequestMapping("/mainpage")
-	public String mainpage() {
+	public String mainpage(Runner runner, Model model, Runner_data data ) {
+		List <Runner> rundata = service.rundata(runner);
+		
+		 // 최대 5개의 닉네임을 개별적으로 가져옵니다.
+	    for (int i = 0; i < Math.min(5, rundata.size()); i++) {
+	        String nickname = rundata.get(i).getUser_nickname();
+	        model.addAttribute("userNickname" + (i + 1), nickname);
+	    }
+	    
+	    // 5개의 달린거리를 가져온다.
+	    for (int i = 0; i < Math.min(5, rundata.size()); i++) {
+	    	double distanceInMeters = Double.parseDouble(rundata.get(i).getDistance());	// distance가 m값이라 km값으로 바꾸기 위해 double로 형변환
+	    	
+	    	 double distanceInKm = distanceInMeters / 1000.0;
+	         // 소수점 둘째 자리까지 반올림
+	         String formattedDistance = String.format("%.2f", distanceInKm);
+	         model.addAttribute("userDistance" + (i + 1), formattedDistance);
+	    }
+	    
+	    // 5개의 프로필이미지를 가져온다.
+	    for (int i = 0; i < Math.min(5, rundata.size()); i++) {
+	        String userprofileimg = rundata.get(i).getUser_photo();
+	        model.addAttribute("userProfileimg" + (i + 1), userprofileimg);
+	    }
+	    
+	    
+	    	model.addAttribute("rundata", rundata);
+	   
 		return "mainpage";
 	}
 

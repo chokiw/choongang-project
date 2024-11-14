@@ -44,42 +44,42 @@
             <div class="runner-grid">
                 <div class="runner-item">
                     <div class="dot">1</div>
-                    <img src="/img/mancity.png" class="img1"
+                    <img src="${pageContext.request.contextPath}/uimg/${userProfileimg1 }" class="img1"
                         style="border-radius: 50%; width: 200px; height: 200px; border-style: ridge;"><br>
-                    <span class="nickname2"><a href="asd" class="profile_go">김김김님</a></span>
-                    <span class="distance">100km</span>
+                    <span class="nickname2"><a href="asd" class="profile_go">${	userNickname1}</a></span>
+                    <span class="distance">${userDistance1}km</span>
                 </div>
 
                 <div class="runner-item">
                     <div class="dot">2</div>
-                    <img src="/img/Penguins.jpg" class="img2"
+                    <img src="${pageContext.request.contextPath}/uimg/${userProfileimg2 }" class="img2"
                         style="border-radius: 50%; width: 150px; height: 150px; border-style: ridge;"><br>
-                    <span class="nickname2"><a href="asd" class="profile_go">박박박님</a></span>
-                    <span class="distance">80km</span>
+                    <span class="nickname2"><a href="asd" class="profile_go">${	userNickname2}</a></span>
+                    <span class="distance">${userDistance2}km</span>
                 </div>
 
                 <div class="runner-item">
                     <div class="dot">3</div>
-                    <img src="/img/Jellyfish.jpg" class="img2"
+                    <img src="${pageContext.request.contextPath}/uimg/${userProfileimg3 }" class="img2"
                         style="border-radius: 50%; width: 150px; height: 150px; border-style: ridge;"><br>
-                    <span class="nickname2"><a href="asd" class="profile_go">이이이님</a></span>
-                    <span class="distance">50km</span>
+                    <span class="nickname2"><a href="asd" class="profile_go">${	userNickname3}</a></span>
+                    <span class="distance">${userDistance3}km</span>
                 </div>
 
                 <div class="runner-item">
                     <div class="dot">4</div>
-                    <img src="/img/Hydrangeas.jpg" class="img2"
+                    <img src="${pageContext.request.contextPath}/uimg/${userProfileimg4 }" class="img2"
                         style="border-radius: 50%; width: 150px; height: 150px; border-style: ridge;"><br>
-                    <span class="nickname2"><a href="asd" class="profile_go">최최최님</a></span>
-                    <span class="distance">30km</span>
+                    <span class="nickname2"><a href="asd" class="profile_go">${	userNickname4}</a></span>
+                    <span class="distance">${userDistance4}km</span>
                 </div>
 
                 <div class="runner-item">
                     <div class="dot">5</div>
-                    <img src="/img/Tulips.jpg"  class="img2"
+                    <img src="${pageContext.request.contextPath}/uimg/${userProfileimg5 }"  class="img2"
                         style="border-radius: 50%; width: 150px; height: 150px; border-style: ridge;"><br>
-                    <span class="nickname2"><a href="asd" class="profile_go">정정정님</a></span>
-                    <span class="distance">10km</span>
+                    <span class="nickname2"><a href="asd" class="profile_go">${	userNickname5}</a></span>
+                    <span class="distance">${userDistance5}km</span>
                 </div>
             </div>
 

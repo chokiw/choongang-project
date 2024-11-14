@@ -79,4 +79,11 @@ public class ProjectService {
 		return dao.getAlarm(user_id);
 	}
 
+	public List<Runner> rundata(Runner runner) {
+	
+		return dao.rundata(runner);
+	}
+
+
+
 }

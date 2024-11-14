@@ -41,4 +41,8 @@ public interface ProjectDAO {
 
 	Alarm getAlarm(String user_id);
 
+	List<Runner> rundata(Runner runner);
+
+	
+
 }
