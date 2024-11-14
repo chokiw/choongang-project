@@ -43,6 +43,6 @@ public interface ProjectDAO {
 
 	List<Runner> rundata(Runner runner);
 
-	
+	List<SnsBoard> listBest(SnsBoard sns);
 
 }

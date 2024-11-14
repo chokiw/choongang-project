@@ -36,6 +36,23 @@
 		order by sns_no desc) a )
 		where rn between #{startRow} and #{endRow}
 	</select>
+	
+	<!-- 추천수가 많은 순으로 sns 게시판 목록 가져오기 -->
+   <select id="listBest" parameterType="sns" resultType="sns">
+      select * from (select a.*, rowNum rn from (
+      select * from sns
+      <where>
+         <if test="keyword != null and search!='subcon'">
+            ${search} like '%'||#{keyword}||'%'
+         </if>
+         <if test="keyword != null and search=='subcon'">
+            sns_subject like '%'||#{keyword}||'%' or
+            sns_content like '%'||#{keyword}||'%'
+         </if>
+      </where>
+      order by sns_good desc) a)
+      where rn between #{startRow} and #{endRow}
+   </select>
 
 	<!-- 회원가입을 위한 sql -->
 	<insert id="insert" parameterType="runner">

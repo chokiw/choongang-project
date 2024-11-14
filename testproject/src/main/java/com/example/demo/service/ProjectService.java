@@ -78,6 +78,11 @@ public class ProjectService {
 		
 		return dao.getAlarm(user_id);
 	}
+	
+	public List<SnsBoard> listBest(SnsBoard sns) {
+		return dao.listBest(sns);
+	}
+
 
 	public List<Runner> rundata(Runner runner) {
 	
