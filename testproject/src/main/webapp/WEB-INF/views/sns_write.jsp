@@ -24,6 +24,9 @@
     <script src="/js/sns_detail.js"></script>
     <title>Document</title>
 	<script>
+		let coord;
+		let distanse;
+		let time;
 		function openPopup(url) { 
 			// 화면 크기 가져오기
 			var screenWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
@@ -47,6 +50,16 @@
 		}
 		
 		function setNo(runner_data_no){
+			$.post('${path}/getMyData',runner_data_no, function(data) {
+				coord=data[0];
+				distanse=data[1];
+				time=data[2];
+				
+				alert(distanse);
+				alert(time);
+				
+				
+			});
 			
 		}
 	</script>
