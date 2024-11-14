@@ -21,35 +21,9 @@
     <link href="/css/sns_write.css" rel="stylesheet">
     
     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=e6146d72cd45f3c8d130a2c1504d9647"></script>
-    <script src="/js/sns_detail.js"></script>
+    <script src="/js/sns_write.js"></script>
     <title>Document</title>
-	<script>
-		function openPopup(url) { 
-			// 화면 크기 가져오기
-			var screenWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
-			var screenHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
 
-			// 팝업 크기 설정
-			var popupWidth = 1050;
-			var popupHeight = 700;
-
-			// 중앙 위치 계산
-			var left = (screenWidth - popupWidth) / 2;
-			var top = (screenHeight - popupHeight) / 2;
-
-			// 팝업창 열기
-			window.open(url, '_blank',
-				'width=' + popupWidth +
-				',height=' + popupHeight +
-				',left=' + left +
-				',top=' + top +
-				',scrollbars=yes,resizable=yes');
-		}
-		
-		function setNo(runner_data_no){
-			
-		}
-	</script>
 
 </head>
 
@@ -65,19 +39,19 @@
         
         
         <main class="content">
-        <form name="memberForm" method="post" action="/membership" onsubmit="return check()">
+        <form method="post" action="snswrite" onsubmit="return check()">
             <span style="font-size: 36px; font-weight: 700;">트랙 게시판</span><br><br>
             <div class="sns_title">
             	<span style="font-size: 24px; font-weight: 600;">제목</span>&nbsp;&nbsp;
-                <input type="text" style="font-size: 20px; font-weight: 500; width: 60%;" placeholder="제목을 입력하세요">  
+                <input type="text" style="font-size: 20px; font-weight: 500; width: 60%;" maxlength="50" placeholder="제목을 입력하세요"  id="sns_subject" name="sns_subject">  
             </div>
             
             <div class="sns_writer">
-                <select id="sns_address1" name="user_address1">
+                 <select id="sns_address1" name="sns_address1">
                     <option value="">광역시선택</option> 
                     <option value="서울시">서울시</option>
                 </select>
-                <select id="sns_address2" name="user_address2">
+                <select id="sns_address2" name="sns_address2">
                     <option value="">지역선택</option>
                     <option value="강남구">강남구</option>
                     <option value="강동구">강동구</option>
@@ -137,12 +111,12 @@
 
             <div style="margin-top: 20px; height: auto;">
                 <span style="font-size: 20px; font-family: 'Gothic A1', sans-serif; font-style: normal; font-weight: 600;">내용작성</span><br>
-                <textarea name="sns_content"  id="sns_content" rows="8" cols="50" style="width: 90%;" placeholder="내용을 입력해주세요"></textarea>
+               <textarea name="sns_content"  id="sns_content" rows="8" cols="50" style="width: 90%;" placeholder="내용을 입력해주세요"></textarea>
             </div>
 
             <div class="button-container">
                 <button type="button" onclick="openPopup('sns_write_list')" class="action-button load">내가 달린 트랙 가져오기</button>
-                <button type="button" class="action-button save" onclick="">저장</button>
+                 <button type="submit" class="action-button save">글 작성</button>
             </div>
 
 			</form>
