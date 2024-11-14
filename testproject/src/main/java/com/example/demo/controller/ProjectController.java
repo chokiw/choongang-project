@@ -113,6 +113,11 @@ public class ProjectController {
 	public String sns_write() {
 		return "sns_write";
 	}
+	
+	@RequestMapping("/mate_write")
+	public String mate_write() {
+		return "mate_write";
+	}
 
 	// 아이디 찾기 액션
 	@RequestMapping(value = "find_id_ok", method = RequestMethod.POST)
