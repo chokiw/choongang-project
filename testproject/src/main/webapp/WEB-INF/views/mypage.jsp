@@ -104,7 +104,7 @@
 
 				<tr>
 					<td><i class="fa-solid fa-fire"></i></td>
-					<td><a href="asd">추천 누른 글</a></td>
+					<td><a href="liked_board">추천 누른 글</a></td>
 				</tr>
 
 				<tr>
