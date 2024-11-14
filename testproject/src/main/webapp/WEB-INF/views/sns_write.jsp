@@ -21,9 +21,35 @@
     <link href="/css/sns_write.css" rel="stylesheet">
     
     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=e6146d72cd45f3c8d130a2c1504d9647"></script>
-    <script src="/js/sns_write.js"></script>
+    <script src="/js/sns_detail.js"></script>
     <title>Document</title>
+	<script>
+		function openPopup(url) { 
+			// 화면 크기 가져오기
+			var screenWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+			var screenHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
 
+			// 팝업 크기 설정
+			var popupWidth = 1050;
+			var popupHeight = 700;
+
+			// 중앙 위치 계산
+			var left = (screenWidth - popupWidth) / 2;
+			var top = (screenHeight - popupHeight) / 2;
+
+			// 팝업창 열기
+			window.open(url, '_blank',
+				'width=' + popupWidth +
+				',height=' + popupHeight +
+				',left=' + left +
+				',top=' + top +
+				',scrollbars=yes,resizable=yes');
+		}
+		
+		function setNo(runner_data_no){
+			
+		}
+	</script>
 
 </head>
 
