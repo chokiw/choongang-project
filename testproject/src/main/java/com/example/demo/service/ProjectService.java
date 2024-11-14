@@ -74,10 +74,13 @@ public class ProjectService {
 		return dao.findpass(runner);
 	}
 
-
 	public Alarm getAlarm(String user_id) {
-		
+
 		return dao.getAlarm(user_id);
+	}
+
+	public List<SnsBoard> listBest(SnsBoard sns) {
+		return dao.listBest(sns);
 	}
 
 }

@@ -41,5 +41,7 @@ public interface ProjectDAO {
 
 	Alarm getAlarm(String user_id);
 
+	List<SnsBoard> listBest(SnsBoard sns);
+
 
 }

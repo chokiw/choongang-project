@@ -382,6 +382,36 @@ public class ProjectController {
 		return "sns_write_list";
 	}
 
+	@RequestMapping("/snslist/best")
+	public String snslistBest(@RequestParam(value = "pageNum", defaultValue = "1") String pageNum, SnsBoard sns,
+			Model model) {
+		final int rowPerPage = 10;
+		if (pageNum == null || pageNum.equals("")) {
+			pageNum = "1";
+		}
+		int currentPage = Integer.parseInt(pageNum);
+		// 전체 데이터 갯수
+		int total = service.getTotal(sns);
+		// 페이지 이동에 따라서 10개의 데이터를 어디서 어디까지 가져올지 알기 위한 변수
+		int startRow = (currentPage - 1) * rowPerPage + 1;
+		int endRow = startRow + rowPerPage - 1;
+		// 페이지 이동 변수들을 담아놓는 DTO에 저장
+		PagingPgm pp = new PagingPgm(total, rowPerPage, currentPage);
 
+		sns.setStartRow(startRow);
+		sns.setEndRow(endRow);
+		int no = total - startRow + 1;
+		// 불러온 추천수 순으로 정렬된 게시판 데이터를 리스트에 담기
+		List<SnsBoard> list = service.listBest(sns);
+		model.addAttribute("list", list);
+		model.addAttribute("pageNum", pageNum);
+		model.addAttribute("no", no);
+		model.addAttribute("pp", pp);
+		model.addAttribute("search", sns.getSearch());
+		model.addAttribute("keyword", sns.getKeyword());
+		model.addAttribute("best", true); // 인기글 목록임을 표시하는 플래그 추가
+
+		return "snslist";
+	}
 
 }
