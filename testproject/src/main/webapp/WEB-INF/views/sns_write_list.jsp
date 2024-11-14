@@ -79,5 +79,6 @@ function goback(runner_data_no){
 					<li><a href="sns_write_list?pageNum=${pp.endPage + 1}">다음</a></li>
 				</c:if>
 		</ul>
+		</div>
 </body>
 </html>
