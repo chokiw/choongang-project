@@ -43,10 +43,15 @@
 	margin: 20px 0;
 }
 
-.maincontent img {
-	max-width: 100%;
+.image-container {
+	width: 100%;
+	max-width: 800px;
+	margin: 0;
 	height: 600px;
-	width: 800px;
+	/* 원하는 비율로 설정 (예: 16:9) */
+	border: 2px solid #000;
+	/* 테두리 추가 */
+	overflow: hidden;
 }
 
 .content-info {
@@ -118,7 +123,32 @@
 	color: #333333;
 	font-size: 18px;
 	font-family: 'Gothic A1', sans-serif;
+	cursor: pointer;
+	display: inline-block;
 }
+
+.button-style {
+	background: none;
+	border: none;
+	padding: 0;
+	margin: 0;
+	font: inherit;
+	color: inherit;
+	font-size: 18.2px;
+	font-style: normal;
+}
+
+.action-buttons {
+	display: flex;
+	align-items: center;
+	gap: 10px; /* 버튼 사이의 간격 */
+}
+
+/* 호버 효과 (선택적) */
+.delete:hover, .button-style:hover {
+	color: #007bff; /* 호버 시 색상 변경 */
+}
+
 
 @media ( max-width : 1200px) {
 	.maincontent {
@@ -128,6 +158,11 @@
 	}
 	.content-info {
 		width: 100%;
+	}
+	
+		.image-container {
+		padding-bottom: 85%;
+		max-width: 100%;
 	}
 }
 
@@ -156,6 +191,10 @@
 		flex-wrap: wrap;
 		justify-content: center;
 	}
+	
+		.image-container {
+		width: 100%;
+	}
 }
 
 @media ( max-width : 425px) {
@@ -168,7 +207,7 @@
 	.content2 {
 		font-size: 28px;
 	}
-}
+
 
 .dot {
 	overflow: hidden;
@@ -228,4 +267,8 @@
 
 .distanceInfo:after {
 	content: none;
+}
+	.image-container {
+		width: 80%;
+	}
 }

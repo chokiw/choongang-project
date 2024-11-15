@@ -98,7 +98,7 @@ public class SJLController {
 		//글쓴이 정보 불러오기
 		Runner r = service.getMember(board.getUser_id());
 		
-		model.addAttribute("member", r);
+		model.addAttribute("r", r);
 		model.addAttribute("rc", rc);
 		model.addAttribute("pageNum", pageNum);
 		model.addAttribute("board", board);
