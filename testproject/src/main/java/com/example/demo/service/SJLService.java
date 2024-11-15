@@ -49,4 +49,13 @@ public class SJLService {
 	public Runner getMember(String user_id) {
 		return dao.getMember(user_id);
 	}
+
+	public int setRecruitBoard(RecruitBoard board) {
+		return dao.setRecruitBoard(board);
+	}
+
+	public void setRecruitC(Recruit_c recruit_c) {
+		// TODO Auto-generated method stub
+		dao.setRecruitC(recruit_c);
+	}
 }

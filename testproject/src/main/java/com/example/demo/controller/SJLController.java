@@ -98,7 +98,7 @@ public class SJLController {
 		//글쓴이 정보 불러오기
 		Runner r = service.getMember(board.getUser_id());
 		
-		model.addAttribute("member", r);
+		model.addAttribute("r", r);
 		model.addAttribute("rc", rc);
 		model.addAttribute("pageNum", pageNum);
 		model.addAttribute("board", board);
@@ -111,6 +111,29 @@ public class SJLController {
 	public String mate_write() {
 		
 		return "mate_write";
+	}
+	
+	// 모집 글쓰기
+	@RequestMapping("/mate_writing")
+	public String mate_writing(@RequestParam(value="coords") String[] coords,RecruitBoard board,Model model) {
+		board.setRecruit_remainnum(board.getRecruit_recruitnum());
+		board.setRecruit_del(0);
+		board.setRecruit_readcount(0);
+		Recruit_c[] rc = new Recruit_c[coords.length/2];
+		int cnt=0;
+		
+		int result=service.setRecruitBoard(board);
+		
+		for(int i=0; i<coords.length;i+=2) {
+			rc[cnt] = new Recruit_c();
+			rc[cnt].setLat(coords[i]);
+			rc[cnt].setLng(coords[i+1]);
+			service.setRecruitC(rc[cnt]);
+			cnt++;
+		}
+		
+		model.addAttribute("result",result);
+		return "mate_writingresult";
 	}
 
 }

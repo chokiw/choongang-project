@@ -178,7 +178,7 @@
             <div class="action-buttons">
                 <a class="delete" href="#"><i class="fa-solid fa-file-pen"></i>&nbsp;수정</a>
                 <a class="delete" href="#"><i class="fa-regular fa-trash-can"></i>&nbsp;삭제</a>
-                <a class="delete" href="#"><i class="fa-solid fa-table-list"></i>&nbsp;글목록</a>
+                <a class="delete" href="javascript:history.go(-1)"><i class="fa-solid fa-table-list"></i>&nbsp;글목록</a>
             </div>
         </main>
     </div>

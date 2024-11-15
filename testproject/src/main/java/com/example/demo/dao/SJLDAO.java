@@ -29,4 +29,8 @@ public interface SJLDAO {
 
 	Runner getMember(String user_id);
 
+	int setRecruitBoard(RecruitBoard board);
+
+	void setRecruitC(Recruit_c recruit_c);
+
 }
