@@ -196,7 +196,7 @@
                 
                 <!-- 삭제버튼 누르면 바로 삭제 완료 alet뜨게함 -->
                 <form method="post" action="snsdelete">
-                	<input type="hidden" name="pageNum"  value="${pageNum }">
+                	<input type="hidden" name="pageNum"  value="${pageNum}">
 					<input type="hidden"  name="sns_no"  value=${board.sns_no }>                
                		<button type="submit" class="delete button-style"><i class="fa-regular fa-trash-can"></i>&nbsp;삭제 </button>
                 </form>
