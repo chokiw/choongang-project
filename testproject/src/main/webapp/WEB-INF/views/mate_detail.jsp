@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="fn"  uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core" %>
-<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -13,13 +13,14 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Gothic+A1&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Gothic+A1&display=swap" rel="stylesheet">
-    <script src="http://code.jquery.com/jquery-latest.js"></script>
+	<script src="http://code.jquery.com/jquery-latest.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://kit.fontawesome.com/5e485453d8.js" crossorigin="anonymous"></script>
     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=e6146d72cd45f3c8d130a2c1504d9647"></script>
     <link href="/css/common.css" rel="stylesheet">
     <link href="/css/mate_detail.css" rel="stylesheet">
     <script src="/js/mate_detail.js"></script>
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
     <title>Document</title>
     <script type="text/javascript">
     var writer = "${board.user_id}"
@@ -57,6 +58,39 @@ $(function() {
 		});
 	});
 });
+		$(function(){
+			$("#start1").click(function(){
+				$.ajax({
+					url: "${pageContext.request.contextPath}/apply",
+					type : "POST",
+					data : {
+						recruit_no : ${board.recruit_no},
+						user_id : "${member.user_id}",
+						applyType : "start"
+					},
+					success : function(response){
+						alert("참가신청 완료 되었습니다.");
+						location.reload();
+					}
+				});
+			});
+				
+			$("#stop1").click(function(){
+				$.ajax({
+					url: "${pageContext.request.contextPath}/apply/cancel",
+					type : "POST",
+					data : {
+						recruit_no : ${board.recruit_no},
+						user_id : "${member.user_id}",
+						applyType : "stop"
+					},
+					success : function(response){
+						alert("신청이 취소 되었습니다.");
+						location.reload();
+					}
+				});
+			});
+		});
     </script>
 </head>
 
@@ -192,8 +226,8 @@ $(function() {
             </div>
 
             <div class="button-container">
-                <button class="action-button start">참가신청</button>
-                <button class="action-button stop">신청취소</button>
+                <button type="button" class="action-button start" id="start1">참가신청</button>
+                <button type="button" class="action-button stop" id="stop1">신청취소</button>
             </div>
 
            
