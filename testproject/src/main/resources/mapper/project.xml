@@ -162,4 +162,16 @@
 </select>
 
 
+<!-- 메인페이지에서 추천수를 가장많이 받은 글 3개 -->
+<select id="routedata" parameterType="sns" resultType="sns">
+	    SELECT * FROM (
+   	 	SELECT s.user_id, s.sns_good, s.sns_proofshot, s.sns_address1, s.sns_address2, r.user_nickname
+    	FROM sns s
+    	INNER JOIN runner r ON s.user_id = r.user_id
+    	WHERE s.sns_date >= SYSDATE - 7 -- 최근 7일간의 데이터를 필터링
+    	ORDER BY s.sns_good DESC NULLS LAST
+)
+WHERE ROWNUM &lt;= 3; -- 상위 3개만 선택
+</select>
+
 </mapper>
