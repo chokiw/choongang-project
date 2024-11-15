@@ -122,7 +122,8 @@ select {
 
 textarea{
     font-size: 16px;
-    font-family: "Gothic A1", sans-serif;   
+    font-family: "Gothic A1", sans-serif;
+    resize: none;	/* 내용 작성 범위를 고정 */
 }
 
 
