@@ -21,6 +21,17 @@
     <link href="/css/mate_detail.css" rel="stylesheet">
     <script src="/js/mate_detail.js"></script>
     <title>Document</title>
+    <script type="text/javascript">
+		$(function(){
+			$(".action-button.start").click(function(){
+				alert("참가신청 완료 되었습니다.");
+			});
+				
+			$(".action-button.stop").click(function(){
+				alert("신청이 취소 되었습니다.")
+			});
+		});    
+    </script>
 </head>
 
 <body>
@@ -158,8 +169,8 @@
             </div>
 
             <div class="button-container">
-                <button class="action-button start">참가신청</button>
-                <button class="action-button stop">신청취소</button>
+                <button type="button" class="action-button start">참가신청</button>
+                <button type="button" class="action-button stop">신청취소</button>
             </div>
 
            

@@ -155,7 +155,6 @@
 			// 마우스로 클릭한 위치입니다 
 			var clickPosition = mouseEvent.latLng;
 			
-			console.log(clickPosition.getLat()+","+clickPosition.getLng())
 			// 지도 클릭이벤트가 발생했는데 선을 그리고있는 상태가 아니면
 			if (!drawingFlag) {
 
