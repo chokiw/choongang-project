@@ -1,5 +1,9 @@
+$(document).ready(function(){
+	$("#map").hide();
+})
 
-    function check(){
+
+ function check(){
 
     if ($.trim($("#sns_subject").val()) == "") {
         alert("제목을 입력해주세요!");

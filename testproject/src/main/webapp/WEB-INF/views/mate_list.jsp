@@ -30,12 +30,12 @@
 <c:if test="${not empty keyword}">var keyword='${keyword}' </c:if>
 
 function getlist(pageNum){
-	var uri = '${path}/snslist?pageNum='+pageNum;
+	var uri = '${path}/mate_list?pageNum='+pageNum;
 	$('#board').load(uri);
 }
 
 function getsearch(pageNum) {
-    var uri = '${path}/snslist?pageNum='+pageNum+'&search='+search+'&keyword='+keyword;
+    var uri = '${path}/mate_list?pageNum='+pageNum+'&search='+search+'&keyword='+keyword;
     $('#board').load(uri);
 }
 
@@ -43,7 +43,7 @@ function getsearchfisrt() {
 	if($("select[name='search']").val()=="") return false; 
 	else if($("#keyword").val()=="") return false; 
 	else{
-    	var uri = '${path}/snslist?pageNum='+1+'&search='
+    	var uri = '${path}/mate_list?pageNum='+1+'&search='
     			  +$("select[name='search']").val()
     			  +'&keyword='+$("#keyword").val();
    	 	$('#board').load(uri);
@@ -64,7 +64,6 @@ function getsearchfisrt() {
 				<col class="col3">
 				<col class="col4">
 				<col class="col5">
-				<col class="col6">
 			</colgroup>
 			<tr>
 				<td>번호</td>
@@ -72,7 +71,6 @@ function getsearchfisrt() {
 				<td>제목</td>
 				<td>작성일</td>
 				<td>조회수</td>
-				<td>추천수</td>
 			</tr>
 			<c:if test="${empty list}">
 				<tr>
@@ -86,12 +84,10 @@ function getsearchfisrt() {
 						<td>${no1}</td>
 						<td>${board.user_id}</td>
 						<td><a
-							href="sns_detail?pageNum=${pageNum}&sns_no=${board.sns_no}">${board.sns_subject}</a></td>
-						<td><fmt:formatDate value="${board.sns_date}"
+							href="mate_detail?pageNum=${pageNum}&recruit_no=${board.recruit_no}">${board.recruit_subject}</a></td>
+						<td><fmt:formatDate value="${board.recruit_date}"
 								pattern="yyyy-MM-dd HH:mm:ss" /></td>
-						<td>${board.sns_readcount}</td>
-						<td>${board.sns_good}</td>
-
+						<td>${board.recruit_readcount}</td>
 					</tr>
 					<c:set var="no1" value="${no1 - 1}"></c:set>
 				</c:forEach>
@@ -115,34 +111,14 @@ function getsearchfisrt() {
 			<!-- 전체 목록의 페이징 처리 -->
 			<c:if test="${empty keyword}">
 				<c:if test="${pp.startPage > pp.pagePerBlk }">
-					<c:choose>
-						<c:when test="${best}">
-							<li><a href="javascript:getBestList(${pp.startPage - 1})">이전</a></li>
-						</c:when>
-						<c:otherwise>
-							<li><a href="javascript:getlist(${pp.startPage - 1})">이전</a></li>
-						</c:otherwise>
-					</c:choose>
+					<li><a href="javascript:getlist(${pp.startPage - 1})">이전</a></li>
 				</c:if>
 				<c:forEach var="i" begin="${pp.startPage}" end="${pp.endPage}">
-					<li <c:if test="${pp.currentPage==i}">class="active"</c:if>><c:choose>
-							<c:when test="${best}">
-								<a href="javascript:getBestList(${i})">${i}</a>
-							</c:when>
-							<c:otherwise>
-								<a href="javascript:getlist(${i})">${i}</a>
-							</c:otherwise>
-						</c:choose></li>
+					<li <c:if test="${pp.currentPage==i}">class="active"</c:if>>
+					<a href="javascript:getlist(${i})">${i}</a>
 				</c:forEach>
 				<c:if test="${pp.endPage < pp.totalPage}">
-					<c:choose>
-						<c:when test="${best}">
-							<li><a href="javascript:getBestList(${pp.endPage + 1})">다음</a></li>
-						</c:when>
-						<c:otherwise>
-							<li><a href="javascript:getlist(${pp.endPage + 1})">다음</a></li>
-						</c:otherwise>
-					</c:choose>
+					<li><a href="javascript:getlist(${pp.endPage + 1})">다음</a></li>
 				</c:if>
 			</c:if>
 		</ul>
@@ -151,8 +127,8 @@ function getsearchfisrt() {
 			style="width: 100px; height: 30px; font-size: 14px;">
 			<option value="">검색</option>
 			<option value="user_id">아이디</option>
-			<option value="sns_subject">제목</option>
-			<option value="sns_content">내용</option>
+			<option value="recruit_subject">제목</option>
+			<option value="recruit_content">내용</option>
 			<option value="subcon">제목+내용</option>
 		</select> <input type="text" id="keyword" name="keyword">
 		<button type="button" onclick="getsearchfisrt()">확인</button>

@@ -34,12 +34,17 @@ public interface ProjectDAO {
 	int getTotalfromrd(String user_id);
 
 	List<Runner_data> listfromrd(Runner_data rd);
-
+	
 	Runner findid(Runner runner);
 
 	Runner findpass(Runner runner);
 
 	Alarm getAlarm(String user_id);
 
+	List<Runner> rundata(Runner runner);
+
+	List<SnsBoard> listBest(SnsBoard sns);
+
+	List<SnsBoard> routedata(SnsBoard sns);
 
 }

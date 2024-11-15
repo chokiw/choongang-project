@@ -30,7 +30,7 @@
 
 
         <!-- 메인 콘텐츠 -->
-        <main class="content">
+         <main class="content">
             <div class="track">
                 <span style="font-size: 40px; font-weight: 700;">Best Runner</span>
                 <span style="float: right; opacity: 80%; font-size: 14px;">랭킹은 현재 시간으로부터 7일전까지 데이터를 기준으로 정해집니다.</span>
@@ -44,42 +44,42 @@
             <div class="runner-grid">
                 <div class="runner-item">
                     <div class="dot">1</div>
-                    <img src="/img/mancity.png" class="img1"
+                    <img src="${pageContext.request.contextPath}/uimg/${userProfileimg1 }" class="img1"
                         style="border-radius: 50%; width: 200px; height: 200px; border-style: ridge;"><br>
-                    <span class="nickname2"><a href="asd" class="profile_go">김김김님</a></span>
-                    <span class="distance">100km</span>
+                    <span class="nickname2"><a href="asd" class="profile_go">${	userNickname1}</a></span>
+                    <span class="distance">${userDistance1}km</span>
                 </div>
 
                 <div class="runner-item">
                     <div class="dot">2</div>
-                    <img src="/img/Penguins.jpg" class="img2"
+                    <img src="${pageContext.request.contextPath}/uimg/${userProfileimg2 }" class="img2"
                         style="border-radius: 50%; width: 150px; height: 150px; border-style: ridge;"><br>
-                    <span class="nickname2"><a href="asd" class="profile_go">박박박님</a></span>
-                    <span class="distance">80km</span>
+                    <span class="nickname2"><a href="asd" class="profile_go">${	userNickname2}</a></span>
+                    <span class="distance">${userDistance2}km</span>
                 </div>
 
                 <div class="runner-item">
                     <div class="dot">3</div>
-                    <img src="/img/Jellyfish.jpg" class="img2"
+                    <img src="${pageContext.request.contextPath}/uimg/${userProfileimg3 }" class="img2"
                         style="border-radius: 50%; width: 150px; height: 150px; border-style: ridge;"><br>
-                    <span class="nickname2"><a href="asd" class="profile_go">이이이님</a></span>
-                    <span class="distance">50km</span>
+                    <span class="nickname2"><a href="asd" class="profile_go">${	userNickname3}</a></span>
+                    <span class="distance">${userDistance3}km</span>
                 </div>
 
                 <div class="runner-item">
                     <div class="dot">4</div>
-                    <img src="/img/Hydrangeas.jpg" class="img2"
+                    <img src="${pageContext.request.contextPath}/uimg/${userProfileimg4 }" class="img2"
                         style="border-radius: 50%; width: 150px; height: 150px; border-style: ridge;"><br>
-                    <span class="nickname2"><a href="asd" class="profile_go">최최최님</a></span>
-                    <span class="distance">30km</span>
+                    <span class="nickname2"><a href="asd" class="profile_go">${	userNickname4}</a></span>
+                    <span class="distance">${userDistance4}km</span>
                 </div>
 
                 <div class="runner-item">
                     <div class="dot">5</div>
-                    <img src="/img/Tulips.jpg"  class="img2"
+                    <img src="${pageContext.request.contextPath}/uimg/${userProfileimg5 }"  class="img2"
                         style="border-radius: 50%; width: 150px; height: 150px; border-style: ridge;"><br>
-                    <span class="nickname2"><a href="asd" class="profile_go">정정정님</a></span>
-                    <span class="distance">10km</span>
+                    <span class="nickname2"><a href="asd" class="profile_go">${	userNickname5}</a></span>
+                    <span class="distance">${userDistance5}km</span>
                 </div>
             </div>
 
@@ -92,10 +92,10 @@
             </div>
 
 
- 
+
 
             <div class="pricebox">
-                <div class="gold" id="track1" style=" padding-left: 200px; padding-right: 200px;">
+                <div class="gold" id="track1">
                     <a href="asd"><img src="/img/route.png" class="trackimg"></a> <br><br>
                     <span class="nickname">writer1님</span><br>
                     <span class="location">서울시 강남구</span><br>

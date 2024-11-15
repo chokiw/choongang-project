@@ -69,7 +69,7 @@ public class JongChanController {
 
 	// 모집 글상세
     @RequestMapping("/mate_detail")
-    public String mate_detail(Model model) {
+    public String mate_detail() {
     	
     	
         return "mate_detail";
