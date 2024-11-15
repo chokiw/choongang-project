@@ -69,13 +69,7 @@ public class JongChanController {
 
 	// 모집 글상세
     @RequestMapping("/mate_detail")
-    public String mate_detail(@RequestParam(value="sns_no", defaultValue="1")int sns_no, Model model) {
-       
-    	SnsBoard snsboard = service.getSnsBoardID(sns_no);
-    	model.addAttribute("sns", snsboard);
-    	
-    	Runner runner = service.getRunnerID(snsboard.getUser_id());
-    	model.addAttribute("runner", runner);
+    public String mate_detail(Model model) {
     	
     	
         return "mate_detail";

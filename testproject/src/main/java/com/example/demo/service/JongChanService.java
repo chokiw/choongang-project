@@ -25,13 +25,5 @@ public class JongChanService {
 		return dao.listRunnerTrack(runnerdata);
 	}
 
-	public SnsBoard getSnsBoardID(int sns_no) {
-		return dao.getSnsBoardID(sns_no);
-	}
-
-	public Runner getRunnerID(String user_id) {
-		return dao.getRunnerID(user_id);
-	}
-
 
 }

@@ -42,19 +42,19 @@
          <main class="content">
             <span style="font-size: 36px; font-weight: 700;">메이트 게시판</span><br><br>
             <div class="sns_title">
-                <span style="font-size: 30px; font-weight: 600;">${sns.sns_subject}</span>&nbsp;&nbsp;
-                <span style="font-family: 'Gothic A1', sans-serif; color: #747474;">${sns.sns_address1} ${sns.sns_address2}</span>
+                <span style="font-size: 30px; font-weight: 600;">같이 뛰실분</span>&nbsp;&nbsp;
+                <span style="font-family: 'Gothic A1', sans-serif; color: #747474;">서울시 강남구</span>
             </div>
             <div class="sns_writer">
                 <img src="Penguins.jpg" class="myimg">
                 <span
                     style="font-size: 14px; font-weight: 600; font-family: 'Gothic A1', sans-serif;
-                    margin-top: 15px; margin-left: 10px;">${runner.user_nickname}</span>
+                    margin-top: 15px; margin-left: 10px;">강남구 퀵실버</span>
             </div>
             <div class="date_read">
                 <span style="font-size: 14px; font-family: 'Gothic A1', sans-serif;">${sns.sns_date }</span>
                 <span style="font-size: 14px; font-family: 'Gothic A1', sans-serif; float: right; font-weight: 600;">조회수
-                    : ${sns.sns_readcount}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;모집인원 : 2/5</span>
+                    : 1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;모집인원 : 2/5</span>
             </div>
             <hr><br><br>
             <div class="maincontent">
@@ -67,8 +67,8 @@
             </div>
 
             <div class="button-container">
-                <button type="submit" class="action-button start">참가신청</button>
-                <button type="submit" class="action-button stop">신청취소</button>
+                <button type="button" class="action-button start">참가신청</button>
+                <button type="button" class="action-button stop">신청취소</button>
             </div>
            
 

@@ -19,12 +19,4 @@
 		where rn between #{startRow} and #{endRow}
 	</select>
 	
-	<select id="getSnsBoardID" parameterType="int" resultType="sns">
-		select * from sns where sns_no=${sns_no}
-	</select>
-	
-	<select id="getRunnerID" parameterType="String" resultType="runner">
-		select * from runner where user_id=${user_id}
-	</select>
-	
 </mapper>

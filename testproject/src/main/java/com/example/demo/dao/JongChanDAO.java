@@ -15,9 +15,7 @@ public interface JongChanDAO {
 
 	List<Runner_data> listRunnerTrack(Runner_data runnerdata);
 
-	SnsBoard getSnsBoardID(int sns_no);
 
-	Runner getRunnerID(String user_id);
 
 
 }
