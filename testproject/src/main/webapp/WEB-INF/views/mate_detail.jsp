@@ -21,6 +21,43 @@
     <link href="/css/mate_detail.css" rel="stylesheet">
     <script src="/js/mate_detail.js"></script>
     <title>Document</title>
+    <script type="text/javascript">
+    var writer = "${board.user_id}"
+    var viewer = "${member.user_id}"
+    
+    $(document).ready(function () {
+    	if(writer != viewer) {
+    		$("#update").hide();
+    		$("#delete").hide();
+    	}               		
+    });  
+    
+$(function(){
+	   $('#delete').click(function(){
+		   if(!confirm('삭제하시겠습니까?')){
+			   return false;
+		   }
+	   })
+})
+    
+$(function() {
+	$('#rlist').load('/rlist/num/${board.recruit_no}')
+	
+	$('#repInsert').click(function() {
+		if (!frm.recruit_r_content.value) {
+			alert('댓글 입력후에 클릭하시오');
+			frm.recruit_r_content.focus();
+			return false;
+		}
+		var frmData = $('form').serialize();
+		
+		$.post('${path}/sInsert', frmData, function(data) {
+			$('#rlist').html(data);
+			frm.recruit_r_content.value = '';
+		});
+	});
+});
+    </script>
 </head>
 
 <body>
@@ -193,6 +230,8 @@
         
                 <a class="delete" href="#"><i class="fa-solid fa-table-list"></i>&nbsp;글목록</a>
             </div>
+            
+            <div id="rlist"></div>
         </main>
     </div>
 </body>
