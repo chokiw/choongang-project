@@ -45,4 +45,6 @@ public interface ProjectDAO {
 
 	List<SnsBoard> listBest(SnsBoard sns);
 
+	List<SnsBoard> routedata(SnsBoard sns);
+
 }

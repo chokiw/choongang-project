@@ -38,9 +38,10 @@ public class ProjectController {
 
 	// 메인페이지로 이동
 	@RequestMapping("/mainpage")
-	public String mainpage(Runner runner, Model model, Runner_data data ) {
+	public String mainpage(Runner runner, Model model, Runner_data data, SnsBoard sns ) {
 		List <Runner> rundata = service.rundata(runner);
 		
+		//  달린거리가 가장 많은 랭킹 5명
 		 // 최대 5개의 닉네임을 개별적으로 가져옵니다.
 	    for (int i = 0; i < Math.min(5, rundata.size()); i++) {
 	        String nickname = rundata.get(i).getUser_nickname();
@@ -65,6 +66,13 @@ public class ProjectController {
 	    
 	    
 	    	model.addAttribute("rundata", rundata);
+	    	
+	    	
+	    	
+	    // 추천수를 가장 많이 받은 글 3개
+	   // 	List<SnsBoard> routedata = service.routedata(sns);
+	    	
+	    	
 	   
 		return "mainpage";
 	}

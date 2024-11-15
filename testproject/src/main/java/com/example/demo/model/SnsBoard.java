@@ -29,4 +29,7 @@ public class SnsBoard {
 	private int startRow;
 	private int endRow;
 
+	// 메인페이지 베스트 트랙에서 nickname 값을 가져오기 위해 사용
+	private String user_nickname;
+	
 }

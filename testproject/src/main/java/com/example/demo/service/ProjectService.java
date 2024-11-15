@@ -89,6 +89,11 @@ public class ProjectService {
 		return dao.rundata(runner);
 	}
 
+	public List<SnsBoard> routedata(SnsBoard sns) {
+		
+		return dao.routedata(sns);
+	}
+
 
 
 }
