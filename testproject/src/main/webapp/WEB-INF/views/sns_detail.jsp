@@ -17,6 +17,10 @@
     <link href="/css/common.css" rel="stylesheet">
     <link href="/css/sns_detail.css" rel="stylesheet">
     <title>RUNAWAY</title>
+    
+    <script>
+    	
+    </script>
 </head>
 
 <body>
@@ -50,7 +54,7 @@
             <hr><br><br>
             
             <div class="maincontent">
-                <div id="map" style="width: 800px; height: 600px; float: left;"></div>
+                <div id="map" class="image-container"></div>
 		 		<script>
     				var mapContainer = document.getElementById('map'), // 지도를 표시할 div  
 						   			   mapOption = {
@@ -182,13 +186,43 @@
             </div>
 
             <!-- 수정, 삭제 글목록 -->
+            <!-- 로그인 아이디와 글쓴이가 다를때 수정, 삭제가 안보이게함 -->
              <div class="action-buttons">
-                <a class="delete" href="#"><i class="fa-solid fa-file-pen"></i>&nbsp;수정</a>
-                <a class="delete" href="#"><i class="fa-regular fa-trash-can"></i>&nbsp;삭제</a>
-                <a class="delete" href="javascript:history.go(-1)"><i class="fa-solid fa-table-list"></i>&nbsp;글목록</a>
+             	 <c:choose>
+            <c:when test="${member.user_id eq board.user_id}">
+                <a class="delete" href="sns_update?pageNum=${pageNum}&sns_no=${board.sns_no}" style="display: inline-block;">
+                    <i class="fa-solid fa-file-pen"></i>&nbsp;수정
+                </a>
+                
+                <!-- 삭제버튼 누르면 바로 삭제 완료 alet뜨게함 -->
+                <form method="post" action="snsdelete">
+                	<input type="hidden" name="pageNum"  value="${pageNum }">
+					<input type="hidden"  name="sns_no"  value=${board.sns_no }>                
+               		<button type="submit" class="delete button-style"><i class="fa-regular fa-trash-can"></i>&nbsp;삭제 </button>
+                </form>
+                
+            </c:when>
+            
+            <c:otherwise>
+                <a class="delete" href="sns_update?pageNum=${pageNum}&sns_no=${board.sns_no}" style="display: none;">
+                    <i class="fa-solid fa-file-pen"></i>&nbsp;수정
+                </a>
+                
+                <a class="delete" href="snsdelete" style="display: none;">
+                <i class="fa-regular fa-trash-can"></i>&nbsp;삭제
+                </a>
+            </c:otherwise>
+        </c:choose>
+        
+        
+        
+               
+                <a class="delete" href="sns_board?pageNum=${pageNum }"><i class="fa-solid fa-table-list"></i>&nbsp;글목록</a>
             </div>
              <div id="reboard"></div>
         </main>
+        
+
     </div>
 
 </body>

@@ -21,17 +21,6 @@
     <link href="/css/mate_detail.css" rel="stylesheet">
     <script src="/js/mate_detail.js"></script>
     <title>Document</title>
-    <script type="text/javascript">
-		$(function(){
-			$(".action-button.start").click(function(){
-				alert("참가신청 완료 되었습니다.");
-			});
-				
-			$(".action-button.stop").click(function(){
-				alert("신청이 취소 되었습니다.")
-			});
-		});    
-    </script>
 </head>
 
 <body>
@@ -56,14 +45,13 @@
                     style="font-size: 14px; font-weight: 600; font-family: 'Gothic A1', sans-serif; margin-top: 15px; margin-left: 10px;">${member.user_nickname}</span>
             </div>
             <div class="date_read">
-                <span style="font-size: 14px; font-family: 'Gothic A1', sans-serif;"><fmt:formatDate value="${board.recruit_date}"
-								pattern="yyyy-MM-dd HH:mm:ss" /></span>
+                <span style="font-size: 14px; font-family: 'Gothic A1', sans-serif;">2024-11-01 12:34</span>
                 <span style="font-size: 14px; font-family: 'Gothic A1', sans-serif; float: right; font-weight: 600;">조회수
-                    : ${board.recruit_readcount}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;모집인원 : ${board.recruit_remainnum}/${board.recruit_recruitnum}</span>
+                    : ${board.recruit_readcount}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;모집인원 : ${board.recruit_recruitnum}/${board.recruit_remainnum}</span>
             </div>
             <hr><br><br>
             <div class="maincontent">
-                <div id="map" style="width: 800px; height: 600px; float: left;"></div>
+                <div id="map" class="image-container"></div>
                 <script>
     				var mapContainer = document.getElementById('map'), // 지도를 표시할 div  
 						   			   mapOption = {
@@ -163,22 +151,47 @@
 				</script>
             </div>
             <div style="margin-top: 20px; height: auto;">
-                <span style="font-size: 24px; font-family: 'Gothic A1', sans-serif;"><fmt:formatDate value="${board.recruit_d_day}"
-								pattern="yyyy-MM-dd a hh:mm:ss" /></span><br><br>
                 <span style="font-size: 24px; font-family: 'Gothic A1', sans-serif;">${board.recruit_content}</span>
             </div>
 
             <div class="button-container">
-                <button type="button" class="action-button start">참가신청</button>
-                <button type="button" class="action-button stop">신청취소</button>
+                <button class="action-button start">참가신청</button>
+                <button class="action-button stop">신청취소</button>
             </div>
 
            
 
             <div class="action-buttons">
-                <a class="delete" href="#"><i class="fa-solid fa-file-pen"></i>&nbsp;수정</a>
-                <a class="delete" href="#"><i class="fa-regular fa-trash-can"></i>&nbsp;삭제</a>
-                <a class="delete" href="javascript:history.go(-1)"><i class="fa-solid fa-table-list"></i>&nbsp;글목록</a>
+             <c:choose>
+             
+            <c:when test="${member.user_id eq board.user_id}">
+                <a class="delete" href="mate_update?pageNum=${pageNum}&recruit_no=${board.recruit_no}" style="display: inline-block;">
+                    <i class="fa-solid fa-file-pen"></i>&nbsp;수정
+                </a>
+                
+                <!-- 삭제버튼 누르면 바로 삭제 완료 alet뜨게함 -->
+                <form method="post" action="matedelete">
+                	<input type="hidden" name="pageNum"  value="${pageNum }">
+					<input type="hidden"  name="recruit_no"  value=${board.recruit_no }>                
+               		<button type="submit" class="delete button-style"><i class="fa-regular fa-trash-can"></i>&nbsp;삭제 </button>
+                </form>
+                
+            </c:when>
+            
+            <c:otherwise>
+                <a class="delete" href="mate_update?pageNum=${pageNum}&recruit_no=${board.recruit_no}" style="display: none;">
+                    <i class="fa-solid fa-file-pen"></i>&nbsp;수정
+                </a>
+                
+                <a class="delete" href="recruitdelete" style="display: none;">
+                <i class="fa-regular fa-trash-can"></i>&nbsp;삭제
+                </a>
+            </c:otherwise>
+        </c:choose>
+        
+        
+        
+                <a class="delete" href="#"><i class="fa-solid fa-table-list"></i>&nbsp;글목록</a>
             </div>
         </main>
     </div>
