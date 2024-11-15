@@ -53,8 +53,6 @@ public class ProjectController_juyoung {
 				// 좌표값 불러오기
 				Coordinate[] c = service.getcdata(board.getRunner_data_no());
 
-				System.out.println("board:"+ board);
-				System.out.println("sns_no:"+ board.getSns_no());
 				
 				model.addAttribute("rd", rd);
 				model.addAttribute("c", c);
@@ -73,9 +71,7 @@ public class ProjectController_juyoung {
 		SnsBoard board = service.getboard(sns_no);
 		
 	
-		System.out.println("sns_no" + sns_no);
 		int update = service.updateboard(sns);
-		System.out.println("update : "+update);
 		
 		model.addAttribute("sns_no",sns_no);
 		model.addAttribute("update",update);

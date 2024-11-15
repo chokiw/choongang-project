@@ -20,7 +20,7 @@
 	<select id="getcdata" parameterType="int"
 		resultType="coordinate">
 		select * from coordinate where
-		runner_data_no=#{runner_data_no}
+		runner_data_no=#{runner_data_no} order by coordinate_no
 	</select>
 	
 	<!-- 트랙 게시판 수정 -->

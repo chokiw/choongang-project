@@ -99,7 +99,7 @@
 	<select id="getcdata" parameterType="int"
 		resultType="coordinate">
 		select * from coordinate where
-		runner_data_no=#{runner_data_no}
+		runner_data_no=#{runner_data_no} order by coordinate_no
 	</select>
 	<!-- runner_data에서 특정 id의 리스트 갯수 가져오기 -->
 	<select id="getTotalfromrd" parameterType="String"
