@@ -5,16 +5,26 @@
 <mapper namespace="com.example.demo.dao.JongChanDAO">
 
 	<!-- runner_data에서 특정 id의 리스트 갯수 가져오기 -->
-	<select id="getRunnerTrack" parameterType="String" resultType="int">
+	<select id="getRunnerTrack" parameterType="String"
+		resultType="int">
 		select count(*) from runner_data where user_id = #{user_id}
 	</select>
-	
+
 	<!-- runner_data에서 특정 id의 리스트 가져오기 -->
 	<select id="listRunnerTrack" parameterType="runner_data" resultType="runner_data">
-		select * from (select a.*,rowNum rn from ( select * from runner_data 
-			  		 where user_id = #{user_id}
-			  		 order by runner_data_date desc) a )
-			where rn between #{startRow} and #{endRow}
+		select * from (select a.*,rowNum rn from ( select * from
+		runner_data
+		where user_id = #{user_id}
+		order by runner_data_date desc) a )
+		where rn between #{startRow} and #{endRow}
+	</select>
+	
+	<select id="getSnsBoardID" parameterType="int" resultType="sns">
+		select * from sns where sns_no=${sns_no}
+	</select>
+	
+	<select id="getRunnerID" parameterType="String" resultType="runner">
+		select * from runner where user_id=${user_id}
 	</select>
 	
 </mapper>

@@ -68,12 +68,6 @@ public class ProjectController {
 		return "mate_board";
 	}
 
-	// 모집 글상세
-	@RequestMapping("/mate_detail")
-	public String mate_detail() {
-		return "mate_detail";
-	}
-
 	// 로그인 페이지로 이동
 	@RequestMapping("/loginpage")
 	public String loginpage() {

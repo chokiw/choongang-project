@@ -16,6 +16,17 @@
     <link href="/css/mate_detail.css" rel="stylesheet">
     <script src="/js/mate_detail.js"></script>
     <title>Document</title>
+    <script type="text/javascript">
+		$(function(){
+			$(".action-button.start").click(function(){
+				alert("참가신청 완료 되었습니다.");
+			});
+				
+			$(".action-button.stop").click(function(){
+				alert("신청이 취소 되었습니다.")
+			});
+		});    
+    </script>
 </head>
 
 <body>
@@ -31,19 +42,19 @@
          <main class="content">
             <span style="font-size: 36px; font-weight: 700;">메이트 게시판</span><br><br>
             <div class="sns_title">
-                <span style="font-size: 30px; font-weight: 600;">오늘 같이 달리실분~</span>&nbsp;&nbsp;
-                <span style="font-family: 'Gothic A1', sans-serif; color: #747474;">서울시 강남구</span>
+                <span style="font-size: 30px; font-weight: 600;">${sns.sns_subject}</span>&nbsp;&nbsp;
+                <span style="font-family: 'Gothic A1', sans-serif; color: #747474;">${sns.sns_address1} ${sns.sns_address2}</span>
             </div>
             <div class="sns_writer">
                 <img src="Penguins.jpg" class="myimg">
                 <span
-                    style="font-size: 14px; font-weight: 600; font-family: 'Gothic A1', sans-serif; margin-top: 15px; margin-left: 10px;">강남구
-                    퀵실버</span>
+                    style="font-size: 14px; font-weight: 600; font-family: 'Gothic A1', sans-serif;
+                    margin-top: 15px; margin-left: 10px;">${runner.user_nickname}</span>
             </div>
             <div class="date_read">
-                <span style="font-size: 14px; font-family: 'Gothic A1', sans-serif;">2024-11-01 12:34</span>
+                <span style="font-size: 14px; font-family: 'Gothic A1', sans-serif;">${sns.sns_date }</span>
                 <span style="font-size: 14px; font-family: 'Gothic A1', sans-serif; float: right; font-weight: 600;">조회수
-                    : 1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;모집인원 : 2/5</span>
+                    : ${sns.sns_readcount}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;모집인원 : 2/5</span>
             </div>
             <hr><br><br>
             <div class="maincontent">
@@ -56,10 +67,9 @@
             </div>
 
             <div class="button-container">
-                <button class="action-button start">참가신청</button>
-                <button class="action-button stop">신청취소</button>
+                <button type="submit" class="action-button start">참가신청</button>
+                <button type="submit" class="action-button stop">신청취소</button>
             </div>
-
            
 
             <div class="action-buttons">
