@@ -153,7 +153,7 @@
             </div>
             <div style="margin-top: 20px; height: auto;">
                 <span style="font-size: 24px; font-family: 'Gothic A1', sans-serif;"><fmt:formatDate value="${board.recruit_d_day}"
-								pattern="yyyy-MM-dd HH:mm:ss" /></span><br><br>
+								pattern="yyyy-MM-dd a hh:mm:ss" /></span><br><br>
                 <span style="font-size: 24px; font-family: 'Gothic A1', sans-serif;">${board.recruit_content}</span>
             </div>
 

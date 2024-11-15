@@ -81,7 +81,7 @@
 			
 			</div>
 			<br>
-            <a href="asd" class="write">글작성</a><br><br>
+            <a href="mate_write" class="write">글작성</a><br><br>
             </main>
         </div>
     

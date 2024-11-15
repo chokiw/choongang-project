@@ -105,5 +105,12 @@ public class SJLController {
 
 		return "mate_detail";
 	}
+	
+	// 모집 글쓰기
+	@RequestMapping("/mate_write")
+	public String mate_write() {
+		
+		return "mate_write";
+	}
 
 }
