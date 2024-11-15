@@ -8,10 +8,10 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.example.demo.model.Alarm;
+import com.example.demo.model.Apply;
 import com.example.demo.model.Member;
-import com.example.demo.model.Runner;
 import com.example.demo.model.Runner_data;
-import com.example.demo.model.SnsBoard;
 import com.example.demo.service.JongChanService;
 import com.example.demo.service.PagingPgm;
 
@@ -66,14 +66,41 @@ public class JongChanController {
 
 		return "runnertrack";
 	}
-
-	// 모집 글상세
-    @RequestMapping("/mate_detail")
-    public String mate_detail() {
-    	
-    	
-        return "mate_detail";
-    }
-
+	
+	@RequestMapping("/apply")
+	public String apply(@RequestParam(value="recruit_no") int recruit_no, @RequestParam(value="user_id") String user_id,
+					   @RequestParam(value="applyType") String applyType) {
+		
+		System.out.println("recruit_no:"+recruit_no);
+		System.out.println("user_id:"+user_id);
+		System.out.println("applyType:"+applyType);
+				
+		Apply apply = new Apply();
+		apply.setRecruit_no(recruit_no);
+		apply.setUser_id(user_id);
+//		apply.setApply_date(new Date());
+		
+		
+		Alarm alarm = new Alarm();
+		alarm.setUser_id(user_id);
+		alarm.setRecruit_no(recruit_no);
+//		alarm.setAlarm_date(new Date());
+		
+		if("start".equals(applyType)) {
+			apply.setApply_del(0);
+			alarm.setAlarm_content("참가신청이 완료 되었습니다.");
+			service.apply(apply);
+			service.alarmB(alarm);
+			
+			
+		}else if("stop".equals(applyType)) {
+			apply.setApply_del(1);
+			alarm.setAlarm_content("신청이 취소 되었습니다.");
+			service.cancelapply(apply);
+			service.cancelalarm(alarm);
+		}
+		
+		return "success";
+	}
 
 }
