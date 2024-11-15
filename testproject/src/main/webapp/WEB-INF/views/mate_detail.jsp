@@ -45,9 +45,10 @@
                     style="font-size: 14px; font-weight: 600; font-family: 'Gothic A1', sans-serif; margin-top: 15px; margin-left: 10px;">${member.user_nickname}</span>
             </div>
             <div class="date_read">
-                <span style="font-size: 14px; font-family: 'Gothic A1', sans-serif;">2024-11-01 12:34</span>
+                <span style="font-size: 14px; font-family: 'Gothic A1', sans-serif;"><fmt:formatDate value="${board.recruit_date}"
+								pattern="yyyy-MM-dd HH:mm:ss" /></span>
                 <span style="font-size: 14px; font-family: 'Gothic A1', sans-serif; float: right; font-weight: 600;">조회수
-                    : ${board.recruit_readcount}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;모집인원 : ${board.recruit_recruitnum}/${board.recruit_remainnum}</span>
+                    : ${board.recruit_readcount}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;모집인원 : ${board.recruit_remainnum}/${board.recruit_recruitnum}</span>
             </div>
             <hr><br><br>
             <div class="maincontent">
@@ -151,6 +152,8 @@
 				</script>
             </div>
             <div style="margin-top: 20px; height: auto;">
+                <span style="font-size: 24px; font-family: 'Gothic A1', sans-serif;"><fmt:formatDate value="${board.recruit_d_day}"
+								pattern="yyyy-MM-dd HH:mm:ss" /></span><br><br>
                 <span style="font-size: 24px; font-family: 'Gothic A1', sans-serif;">${board.recruit_content}</span>
             </div>
 
