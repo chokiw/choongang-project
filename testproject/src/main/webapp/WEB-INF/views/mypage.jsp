@@ -70,20 +70,18 @@
 					<br> <span class="content2">${runner.user_distance}</span>
 				</div>
 
-				<div
-					style="height: 100px; border-left: solid thin; margin-left: 50px; margin-right: 50px;"></div>
+				 <div class="crossline"></div>
 
 				<div align="center">
 					<span class="content1">총 달린 시간</span><br>
 					<br> <span class="content2">${runner.user_runtime}</span>
 				</div>
 
-				<div
-					style="height: 100px; border-left: solid thin; margin-left: 50px; margin-right: 50px;"></div>
+				 <div class="crossline"></div>
 
 				<div align="center">
 					<span class="content1">평균 페이스</span><br>
-					<br> <span class="content2">km/h</span>
+					<br> <span class="content2">4'43"/KM</span><!-- 평균 페이스 단위 수정 -->
 				</div>
 			</div>
 
