@@ -41,7 +41,7 @@
 				
 			$("#stop1").click(function(){
 				$.ajax({
-					url: "${pageContext.request.contextPath}/apply/cancel",
+					url: "${pageContext.request.contextPath}/apply",
 					type : "POST",
 					data : {
 						recruit_no : ${board.recruit_no},
