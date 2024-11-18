@@ -210,7 +210,7 @@ public class ProjectController {
 		}
 	}
 
-	// test용 서비스 ->지워도됌 최종때는 반드시 지워야함
+	// run측정 저장
 	@RequestMapping("/runnerdata")
 	public String runnerdata(@RequestParam(value = "path") String[] path,
 			@RequestParam(value = "distance") String distance, @RequestParam(value = "time") String time) {
