@@ -17,10 +17,4 @@ public class Alarm {
 	private Date alarm_date;
 	private int alarm_date_readcount;
 	private int alarm_del;
-	private String alarm_subject;
-	
-	// page
-	private int startRow;
-	private int endRow;
-	
 }
