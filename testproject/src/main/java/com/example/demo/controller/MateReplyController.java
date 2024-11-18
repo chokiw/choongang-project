@@ -129,8 +129,7 @@ public class MateReplyController {
 			} 
 			
 		}else {
-			rb.setRecruit_r_ref(number);
-			
+			rb.setRecruit_r_ref(number);			
 
 			System.out.println("자신의 r_no로 count 값 설정" + rb.getRecruit_r_no() + "," + rb.getRecruit_r_ref());
 				

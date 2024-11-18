@@ -119,7 +119,7 @@
 
 				<tr>
 					<td><i class="fa-solid fa-bell"></i></td>
-					<td><a href="asd">알람</a></td>
+					<td><a href="alarm_page">알람</a></td>
 				</tr>
 
 				<tr>

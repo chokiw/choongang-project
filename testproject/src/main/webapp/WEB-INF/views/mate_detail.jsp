@@ -23,6 +23,7 @@
     <script src="http://code.jquery.com/jquery-latest.js"></script>
     <title>Document</title>
     <script type="text/javascript">
+    
     var writer = "${board.user_id}"
     var viewer = "${member.user_id}"
     
@@ -266,7 +267,7 @@ $(function() {
             </div>
             
             
-            <!-- 댓글 입력 -->
+        <!-- 댓글 입력 -->
 		<form name="frm" id="frm">
 			<input type="hidden" name=user_id value="${member.user_id}">
 			<input type="hidden" name="recruit_no" value="${no }"> 댓글 :
