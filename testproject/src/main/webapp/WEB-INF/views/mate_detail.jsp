@@ -13,15 +13,13 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Gothic+A1&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Gothic+A1&display=swap" rel="stylesheet">
-<!--     <script src="http://code.jquery.com/jquery-latest.js"></script> -->
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://kit.fontawesome.com/5e485453d8.js" crossorigin="anonymous"></script>
     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=e6146d72cd45f3c8d130a2c1504d9647"></script>
     <link href="/css/common.css" rel="stylesheet">
     <link href="/css/mate_detail.css" rel="stylesheet">
     <script src="/js/mate_detail.js"></script>
-    <script src="http://code.jquery.com/jquery-latest.js"></script>
-<!--     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
     <title>Document</title>
     <script type="text/javascript">
 		$(function(){

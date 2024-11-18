@@ -39,7 +39,7 @@ public interface ProjectDAO {
 
 	Runner findpass(Runner runner);
 
-	Alarm getAlarm(String user_id);
+	Alarm[] getAlarm(String user_id);
 
 	List<Runner> rundata(Runner runner);
 

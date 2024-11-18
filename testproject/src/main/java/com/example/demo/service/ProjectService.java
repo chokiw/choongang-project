@@ -74,7 +74,7 @@ public class ProjectService {
 		return dao.findpass(runner);
 	}
 
-	public Alarm getAlarm(String user_id) {
+	public Alarm[] getAlarm(String user_id) {
 		
 		return dao.getAlarm(user_id);
 	}

@@ -89,7 +89,7 @@ public class ProjectController {
 
 		String user_id = member.getUser_id();
 		Runner dbrunner = service.getMember(user_id);
-		Alarm dbalarm = service.getAlarm(user_id);
+		Alarm[] dbalarm = service.getAlarm(user_id);
 
 		model.addAttribute("runner", dbrunner);
 		model.addAttribute("alarm", dbalarm);
