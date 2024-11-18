@@ -58,4 +58,18 @@ public class SJLService {
 		// TODO Auto-generated method stub
 		dao.setRecruitC(recruit_c);
 	}
+
+	public int setRunnerdata(Runner_data rd) {
+		return dao.setRunnerdata(rd);
+	}
+
+	public void setCoordinate(Coordinate coord) {
+		dao.setCoordinate(coord);
+	}
+
+	public void updateRunnerdata(Runner runner) {
+		dao.updateRunnerdata(runner);
+	}
+	
+	
 }

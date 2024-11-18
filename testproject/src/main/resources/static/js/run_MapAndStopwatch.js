@@ -189,6 +189,7 @@
 
 	//시계 시작 - 재귀호출로 반복실행
 	function startClock() {
+		//측정을 시작할시 경로 그림 만들어서 띄워주기
 		if(time==0){
 			coords=where();
 			clickLine = new kakao.maps.Polyline({

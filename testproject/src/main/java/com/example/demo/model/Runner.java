@@ -23,8 +23,8 @@ public class Runner {
 	private String user_address1;
 	private String user_address2;
 	private String user_photo;
-	private String user_runtime;
-	private String user_distance;
+	private int user_runtime;
+	private int user_distance;
 	private String user_gender;
 	private Date user_date;
 	

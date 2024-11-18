@@ -186,7 +186,7 @@
         
         <main class="content">
        		<span style="font-size: 36px; font-weight: 700;">트랙 게시판</span><br><br>
-       		<form method="post" action="snswrite" onsubmit="return check()">
+       		<form method="post" action="sns_writing" onsubmit="return check()">
             	<div class="sns_title">
             		<span style="font-size: 24px; font-weight: 600;">제목</span>&nbsp;&nbsp;
                 	<input type="text" style="font-size: 20px; font-weight: 500; width: 60%;" maxlength="50" placeholder="제목을 입력하세요"  id="sns_subject" name="sns_subject">  

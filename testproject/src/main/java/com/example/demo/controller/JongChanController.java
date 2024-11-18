@@ -56,7 +56,6 @@ public class JongChanController {
 		runnerdata.setStartRow(startRow);
 		runnerdata.setEndRow(endRow);
 		int no = total - startRow + 1;
-		System.out.println("no:" + no);
 		List<Runner_data> list = service.listRunnerTrack(runnerdata);
 
 		model.addAttribute("list", list);

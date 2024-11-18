@@ -8,15 +8,15 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<c:if test="${result==1}">
+<c:if test="${result==1}">
 		<script>
-			alert("모집 글쓰기 성공");
-			location.href="mate_board";
+			alert("기록 저장에 성공했습니다");
+			location.href="mypage";
 		</script>
 	</c:if>
 	<c:if test="${result!=1}">
 		<script>
-			alert("모집 글쓰기 실패");
+			alert("기록저장 실패");
 			history.go(-1);
 		</script>
 	</c:if>
