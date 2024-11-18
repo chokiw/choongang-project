@@ -53,7 +53,7 @@
 		select * from recruit_c where recruit_no = #{recruit_no} order by recruit_c_no
 	</select>
 	<!-- 세션값 설정을 위한 membetDTO생성 -->
-	<select id="getMember" parameterType="String"
+	<select id="getMember_SJL" parameterType="String"
 		resultType="runner">
 		select * from runner where user_id=#{user_id}
 	</select>

@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import com.example.demo.model.SnsBoard;
+import com.example.demo.model.Totalpage;
 
 @Mapper
 public interface UserPostDAO {
@@ -16,4 +17,8 @@ public interface UserPostDAO {
     List<SnsBoard> listByUserId(@Param("userId") String userId,
                                 @Param("startRow") int startRow,
                                 @Param("endRow") int endRow);
+
+	Totalpage[] getSnsboard(String userId);
+
+	Totalpage[] getMateboard(String userId);
 }

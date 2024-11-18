@@ -24,4 +24,12 @@
         ) 
         WHERE rn &gt;= #{startRow}
     </select>
+    
+    <select id="getSnsboard" parameterType="String" resultType="totalpage">
+    	select sns_no,sns_subject,sns_date,sns_readcount from sns where user_id= #{user_id}
+    </select>
+    
+    <select id="getMateboard" parameterType="String" resultType="totalpage">
+    	select recruit_no,recruit_subject,recruit_date,recruit_readcount from recruit where user_id= #{user_id}
+    </select>
 </mapper>

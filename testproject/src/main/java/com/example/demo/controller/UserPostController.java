@@ -39,13 +39,16 @@ public class UserPostController {
         String userId = member.getUser_id(); 
         
         
-        Totalpage tp1 = new Totalpage(); 
+        Totalpage[] tp1 = userPostService.getSnsboard(userId);
         
-        tp1 = userPostService.getSnsboard(userId);
+        Totalpage[] tp2 = userPostService.getMateboard(userId);
         
-        Totalpage tp2 = new Totalpage();
+        Totalpage[] tp = new Totalpage[tp1.length+tp2.length];
         
-        tp1 = userPostService.getMateboard(userId);
+        for(Totalpage page : tp1) {
+        	
+        }
+        
 
         final int rowPerPage = 10;
         int currentPage = Integer.parseInt(pageNum);

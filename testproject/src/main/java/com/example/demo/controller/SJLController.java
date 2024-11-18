@@ -96,7 +96,7 @@ public class SJLController {
 		// 맵에 경로 표현을 위한 테이터 불러오기
 		Recruit_c[] rc = service.getrecruitC(board.getRecruit_no());
 		//글쓴이 정보 불러오기
-		Runner r = service.getMember(board.getUser_id());
+		Runner r = service.getMember_SJL(board.getUser_id());
 		
 		model.addAttribute("r", r);
 		model.addAttribute("rc", rc);
