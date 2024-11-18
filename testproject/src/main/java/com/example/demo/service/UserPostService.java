@@ -24,8 +24,4 @@ public class UserPostService {
         return userPostDAO.listByUserId(userId, startRow, endRow);
     }
 
-	public Totalpage getSnsboard(String userId) {
-		
-		return userPostDAO.getSnsboard(userId);
-	}
 }

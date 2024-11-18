@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.demo.dao.GoodDAO">
+
+<insert id="good_insert" parameterType="map">
+	insert into good values(GOOD_NO_SEQ.nextval,#{sns_no},#{user_id},sysdate)
+</insert>
+
+<update id="good_plus" parameterType="map">
+	update sns set sns_good = sns_good + 1 where sns_no=#{sns_no}
+</update>
+
+<delete id="good_delete" parameterType="map">
+    delete from good where user_id=#{user_id} and sns_no=#{sns_no}
+</delete>
+
+<update id="good_minus" parameterType="map">
+	 update sns set sns_good = sns_good - 1 where sns_no=#{sns_no}
+</update>
+
+<select id="checkGood" parameterType="map" resultType="int">
+ 	select Count(*) from good where user_id=#{user_id} and sns_no=#{sns_no}
+
+</select>
+
+<select id="get_good" parameterType="map" resultType="Good">
+	select * from good where sns_no=#{sns_no} 
+</select>
+</mapper>

@@ -37,15 +37,6 @@ public class UserPostController {
 
         // Member 객체에서 userId 가져오기
         String userId = member.getUser_id(); 
-        
-        
-        Totalpage tp1 = new Totalpage(); 
-        
-        tp1 = userPostService.getSnsboard(userId);
-        
-        Totalpage tp2 = new Totalpage();
-        
-        tp1 = userPostService.getMateboard(userId);
 
         final int rowPerPage = 10;
         int currentPage = Integer.parseInt(pageNum);
