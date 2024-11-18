@@ -15,8 +15,9 @@ public class MateReplyBoard {
 	private int recruit_r_level;
 	private String recruit_r_content;
 	private Date recruit_r_date;
-	private int recruit_r_count;
+	private int recruit_r_ref;
 	private int recruit_r_del;
+	private int recruit_r_parent;
 	
 	
 }

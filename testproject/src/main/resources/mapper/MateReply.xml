@@ -13,8 +13,9 @@
 		<result property="recruit_r_level"    column="recruit_r_level" />
 		<result property="recruit_r_content"  column="recruit_r_content" />
 		<result property="recruit_r_date" 	  column="recruit_r_date" />
-		<result property="recruit_r_count" 	  column="recruit_r_count" />
+		<result property="recruit_r_ref" 	  column="recruit_r_ref" />
 		<result property="recruit_r_del" 	  column="recruit_r_del" />
+		<result property="recruit_r_parent"   column="recruit_r_parent" />
 	</resultMap>
 	
 	<select id="list" parameterType="int" resultMap="rbResult">
@@ -25,7 +26,7 @@
 				
 			select * from (select a.*,rowNum rn from (
 			select * from recruit_r				
-			 order by recruit_r_count, recruit_r_step) a ) where recruit_no = #{recruit_no}
+			 order by recruit_r_ref, recruit_r_step) a ) where recruit_no = #{recruit_no}
 			
 	</select>
 	
@@ -48,8 +49,9 @@
 			#{recruit_r_level},
 			#{recruit_r_content},
 			sysdate,
-			#{recruit_r_count},
-			#{recruit_r_del}
+			#{recruit_r_ref},
+			#{recruit_r_del},
+			#{recruit_r_parent}
 			)
 	</insert>
 	
@@ -69,7 +71,7 @@
 	</select>
 
 	<select id="getMaxNum2" resultType="int">
-		select nvl(max(recruit_r_step), 0)+1 from recruit_r where recruit_r_del= #{recruit_r_no} 
+		select nvl(max(recruit_r_step), 0)+1 from recruit_r where recruit_r_parent= #{recruit_r_no} 
 	</select>
 	
 <!-- 	<select id="getMaxNum2" resultType="int"> -->
@@ -81,18 +83,16 @@
 	
 	<update id="updateRe" parameterType="rb">
 		update recruit_r set recruit_r_step = recruit_r_step + 1
-			where recruit_r_del=#{recruit_r_no} and recruit_r_step > #{recruit_r_step}
+			where recruit_r_parent=#{recruit_r_no} and recruit_r_step > #{recruit_r_step}
 		
 	</update>
 	
-	<update id="update2" parameterType="rb">
-		update recruit_r set recruit_r_step = recruit_r_step + 1 where recruit_r_
-	</update>
+	
 	
 	<select id="getChild" parameterType="int">
 <!-- 		select nvl(max(recruit_r_step),0) from recruit_r where recruit_r_del = #{recruit_r_no} -->
 		    select nvl(min(recruit_r_step),0) from recruit_r where recruit_r_step > #{recruit_r_step} 
-		    	and recruit_r_level &lt;= #{recruit_r_level} and recruit_r_count = #{recruit_r_count} order by recruit_r_step
+		    	and recruit_r_level &lt;= #{recruit_r_level} and recruit_r_ref = #{recruit_r_ref} order by recruit_r_step
 		
 	</select>	
 	
@@ -101,7 +101,7 @@
 	
 	<update id="updateStep" parameterType="rb">
 		update recruit_r set recruit_r_step = recruit_r_step + 1 
-			where recruit_r_count=#{recruit_r_count} and recruit_r_step >= #{recruit_r_step}
+			where recruit_r_ref=#{recruit_r_ref} and recruit_r_step >= #{recruit_r_step}
 	
 	</update>
 	
