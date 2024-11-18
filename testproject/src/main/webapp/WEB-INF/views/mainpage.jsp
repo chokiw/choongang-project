@@ -44,7 +44,7 @@
             <div class="runner-grid">
                 <div class="runner-item">
                     <div class="dot">1</div>
-                    <img src="${pageContext.request.contextPath}/uimg/${userProfileimg1 }" class="img1"
+                    <img src="${pageContext.request.contextPath}/uimg/${userProfileimg1}" class="img1"
                         style="border-radius: 50%; width: 200px; height: 200px; border-style: ridge;"><br>
                     <span class="nickname2"><a href="asd" class="profile_go">${	userNickname1}</a></span>
                     <span class="distance">${userDistance1}km</span>
@@ -52,7 +52,7 @@
 
                 <div class="runner-item">
                     <div class="dot">2</div>
-                    <img src="${pageContext.request.contextPath}/uimg/${userProfileimg2 }" class="img2"
+                    <img src="${pageContext.request.contextPath}/uimg/${userProfileimg2}" class="img2"
                         style="border-radius: 50%; width: 150px; height: 150px; border-style: ridge;"><br>
                     <span class="nickname2"><a href="asd" class="profile_go">${	userNickname2}</a></span>
                     <span class="distance">${userDistance2}km</span>

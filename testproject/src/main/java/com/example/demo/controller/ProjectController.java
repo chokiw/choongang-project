@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.example.demo.model.Alarm;
 import com.example.demo.model.Coordinate;
 import com.example.demo.model.Good;
 import com.example.demo.model.Member;
@@ -38,15 +39,65 @@ public class ProjectController {
 	private final ProjectService service; 
 	private final GoodService good_service;
 
-	//메인페이지로 이동
+	// 메인페이지로 이동
 	@RequestMapping("/mainpage")
-	public String mainpage() {
+	public String mainpage(Runner runner, Model model, Runner_data data, SnsBoard sns ) {
+		List <Runner> rundata = service.rundata(runner);
+		
+		//  달린거리가 가장 많은 랭킹 5명
+		 // 최대 5개의 닉네임을 개별적으로 가져옵니다.
+	    for (int i = 0; i < Math.min(5, rundata.size()); i++) {
+	        String nickname = rundata.get(i).getUser_nickname();
+	        model.addAttribute("userNickname" + (i + 1), nickname);
+	    }
+	    
+	    // 5개의 달린거리를 가져온다.
+	    for (int i = 0; i < Math.min(5, rundata.size()); i++) {
+	    	double distanceInMeters = Double.parseDouble(rundata.get(i).getDistance());	// distance가 m값이라 km값으로 바꾸기 위해 double로 형변환
+	    	
+	    	 double distanceInKm = distanceInMeters / 1000.0;
+	         // 소수점 둘째 자리까지 반올림
+	         String formattedDistance = String.format("%.2f", distanceInKm);
+	         model.addAttribute("userDistance" + (i + 1), formattedDistance);
+	    }
+	    
+	    // 5개의 프로필이미지를 가져온다.
+	    for (int i = 0; i < Math.min(5, rundata.size()); i++) {
+	        String userprofileimg = rundata.get(i).getUser_photo();
+	        model.addAttribute("userProfileimg" + (i + 1), userprofileimg);
+	    }
+	    
+	    
+	    	model.addAttribute("rundata", rundata);
+	    	
+	    	
+	    	
+	    // 추천수를 가장 많이 받은 글 3개
+	   // 	List<SnsBoard> routedata = service.routedata(sns);
+	    	
+	    	
+	   
 		return "mainpage";
 	}
 
-	//마이페이지로 이동
+	// 마이페이지로 이동
 	@RequestMapping("/mypage")
-	public String mypage() {
+	public String mypage(HttpSession session, Alarm alarm, Runner runner, Model model) {
+
+		Member member = (Member) session.getAttribute("member");
+
+		if (member == null) {
+			return "redirect:/loginpage";
+		}
+
+		String user_id = member.getUser_id();
+		Runner dbrunner = service.getMember(user_id);
+		Alarm[] dbalarm = service.getAlarm(user_id);
+
+
+		model.addAttribute("runner", dbrunner);
+		model.addAttribute("alarm", dbalarm);
+
 		return "mypage";
 	}
 	
@@ -55,12 +106,7 @@ public class ProjectController {
 	public String mate_board() {
 		return "mate_board";
 	}
-	
-	//모집 글상세
-	@RequestMapping("/mate_detail")
-	public String mate_detail() {
-		return "mate_detail";
-	}
+
 	
 	//로그인 페이지로 이동
 	@RequestMapping("/loginpage")
@@ -283,8 +329,8 @@ public class ProjectController {
 	
 
 	@RequestMapping("/sns_detail")
-	public String sns_detail(@RequestParam(value = "pageNum", defaultValue = "1") String pageNum,
-	                         @RequestParam(value = "sns_no", defaultValue = "227") String sns_no, 
+	public String sns_detail(@RequestParam(value = "pageNum") String pageNum,
+	                         @RequestParam(value = "sns_no") String sns_no, 
 	                         Model model, HttpSession session) {
 	    // 글 정보 불러오기
 		SnsBoard board = service.getboard(Integer.parseInt(sns_no));
@@ -377,6 +423,40 @@ public class ProjectController {
 		model.addAttribute("pp", pp);
 
 		return "sns_write_list";
+	}
+
+
+//sns 리스트에서 인기글목록 순으로 나타내 기위한 컨트롤러
+	@RequestMapping("/snslist/best")
+	public String snslistBest(@RequestParam(value = "pageNum", defaultValue = "1") String pageNum, SnsBoard sns,
+			Model model) {
+		final int rowPerPage = 10;
+		if (pageNum == null || pageNum.equals("")) {
+			pageNum = "1";
+		}
+		int currentPage = Integer.parseInt(pageNum);
+		// 전체 데이터 갯수
+		int total = service.getTotal(sns);
+		// 페이지 이동에 따라서 10개의 데이터를 어디서 어디까지 가져올지 알기 위한 변수
+		int startRow = (currentPage - 1) * rowPerPage + 1;
+		int endRow = startRow + rowPerPage - 1;
+		// 페이지 이동 변수들을 담아놓는 DTO에 저장
+		PagingPgm pp = new PagingPgm(total, rowPerPage, currentPage);
+
+		sns.setStartRow(startRow);
+		sns.setEndRow(endRow);
+		int no = total - startRow + 1;
+		// 불러온 추천수 순으로 정렬된 게시판 데이터를 리스트에 담기
+		List<SnsBoard> list = service.listBest(sns);
+		model.addAttribute("list", list);
+		model.addAttribute("pageNum", pageNum);
+		model.addAttribute("no", no);
+		model.addAttribute("pp", pp);
+		model.addAttribute("search", sns.getSearch());
+		model.addAttribute("keyword", sns.getKeyword());
+		model.addAttribute("best", true); // 인기글 목록임을 표시하는 플래그 추가
+
+		return "snslist";
 	}
 
 }
