@@ -56,10 +56,11 @@
 				<a href="asd"><i class="fa-solid fa-bell"></i></a>
 				
 				<!-- 알람확인표시 -->
-				<fmt:parseNumber value="${START1}" var="NUM_TIME1"/>
-
-				<c:forEach var="alarm" items="${dbalarm}">
-					<fmt:parseNumber value="${alarm.alarm_date_readcount}" var="alarm_count"/>
+				<c:forEach var="a" items="${dbalarm}">
+					<script>
+							console.log(${a.alarm_date_count});
+					</script>
+					<fmt:parseNumber value="${a.alarm_date_readcount}" var="alarm_count"/>
 					<c:if test="${alarm_count == 0}">
 						<script>
 							console.log(${alarm_count});
