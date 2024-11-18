@@ -38,8 +38,8 @@
 
         <main class="content">
             <div class="track">
-                <span style="font-size: 36px; font-weight: 700;">트랙 게시판</span><br><br>
-                <span style="color: gray;">자신이 달린 루트를 공유하고 상대방의 루트를 추천, 저장할 수 있습니다.</span>
+                <span style="font-size: 36px; font-weight: 700;">내가 추천한 게시글</span><br><br>
+                <span style="color: gray;">내가 추천한 게시글을 볼 수 있습니다.</span>
             </div>
 			<br>
             <div class="locationbox">
@@ -74,12 +74,6 @@
                     <option value="강남구">중구</option>
                     <option value="강남구">중랑구</option>
                 </select>
-
-
-                <!-- 인기글 버튼 -->
-                <div class="hot">
-                    <a href="sd" class="hot_text"> <i class="fa-solid fa-fire"></i> 인기글</a>
-                </div>
             </div>
 
             <div id="liked"></div>

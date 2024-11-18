@@ -38,7 +38,7 @@
 
 
 
-			<form method="post" action="mate_writing" onsubmit="return check()">
+			<form method="post" action="mateupdate" onsubmit="return check()">
 			<input type="hidden" name="pageNum"  value="${pageNum }">
 			<input type="hidden"  name="recruit_no"  value=${board.recruit_no }> 
 			<input type="hidden" name=user_id id="user_id" value="${member.user_id}">
@@ -123,7 +123,7 @@
 					let clickLine; // 마우스로 클릭한 좌표로 그려질 선 객체입니다
 					var distanceOverlay; // 선의 거리정보를 표시할 커스텀오버레이 입니다
 					var dot_distanceOverlay; // 점의 거리정보를 표시할 커스텀오버레이 입니다
-					let dots = {}; // 선이 그려지고 있을때 클릭할 때마다 클릭 지점과 거리를 표시하는 커스텀 오버레이 배열입니다.
+					let dots = []; // 선이 그려지고 있을때 클릭할 때마다 클릭 지점과 거리를 표시하는 커스텀 오버레이 배열입니다.
 					let cnt=0;
 					
 					//HTML5의 geolocation으로 사용할 수 있는지 확인합니다 
@@ -152,7 +152,7 @@
 					//좌표생성
 					var coords = new kakao.maps.LatLng(${rc[0].lat}, ${rc[0].lng});
 					var first_c=coords;
-					
+					map.setCenter(coords);
 					
 					//경로 생성
 					clickLine = new kakao.maps.Polyline({
@@ -403,13 +403,11 @@
 							dot_distanceOverlay.setMap(map);
 						}
 						
-						let ddots=[];
 						// 배열에 추가합니다
-						ddots.push({
+						dots.push({
 							circle : circleOverlay,
 							distance : dot_distanceOverlay
 						});
-						dots=ddots;
 					}
 
 					// 클릭 지점에 대한 정보 (동그라미와 클릭 지점까지의 총거리)를 지도에서 모두 제거하는 함수입니다

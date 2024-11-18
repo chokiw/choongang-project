@@ -41,7 +41,7 @@
 			<div class="alert">
 				<a href="asd"><i class="fa-solid fa-bell"></i></a>
 
-				<!-- 알람이 있으면 생기는 빨간색 점 없거나 읽으면 사라짐 -->
+<!-- 				알람이 있으면 생기는 빨간색 점 없거나 읽으면 사라짐 -->
 				<c:if test="${alarm.alarm_date_readcount == 0}">
 					<div class="dot"></div>
 				</c:if>

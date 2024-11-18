@@ -119,20 +119,28 @@ public class ProjectController_juyoung {
 	
 	// 메이트 게시판 수정
 	@RequestMapping("/mateupdate")
-	public String mateupdate(@RequestParam(value = "pageNum")  String pageNum,   Model model, RecruitBoard rb ) {
+	public String mateupdate(@RequestParam(value="coords") String[] coords,
+			@RequestParam(value = "pageNum")  String pageNum, RecruitBoard rb,Model model ) {
+		System.out.println("수정");
+		System.out.println(rb.getRecruit_no());
+		System.out.println(rb.getUser_id());
+		System.out.println(rb.getRecruit_d_day());
+		System.out.println(rb.getRecruit_recruitnum());
+		System.out.println(rb.getRecruit_remainnum());
+		System.out.println(rb.getRecruit_subject());
+		System.out.println(rb.getRecruit_content());
+		System.out.println(rb.getRecruit_address1());
+		System.out.println(rb.getRecruit_address2());
 		
-		int recruit_no = rb.getRecruit_no();
-		RecruitBoard board = service.getrecruitD(recruit_no);
-		
-		
+		for(String s: coords) {
+			System.out.println(s);
+		}
 	
-		System.out.println("recruit_no" + recruit_no);
-		int update = service.updateRb(rb);
-		System.out.println("update : "+update);
+		int update =0;
 		
-		model.addAttribute("recruit_no",recruit_no);
 		model.addAttribute("update",update);
 		model.addAttribute("pageNum", pageNum);
+		model.addAttribute("recruit_no", rb.getRecruit_no());
 		return "mateupdateresult";
 	}
 	
