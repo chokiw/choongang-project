@@ -21,7 +21,7 @@
 <script src="https://kit.fontawesome.com/5e485453d8.js"
 	crossorigin="anonymous"></script>
 <link href="/css/common.css" rel="stylesheet">
-<link href="/css/mypage.css" rel="stylesheet">
+<link href="./css/mypage.css" rel="stylesheet">
 <script src="/js/mypage.js"></script>
 <title>Document</title>
 
@@ -67,9 +67,7 @@
 
 						<!-- 알람확인표시 -->
 						<c:forEach var="alarm" items="${dbalarm}">
-							<fmt:parseNumber value="${alarm.alarm_date_readcount}"
-								var="alarm_count" />
-							<c:if test="${alarm_count == 0}">
+							<c:if test="${alarm.alarm_date_readcount == 0}">
 								<div class="dot"></div>
 							</c:if>
 						</c:forEach>

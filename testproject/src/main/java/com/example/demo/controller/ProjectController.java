@@ -93,7 +93,7 @@ public class ProjectController {
 
 
 		model.addAttribute("runner", dbrunner);
-		model.addAttribute("alarm", dbalarm);
+		model.addAttribute("dbalarm", dbalarm);
 
 		return "mypage";
 	}
