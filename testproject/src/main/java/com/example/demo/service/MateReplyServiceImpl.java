@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import com.example.demo.dao.MateReplyDAO;
 import com.example.demo.model.MateReplyBoard;
 import com.example.demo.model.RecruitBoard;
-import com.example.demo.model.SnsReplyBoard;
 
 @Service
 public class MateReplyServiceImpl {
@@ -53,6 +52,11 @@ public class MateReplyServiceImpl {
 		
 	}
 
+	public void update2(MateReplyBoard rb) {
+		rbd.update2(rb);
+		
+	}
+
 	public int getChild(MateReplyBoard reboard) {
 		return rbd.getChild(reboard);
 	}
@@ -61,45 +65,6 @@ public class MateReplyServiceImpl {
 		return rbd.rgetdetail(num);
 	}
 
-	public SnsReplyBoard srgetDetail(int num) {
-		return rbd.srgetDetail(num);
-	}
-
-	public List<SnsReplyBoard> srlist(int num) {
-		return rbd.srList(num);
-	}
-
-	public SnsReplyBoard srSelect(int sns_r_no) {
-		return rbd.srSelect(sns_r_no);
-	}
-
-	public int getSrMaxNum2(int sns_r_no) {
-		return rbd.getSrMaxNum2(sns_r_no);
-	}
-
-	public int getSrChild(SnsReplyBoard reboard) {
-		return rbd.getSrChild(reboard);
-	}
-
-	public void updateSrStep(SnsReplyBoard srb) {	
-		rbd.updateSrStep(srb);
-	}
-
-	public int srInsert(SnsReplyBoard srb) {
-		return rbd.srInsert(srb);
-	}
-
-	public void srUpdate(SnsReplyBoard srb) {
-		rbd.srUpdate(srb);
-	}
-
-	public void srDelete(int sns_r_no) {
-		rbd.srDelete(sns_r_no);
-	}
-
-	public int getSrMaxNum() {
-		return rbd.getSrMaxNum();
-	}
 
 	
 	
