@@ -17,10 +17,6 @@
     <link href="/css/common.css" rel="stylesheet">
     <link href="/css/sns_detail.css" rel="stylesheet">
     <title>RUNAWAY</title>
-    
-    <script>
-    	
-    </script>
 </head>
 
 <body>
@@ -54,7 +50,7 @@
             <hr><br><br>
             
             <div class="maincontent">
-                <div id="map" class="image-container"></div>
+                <div id="map" style="width: 800px; height: 600px; float: left;"></div>
 		 		<script>
     				var mapContainer = document.getElementById('map'), // 지도를 표시할 div  
 						   			   mapOption = {
@@ -177,52 +173,58 @@
                 <span style="font-size: 24px; font-family: 'Gothic A1', sans-serif;">${board.sns_content}</span>
             </div>
 
-            <!-- 추천버튼 -->
-            <div class="recomend_box">
-            <a href="#" class="recomend">
+<!-- 추천버튼 -->
+<c:choose>
+    <c:when test="${board.sns_no == good_board.sns_no && sessionScope.member.user_id == good_board.user_id}">
+        <div class="recomend_box">
+            <a href="#" class="recomend" onclick="toggleLike(event, ${board.sns_no})">
+                <br><i class="fa-solid fa-fire" style="font-size: 32px; color: #ff0000;"></i><br>
+                <span class="run">RUN</span>
+            </a>
+        </div>
+    </c:when>
+    <c:otherwise>
+        <div class="recomend_box">
+            <a href="#" class="recomend" onclick="toggleLike(event, ${board.sns_no})">
                 <br><i class="fa-solid fa-fire" style="font-size: 32px; color: #333333;"></i><br>
                 <span class="run">RUN</span>
             </a>
-            </div>
+        </div>
+    </c:otherwise>
+</c:choose>
+
+            
+<script>
+function toggleLike(event, sns_no) {
+    event.preventDefault(); // 이 줄을 활성화하여 새로고침 방지
+
+    fetch('/good/toggleGood?sns_no=' + sns_no, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+        }
+    }).then(response => response.json())
+      .then(data => {
+          console.log("좋아요 토글 결과:", data);
+          location.reload(); // 새로고침
+      })
+      .catch(error => {
+          console.error("오류 발생:", error);
+      });
+}
+
+</script>
+
+        
 
             <!-- 수정, 삭제 글목록 -->
-            <!-- 로그인 아이디와 글쓴이가 다를때 수정, 삭제가 안보이게함 -->
              <div class="action-buttons">
-             	 <c:choose>
-            <c:when test="${member.user_id eq board.user_id}">
-                <a class="delete" href="sns_update?pageNum=${pageNum}&sns_no=${board.sns_no}" style="display: inline-block;">
-                    <i class="fa-solid fa-file-pen"></i>&nbsp;수정
-                </a>
-                
-                <!-- 삭제버튼 누르면 바로 삭제 완료 alet뜨게함 -->
-                <form method="post" action="snsdelete">
-                	<input type="hidden" name="pageNum"  value="${pageNum}">
-					<input type="hidden"  name="sns_no"  value=${board.sns_no }>                
-               		<button type="submit" class="delete button-style"><i class="fa-regular fa-trash-can"></i>&nbsp;삭제 </button>
-                </form>
-                
-            </c:when>
-            
-            <c:otherwise>
-                <a class="delete" href="sns_update?pageNum=${pageNum}&sns_no=${board.sns_no}" style="display: none;">
-                    <i class="fa-solid fa-file-pen"></i>&nbsp;수정
-                </a>
-                
-                <a class="delete" href="snsdelete" style="display: none;">
-                <i class="fa-regular fa-trash-can"></i>&nbsp;삭제
-                </a>
-            </c:otherwise>
-        </c:choose>
-        
-        
-        
-               
-                <a class="delete" href="sns_board?pageNum=${pageNum }"><i class="fa-solid fa-table-list"></i>&nbsp;글목록</a>
+                <a class="delete" href="#"><i class="fa-solid fa-file-pen"></i>&nbsp;수정</a>
+                <a class="delete" href="#"><i class="fa-regular fa-trash-can"></i>&nbsp;삭제</a>
+                <a class="delete" href="#"><i class="fa-solid fa-table-list"></i>&nbsp;글목록</a>
             </div>
              <div id="reboard"></div>
         </main>
-        
-
     </div>
 
 </body>

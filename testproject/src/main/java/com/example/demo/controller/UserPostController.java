@@ -2,8 +2,6 @@ package com.example.demo.controller;
 
 import java.util.List;
 
-import jakarta.servlet.http.HttpSession;  // javax.servlet 대신 jakarta.servlet 사용
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,9 +9,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.demo.model.Member;
 import com.example.demo.model.SnsBoard;
+import com.example.demo.model.Totalpage;
 import com.example.demo.service.PagingPgm;
 import com.example.demo.service.UserPostService;
 
+import jakarta.servlet.http.HttpSession;  // javax.servlet 대신 jakarta.servlet 사용
 import lombok.RequiredArgsConstructor;
 
 @Controller
@@ -37,6 +37,15 @@ public class UserPostController {
 
         // Member 객체에서 userId 가져오기
         String userId = member.getUser_id(); 
+        
+        
+        Totalpage tp1 = new Totalpage(); 
+        
+        tp1 = userPostService.getSnsboard(userId);
+        
+        Totalpage tp2 = new Totalpage();
+        
+        tp1 = userPostService.getMateboard(userId);
 
         final int rowPerPage = 10;
         int currentPage = Integer.parseInt(pageNum);

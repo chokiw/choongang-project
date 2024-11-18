@@ -61,6 +61,19 @@
 $(document).ready(function(){
 	$('#store').click(function(){
 		if(t_path!=null) {
+			coords = where();
+		    var Lat=coords.getLat()+(sec/10000);
+		    var Lng=coords.getLng()+(sec/10000);
+		    coords=new kakao.maps.LatLng(Lat, Lng);
+		    path = clickLine.getPath();
+		    path.push(coords);
+		    clickLine.setPath(path);
+		    draw(clickLine.getPath());
+		    map.setCenter(coords);
+			
+			t_path.push(Lat);
+			t_path.push(Lng);		
+		
 			console.log(t_path);
 			console.log(distance);
 			console.log(time);
