@@ -40,11 +40,13 @@
 			<!-- 알람 아이콘 -->
 			<div class="alert">
 				<a href="asd"><i class="fa-solid fa-bell"></i></a>
-
-<!-- 				알람이 있으면 생기는 빨간색 점 없거나 읽으면 사라짐 -->
-				<c:if test="${alarm.alarm_date_readcount == 0}">
-					<div class="dot"></div>
-				</c:if>
+				
+				<!-- 알람확인표시 -->
+				<c:forEach var="alarm" items="${dbalarm }">
+					<c:if test="${alarm.alarm_date_readcount == 0}">
+						<div class="dot"></div>
+					</c:if>
+				</c:forEach>
 			</div>
 			
 			<div class="profilebox">
