@@ -121,22 +121,20 @@ public class ProjectController_juyoung {
 	@RequestMapping("/mateupdate")
 	public String mateupdate(@RequestParam(value="coords") String[] coords,
 			@RequestParam(value = "pageNum")  String pageNum, RecruitBoard rb,Model model ) {
-		System.out.println("수정");
-		System.out.println(rb.getRecruit_no());
-		System.out.println(rb.getUser_id());
-		System.out.println(rb.getRecruit_d_day());
-		System.out.println(rb.getRecruit_recruitnum());
-		System.out.println(rb.getRecruit_remainnum());
-		System.out.println(rb.getRecruit_subject());
-		System.out.println(rb.getRecruit_content());
-		System.out.println(rb.getRecruit_address1());
-		System.out.println(rb.getRecruit_address2());
-		
-		for(String s: coords) {
-			System.out.println(s);
-		}
+		System.out.println("mate수정");
 	
-		int update =0;
+		int update =service.updateRb(rb);
+		service.deleteRc(rb.getRecruit_no());
+		int cnt=0;
+		Recruit_c[] rc = new Recruit_c[coords.length/2];
+		for(int i=0; i<coords.length;i+=2) {
+			rc[cnt] = new Recruit_c();
+			rc[cnt].setRecruit_no(rb.getRecruit_no());
+			rc[cnt].setLat(coords[i]);
+			rc[cnt].setLng(coords[i+1]);
+			service.setRecruitC(rc[cnt]);
+			cnt++;
+		}
 		
 		model.addAttribute("update",update);
 		model.addAttribute("pageNum", pageNum);

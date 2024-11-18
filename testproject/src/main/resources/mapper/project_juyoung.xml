@@ -62,5 +62,14 @@
 		delete from recruit where recruit_no = #{recruit_no}
 	</delete>
 	
+	<!-- 메이트게시판수정을 위한 전의 좌표값 삭제 -->
+	<delete id="deleteRc" parameterType="int" >
+		delete from recruit_c where recruit_no = #{recruit_no}
+	</delete>
+	
+	<insert id="setRecruitC" parameterType="recruit_c">
+		insert into recruit_c values(recruit_c_no_seq.nextval,#{recruit_no},
+									#{lat},#{lng})
+	</insert>
 	
 </mapper>

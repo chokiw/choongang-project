@@ -65,8 +65,7 @@
 	</insert>
 	
 	<insert id="setRecruitC" parameterType="recruit_c">
-		insert into recruit_c values(recruit_c_no_seq.nextval,recruit_no_seq.currval,
-									#{lat},#{lng})
+		insert into recruit_c values(recruit_c_no_seq.nextval,RECRUIT_NO_SEQ.currval,#{lat},#{lng})
 	</insert>
 	
 </mapper>

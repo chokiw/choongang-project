@@ -39,20 +39,7 @@
 				<br>
 			</div>
 			
-			<!-- 알람 아이콘 -->
-			<div class="alert">
-				<a href="asd"><i class="fa-solid fa-bell"></i></a>
-				
-				<!-- 알람확인표시 -->
-				<fmt:parseNumber value="${START1}" var="NUM_TIME1"/>
-
-				<c:forEach var="alarm" items="${dbalarm}">
-					<fmt:parseNumber value="${alarm.alarm_date_readcount}" var="alarm_count"/>
-					<c:if test="${alarm_count == 0}">
-						<div class="dot"></div>
-					</c:if>
-				</c:forEach>
-			</div>
+			
 			
 			<div class="profilebox">
 
@@ -64,7 +51,23 @@
 					<span class="name">${runner.user_name}</span>
 					<span class="phone">${runner.user_phone1}-${runner.user_phone2}-${runner.user_phone3}</span><br>
 					<span class="location">${runner.user_address1} ${runner.user_address2}</span>
+					<!-- 알람 아이콘 -->
+			<div class="alert">
+				<a href="asd"><i class="fa-solid fa-bell"></i></a>
+				
+				<!-- 알람확인표시 -->
+				<fmt:parseNumber value="${START1}" var="NUM_TIME1"/>
 
+				<c:forEach var="alarm" items="${dbalarm}">
+					<fmt:parseNumber value="${alarm.alarm_date_readcount}" var="alarm_count"/>
+					<c:if test="${alarm_count == 0}">
+						<script>
+							console.log(${alarm_count});
+						</script>
+						<div class="dot"></div>
+					</c:if>
+				</c:forEach>
+			</div>
 				</div>
 
 			</div>
