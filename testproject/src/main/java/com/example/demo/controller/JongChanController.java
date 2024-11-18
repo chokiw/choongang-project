@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import java.sql.Date;
 import java.util.List;
 
 import org.springframework.stereotype.Controller;
@@ -7,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.demo.model.Alarm;
 import com.example.demo.model.Apply;
@@ -68,39 +70,52 @@ public class JongChanController {
 	}
 	
 	@RequestMapping("/apply")
-	public String apply(@RequestParam(value="recruit_no") int recruit_no, @RequestParam(value="user_id") String user_id,
+	@ResponseBody
+	public Integer apply(@RequestParam(value="recruit_no") int recruit_no,
+						@RequestParam(value="user_id") String user_id,
 					   @RequestParam(value="applyType") String applyType) {
 		
-		System.out.println("recruit_no:"+recruit_no);
-		System.out.println("user_id:"+user_id);
-		System.out.println("applyType:"+applyType);
+		Date date = new Date(System.currentTimeMillis());
 				
 		Apply apply = new Apply();
 		apply.setRecruit_no(recruit_no);
 		apply.setUser_id(user_id);
-//		apply.setApply_date(new Date());
+		apply.setApply_date(date);
 		
 		
 		Alarm alarm = new Alarm();
 		alarm.setUser_id(user_id);
 		alarm.setRecruit_no(recruit_no);
-//		alarm.setAlarm_date(new Date());
+		alarm.setAlarm_date(date);
+		
+		int result = 0;
 		
 		if("start".equals(applyType)) {
 			apply.setApply_del(0);
 			alarm.setAlarm_content("참가신청이 완료 되었습니다.");
-			service.apply(apply);
-			service.alarmB(alarm);
-			
-			
+			alarm.setAlarm_subject("참가신청 알림");
+			service.getapply(apply);
+			service.getalarmB(alarm);
+			result = 1;
+				
 		}else if("stop".equals(applyType)) {
 			apply.setApply_del(1);
 			alarm.setAlarm_content("신청이 취소 되었습니다.");
-			service.cancelapply(apply);
-			service.cancelalarm(alarm);
+			alarm.setAlarm_subject("참가취소 알림");
+			service.getcancelapply(apply);
+			service.getcancelalarm(alarm);
+			result = 2;
 		}
 		
-		return "success";
+		
+		return result;
 	}
+	
+	@RequestMapping("/userpage")
+	public String userpage() {
+		
+		return "userpage";
+	}
+	
 
 }

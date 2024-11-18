@@ -64,29 +64,34 @@ $(function() {
 					url: "${pageContext.request.contextPath}/apply",
 					type : "POST",
 					data : {
-						recruit_no : ${board.recruit_no},
-						user_id : "${member.user_id}",
+						recruit_no : "${board.recruit_no}",
+						user_id : "${sessionScope.member.user_id}",
 						applyType : "start"
 					},
 					success : function(response){
-						alert("참가신청 완료 되었습니다.");
-						location.reload();
+						if(response == 1){
+							alert("참가신청 완료 되었습니다.");
+							location.reload();
+						}
 					}
 				});
 			});
 				
 			$("#stop1").click(function(){
 				$.ajax({
-					url: "${pageContext.request.contextPath}/apply/cancel",
+					url: "${pageContext.request.contextPath}/apply",
 					type : "POST",
 					data : {
-						recruit_no : ${board.recruit_no},
-						user_id : "${member.user_id}",
+						recruit_no : "${board.recruit_no}",
+						user_id : "${sessionScope.member.user_id}",
 						applyType : "stop"
 					},
 					success : function(response){
-						alert("신청이 취소 되었습니다.");
-						location.reload();
+						if(response == 2){
+							alert("참가신청이 취소 되었습니다.");
+							location.reload();
+						}
+						
 					}
 				});
 			});

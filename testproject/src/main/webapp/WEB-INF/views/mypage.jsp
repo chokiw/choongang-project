@@ -59,10 +59,9 @@
 				<img src="${pageContext.request.contextPath}/uimg/${runner.user_photo}" class="profileimg">
 
 				<div style="margin-top: 30px;">
-					<span class="nickname">${runner.user_nickname}</span>
-					<span class="gender">/ ${runner.user_gender}</span><br>
+					<span class="nickname">${runner.user_nickname}</span><br>
 					<span class="name">${runner.user_name}</span>
-					<span class="phone">${runner.user_phone1}-${runner.user_phone2}-${runner.user_phone3}</span><br>
+					<span class="gender">/ ${runner.user_gender}</span><br>
 					<span class="location">${runner.user_address1} ${runner.user_address2}</span>
 
 				</div>
