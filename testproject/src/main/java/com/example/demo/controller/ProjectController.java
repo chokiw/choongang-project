@@ -1,7 +1,6 @@
 package com.example.demo.controller;
 
 import java.io.File;
-import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -17,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.util.UriUtils;
 
 import com.example.demo.model.Alarm;
 import com.example.demo.model.Coordinate;
@@ -98,7 +98,7 @@ public class ProjectController {
 
 
 		model.addAttribute("runner", dbrunner);
-		model.addAttribute("alarm", dbalarm);
+		model.addAttribute("dbalarm", dbalarm);
 
 		return "mypage";
 	}

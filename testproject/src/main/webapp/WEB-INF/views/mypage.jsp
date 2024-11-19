@@ -67,12 +67,9 @@
 						<a href="asd" class="bell"><span class="material-symbols-outlined" style="width:22px; height:22px">notifications</span></a>
 
 						<!-- 알람확인표시 -->
-						<fmt:parseNumber value="${START1}" var="NUM_TIME1" />
 
 						<c:forEach var="alarm" items="${dbalarm}">
-							<fmt:parseNumber value="${alarm.alarm_date_readcount}"
-								var="alarm_count" />
-							<c:if test="${alarm_count == 0}">
+							<c:if test="${alarm.alarm_count == 0}">
 								<div class="dot"></div>
 							</c:if>
 						</c:forEach>
