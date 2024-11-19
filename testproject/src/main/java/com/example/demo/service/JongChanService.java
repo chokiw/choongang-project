@@ -27,19 +27,19 @@ public class JongChanService {
 		return dao.listRunnerTrack(runnerdata);
 	}
 
-	public void apply(Apply apply) {
+	public void getapply(Apply apply) {
 		dao.getapply(apply);
 	}
 
-	public void cancelapply(Apply apply) {
+	public void getcancelapply(Apply apply) {
 		dao.getcancelapply(apply);
 	}
 
-	public void alarmB(Alarm alarm) {
+	public void getalarmB(Alarm alarm) {
 		dao.getalarmB(alarm);
 	}
 
-	public void cancelalarm(Alarm alarm) {
+	public void getcancelalarm(Alarm alarm) {
 		dao.getcancelalarm(alarm);
 	}
 	

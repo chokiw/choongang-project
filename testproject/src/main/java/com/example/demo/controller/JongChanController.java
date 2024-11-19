@@ -88,17 +88,17 @@ public class JongChanController {
 		if("start".equals(applyType)) {
 			apply.setApply_del(0);
 			alarm.setAlarm_content("참가신청이 완료 되었습니다.");
-			service.apply(apply);
-			service.alarmB(alarm);
+			service.getapply(apply);
+			service.getalarmB(alarm);
 			
 			
 		}else if("stop".equals(applyType)) {
 			apply.setApply_del(1);
 			alarm.setAlarm_content("신청이 취소 되었습니다.");
-			service.cancelapply(apply);
-			service.cancelalarm(alarm);
+			service.getcancelapply(apply);
+			service.getcancelalarm(alarm);
 		}
-		
+			
 		return "success";
 	}
 
