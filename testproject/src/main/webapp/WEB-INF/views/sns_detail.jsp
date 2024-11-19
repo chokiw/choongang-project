@@ -194,25 +194,27 @@
                 <span style="font-size: 24px; font-family: 'Gothic A1', sans-serif;">${board.sns_content}</span>
             </div>
 
-<!-- 추천버튼 -->
-<c:choose>
-    <c:when test="${board.sns_no == good_board.sns_no && sessionScope.member.user_id == good_board.user_id}">
-        <div class="recomend_box">
-            <a href="#" class="recomend" onclick="toggleLike(event, ${board.sns_no})">
-                <br><i class="fa-solid fa-fire" style="font-size: 32px; color: #ff0000;"></i><br>
-                <span class="run">RUN</span>
-            </a>
-        </div>
-    </c:when>
-    <c:otherwise>
-        <div class="recomend_box">
-            <a href="#" class="recomend" onclick="toggleLike(event, ${board.sns_no})">
-                <br><i class="fa-solid fa-fire" style="font-size: 32px; color: #333333;"></i><br>
-                <span class="run">RUN</span>
-            </a>
-        </div>
-    </c:otherwise>
-</c:choose>
+<!-- 추천 버튼 -->
+<div class="recomend_box">
+    <a href="#" class="recomend" onclick="toggleLike(event, ${board.sns_no})">
+        <br>
+        <c:choose>
+            <c:when test="${fn:length(goodList) > 0}">
+                <c:forEach var="good" items="${goodList}">
+                    <c:if test="${good.sns_no == board.sns_no && sessionScope.member.user_id == good.user_id}">
+                        <!-- 추천된 상태 -->
+                        <i class="fa-solid fa-fire" style="font-size: 32px; color: #ff0000;"></i>
+                    </c:if>
+                </c:forEach>
+            </c:when>
+            <c:otherwise>
+                <i class="fa-solid fa-fire" style="font-size: 32px; color: #333333;"></i>
+            </c:otherwise>
+        </c:choose>
+        <br>
+        <span class="run">RUN</span>
+    </a>
+</div>
 
             
 <script>

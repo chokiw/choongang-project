@@ -330,8 +330,9 @@ public class ProjectController {
 	    // 글 정보 불러오기
 		SnsBoard board = service.getboard(Integer.parseInt(sns_no));
 		
-		// 굿 정보 불러오기
-		Good good_board = good_service.get_good(Integer.parseInt(sns_no));
+		 // 굿 정보 불러오기
+	    List<Good> goodList = good_service.get_good(Integer.parseInt(sns_no));
+
 		
 	    // 맵에 경로 표현을 위한 데이터 불러오기
 	    Runner_data rd = service.getrdata(board.getRunner_data_no());
@@ -342,7 +343,7 @@ public class ProjectController {
 	    model.addAttribute("c", c);
 	    model.addAttribute("pageNum", pageNum);
 	    model.addAttribute("board", board);
-	    model.addAttribute("good_board", good_board);
+	    model.addAttribute("goodList", goodList);
 	    
 	    return "sns_detail";
 	}

@@ -67,9 +67,8 @@
 						<a href="asd" class="bell"><span class="material-symbols-outlined" style="width:22px; height:22px">notifications</span></a>
 
 						<!-- 알람확인표시 -->
-
 						<c:forEach var="alarm" items="${dbalarm}">
-							<c:if test="${alarm.alarm_count == 0}">
+							<c:if test="${alarm.alarm_date_readcount == 0}">
 								<div class="dot"></div>
 							</c:if>
 						</c:forEach>
