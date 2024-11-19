@@ -26,6 +26,6 @@
 </select>
 
 <select id="get_good" parameterType="map" resultType="Good">
-	select * from good where sns_no=#{sns_no} 
+    select * from good where sns_no=#{sns_no}
 </select>
 </mapper>
