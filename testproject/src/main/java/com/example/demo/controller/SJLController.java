@@ -101,7 +101,7 @@ public class SJLController {
 
 	// 모집 글상세
 	@RequestMapping("/mate_detail")
-	public String mate_detail(@RequestParam(value = "pageNum") String pageNum,
+	public String mate_detail(@RequestParam(value = "pageNum",defaultValue = "1") String pageNum,
 			@RequestParam(value = "recruit_no") String recruit_no, Model model) {
 		// 글정보 불러오기
 		RecruitBoard board = service.getrecruitD(Integer.parseInt(recruit_no));

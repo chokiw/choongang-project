@@ -84,11 +84,10 @@ public class UserPostController {
         PagingPgm pp = new PagingPgm(total, rowPerPage, currentPage);
 
         // 사용자 게시글 목록 가져오기
-        List list = new ArrayList();
-        
-        for(int i=0;i<rowPerPage;i++) {
-        	if(totalpage.get(startRow-1).getRecruit_no()==0) list.add(userPostService.getSns(totalpage.get(startRow-1).getSns_no()));
-        	else list.add(userPostService.getRecruit(totalpage.get(startRow-1).getRecruit_no()));
+        List<Totalpage> list = new ArrayList<Totalpage>();
+        if(endRow>totalpage.size()) endRow=totalpage.size();
+        for(int i=startRow-1;i<endRow;i++) {
+        	list.add(totalpage.get(i));
         }
         
         

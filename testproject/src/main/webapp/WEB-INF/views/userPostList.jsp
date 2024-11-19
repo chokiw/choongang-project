@@ -43,11 +43,10 @@ function getlist(pageNum){
                 </colgroup>
 			<tr>
 				<th>번호</th>
-				<th>작성자</th>
+				<th>글유형</th>
 				<th>제목</th>
 				<th>작성일</th>
 				<th>조회수</th>
-				<th>추천수</th>
 			</tr>
             <!-- 게시글이 없을 경우 -->
             <c:if test="${empty list}">
@@ -61,11 +60,18 @@ function getlist(pageNum){
                 <c:forEach var="post" items="${list}">
                     <tr>
                         <td>${no}</td>
-                        <td>${post.user_id}</td>
-                        <td><a href="sns_detail?postId=${post.sns_no}">${post.sns_subject}</a></td>
-                        <td><fmt:formatDate value="${post.sns_date}" pattern="yyyy-MM-dd HH:mm:ss" /></td>
-                        <td>${post.sns_readcount}</td>
-                        <td>${post.sns_good}</td>
+                        <c:if test="${post.recruit_no==0 }">
+                        	<td>트랙</td>
+                        	<td><a href="sns_detail?sns_no=${post.sns_no}">${post.sns_subject}</a></td>
+                        	<td><fmt:formatDate value="${post.sns_date}" pattern="yyyy-MM-dd HH:mm:ss" /></td>
+                        	<td>${post.sns_readcount}</td>
+                        </c:if>
+                        <c:if test="${post.recruit_no!=0 }">
+                        	<td>모집</td>
+                        	<td><a href="mate_detail?recruit_no=${post.recruit_no}">${post.recruit_subject}</a></td>
+                        	<td><fmt:formatDate value="${post.recruit_date}" pattern="yyyy-MM-dd HH:mm:ss" /></td>
+                        	<td>${post.recruit_readcount}</td>
+                        </c:if>
 					</tr>
 					<c:set var="no" value="${no - 1}" />
 				</c:forEach>
