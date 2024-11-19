@@ -383,8 +383,6 @@ public class ProjectController {
 
 		HttpSession session = request.getSession(false);
 		Member member = (Member) session.getAttribute("member");
-		System.out.println(member.getUser_id());
-		System.out.println(member.getUser_nickname());
 		Runner_data rd = new Runner_data();
 		rd.setUser_id(member.getUser_id());
 		final int rowPerPage = 10;
@@ -394,7 +392,6 @@ public class ProjectController {
 		int currentPage = Integer.parseInt(pageNum);
 
 		int total = service.getTotalfromrd(member.getUser_id());
-		System.out.println("total:" + total);
 		int startRow = (currentPage - 1) * rowPerPage + 1;
 		int endRow = startRow + rowPerPage - 1;
 		PagingPgm pp = new PagingPgm(total, rowPerPage, currentPage);
@@ -402,7 +399,6 @@ public class ProjectController {
 		rd.setStartRow(startRow);
 		rd.setEndRow(endRow);
 		int no = total - startRow + 1;
-		System.out.println("no:" + no);
 		List<Runner_data> list = service.listfromrd(rd);
 		model.addAttribute("list", list);
 		model.addAttribute("pageNum", pageNum);
