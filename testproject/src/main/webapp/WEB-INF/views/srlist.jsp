@@ -33,33 +33,33 @@
 	
 	function up(id) {
 		var replytext = $('#tt_'+id).val();
-		var formData = "recruit_r_no="+id+'&recruit_r_content='+replytext
-			+"&recruit_no=${board.recruit_no}";
-		$.post('${path}/repUpdate',formData, function(data) { // 댓글 수정 요청(콜백함수)
-			$('#rlist').html(data);
+		var formData = "sns_r_no="+id+'&sns_r_content='+replytext
+			+"&sns_no=${board.sns_no}";
+		$.post('${path}/repsrUpdate',formData, function(data) { // 댓글 수정 요청(콜백함수)
+			$('#srlist').html(data);
 		});
 	}
 	
 	function lst() {
-		$('#rlist').load('/rlist/num/${recruit.recruit_no}');
+		$('#srlist').load('/srlist/num/${board.sns_no}');
 	}
 		
-	function del(recruit_r_no,recruit_no) {
+	function del(sns_r_no,sns_no) {
 		if(!confirm('삭제하시겠습니까?')){
 			return false;
 		   }
-		var formData="recruit_r_no="+recruit_r_no+"&recruit_no="+recruit_no;
-			$.post('${path}/repDelete', formData , function(data) {	// 댓글 삭제 요청
-			$('#rlist').html(data);	
+		var formData="sns_r_no="+sns_r_no+"&sns_no="+sns_no;
+			$.post('${path}/repsDelete', formData , function(data) {	// 댓글 삭제 요청
+			$('#srlist').html(data);	
 		})			
 	}	
 	
-	function re(recruit_r_no,recruit_no) {
+	function re(sns_r_no,sns_no) {
 		
-		var formData="recruit_r_no="+recruit_r_no+"&recruit_no="+recruit_no;
+		var formData="sns_r_no="+sns_r_no+"&sns_no="+sns_no;
 			
-			$.post('${path}/sInsert', formData , function(data) {	// 댓글 삭제 요청
-			$('#rlist').html(data);	
+			$.post('${path}/srInsert', formData , function(data) {	// 댓글 삭제 요청
+			$('#srlist').html(data);	
 		})			
 	}				
 	
@@ -72,17 +72,17 @@
 	
 	function rep(rno) {		// rno = recruit_r_no
 			var user_id = $('.user_id').val();			// 세션id
-			var recruit_no = $('.recruit_no').val();	// 글번호		
+			var sns_no = $('.sns_no').val();	// 글번호		
 		if($('.txt_'+rno).val() == ''){
 			alert('댓글 입력후에 클릭하시오');
 			$('.txt_'+rno).focus();				
 			return false;
 		}else{
-			var recruit_r_content = $('.txt_'+rno).val();
+			var sns_r_content = $('.txt_'+rno).val();
 		}			
-		var reData = 'user_id='+user_id+'&recruit_no='+recruit_no+'&recruit_r_no='+rno+'&recruit_r_content='+recruit_r_content;
-		$.post('${path}/sInsert', reData, function(data) {
-			$('#rlist').html(data);
+		var reData = 'user_id='+user_id+'&sns_no='+sns_no+'&sns_r_no='+rno+'&sns_r_content='+sns_r_content;
+		$.post('${path}/srInsert', reData, function(data) {
+			$('#srlist').html(data);
 			frm.replytext.value = '';
 		}); 	
 	}	
@@ -97,7 +97,7 @@
 <body>
   <div align="center">
 	<input type="hidden" class=user_id value="${member.user_id}">
-	<input type="hidden" class=recruit_no value="${board.recruit_no}">
+	<input type="hidden" class=sns_no value="${board.sns_no}">
 		<h2 class="text-primary">댓글</h2>
 		<table>
 			<tr>
@@ -105,32 +105,32 @@
 				<td>내용</td>
 				<td>수정일</td>
 			</tr>
-			<c:forEach var="rb" items="${rlist}">
+			<c:forEach var="rb" items="${srlist}">
 				<c:set var = "i" value= "${i+1 }"/>
 				<tr>
 					<td>${rb.user_id}</td>
-					<td id="td_${rb.recruit_r_no}" >
-					<c:if test="${ rb.recruit_r_level > 0}">
-						<c:forEach begin="1" end="${rb.recruit_r_level }">
+					<td id="td_${rb.sns_r_no}" >
+					<c:if test="${ rb.sns_r_level > 0}">
+						<c:forEach begin="1" end="${rb.sns_r_level }">
 							&nbsp;&nbsp;&nbsp;&nbsp;
 						</c:forEach>
 					</c:if>
-						 ${rb.recruit_r_content}
+						 ${rb.sns_r_content}
 					</td>
-					<td>${rb.recruit_r_date}</td>
-					<td id="btn_${rb.recruit_r_no}">
+					<td>${rb.sns_r_date}</td>
+					<td id="btn_${rb.sns_r_no}">
 						<c:if test="${rb.user_id==member.user_id}">
-							<input type="button" value="수정" class="edit1" id="${rb.recruit_r_no}">
-							<input type="button" value="삭제"	 onclick="del(${rb.recruit_r_no},${rb.recruit_no})">
+							<input type="button" value="수정" class="edit1" id="${rb.sns_r_no}">
+							<input type="button" value="삭제"	 onclick="del(${rb.sns_r_no},${rb.sns_no})">
 						</c:if>						
-						<input type="button" value="댓글"	 class="rbt" id="rbtn_${rb.recruit_r_no}">
+						<input type="button" value="댓글"	 class="rbt" id="rbtn_${rb.sns_r_no}">
 					</td>
 				</tr>
-				<tbody class="rbtn_${rb.recruit_r_no}" style="display: none" >
+				<tbody class="rbtn_${rb.sns_r_no}" style="display: none" >
 					<tr>
 						<td colspan="4">												
-							<textarea rows="3" cols="50" class="txt_${rb.recruit_r_no}"></textarea>
-							<input type="button" value="댓글입력" onclick="rep(${rb.recruit_r_no})"> 						
+							<textarea rows="3" cols="50" class="txt_${rb.sns_r_no}"></textarea>
+							<input type="button" value="댓글입력" onclick="rep(${rb.sns_r_no})"> 						
 						</td>					
 					</tr>							
 				</tbody>
