@@ -176,8 +176,8 @@ public class SJLController {
 			service.setCoordinate(coord);
 		}
 
-		Runner runner = new Runner();
-
+		Runner runner = service.getMember_SJL(member.getUser_id());
+	
 		runner.setUser_distance(Integer.parseInt(distance) + runner.getUser_distance());
 		runner.setUser_runtime(Integer.parseInt(rd.getRunner_data_time()) + runner.getUser_runtime());
 		runner.setUser_id(member.getUser_id());
