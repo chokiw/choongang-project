@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import com.example.demo.dao.JongChanDAO;
 import com.example.demo.model.Alarm;
 import com.example.demo.model.Apply;
+import com.example.demo.model.Runner;
 import com.example.demo.model.Runner_data;
 
 import lombok.RequiredArgsConstructor;
@@ -39,6 +40,10 @@ public class JongChanService {
 
 	public void getcancelalarm(Alarm alarm) {
 		dao.getcancelalarm(alarm);
+	}
+
+	public Runner getMemberB(String user_id) {
+		return dao.getMemberB(user_id);
 	}
 
 	

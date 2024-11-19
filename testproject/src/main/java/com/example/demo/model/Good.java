@@ -1,7 +1,9 @@
 package com.example.demo.model;
 
 import java.util.Date;
+
 import org.apache.ibatis.type.Alias;
+
 import lombok.Data;
 
 @Data
@@ -11,4 +13,5 @@ public class Good {
 	private int sns_no;
 	private String user_id;
 	private Date good_date;
+	
 }

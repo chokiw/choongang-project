@@ -18,70 +18,6 @@
     <script src="/js/run.js"></script>
     <title>Document</title>
  
-    <style>
-.dot {
-	overflow: hidden;
-	float: left;
-	width: 12px;
-	height: 12px;
-	background:
-		url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/mini_circle.png');
-}
-
-.dotOverlay {
-	position: relative;
-	bottom: 10px;
-	border-radius: 6px;
-	border: 1px solid #ccc;
-	border-bottom: 2px solid #ddd;
-	float: left;
-	font-size: 12px;
-	padding: 5px;
-	background: #fff;
-}
-
-.dotOverlay:nth-of-type(n) {
-	border: 0;
-	box-shadow: 0px 1px 2px #888;
-}
-
-.number {
-	font-weight: bold;
-	color: #ee6152;
-}
-
-.dotOverlay:after {
-	content: '';
-	position: absolute;
-	margin-left: -6px;
-	left: 50%;
-	bottom: -8px;
-	width: 11px;
-	height: 8px;
-	background:
-		url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/vertex_white_small.png')
-}
-
-.distanceInfo {
-	position: relative;
-	top: 5px;
-	left: 5px;
-	list-style: none;
-	margin: 0;
-}
-
-.distanceInfo .label {
-	display: inline-block;
-	width: 50px;
-}
-
-.distanceInfo:after {
-	content: none;
-}
-</style>
-
-</head>
-
 <body>
     <div class="container">
     
@@ -94,20 +30,6 @@
 
         <main class="content">
              <h1 class="main-title">기록</h1>
-             <div class="sns_writer">
-                <img src="/img/mancity.png" class="myimg">
-                <span
-                    style="font-size: 14px; font-weight: 600; font-family: 'Gothic A1', sans-serif; margin-top: 15px; margin-left: 10px;">강남구
-                    퀵실버</span>
-            </div>
-            
-               <div class="date_read">
-               			 <span style="font-size: 14px; font-family: 'Gothic A1', sans-serif;">2024-11-01 12:34</span>
-           		 	</div>
-
-            
-            <hr><br><br>
-            
           <div class="content-wrapper">
          
           
@@ -139,6 +61,19 @@
 $(document).ready(function(){
 	$('#store').click(function(){
 		if(t_path!=null) {
+			coords = where();
+		    var Lat=coords.getLat()+(sec/10000);
+		    var Lng=coords.getLng()+(sec/10000);
+		    coords=new kakao.maps.LatLng(Lat, Lng);
+		    path = clickLine.getPath();
+		    path.push(coords);
+		    clickLine.setPath(path);
+		    draw(clickLine.getPath());
+		    map.setCenter(coords);
+			
+			t_path.push(Lat);
+			t_path.push(Lng);		
+		
 			console.log(t_path);
 			console.log(distance);
 			console.log(time);

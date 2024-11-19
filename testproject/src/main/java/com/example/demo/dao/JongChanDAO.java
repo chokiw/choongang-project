@@ -26,5 +26,7 @@ public interface JongChanDAO {
 
 	void getcancelalarm(Alarm alarm);
 
+	Runner getMemberB(String user_id);
+
 
 }

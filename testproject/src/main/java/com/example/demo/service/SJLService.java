@@ -46,8 +46,8 @@ public class SJLService {
 		return dao.getrecruitC(recruit_no);
 	}
 
-	public Runner getMember(String user_id) {
-		return dao.getMember(user_id);
+	public Runner getMember_SJL(String user_id) {
+		return dao.getMember_SJL(user_id);
 	}
 
 	public int setRecruitBoard(RecruitBoard board) {

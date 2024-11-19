@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.example.demo.model.Alarm;
 import com.example.demo.model.Apply;
 import com.example.demo.model.Member;
+import com.example.demo.model.Runner;
 import com.example.demo.model.Runner_data;
 import com.example.demo.service.JongChanService;
 import com.example.demo.service.PagingPgm;
@@ -112,10 +113,23 @@ public class JongChanController {
 	}
 	
 	@RequestMapping("/userpage")
-	public String userpage() {
+	public String userpage(@RequestParam("user_id")String user_id, HttpSession session,
+							Runner runner, Model model) {
+
+		Member member = (Member) session.getAttribute("member");
+
+		if (member == null) {
+			return "redirect:/loginpage";
+		}
 		
+		Runner userRunner = service.getMemberB(user_id);
+	    if (userRunner == null) {
+	        return "error/404"; // 존재하지 않는 사용자 처리
+	    }
+
+		model.addAttribute("runner", userRunner);
+
 		return "userpage";
 	}
 	
-
 }

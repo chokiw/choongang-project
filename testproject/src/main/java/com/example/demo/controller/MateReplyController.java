@@ -80,14 +80,14 @@ public class MateReplyController {
 		
 		if (recruit_r_no != 0) {		// 댓이면 
 			
-			rb.setRecruit_r_del(reboard.getRecruit_r_no());								// del 값에 부모 no 삽입 clear
-			System.out.println(rb.getRecruit_r_del());
+			rb.setRecruit_r_parent(reboard.getRecruit_r_no());								// del 값에 부모 no 삽입 clear
+			System.out.println(rb.getRecruit_r_parent());
 			
 			if(reboard.getRecruit_r_step() == 0 && reboard.getRecruit_r_level()==0) {	// root 댓글에 댓글달면
 				
 				System.out.println("루트댓글에 댓글달기");
 				
-				rb.setRecruit_r_count(reboard.getRecruit_r_count());					// ref값에 부모 ref 설정 clear
+				rb.setRecruit_r_ref(reboard.getRecruit_r_ref());					// ref값에 부모 ref 설정 clear
 				
 				int maxstep = rbs.getMaxNum2(rb.getRecruit_r_no());						// 같은 부모ref 중 다음 step값 구하기
 				
@@ -120,7 +120,7 @@ public class MateReplyController {
 				
 				System.out.println("새댓 step : "+rb.getRecruit_r_step());
 				
-				rb.setRecruit_r_count(reboard.getRecruit_r_count());		// 같은 ref 부여	
+				rb.setRecruit_r_ref(reboard.getRecruit_r_ref());		// 같은 ref 부여	
 				
 				rbs.updateStep(rb);											// 새로 들어가는 댓글 아래의 댓글들의 step을 1씩 증가
 								
@@ -129,10 +129,10 @@ public class MateReplyController {
 			} 
 			
 		}else {
-			rb.setRecruit_r_count(number);
+			rb.setRecruit_r_ref(number);
 			
 
-			System.out.println("자신의 r_no로 count 값 설정" + rb.getRecruit_r_no() + "," + rb.getRecruit_r_count());
+			System.out.println("자신의 r_no로 count 값 설정" + rb.getRecruit_r_no() + "," + rb.getRecruit_r_ref());
 				
 		}
 			

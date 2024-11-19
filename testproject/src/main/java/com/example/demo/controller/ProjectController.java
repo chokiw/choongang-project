@@ -18,10 +18,12 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.example.demo.model.Alarm;
 import com.example.demo.model.Coordinate;
+import com.example.demo.model.Good;
 import com.example.demo.model.Member;
 import com.example.demo.model.Runner;
 import com.example.demo.model.Runner_data;
 import com.example.demo.model.SnsBoard;
+import com.example.demo.service.GoodService;
 import com.example.demo.service.PagingPgm;
 import com.example.demo.service.ProjectService;
 
@@ -34,7 +36,8 @@ import lombok.RequiredArgsConstructor;
 @CrossOrigin(origins = "*")
 public class ProjectController {
 
-	private final ProjectService service;
+	private final ProjectService service; 
+	private final GoodService good_service;
 
 	// 메인페이지로 이동
 	@RequestMapping("/mainpage")
@@ -93,48 +96,47 @@ public class ProjectController {
 
 
 		model.addAttribute("runner", dbrunner);
-		model.addAttribute("alarm", dbalarm);
+		model.addAttribute("dbalarm", dbalarm);
 
 		return "mypage";
 	}
-
-	// 모집게시판
+	
+	//모집게시판
 	@RequestMapping("/mate_board")
 	public String mate_board() {
 		return "mate_board";
 	}
 
-
-	// 로그인 페이지로 이동
+	
+	//로그인 페이지로 이동
 	@RequestMapping("/loginpage")
 	public String loginpage() {
 		return "login";
 	}
-
-	// 아이디 찾기 창으로 이동
+	//아이디 찾기 창으로 이동
 	@RequestMapping("/find_id")
 	public String find_id() {
 		return "find_id";
 	}
 
-	// 비번찾기창으로 이동
+	//비번찾기창으로 이동
 	@RequestMapping("/find_pass")
 	public String find_pass() {
 		return "find_pass";
 	}
 
-	// 측정페이지로 이동
+	//측정페이지로 이동
 	@RequestMapping("/run")
 	public String run() {
 		return "run";
 	}
-
-	// 회원가입 창으로 이동
+	
+	//회원가입 창으로 이동
 	@RequestMapping("/member")
 	public String member() {
 		return "member";
 	}
-
+	
 	@RequestMapping("/sns_board")
 	public String sns_board() {
 		return "sns_board";
@@ -209,8 +211,7 @@ public class ProjectController {
 
 		}
 	}
-
-	// test용 서비스 ->지워도됌 최종때는 반드시 지워야함
+	//test용 서비스 ->지워도됌 최종때는 반드시 지워야함
 	@RequestMapping("/runnerdata")
 	public String runnerdata(@RequestParam(value = "path") String[] path,
 			@RequestParam(value = "distance") String distance, @RequestParam(value = "time") String time) {
@@ -224,8 +225,9 @@ public class ProjectController {
 
 		return "mypage";
 	}
-
-	// 로그인 서비스
+	
+	
+	//로그인 서비스
 	@RequestMapping("/login")
 	public String login(@ModelAttribute Runner runner, HttpSession session, Model model) {
 		int result = 0;
@@ -246,8 +248,8 @@ public class ProjectController {
 		model.addAttribute("result", result);
 		return "loginresult";
 	}
-
-	// 회원가입 아이디 중복확인
+	
+	//회원가입 아이디 중복확인
 	@RequestMapping("/member_idcheck")
 	@ResponseBody
 	public int member_idcheck(@RequestParam(value = "memid") String id) {
@@ -256,7 +258,7 @@ public class ProjectController {
 		return result;
 	}
 
-	// 회원가입 닉네임확인
+	//회원가입 닉네임확인
 	@RequestMapping("/member_nicknamecheck")
 	@ResponseBody
 	public int member_nicknamecheck(@RequestParam(value = "memnickname") String nickname) {
@@ -266,13 +268,13 @@ public class ProjectController {
 		System.out.println(result);
 		return result;
 	}
-
-	// 회원가입 진행
+	
+	//회원가입 진행
 	@RequestMapping("/membership")
 	public String membership(@ModelAttribute Runner runner, @RequestParam("file1") MultipartFile mf,
 			HttpSession session, HttpServletRequest request, Model model) throws Exception {
-
-		// 프로필사진 불러오기
+		
+		//프로필사진 불러오기
 		String filename = mf.getOriginalFilename(); // 첨부파일명
 		int size = (int) mf.getSize(); // 첨부파일의 크기 (단위:Byte)
 		int result = 0;
@@ -283,8 +285,8 @@ public class ProjectController {
 //		System.out.println("size=" + size);
 //		System.out.println("Path=" + path);
 		if (size > 0) { // 첨부파일이 전송된 경우
-
-			// 날짜에 따라서 프로플사진 이름 변경
+			
+			//날짜에 따라서 프로플사진 이름 변경
 			Date d = new Date();
 			SimpleDateFormat sd = new SimpleDateFormat("_yyyyMMdd_HH_mm_ss");
 			String newdate = sd.format(d);
@@ -294,13 +296,13 @@ public class ProjectController {
 			newfilename = runner.getUser_id() + newdate + extension;
 //			System.out.println("newfilename:"+newfilename);		
 
-			// 용량 초과시
+			//용량 초과시
 			if (size > 100000) { // 100KB
 				result = 2;
 				model.addAttribute("result", result);
 
 				return "membershipresult";
-				// 지정된 확장자가 아니면
+			//지정된 확장자가 아니면
 			} else if (!extension.equals(".jpg") && !extension.equals(".jpeg") && !extension.equals(".gif")
 					&& !extension.equals(".png")) {
 
@@ -324,22 +326,32 @@ public class ProjectController {
 		return "membershipresult";
 	}
 
+	
+
 	@RequestMapping("/sns_detail")
 	public String sns_detail(@RequestParam(value = "pageNum") String pageNum,
-			@RequestParam(value = "sns_no") String sns_no, Model model) {
-		// 글정보 불러오기
+	                         @RequestParam(value = "sns_no") String sns_no, 
+	                         Model model, HttpSession session) {
+	    // 글 정보 불러오기
 		SnsBoard board = service.getboard(Integer.parseInt(sns_no));
-		// 맵에 경로 표현을 위한 테이터 불러오기
-		Runner_data rd = service.getrdata(board.getRunner_data_no());
-		// 좌표값 불러오기
-		Coordinate[] c = service.getcdata(board.getRunner_data_no());
+		
+		// 굿 정보 불러오기
+		Good good_board = good_service.get_good(Integer.parseInt(sns_no));
+		
+	    // 맵에 경로 표현을 위한 데이터 불러오기
+	    Runner_data rd = service.getrdata(board.getRunner_data_no());
+	    // 좌표값 불러오기
+	    Coordinate[] c = service.getcdata(board.getRunner_data_no());
 
-		model.addAttribute("rd", rd);
-		model.addAttribute("c", c);
-		model.addAttribute("pageNum", pageNum);
-		model.addAttribute("board", board);
-		return "sns_detail";
+	    model.addAttribute("rd", rd);
+	    model.addAttribute("c", c);
+	    model.addAttribute("pageNum", pageNum);
+	    model.addAttribute("board", board);
+	    model.addAttribute("good_board", good_board);
+	    
+	    return "sns_detail";
 	}
+
 
 	@RequestMapping("/snslist")
 	public String snslist(@RequestParam(value = "pageNum", defaultValue = "1") String pageNum, SnsBoard sns,
@@ -349,22 +361,22 @@ public class ProjectController {
 			pageNum = "1";
 		}
 		int currentPage = Integer.parseInt(pageNum);
-		// 전체데이터 갯수
-		int total = service.getTotal(sns);
-		// System.out.println("total:" + total);
-		// 페이지 이동에 따라서 10개의 데이터를 어디서 어디까지 가져올지 알기위한 변수
+		//전체데이터 갯수
+		int total = service.getTotal(sns); 
+		//System.out.println("total:" + total);
+		//페이지 이동에 따라서 10개의 데이터를 어디서 어디까지 가져올지 알기위한 변수
 		int startRow = (currentPage - 1) * rowPerPage + 1;
 		int endRow = startRow + rowPerPage - 1;
-		// 페이지 이동 변수들을 담아놓는 DTO에 저장
+		//페이지 이동 변수들을 담아놓는 DTO에 저장
 		PagingPgm pp = new PagingPgm(total, rowPerPage, currentPage);
-
-		// DTO에 페이지 변수가져가는 이유는 mapper파일 이동시 매개변수는 1개만 가져갈 수 있다.
-		// 따라서 map같은 거에 많은 데이터를 한번에 가져가야한다.
+		
+		//DTO에 페이지 변수가져가는 이유는 mapper파일 이동시 매개변수는 1개만 가져갈 수 있다.
+		//따라서  map같은 거에 많은 데이터를 한번에 가져가야한다.
 		sns.setStartRow(startRow);
 		sns.setEndRow(endRow);
 		int no = total - startRow + 1;
-		// System.out.println("no:" + no);
-		// 불러온 게시판 데이터 리스트에 담기
+		//System.out.println("no:" + no);
+		//불러온 게시판 데이터 리스트에 담기
 		List<SnsBoard> list = service.list(sns);
 		model.addAttribute("list", list);
 		model.addAttribute("pageNum", pageNum);
@@ -376,14 +388,16 @@ public class ProjectController {
 
 		return "snslist";
 	}
-
-	// sns글 쓸때 자신의 데이터를 게시판 형태로 보기위한 서비스코드
+	
+	//sns글 쓸때 자신의 데이터를 게시판 형태로 보기위한 서비스코드
 	@RequestMapping("/sns_write_list")
 	public String sns_write_list(@RequestParam(value = "pageNum", defaultValue = "1") String pageNum, Model model,
 			HttpServletRequest request) {
 
 		HttpSession session = request.getSession(false);
 		Member member = (Member) session.getAttribute("member");
+		System.out.println(member.getUser_id());
+		System.out.println(member.getUser_nickname());
 		Runner_data rd = new Runner_data();
 		rd.setUser_id(member.getUser_id());
 		final int rowPerPage = 10;
@@ -397,7 +411,7 @@ public class ProjectController {
 		int startRow = (currentPage - 1) * rowPerPage + 1;
 		int endRow = startRow + rowPerPage - 1;
 		PagingPgm pp = new PagingPgm(total, rowPerPage, currentPage);
-		
+
 		rd.setStartRow(startRow);
 		rd.setEndRow(endRow);
 		int no = total - startRow + 1;
@@ -411,8 +425,8 @@ public class ProjectController {
 		return "sns_write_list";
 	}
 
-	
-	//sns 리스트에서 인기글목록 순으로 나타내 기위한 컨트롤러
+
+//sns 리스트에서 인기글목록 순으로 나타내 기위한 컨트롤러
 	@RequestMapping("/snslist/best")
 	public String snslistBest(@RequestParam(value = "pageNum", defaultValue = "1") String pageNum, SnsBoard sns,
 			Model model) {

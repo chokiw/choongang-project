@@ -79,6 +79,8 @@ table {
     table-layout: fixed
 }
 
+
+
 th,
 td {
     padding: 8px;
@@ -91,6 +93,16 @@ td {
 tr:hover {
     background-color: #b4b4b4;
 }
+
+.mypagelist:link{
+	color: black;
+}
+
+.mypagelist:visited{
+	color: black;
+}
+
+
 
 .col1 {
     width: 50px;
@@ -107,8 +119,16 @@ tr:hover {
     font-size: 30px;
     border-radius: 50%;
     z-index: 1;
-
 }
+
+.bell:link{
+	color: black;
+}
+
+.bell:visited{
+	color: black;
+}
+
 
 .dot {
     border-radius: 50%;

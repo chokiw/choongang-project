@@ -270,6 +270,16 @@ $(function() {
                 <a class="delete" href="#"><i class="fa-solid fa-table-list"></i>&nbsp;글목록</a>
             </div>
             
+            
+            <!-- 댓글 입력 -->
+		<form name="frm" id="frm">
+			<input type="hidden" name=user_id value="${member.user_id}">
+			<input type="hidden" name="recruit_no" value="${no }"> 댓글 :
+			<textarea rows="3" cols="50" name="recruit_r_content"></textarea>
+			<input type="button" value="확인" id="repInsert">
+		</form>
+            
+            
             <div id="rlist"></div>
         </main>
     </div>

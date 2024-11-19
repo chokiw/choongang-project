@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.demo.dao.UserPostDAO;
 import com.example.demo.model.SnsBoard;
+import com.example.demo.model.Totalpage;
 
 import lombok.RequiredArgsConstructor;
 
@@ -22,4 +23,13 @@ public class UserPostService {
     public List<SnsBoard> listByUserId(String userId, int startRow, int endRow) {
         return userPostDAO.listByUserId(userId, startRow, endRow);
     }
+
+	public Totalpage[] getSnsboard(String userId) {
+		
+		return userPostDAO.getSnsboard(userId);
+	}
+
+	public Totalpage[] getMateboard(String userId) {
+		return userPostDAO.getMateboard(userId);
+	}
 }

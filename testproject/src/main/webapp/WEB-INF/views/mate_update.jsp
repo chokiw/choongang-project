@@ -43,6 +43,7 @@
 			<input type="hidden"  name="recruit_no"  value=${board.recruit_no }> 
 			<input type="hidden" name=user_id id="user_id" value="${member.user_id}">
 				<div class="recruit_title">
+					<span style="font-size: 24px; font-weight: 600;">수정하기</span><br><br>
 					<span style="font-size: 24px; font-weight: 600;">제목</span>&nbsp;&nbsp;
 					<input type="text"
 						style="font-size: 20px; font-weight: 500; width: 60%;"
@@ -581,7 +582,7 @@
 
 					<button id="backStep"type="button" class="action-button remove">경로 뒤로 한칸 이동</button>
 					<button id="lineReset" type="button" class="action-button delete">경로 삭제</button>
-					<button type="submit" class="action-button save">글 작성</button>
+					<button type="submit" class="action-button save">글 수정</button>
 				</div>
 
 
