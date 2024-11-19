@@ -92,7 +92,7 @@
 				<br>
 				<br>
 				<div class="maincontent">
-					<div id="map" style="width: 800px; height: 600px;"></div>
+					<div id="map" class="image-container"></div>
 					<script src="/js/mate_write_map.js"></script>
 
 				<input type="hidden" name="coords" id="coords" >

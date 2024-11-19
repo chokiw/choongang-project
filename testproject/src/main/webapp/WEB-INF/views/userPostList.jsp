@@ -32,7 +32,7 @@ function getlist(pageNum){
 <body>
 	<div align="center">
 		<h2>내가 쓴 글</h2>
-		<table>
+		<table class="list">
 			<colgroup>
                     <col class="col1">
                     <col class="col2">

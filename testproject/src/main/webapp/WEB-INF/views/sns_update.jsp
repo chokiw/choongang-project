@@ -268,7 +268,7 @@
             <hr><br><br>
             
             <div class="maincontent">
-           		     <div id="map" style="width: 800px; height: 600px; float: left;"></div>
+           		     <div id="map" ></div>
            		     <script>
     				var mapContainer = document.getElementById('map'), // 지도를 표시할 div  
 						   			   mapOption = {

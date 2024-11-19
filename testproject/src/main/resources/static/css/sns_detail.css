@@ -46,9 +46,7 @@
 	max-width: 800px;
 	margin: 0;
 	height: 600px;
-	/* 원하는 비율로 설정 (예: 16:9) */
 	border: 2px solid #000;
-	/* 테두리 추가 */
 	overflow: hidden;
 }
 
@@ -90,10 +88,20 @@
 	background-position: top;
 	transition: background-position 0.5s;
 	text-decoration: none;
-	color: #b4b4b4;
+	color: black;
 	margin-top: 20px;
+}
 
-	/* 부드러운 전환 효과 추가 */
+.recomended{
+	border-radius: 50%;
+	height: 100px;
+	width: 100px;
+	display: inline-block;
+	text-align: center;
+	background: #d92929;
+	text-decoration: none;
+	color: black;
+	margin-top: -20px;
 }
 
 .recomend:hover {
@@ -133,6 +141,10 @@
 	font-style: normal;
 }
 
+.material-symbols-outlined {
+    vertical-align: middle;
+}
+
 .action-buttons {
 	display: flex;
 	align-items: center;
@@ -152,7 +164,7 @@
 	}
 	.image-container {
 		padding-bottom: 85%;
-		max-width: 100%;
+		max-width: 85%;
 	}
 	.content-info {
 		width: 100%;
@@ -165,7 +177,7 @@
 		padding: 0 20px;
 	}
 	.image-container {
-		width: 100%;
+		width: 85%;
 	}
 	.content1 {
 		font-size: 20px;
@@ -175,8 +187,9 @@
 	}
 	.action-buttons {
 		flex-wrap: wrap;
-		justify-content: center;
+	
 	}
+	
 }
 
 @media ( max-width : 425px) {
@@ -255,5 +268,5 @@
 }
 
 .image-container {
-	width: 80%;
+	width: 90%;
 }

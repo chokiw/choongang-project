@@ -45,7 +45,7 @@
 				<span style="color: gray;">여기에서 내가 달린 트랙의 기록을 확인할 수 있습니다.</span><hr>
 			</div>
 		<div align="center">
-			<table>
+			<table class="list">
 				<colgroup>
 					<col class="col1">
 					<col class="col2">
@@ -54,11 +54,11 @@
 					<col class="col5">
 				</colgroup>
 				<tr>
-					<td>번호</td>
-					<td>작성자</td>
-					<td>날짜</td>
-					<td>거리</td>
-					<td>시간</td>
+					<th>번호</th>
+					<th>작성자</th>
+					<th>날짜</th>
+					<th>거리</th>
+					<th>시간</th>
 				</tr>
 				<c:if test="${empty list}">
 					<tr>

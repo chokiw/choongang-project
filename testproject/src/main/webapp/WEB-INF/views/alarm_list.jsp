@@ -39,7 +39,7 @@ function getlist(pageNum){
 <body>
 	<div id="alarm" align="center">
 		<h2>참여 리스트</h2>
-		<table>
+		<table class="list">
 			<colgroup>
 				<col class="col1">
 				<col class="col2">
@@ -47,10 +47,10 @@ function getlist(pageNum){
 				<col class="col4">
 			</colgroup>
 			<tr>
-				<td>번호</td>
-				<td>제목</td>
-				<td>참가일</td>
-				<td>읽음</td>
+				<th>번호</th>
+				<th>제목</th>
+				<th>참가일</th>
+				<th>읽음</th>
 			</tr>
 			<c:if test="${empty list}">
 				<tr>

@@ -236,7 +236,7 @@
             
             <div class="maincontent">
            		<img id="defaultImg" src="/img/route.png" alt="Route">
-		 		<div id="map" style="width: 800px; height: 600px; float: left;"></div>
+		 		<div id="map"></div>
 				<div class="content-info">
                     <div>
                         <span class="content1">달린 거리</span><br>
