@@ -1,5 +1,7 @@
 package com.example.demo.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -18,6 +20,6 @@ public interface GoodDAO {
 	
 	int checkGood(@Param("user_id") String user_id, @Param("sns_no") int sns_no);
 	
-	Good get_good(@Param("sns_no") int sns_no);
+	List<Good> get_good(@Param("sns_no") int sns_no);
 	
 }
