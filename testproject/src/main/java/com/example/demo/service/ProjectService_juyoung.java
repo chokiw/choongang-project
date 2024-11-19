@@ -65,6 +65,14 @@ public class ProjectService_juyoung {
 		return dao.deleteRb(rb);
 	}
 
+	public void setRecruitC(Recruit_c recruit_c) {
+		dao.setRecruitC(recruit_c);
+	}
+
+	public void deleteRc(int recruit_no) {
+		dao.deleteRc(recruit_no);	
+	}
+
 
 
 	}

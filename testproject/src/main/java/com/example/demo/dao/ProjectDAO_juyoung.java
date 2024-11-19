@@ -34,6 +34,8 @@ public interface ProjectDAO_juyoung {
 
 	int deleteRb(RecruitBoard rb);
 
+	void setRecruitC(Recruit_c recruit_c);
 
+	void deleteRc(int recruit_no);
 
 }
