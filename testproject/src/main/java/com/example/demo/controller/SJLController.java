@@ -40,6 +40,7 @@ public class SJLController {
 		return "sns_writingresult";
 	}
 
+	//트랙과 모집에 글쓰기할때 지도에 데이터를 불러오기 위해서 필요한 컨트롤러
 	@RequestMapping("/getMyData")
 	@ResponseBody
 	public List getMyData(@RequestParam(value = "runner_data_no") String runner_data_no) {
@@ -148,7 +149,7 @@ public class SJLController {
 		return "mate_writingresult";
 	}
 
-	// 기록측정
+	// 기록측정을 관리하는 컨트롤러
 	@RequestMapping("/runnerdata")
 	@ResponseBody
 	public int runnerdata(@RequestParam(value = "path") String[] path,

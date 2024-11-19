@@ -71,7 +71,7 @@
 						<tr>
 							<td>${no1}</td>
 							<td>${track.user_id}</td>
-							<td><a href=""><fmt:formatDate
+							<td><a href="runnertrack_detail?runner_data_no=${track.runner_data_no}"><fmt:formatDate
 										value="${track.runner_data_date}"
 										pattern="yyyy-MM-dd HH:mm:ss" /></a></td>
 							<td>${track.runner_data_distance}</td>
