@@ -40,7 +40,6 @@
 	<main class="content">
 		<div class="track">
 			<span style="font-size: 36px; font-weight: 700;">${runner.user_nickname}의 페이지</span><br><br>
-			<a href="${pageContext.request.contextPath}/profile?user_id=${runner.user_id}">${runner.user_nickname}님의 프로필 보기</a>
 		</div>
 
 		<div class="profilebox">

@@ -332,7 +332,10 @@ public class ProjectController {
 		
 		 // 굿 정보 불러오기
 	    List<Good> goodList = good_service.get_good(Integer.parseInt(sns_no));
-
+	    
+	    // 글 작성한 사람의 사진 불러오기
+	    String userphoto = service.getUserPhoto(Integer.parseInt(sns_no));
+	    String nickname = service.getNickName(Integer.parseInt(sns_no));
 		
 	    // 맵에 경로 표현을 위한 데이터 불러오기
 	    Runner_data rd = service.getrdata(board.getRunner_data_no());
@@ -344,6 +347,8 @@ public class ProjectController {
 	    model.addAttribute("pageNum", pageNum);
 	    model.addAttribute("board", board);
 	    model.addAttribute("goodList", goodList);
+	    model.addAttribute("userphoto", userphoto);
+	    model.addAttribute("nickname", nickname);
 	    
 	    return "sns_detail";
 	}

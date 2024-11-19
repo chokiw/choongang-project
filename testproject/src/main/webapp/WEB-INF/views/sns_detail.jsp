@@ -58,9 +58,14 @@
             </div>
 
             <div class="sns_writer">
-                <img src="${pageContext.request.contextPath}/img/Jellyfish.jpg" class="myimg">
-                <span
-                    style="font-size: 14px; font-weight: 600; font-family: 'Gothic A1', sans-serif; margin-top: 15px; margin-left: 10px;">${board.user_id }</span>
+            	<!-- 이미지를 클릭 했을 때 userpage로 이동 -->
+            	<a href="${pageContext.request.contextPath}/userpage?user_id=${board.user_id}">
+                <img src="${pageContext.request.contextPath}/uimg/${userphoto}" class="myimg">
+                </a>
+                <!-- 텍스트를 클릭 했을 때 userpage로 이동 -->
+                <a href="${pageContext.request.contextPath}/userpage?user_id=${board.user_id}">
+                <span style="font-size: 14px; font-weight: 600; font-family: 'Gothic A1', sans-serif; margin-top: 15px; margin-left: 10px;">${nickname}</span>
+                </a>
             </div>
 
             <div class="date_read">
