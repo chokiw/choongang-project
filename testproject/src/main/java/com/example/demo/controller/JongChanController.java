@@ -112,8 +112,8 @@ public class JongChanController {
 	}
 	
 	@RequestMapping("/userpage")
-	public String userpage(@RequestParam("user_id")String user_id, HttpSession session,
-							Runner runner, Model model) {
+	public String userpage(@RequestParam(value="user_id", required=false)String user_id,
+							HttpSession session, Model model) {
 
 		Member member = (Member) session.getAttribute("member");
 
@@ -121,11 +121,11 @@ public class JongChanController {
 			return "redirect:/loginpage";
 		}
 		
-		Runner userRunner = service.getMemberB(user_id);
-	    if (userRunner == null) {
-	        return "error/404"; // 존재하지 않는 사용자 처리
+		if (user_id == null || user_id.isEmpty()) {
+	        return "redirect:/mypage"; // 파라미터 없으면 마이페이지로 이동
 	    }
-
+		
+		Runner userRunner = service.getMemberB(user_id);
 		model.addAttribute("runner", userRunner);
 
 		return "userpage";
