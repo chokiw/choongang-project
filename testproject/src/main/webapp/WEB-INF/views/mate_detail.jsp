@@ -13,51 +13,15 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Gothic+A1&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Gothic+A1&display=swap" rel="stylesheet">
-	<script src="http://code.jquery.com/jquery-latest.js"></script>
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://kit.fontawesome.com/5e485453d8.js" crossorigin="anonymous"></script>
     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=e6146d72cd45f3c8d130a2c1504d9647"></script>
     <link href="/css/common.css" rel="stylesheet">
     <link href="/css/mate_detail.css" rel="stylesheet">
     <script src="/js/mate_detail.js"></script>
-    <script src="http://code.jquery.com/jquery-latest.js"></script>
     <title>Document</title>
     <script type="text/javascript">
-    var writer = "${board.user_id}"
-    var viewer = "${member.user_id}"
-    
-    $(document).ready(function () {
-    	if(writer != viewer) {
-    		$("#update").hide();
-    		$("#delete").hide();
-    	}               		
-    });  
-    
-$(function(){
-	   $('#delete').click(function(){
-		   if(!confirm('삭제하시겠습니까?')){
-			   return false;
-		   }
-	   })
-})
-    
-$(function() {
-	$('#rlist').load('/rlist/num/${board.recruit_no}')
-	
-	$('#repInsert').click(function() {
-		if (!frm.recruit_r_content.value) {
-			alert('댓글 입력후에 클릭하시오');
-			frm.recruit_r_content.focus();
-			return false;
-		}
-		var frmData = $('form').serialize();
-		
-		$.post('${path}/sInsert', frmData, function(data) {
-			$('#rlist').html(data);
-			frm.recruit_r_content.value = '';
-		});
-	});
-});
 		$(function(){
 			$("#start1").click(function(){
 				$.ajax({
@@ -125,19 +89,20 @@ $(function() {
                 	margin-left: 10px;">${nickname}</span></a>
             </div>
             <div class="date_read">
-                <span style="font-size: 14px; font-family: 'Gothic A1', sans-serif;">2024-11-01 12:34</span>
+                <span style="font-size: 14px; font-family: 'Gothic A1', sans-serif;"><fmt:formatDate value="${board.recruit_date}"
+								pattern="yyyy-MM-dd HH:mm:ss" /></span>
                 <span style="font-size: 14px; font-family: 'Gothic A1', sans-serif; float: right; font-weight: 600;">조회수
-                    : ${board.recruit_readcount}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;모집인원 : ${board.recruit_recruitnum}/${board.recruit_remainnum}</span>
+                    : ${board.recruit_readcount}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;모집인원 : ${board.recruit_remainnum}/${board.recruit_recruitnum}</span>
             </div>
             <hr><br><br>
             <div class="maincontent">
-                <div id="map" class="image-container"></div>
+                <div id="map" style="width: 800px; height: 600px; float: left;"></div>
                 <script>
     				var mapContainer = document.getElementById('map'), // 지도를 표시할 div  
 						   			   mapOption = {
     								   		center : new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
 											// 지도의 확대 레벨
-											level: 4
+											level: 3
 										};
 
 					var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
@@ -231,6 +196,8 @@ $(function() {
 				</script>
             </div>
             <div style="margin-top: 20px; height: auto;">
+                <span style="font-size: 24px; font-family: 'Gothic A1', sans-serif;"><fmt:formatDate value="${board.recruit_d_day}"
+								pattern="yyyy-MM-dd a hh:mm:ss" /></span><br><br>
                 <span style="font-size: 24px; font-family: 'Gothic A1', sans-serif;">${board.recruit_content}</span>
             </div>
 
@@ -242,49 +209,10 @@ $(function() {
            
 
             <div class="action-buttons">
-             <c:choose>
-             
-            <c:when test="${member.user_id eq board.user_id}">
-                <a class="delete" href="mate_update?pageNum=${pageNum}&recruit_no=${board.recruit_no}" style="display: inline-block;">
-                    <i class="fa-solid fa-file-pen"></i>&nbsp;수정
-                </a>
-                
-                <!-- 삭제버튼 누르면 바로 삭제 완료 alet뜨게함 -->
-                <form method="post" action="matedelete">
-                	<input type="hidden" name="pageNum"  value="${pageNum }">
-					<input type="hidden"  name="recruit_no"  value=${board.recruit_no }>                
-               		<button type="submit" class="delete button-style"><i class="fa-regular fa-trash-can"></i>&nbsp;삭제 </button>
-                </form>
-                
-            </c:when>
-            
-            <c:otherwise>
-                <a class="delete" href="mate_update?pageNum=${pageNum}&recruit_no=${board.recruit_no}" style="display: none;">
-                    <i class="fa-solid fa-file-pen"></i>&nbsp;수정
-                </a>
-                
-                <a class="delete" href="recruitdelete" style="display: none;">
-                <i class="fa-regular fa-trash-can"></i>&nbsp;삭제
-                </a>
-            </c:otherwise>
-        </c:choose>
-        
-        
-        
-                <a class="delete" href="javascript:history.back();"><i class="fa-solid fa-table-list"></i>&nbsp;글목록</a>
+                <a class="delete" href="#"><i class="fa-solid fa-file-pen"></i>&nbsp;수정</a>
+                <a class="delete" href="#"><i class="fa-regular fa-trash-can"></i>&nbsp;삭제</a>
+                <a class="delete" href="#"><i class="fa-solid fa-table-list"></i>&nbsp;글목록</a>
             </div>
-            
-            
-            <!-- 댓글 입력 -->
-		<form name="frm" id="frm">
-			<input type="hidden" name=user_id value="${member.user_id}">
-			<input type="hidden" name="recruit_no" value="${no }"> 댓글 :
-			<textarea rows="3" cols="50" name="recruit_r_content"></textarea>
-			<input type="button" value="확인" id="repInsert">
-		</form>
-            
-            
-            <div id="rlist"></div>
         </main>
     </div>
 </body>
