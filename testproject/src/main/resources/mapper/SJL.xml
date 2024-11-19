@@ -25,6 +25,10 @@
 				recruit_content like
 				'%'||#{keyword}||'%'
 			</if>
+			<!-- 지역별로 가져오게 조건 추가 -->
+			<if test="recruit_address2 != null">
+				recruit_address2  like '%'||#{recruit_address2}||'%'
+			</if>
 		</where>
 	</select>
 
@@ -40,6 +44,10 @@
 				recruit_subject like '%'||#{keyword}||'%' or
 				recruit_content like
 				'%'||#{keyword}||'%'
+			</if>
+				<!-- 지역별로 가져오게 조건 추가 -->
+			<if test="recruit_address2 != null">
+				recruit_address2  like '%'||#{recruit_address2}||'%'
 			</if>
 		</where>
 		order by recruit_no desc) a )

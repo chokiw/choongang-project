@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import java.io.File;
+import java.nio.charset.StandardCharsets;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -15,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
-
+import org.springframework.web.util.UriUtils;
 
 import com.example.demo.model.Coordinate;
 import com.example.demo.model.Member;
@@ -164,7 +165,29 @@ public class ProjectController_juyoung {
 	
 
 	
-	
+	// 메이트 게시판 지역별로 불러오기
+	@RequestMapping("/mate_list_location")
+	public String matelist_location(@RequestParam(value = "pageNum", defaultValue = "1") String pageNum,  
+													 	@RequestParam("recruit_address1")  String  recruit_address1,
+													 	@RequestParam("recruit_address2")  String  recruit_address2,
+													 	@ModelAttribute  RecruitBoard recruit,
+													 	Model model) {
+		
+		System.out.println("pageNum:"+ pageNum);
+		System.out.println("recruit_address1:"+ recruit_address1);
+		System.out.println("recruit_address2:"+ recruit_address2);
+		
+		
+		
+		int pageNum1 = Integer.parseInt(pageNum);
+//		String pageNum1 = UriUtils.encodePath(pageNum, StandardCharsets.UTF_8);
+		String encodedPath1 = UriUtils.encodePath(recruit_address1, StandardCharsets.UTF_8);
+		String encodedPath2 = UriUtils.encodePath(recruit_address2, StandardCharsets.UTF_8);
+		
+		
+//		return redirectUrl;
+		return "redirect:/mate_list?pageNum="+pageNum1+"&recruit_address1="+encodedPath1+"&recruit_address2="+encodedPath2;
+	}
 	
 	
 	

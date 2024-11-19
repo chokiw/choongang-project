@@ -34,8 +34,6 @@ public interface ProjectDAO_juyoung {
 
 	int deleteRb(RecruitBoard rb);
 
-	int getTotal(SnsBoard sns);
 
-	List<SnsBoard> listLocation(SnsBoard sns);
 
 }
