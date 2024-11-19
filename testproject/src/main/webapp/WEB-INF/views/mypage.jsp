@@ -18,10 +18,11 @@
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-<script src="https://kit.fontawesome.com/5e485453d8.js"
-	crossorigin="anonymous"></script>
+<link rel="stylesheet"
+	href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+<link href="/css/icons.css" rel="stylesheet">
 <link href="/css/common.css" rel="stylesheet">
-<link href="./css/mypage.css" rel="stylesheet">
+<link href="/css/mypage.css" rel="stylesheet">
 <script src="/js/mypage.js"></script>
 <title>Document</title>
 
@@ -45,7 +46,7 @@
 				<br>
 			</div>
 
-		
+
 
 			<div class="profilebox">
 
@@ -62,7 +63,7 @@
 
 					<!-- 알람 아이콘 -->
 					<div class="alert">
-						<a href="asd"  class="bell"><i class="fa-solid fa-bell"></i></a>
+						<a href="asd" class="bell"><span class="material-symbols-outlined" style="width:22px; height:22px">notifications</span></a>
 
 						<!-- 알람확인표시 -->
 						<c:forEach var="alarm" items="${dbalarm}">
@@ -108,34 +109,33 @@
 					<col class="col2">
 				</colgroup>
 				<tr>
-					<td><i class="fa-solid fa-stopwatch"></i></td>
+					<td><span class="material-symbols-outlined"> sprint </span></td>
 					<td><a href="runnertrack" class="mypagelist">내가 달린 트랙</a></td>
 				</tr>
 
 				<tr>
-					<td><i class="fa-solid fa-pen"></i></td>
+					<td><span class="material-symbols-outlined">edit_document</span></td>
 					<td><a href="mywriting" class="mypagelist">내가 작성한 글</a></td>
 				</tr>
 
 				<tr>
-					<td><i class="fa-solid fa-fire"></i></td>
-
+					<td><span class="material-symbols-outlined"> recommend</span></td>
 					<td><a href="/liked_board" class="mypagelist">추천 누른 글</a></td>
 
 				</tr>
 
 				<tr>
-					<td><i class="fa-solid fa-bell"></i></td>
+					<td><span class="material-symbols-outlined">notifications</span></td>
 					<td><a href="asd" class="mypagelist">알람</a></td>
 				</tr>
 
 				<tr>
-					<td><i class="fa-solid fa-user-pen"></i></td>
+					<td><span class="material-symbols-outlined">person_edit</span></td>
 					<td><a href="asd" class="mypagelist">정보수정</a></td>
 				</tr>
 
 				<tr>
-					<td><i class="fa-solid fa-user-slash"></i></td>
+					<td>&nbsp;<span class="material-symbols-outlined">person_remove</span></td>
 					<td><a href="asd" class="mypagelist">회원탈퇴</a></td>
 				</tr>
 			</table>

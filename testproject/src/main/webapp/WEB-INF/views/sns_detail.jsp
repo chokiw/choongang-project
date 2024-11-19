@@ -16,7 +16,28 @@
     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=e6146d72cd45f3c8d130a2c1504d9647"></script>
     <link href="/css/common.css" rel="stylesheet">
     <link href="/css/sns_detail.css" rel="stylesheet">
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+    
     <title>RUNAWAY</title>
+    
+<script>
+	$(function() {
+    	$('#srlist').load('/srlist/num/${board.sns_no}')    	
+    	$('#repInsert').click(function() {
+    		if (!frm.sns_r_content.value) {
+    			alert('댓글 입력후에 클릭하시오');
+    			frm.sns_r_content.focus();
+    			return false;
+    		}
+    		var frmData = $('form').serialize();
+    		
+    		$.post('${path}/srInsert', frmData, function(data) {
+    			$('#srlist').html(data);
+    			frm.sns_r_content.value = '';
+    		});
+	});
+});
+    </script>
 </head>
 
 <body>
@@ -50,7 +71,7 @@
             <hr><br><br>
             
             <div class="maincontent">
-                <div id="map" style="width: 800px; height: 600px; float: left;"></div>
+                <div id="map" class="image-container"></div>
 		 		<script>
     				var mapContainer = document.getElementById('map'), // 지도를 표시할 div  
 						   			   mapOption = {
@@ -173,25 +194,27 @@
                 <span style="font-size: 24px; font-family: 'Gothic A1', sans-serif;">${board.sns_content}</span>
             </div>
 
-<!-- 추천버튼 -->
-<c:choose>
-    <c:when test="${board.sns_no == good_board.sns_no && sessionScope.member.user_id == good_board.user_id}">
-        <div class="recomend_box">
-            <a href="#" class="recomend" onclick="toggleLike(event, ${board.sns_no})">
-                <br><i class="fa-solid fa-fire" style="font-size: 32px; color: #ff0000;"></i><br>
-                <span class="run">RUN</span>
-            </a>
-        </div>
-    </c:when>
-    <c:otherwise>
-        <div class="recomend_box">
-            <a href="#" class="recomend" onclick="toggleLike(event, ${board.sns_no})">
-                <br><i class="fa-solid fa-fire" style="font-size: 32px; color: #333333;"></i><br>
-                <span class="run">RUN</span>
-            </a>
-        </div>
-    </c:otherwise>
-</c:choose>
+<!-- 추천 버튼 -->
+<div class="recomend_box">
+    <a href="#" class="recomend" onclick="toggleLike(event, ${board.sns_no})">
+        <br>
+        <c:choose>
+            <c:when test="${fn:length(goodList) > 0}">
+                <c:forEach var="good" items="${goodList}">
+                    <c:if test="${good.sns_no == board.sns_no && sessionScope.member.user_id == good.user_id}">
+                        <!-- 추천된 상태 -->
+                        <i class="fa-solid fa-fire" style="font-size: 32px; color: #ff0000;"></i>
+                    </c:if>
+                </c:forEach>
+            </c:when>
+            <c:otherwise>
+                <i class="fa-solid fa-fire" style="font-size: 32px; color: #333333;"></i>
+            </c:otherwise>
+        </c:choose>
+        <br>
+        <span class="run">RUN</span>
+    </a>
+</div>
 
             
 <script>
@@ -228,9 +251,9 @@ function toggleLike(event, sns_no) {
                 
                 <!-- 삭제버튼 누르면 바로 삭제 완료 alet뜨게함 -->
                 <form method="post" action="snsdelete">
-                   <input type="hidden" name="pageNum"  value="${pageNum}">
-               <input type="hidden"  name="sns_no"  value=${board.sns_no }>                
-                     <button type="submit" class="delete button-style"><i class="fa-regular fa-trash-can"></i>&nbsp;삭제 </button>
+                	<input type="hidden" name="pageNum"  value="${pageNum}">
+					<input type="hidden"  name="sns_no"  value=${board.sns_no }>                
+               		<button type="submit" class="delete button-style"><i class="fa-regular fa-trash-can"></i>&nbsp;삭제 </button>
                 </form>
                 
             </c:when>
@@ -245,10 +268,30 @@ function toggleLike(event, sns_no) {
                 </a>
             </c:otherwise>
         </c:choose>
+        
+        
+        
+               
                 <a class="delete" href="sns_board?pageNum=${pageNum }"><i class="fa-solid fa-table-list"></i>&nbsp;글목록</a>
             </div>
-             <div id="reboard"></div>
+            
+            
+            
+            
+                 
+            <!-- 댓글 입력 -->
+		<form name="frm" id="frm">
+			<input type="hidden" name=user_id value="${member.user_id}">
+			<input type="hidden" name="sns_no" value="${no }"> 댓글 :
+			<textarea rows="3" cols="50" name="sns_r_content"></textarea>
+			<input type="button" value="확인" id="repInsert">
+		</form>
+            
+  
+             <div id="srlist"></div>
         </main>
+        
+
     </div>
 
 </body>

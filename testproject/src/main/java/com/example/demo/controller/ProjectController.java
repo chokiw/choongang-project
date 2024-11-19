@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import java.io.File;
+import java.nio.charset.StandardCharsets;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.util.UriUtils;
 
 import com.example.demo.model.Alarm;
 import com.example.demo.model.Coordinate;
@@ -100,43 +102,44 @@ public class ProjectController {
 
 		return "mypage";
 	}
-	
-	//모집게시판
+
+	// 모집게시판
 	@RequestMapping("/mate_board")
 	public String mate_board() {
 		return "mate_board";
 	}
 
-	
-	//로그인 페이지로 이동
+
+	// 로그인 페이지로 이동
 	@RequestMapping("/loginpage")
 	public String loginpage() {
 		return "login";
 	}
-	//아이디 찾기 창으로 이동
+
+	// 아이디 찾기 창으로 이동
 	@RequestMapping("/find_id")
 	public String find_id() {
 		return "find_id";
 	}
 
-	//비번찾기창으로 이동
+	// 비번찾기창으로 이동
 	@RequestMapping("/find_pass")
 	public String find_pass() {
 		return "find_pass";
 	}
 
-	//측정페이지로 이동
+	// 측정페이지로 이동
 	@RequestMapping("/run")
 	public String run() {
 		return "run";
 	}
-	
-	//회원가입 창으로 이동
+
+	// 회원가입 창으로 이동
 	@RequestMapping("/member")
 	public String member() {
 		return "member";
 	}
-	
+
 	@RequestMapping("/sns_board")
 	public String sns_board() {
 		return "sns_board";
@@ -145,6 +148,11 @@ public class ProjectController {
 	@RequestMapping("/sns_write")
 	public String sns_write() {
 		return "sns_write";
+	}
+	
+	@RequestMapping("/snsboard_location")
+	public String snsboard_location() {
+		return "snsboard_location";
 	}
 
 	// 아이디 찾기 액션
@@ -235,8 +243,8 @@ public class ProjectController {
 		model.addAttribute("result", result);
 		return "loginresult";
 	}
-	
-	//회원가입 아이디 중복확인
+
+	// 회원가입 아이디 중복확인
 	@RequestMapping("/member_idcheck")
 	@ResponseBody
 	public int member_idcheck(@RequestParam(value = "memid") String id) {
@@ -245,7 +253,7 @@ public class ProjectController {
 		return result;
 	}
 
-	//회원가입 닉네임확인
+	// 회원가입 닉네임확인
 	@RequestMapping("/member_nicknamecheck")
 	@ResponseBody
 	public int member_nicknamecheck(@RequestParam(value = "memnickname") String nickname) {
@@ -255,13 +263,13 @@ public class ProjectController {
 		System.out.println(result);
 		return result;
 	}
-	
-	//회원가입 진행
+
+	// 회원가입 진행
 	@RequestMapping("/membership")
 	public String membership(@ModelAttribute Runner runner, @RequestParam("file1") MultipartFile mf,
 			HttpSession session, HttpServletRequest request, Model model) throws Exception {
-		
-		//프로필사진 불러오기
+
+		// 프로필사진 불러오기
 		String filename = mf.getOriginalFilename(); // 첨부파일명
 		int size = (int) mf.getSize(); // 첨부파일의 크기 (단위:Byte)
 		int result = 0;
@@ -272,8 +280,8 @@ public class ProjectController {
 //		System.out.println("size=" + size);
 //		System.out.println("Path=" + path);
 		if (size > 0) { // 첨부파일이 전송된 경우
-			
-			//날짜에 따라서 프로플사진 이름 변경
+
+			// 날짜에 따라서 프로플사진 이름 변경
 			Date d = new Date();
 			SimpleDateFormat sd = new SimpleDateFormat("_yyyyMMdd_HH_mm_ss");
 			String newdate = sd.format(d);
@@ -283,13 +291,13 @@ public class ProjectController {
 			newfilename = runner.getUser_id() + newdate + extension;
 //			System.out.println("newfilename:"+newfilename);		
 
-			//용량 초과시
+			// 용량 초과시
 			if (size > 100000) { // 100KB
 				result = 2;
 				model.addAttribute("result", result);
 
 				return "membershipresult";
-			//지정된 확장자가 아니면
+				// 지정된 확장자가 아니면
 			} else if (!extension.equals(".jpg") && !extension.equals(".jpeg") && !extension.equals(".gif")
 					&& !extension.equals(".png")) {
 
@@ -322,8 +330,9 @@ public class ProjectController {
 	    // 글 정보 불러오기
 		SnsBoard board = service.getboard(Integer.parseInt(sns_no));
 		
-		// 굿 정보 불러오기
-		Good good_board = good_service.get_good(Integer.parseInt(sns_no));
+		 // 굿 정보 불러오기
+	    List<Good> goodList = good_service.get_good(Integer.parseInt(sns_no));
+
 		
 	    // 맵에 경로 표현을 위한 데이터 불러오기
 	    Runner_data rd = service.getrdata(board.getRunner_data_no());
@@ -334,7 +343,7 @@ public class ProjectController {
 	    model.addAttribute("c", c);
 	    model.addAttribute("pageNum", pageNum);
 	    model.addAttribute("board", board);
-	    model.addAttribute("good_board", good_board);
+	    model.addAttribute("goodList", goodList);
 	    
 	    return "sns_detail";
 	}
@@ -372,19 +381,43 @@ public class ProjectController {
 		// 검색
 		model.addAttribute("search", sns.getSearch());
 		model.addAttribute("keyword", sns.getKeyword());
-
+		model.addAttribute("sns_address1", sns.getSns_address1());
+		model.addAttribute("sns_address2", sns.getSns_address2());
 		return "snslist";
 	}
 	
-	//sns글 쓸때 자신의 데이터를 게시판 형태로 보기위한 서비스코드
+	
+	// 트랙 게시판 지역별로 불러오기
+	@RequestMapping("/snslist_location")
+	public String snslist_location(@RequestParam(value = "pageNum", defaultValue = "1") String pageNum,  
+													 	@RequestParam("sns_address1")  String  sns_address1,
+													 	@RequestParam("sns_address2")  String  sns_address2,
+													 	@ModelAttribute  SnsBoard sns,
+													 	Model modele) {
+		
+		System.out.println("pageNum:"+ pageNum);
+		System.out.println("sns_address1:"+ sns_address1);
+		System.out.println("sns_address2:"+ sns_address2);
+		
+		
+		
+		int pageNum1 = Integer.parseInt(pageNum);
+//		String pageNum1 = UriUtils.encodePath(pageNum, StandardCharsets.UTF_8);
+		String encodedPath1 = UriUtils.encodePath(sns_address1, StandardCharsets.UTF_8);
+		String encodedPath2 = UriUtils.encodePath(sns_address2, StandardCharsets.UTF_8);
+		
+		
+//		return redirectUrl;
+		return "redirect:/snslist?pageNum="+pageNum1+"&sns_address1="+encodedPath1+"&sns_address2="+encodedPath2;
+	}
+
+	// sns글 쓸때 자신의 데이터를 게시판 형태로 보기위한 서비스코드
 	@RequestMapping("/sns_write_list")
 	public String sns_write_list(@RequestParam(value = "pageNum", defaultValue = "1") String pageNum, Model model,
 			HttpServletRequest request) {
 
 		HttpSession session = request.getSession(false);
 		Member member = (Member) session.getAttribute("member");
-		System.out.println(member.getUser_id());
-		System.out.println(member.getUser_nickname());
 		Runner_data rd = new Runner_data();
 		rd.setUser_id(member.getUser_id());
 		final int rowPerPage = 10;
@@ -398,7 +431,7 @@ public class ProjectController {
 		int startRow = (currentPage - 1) * rowPerPage + 1;
 		int endRow = startRow + rowPerPage - 1;
 		PagingPgm pp = new PagingPgm(total, rowPerPage, currentPage);
-
+		
 		rd.setStartRow(startRow);
 		rd.setEndRow(endRow);
 		int no = total - startRow + 1;
@@ -412,8 +445,8 @@ public class ProjectController {
 		return "sns_write_list";
 	}
 
-
-//sns 리스트에서 인기글목록 순으로 나타내 기위한 컨트롤러
+	
+	//sns 리스트에서 인기글목록 순으로 나타내 기위한 컨트롤러
 	@RequestMapping("/snslist/best")
 	public String snslistBest(@RequestParam(value = "pageNum", defaultValue = "1") String pageNum, SnsBoard sns,
 			Model model) {

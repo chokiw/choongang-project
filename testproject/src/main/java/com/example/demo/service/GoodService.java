@@ -1,5 +1,7 @@
 package com.example.demo.service;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -14,8 +16,8 @@ public class GoodService {
 
     private final GoodDAO goodDAO;
     
-    public Good get_good(int sns_no) {
-    	return goodDAO.get_good(sns_no);
+    public List<Good> get_good(int sns_no) {
+        return goodDAO.get_good(sns_no);
     }
     
     @Transactional

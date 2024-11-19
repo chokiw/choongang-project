@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Controller;
@@ -43,12 +44,15 @@ public class UserPostController {
         
         Totalpage[] tp2 = userPostService.getMateboard(userId);
         
-        Totalpage[] tp = new Totalpage[tp1.length+tp2.length];
+        List<Totalpage> tp = new ArrayList<Totalpage>();
         
-        for(Totalpage page : tp1) {
-        	
+        for(Totalpage p1 : tp1) {
+        	tp.add(p1);
         }
         
+        for(Totalpage p2 : tp2) {
+        	tp.add(p2);
+        }
 
         final int rowPerPage = 10;
         int currentPage = Integer.parseInt(pageNum);
