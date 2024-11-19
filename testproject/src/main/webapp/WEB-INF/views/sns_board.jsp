@@ -30,7 +30,7 @@
 		$('#board').load('${path}/snslist');
 	});
 		// sns 인기글 순으로 리스트 요청
-	function getlist(pageNum) {
+	 function getlist(pageNum) {
 		var best = '${best}';
 		if (best === 'true') {
 			getBestList(pageNum);
@@ -41,9 +41,49 @@
 	}
 
 	function getBestList(pageNum) {
+		resetSelectValues();
 		var uri = '${path}/snslist/best?pageNum=' + pageNum;
 		$('#board').load(uri);
+	} 
+	
+	// 인기글 누를때 지역 select 초기화
+	function resetSelectValues() {
+	    $('#sns_address1').val(''); // 광역시 선택을 초기화
+	    $('#sns_address2').val(''); // 지역 선택을 초기화
 	}
+	
+	// 지역별로 글 리스트 이동
+	$(function() {
+	    $('form').on('submit', function(e) {
+	        e.preventDefault();
+	        var formData = $(this).serialize();
+	        
+	        $.ajax({
+	            url: '${path}/snslist_location',
+	            type: 'GET',
+	            data: formData,
+	            success: function(response) {
+	                $('#board').html(response);
+	            },
+	            error: function(xhr, status, error) {
+	                console.error("AJAX 요청 실패:", error);
+	            }
+	        });
+	    });
+	});
+
+	
+	function getAddressList(pageNum, sns_address1, sns_address2) {
+		
+		
+		var uri = '${path}/snslist_location?pageNum=' + pageNum+'&sns_address1='+sns_address1+'&sns_address2='+sns_address2;
+		$('#board').load(uri);
+	} 
+	
+	
+	
+	
+	
 </script>
 
 <title>Document</title>
@@ -66,36 +106,41 @@
 			</div>
 			<br>
 			<div class="locationbox">
-				<select>
-					<option value="서울시">서울시</option>
-				</select> <select>
-					<option value="">지역선택</option>
-					<option value="강남구">강남구</option>
-					<option value="강남구">강동구</option>
-					<option value="강남구">강북구</option>
-					<option value="강남구">강서구</option>
-					<option value="강남구">관악구</option>
-					<option value="강남구">광진구</option>
-					<option value="강남구">구로구</option>
-					<option value="강남구">금천구</option>
-					<option value="강남구">노원구</option>
-					<option value="강남구">도봉구</option>
-					<option value="강남구">동대문구</option>
-					<option value="강남구">동작구</option>
-					<option value="강남구">마포구</option>
-					<option value="강남구">서대문구</option>
-					<option value="강남구">서초구</option>
-					<option value="강남구">성동구</option>
-					<option value="강남구">성북구</option>
-					<option value="강남구">송파구</option>
-					<option value="강남구">양천구</option>
-					<option value="강남구">영등포구</option>
-					<option value="강남구">용산구</option>
-					<option value="강남구">은평구</option>
-					<option value="강남구">종로구</option>
-					<option value="강남구">중구</option>
-					<option value="강남구">중랑구</option>
-				</select>
+			<form>
+				 <select id="sns_address1"   name="sns_address1">
+                    <option value="">광역시선택</option> 
+                    <option value="서울시">서울시</option>
+                </select>
+                <select id="sns_address2"  name="sns_address2">
+                    <option value="">지역선택</option>
+                    <option value="강남구">강남구</option>
+                    <option value="강동구" >강동구</option>
+                    <option value="강북구">강북구</option>
+                    <option value="강서구">강서구</option>
+                    <option value="관악구">관악구</option>
+                    <option value="광진구">광진구</option>
+                    <option value="구로구">구로구</option>
+                    <option value="금천구">금천구</option>
+                    <option value="노원구">노원구</option>
+                    <option value="도봉구">도봉구</option>
+                    <option value="동대문구">동대문구</option>
+                    <option value="동작구">동작구</option>
+                    <option value="마포구">마포구</option>
+                    <option value="서대문구">서대문구</option>
+                    <option value="서초구">서초구</option>
+                    <option value="성동구">성동구</option>
+                    <option value="성북구">성북구</option>
+                    <option value="송파구">송파구</option>
+                    <option value="양천구">양천구</option>
+                    <option value="영등포구">영등포구</option>
+                    <option value="용산구">용산구</option>
+                    <option value="은평구">은평구</option>
+                    <option value="종로구">종로구</option>
+                    <option value="중구">중구</option>
+                    <option value="중랑구">중랑구</option>
+                </select>
+                <button type="submit">이동</button>
+                </form>	
 
 
 				<!-- 인기글 버튼 -->
