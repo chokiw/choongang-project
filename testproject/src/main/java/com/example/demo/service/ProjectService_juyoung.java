@@ -65,4 +65,14 @@ public class ProjectService_juyoung {
 		return dao.deleteRb(rb);
 	}
 
+	public int getTotal(SnsBoard sns) {
+		
+		return dao.getTotal(sns);
+	}
+
+	public List<SnsBoard> listLocation(SnsBoard sns) {
+		
+		return dao.listLocation(sns);
+	}
+
 	}

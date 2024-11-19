@@ -1,6 +1,8 @@
 package com.example.demo.controller;
 
 import java.io.File;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.util.UriUtils;
 
 import com.example.demo.model.Alarm;
 import com.example.demo.model.Coordinate;
@@ -26,6 +29,7 @@ import com.example.demo.service.PagingPgm;
 import com.example.demo.service.ProjectService;
 
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 
@@ -143,6 +147,11 @@ public class ProjectController {
 	@RequestMapping("/sns_write")
 	public String sns_write() {
 		return "sns_write";
+	}
+	
+	@RequestMapping("/snsboard_location")
+	public String snsboard_location() {
+		return "snsboard_location";
 	}
 
 	// 아이디 찾기 액션
@@ -341,9 +350,22 @@ public class ProjectController {
 		return "sns_detail";
 	}
 
+	
 	@RequestMapping("/snslist")
-	public String snslist(@RequestParam(value = "pageNum", defaultValue = "1") String pageNum, SnsBoard sns,
+	public String snslist(@RequestParam(value = "pageNum", defaultValue = "1") String pageNum, @ModelAttribute  SnsBoard sns, 
+//		@RequestParam(value = "sns_address2", required = false) String sns_address2,
 			Model model) {
+		
+		System.out.println("snslist_pageNum::"+ pageNum);
+		System.out.println("snslist_sns_address1:"+ sns.getSns_address1());
+		System.out.println("snslist_sns_address2:"+ sns.getSns_address2());
+//		sns.setSns_address2(sns_address2);
+		
+		
+//	    if (sns_address2 != null && !sns_address2.isEmpty()) {
+//	        sns.setSns_address2(sns_address2);
+//	    }
+		
 		final int rowPerPage = 10;
 		if (pageNum == null || pageNum.equals("")) {
 			pageNum = "1";
@@ -351,7 +373,7 @@ public class ProjectController {
 		int currentPage = Integer.parseInt(pageNum);
 		// 전체데이터 갯수
 		int total = service.getTotal(sns);
-		// System.out.println("total:" + total);
+		 System.out.println("total:" + total);
 		// 페이지 이동에 따라서 10개의 데이터를 어디서 어디까지 가져올지 알기위한 변수
 		int startRow = (currentPage - 1) * rowPerPage + 1;
 		int endRow = startRow + rowPerPage - 1;
@@ -366,6 +388,9 @@ public class ProjectController {
 		// System.out.println("no:" + no);
 		// 불러온 게시판 데이터 리스트에 담기
 		List<SnsBoard> list = service.list(sns);
+		System.out.println("list:" + list);
+		
+		
 		model.addAttribute("list", list);
 		model.addAttribute("pageNum", pageNum);
 		model.addAttribute("no", no);
@@ -373,8 +398,34 @@ public class ProjectController {
 		// 검색
 		model.addAttribute("search", sns.getSearch());
 		model.addAttribute("keyword", sns.getKeyword());
-
+		model.addAttribute("sns_address1", sns.getSns_address1());
+		model.addAttribute("sns_address2", sns.getSns_address2());
 		return "snslist";
+	}
+	
+	
+	// 트랙 게시판 지역별로 불러오기
+	@RequestMapping("/snslist_location")
+	public String snslist_location(@RequestParam(value = "pageNum", defaultValue = "1") String pageNum,  
+													 	@RequestParam("sns_address1")  String  sns_address1,
+													 	@RequestParam("sns_address2")  String  sns_address2,
+													 	@ModelAttribute  SnsBoard sns,
+													 	Model modele) {
+		
+		System.out.println("pageNum:"+ pageNum);
+		System.out.println("sns_address1:"+ sns_address1);
+		System.out.println("sns_address2:"+ sns_address2);
+		
+		
+		
+		int pageNum1 = Integer.parseInt(pageNum);
+//		String pageNum1 = UriUtils.encodePath(pageNum, StandardCharsets.UTF_8);
+		String encodedPath1 = UriUtils.encodePath(sns_address1, StandardCharsets.UTF_8);
+		String encodedPath2 = UriUtils.encodePath(sns_address2, StandardCharsets.UTF_8);
+		
+		
+//		return redirectUrl;
+		return "redirect:/snslist?pageNum="+pageNum1+"&sns_address1="+encodedPath1+"&sns_address2="+encodedPath2;
 	}
 
 	// sns글 쓸때 자신의 데이터를 게시판 형태로 보기위한 서비스코드

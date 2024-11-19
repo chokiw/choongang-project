@@ -113,7 +113,7 @@ function getsearchfisrt() {
 			</c:if>
 
 			<!-- 전체 목록의 페이징 처리 -->
-			<c:if test="${empty keyword}">
+			<c:if test="${empty keyword && empty  sns_address1  && empty  sns_address2 }">
 				<c:if test="${pp.startPage > pp.pagePerBlk }">
 					<c:choose>
 						<c:when test="${best}">
@@ -145,6 +145,24 @@ function getsearchfisrt() {
 					</c:choose>
 				</c:if>
 			</c:if>
+
+			<!-- 지역별 페이징 처리 -->
+			<c:if test="${not empty sns_address1 && not empty sns_address2}">
+				<c:if test="${pp.startPage > pp.pagePerBlk }">
+					<li><a href="javascript:getAddressList(${pp.startPage - 1},'${sns_address1 }','${sns_address2 }')">이전</a></li>
+				</c:if>
+				<c:forEach var="i" begin="${pp.startPage}" end="${pp.endPage}">
+					<li <c:if test="${pp.currentPage==i}">class="active"</c:if>><a
+						href="javascript:getAddressList(${i},'${sns_address1 }'  ,  '${sns_address2 }')">${i}</a></li>
+				</c:forEach>
+				<c:if test="${pp.endPage < pp.totalPage}">
+					<li><a href="javascript:getAddressList(${pp.endPage + 1},'${sns_address1 }','${sns_address2 }')">다음</a></li>
+				</c:if>
+			</c:if>
+
+
+
+
 		</ul>
 
 		<select name="search"
