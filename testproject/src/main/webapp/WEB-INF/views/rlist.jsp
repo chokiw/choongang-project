@@ -22,7 +22,6 @@
     <script>
     $(function() {
 		$('.edit1').click(function() {	   // 수정 버튼 클릭
-			alert("수정버튼 클릭");
 			var id  = $(this).attr('id');  // rno
 			var txt = $.trim($('#td_'+id).text()); // replytext
 			$('#td_'+id).html("<textarea rows='3' cols='30' id='tt_"+id+"'>"+txt+"</textarea>");
@@ -74,16 +73,13 @@
 	function rep(rno) {		// rno = recruit_r_no
 			var user_id = $('.user_id').val();			// 세션id
 			var recruit_no = $('.recruit_no').val();	// 글번호		
-			alert("recruit_r_no : "+ rno);
 		if($('.txt_'+rno).val() == ''){
 			alert('댓글 입력후에 클릭하시오');
 			$('.txt_'+rno).focus();				
 			return false;
 		}else{
 			var recruit_r_content = $('.txt_'+rno).val();
-		}	
-		alert("content : " + recruit_r_content);
-		
+		}			
 		var reData = 'user_id='+user_id+'&recruit_no='+recruit_no+'&recruit_r_no='+rno+'&recruit_r_content='+recruit_r_content;
 		$.post('${path}/sInsert', reData, function(data) {
 			$('#rlist').html(data);

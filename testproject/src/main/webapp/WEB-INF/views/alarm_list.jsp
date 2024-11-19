@@ -62,7 +62,7 @@ function getlist(pageNum){
  				<c:forEach var="board" items="${list}">
  					<tr> 
  						<td>${no1}</td> 
- 						<td>${board.alarm_subject}</a></td>
+ 						<td><a href="alarm_detail?pageNum=${pageNum}&alarm_no=${board.alarm_no}">${board.alarm_subject}</a></td>
 						<td><fmt:formatDate value="${board.alarm_date}" 
  								pattern="yyyy-MM-dd HH:mm:ss" /></td> 
  						<td>${board.alarm_date_readcount}</td> 

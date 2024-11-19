@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.SessionAttribute;
 
 import com.example.demo.model.Alarm;
 import com.example.demo.model.Member;
+import com.example.demo.model.SnsBoard;
 import com.example.demo.model.SnsReplyBoard;
 import com.example.demo.service.KiwonService;
 import com.example.demo.service.MateReplyServiceImpl;
@@ -39,6 +40,8 @@ public class KiwonController {
 							 @SessionAttribute(name = "member", required = false) Member member,
 							 Alarm alarm,
 							 Model model) {
+		
+		System.out.println("alarm_list in");
 		
 		final int rowPerPage = 10;
 		if (pageNum == null || pageNum.equals("")) {
@@ -78,6 +81,32 @@ public class KiwonController {
 	}
 	
 
+	@RequestMapping("alarm_detail")
+	public String alarm_detail(@RequestParam(value = "pageNum") String pageNum,
+							   @RequestParam("alarm_no") int alarm_no,
+							   Model model) {
+		
+		System.out.println("alarm detail in");
+		System.out.println("pageNum : " + pageNum);
+		System.out.println("alarm_no : " + alarm_no);
+		
+		Alarm alarm = kservice.getDetail(alarm_no);
+		
+		System.out.println(alarm);
+		
+		model.addAttribute("alarm", alarm);
+		
+		
+		
+		
+		return "alarm_detail";
+	}
+
+	
+	
+	
+	
+	
 	
 	// sns댓글 목록
 	@RequestMapping("/srlist/num/{num}")
@@ -87,18 +116,24 @@ public class KiwonController {
 		System.out.println("sns reply list in");
 		System.out.println("sns no : " + num);
 		
-		SnsReplyBoard board = rbs.srgetDetail(num);
+		SnsBoard board = service.getboard(num);
 		
 		System.out.println("board : " + board);
 		
 		List<SnsReplyBoard> srlist = rbs.srlist(num);	// 댓글 목록			
 		
 		System.out.println("srlist : " + srlist);
-		
+	
 		model.addAttribute("srlist", srlist);
 		model.addAttribute("board", board);
 		return "/srlist";		// 웹브라우저에 출력되는 결과가 callback함수로 리턴된다.
 	}
+	
+	
+	
+	
+	
+	
 	
 	
 	// sns댓글 작성

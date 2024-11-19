@@ -17,14 +17,10 @@
     <script src="https://kit.fontawesome.com/5e485453d8.js" crossorigin="anonymous"></script>
    	<link href="/css/common.css" rel="stylesheet">
    	<link href="/css/sns_board.css" rel="stylesheet">
+    <link href="/css/mate_detail.css" rel="stylesheet">
     <script src="/js/sns_board.js"></script>
- 	<script type="text/javascript">
- 	$(document).ready(function(){
-
- 	    $("#alarm").load("/alarm_list");
-
- 	});
-</script>
+    <script src="http://code.jquery.com/jquery-latest.js"></script>    
+ 
     <title>Document</title>
 
 </head>
@@ -43,9 +39,18 @@
                 <span style="color: gray;">나의 참가 리스트입니다.</span>
             </div>
 			<br>
+			<div class="sns_writer">
+                <img src="${pageContext.request.contextPath}/uimg/${member.user_photo }" class="myimg">
+                <span
+                    style="font-size: 14px; font-weight: 600; font-family: 'Gothic A1', sans-serif; margin-top: 15px; margin-left: 10px;">${member.user_nickname}</span>
+            </div>
           
-
-            <div id="alarm"></div>
+            <hr><br><br>
+         	       
+			${alarm.alarm_content}<br><br>
+            
+			<a href="mate_detail?pageNum=${pageNum}&recruit_no=${alarm.recruit_no}">이곳을 누르면 참가신청한 글로 이동합니다.</a>
+            
 			
       
         </main>

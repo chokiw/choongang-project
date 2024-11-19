@@ -12,9 +12,13 @@
 			
 		select * from (select a.*, rowNum rn from (
    			select * from alarm order by alarm_no desc) a)
-    		where rn between #{startRow} and #{endRow}
-		
-		
+    		where rn between #{startRow} and #{endRow}	
 	</select>
+	
+	<select id="getDetail" parameterType="int" resultType="alarm">
+		select * from alarm where alarm_no = #{alarm_no}
+	</select>
+	
+	
 	
 </mapper>

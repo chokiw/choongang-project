@@ -31,6 +31,9 @@ public interface MateReplyDAO {
 	int getChild(MateReplyBoard reboard);
 
 	RecruitBoard rgetdetail(int num);
+	
+	
+	
 
 	SnsReplyBoard srgetDetail(int num);
 

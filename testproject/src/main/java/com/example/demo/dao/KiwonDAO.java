@@ -14,5 +14,7 @@ public interface KiwonDAO {
 
 	List<Alarm> alarmList(Alarm alarm);
 
+	Alarm getDetail(int alarm_no);
+
 
 }

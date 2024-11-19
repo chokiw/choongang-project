@@ -16,17 +16,19 @@ public class KiwonService {
 	@Autowired
 	private KiwonDAO dao;
 
-	
-
 	public int getTotal(Alarm alarm) {
 		return dao.getTotal(alarm);
 	}
 
-
-
 	public List<Alarm> alarmList(Alarm alarm) {
 		return dao.alarmList(alarm);
 	}
+
+	public Alarm getDetail(int alarm_no) {
+		return dao.getDetail(alarm_no);
+	}
+	
+	
 
 	
 	
