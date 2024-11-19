@@ -33,14 +33,10 @@ public class SJLController {
 	// 모집 글쓰기
 	@RequestMapping("/sns_writing")
 	public String sns_writing(SnsBoard board, Model model) {
-//		board.setRecruit_remainnum(board.getRecruit_recruitnum());
-//		board.setRecruit_del(0);
-//		board.setRecruit_readcount(0);
-//		int cnt = 0;
-//
-//		int result = service.setRecruitBoard(board);
-//
-//		model.addAttribute("result", result);
+
+		int result = service.updateSns(board);
+
+		model.addAttribute("result", result);
 		return "sns_writingresult";
 	}
 
@@ -162,7 +158,7 @@ public class SJLController {
 		Runner_data rd = new Runner_data();
 		rd.setUser_id(member.getUser_id());
 		rd.setRunner_data_distance(distance);
-		rd.setRunner_data_time(time);
+		rd.setRunner_data_time(Integer.toString(Integer.parseInt(distance)/100));
 
 		int result = service.setRunnerdata(rd);
 
@@ -176,7 +172,7 @@ public class SJLController {
 		Runner runner = new Runner();
 
 		runner.setUser_distance(Integer.parseInt(distance) + runner.getUser_distance());
-		runner.setUser_runtime(Integer.parseInt(time) + runner.getUser_runtime());
+		runner.setUser_runtime(Integer.parseInt(rd.getRunner_data_time()) + runner.getUser_runtime());
 		runner.setUser_id(member.getUser_id());
 		// 뛴거리와 시간 업데이트
 		service.updateRunnerdata(runner);

@@ -70,6 +70,10 @@ public class SJLService {
 	public void updateRunnerdata(Runner runner) {
 		dao.updateRunnerdata(runner);
 	}
+
+	public int updateSns(SnsBoard board) {
+		return dao.updateSns(board);
+	}
 	
 	
 }

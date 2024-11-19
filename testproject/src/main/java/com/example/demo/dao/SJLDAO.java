@@ -38,4 +38,6 @@ public interface SJLDAO {
 	void setCoordinate(Coordinate coord);
 
 	void updateRunnerdata(Runner runner);
+
+	int updateSns(SnsBoard board);
 }

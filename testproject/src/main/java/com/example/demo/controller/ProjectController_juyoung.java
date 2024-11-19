@@ -70,7 +70,7 @@ public class ProjectController_juyoung {
 		int sns_no = sns.getSns_no();
 		SnsBoard board = service.getboard(sns_no);
 		
-	
+		System.out.println(board.getRunner_data_no());
 		int update = service.updateboard(sns);
 		
 		model.addAttribute("sns_no",sns_no);
@@ -85,6 +85,7 @@ public class ProjectController_juyoung {
 		
 		int sns_no = sns.getSns_no();
 		SnsBoard board = service.getboard(sns_no);
+		
 		
 		int delete = service.deleteboard(sns);
 		

@@ -25,7 +25,7 @@
 	
 	<!-- 트랙 게시판 수정 -->
 	<update id="updateboard" parameterType="sns">
-		update sns set sns_subject = #{sns_subject}, sns_address1= #{sns_address1}, sns_address2 = #{sns_address2}, sns_content = #{sns_content} where sns_no = #{sns_no}
+		update sns set runner_data_no=#{runner_data_no}, sns_address1= #{sns_address1}, sns_address2 = #{sns_address2}, sns_subject = #{sns_subject},sns_content = #{sns_content} where sns_no = #{sns_no}
 	</update>
 	
 	<!-- 트랙 게시판 삭제 -->

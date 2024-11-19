@@ -28,7 +28,14 @@
 		let coord;
 		let distanse;
 		let time;
-		
+		let dots=[];
+		let marker;
+		var path;
+		var distance;
+		var content;
+		var clickLine // 마우스로 클릭한 좌표로 그려질 선 객체입니다
+		var distanceOverlay; // 선의 거리정보를 표시할 커스텀오버레이 입니다
+		var rdn;
 		function openPopup(url) { 
 			// 화면 크기 가져오기
 			var screenWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
@@ -50,9 +57,14 @@
 				',top=' + top +
 				',scrollbars=yes,resizable=yes');
 		}
+		
+		function setRDN(data){
+			$("#runner_data_no").val(data);
+		}
+		
 		function setNo(runner_data_no) {
 			var data = "runner_data_no=" + runner_data_no;
-
+			$("#runner_data_no").val(runner_data_no);
 			$.post('${path}/getMyData', data, function(data) {
 				$("#defaultImg").hide();
 				$("#map").show();
@@ -67,21 +79,27 @@
 				const distance_html = document.getElementById("distance");
 				const time_html = document.getElementById("time");
 				const phase_html = document.getElementById("phase");
-				distance_html.innerText = distanse + "km";
+				distance_html.innerText = distanse + "m";
 				time_html.innerText = time_h + "분" + time_s + "초";
 				phase_html.innerText = phase_h + "'" + phase_s + '"';
+				
+				//마커 지우기
+				marker.setMap(null);
+				// 지도 위에 선이 표시되고 있다면 지도에서 제거합니다
+				deleteClickLine();
 
-				var path;
-				var distance;
-				var content;
-				var clickLine // 마우스로 클릭한 좌표로 그려질 선 객체입니다
-				var distanceOverlay; // 선의 거리정보를 표시할 커스텀오버레이 입니다
+				// 지도 위에 커스텀오버레이가 표시되고 있다면 지도에서 제거합니다
+				deleteDistnce();
+				//지도위에 점 거리 정보 지우기
+				deleteCircleDot();
+
+				
 				let cnt = 0;
 
 				//첫번째좌표생성
 				var coords = new kakao.maps.LatLng(coord[0], coord[1]);
 				// 시작점마커를 생성합니다
-				var marker = new kakao.maps.Marker({
+				marker = new kakao.maps.Marker({
 					position: coords
 				});
 
@@ -100,6 +118,7 @@
 					strokeStyle: 'solid' // 선의 스타일입니다
 				});
 				displayCircleDot(coords, 0);
+				
 				cnt++;
 				let i;
 				for (i = 2; i < coord.length; i += 2) {
@@ -143,9 +162,44 @@
 						// 지도에 표시합니다
 						distanceOverlay.setMap(map);
 					};
+					// 배열에 추가합니다
+					dots.push({
+						circle : circleOverlay,
+						distance : distanceOverlay
+					});
 
 				}
+			
 			});
+		}
+		// 클릭으로 그려진 선을 지도에서 제거하는 함수입니다
+		function deleteClickLine() {
+			if (clickLine) {
+				clickLine.setMap(null);
+				clickLine = null;
+			}
+		}
+		
+		function deleteDistnce() {
+			if (distanceOverlay) {
+				distanceOverlay.setMap(null);
+				distanceOverlay = null;
+			}
+		}
+		function deleteCircleDot() {
+			var i;
+
+			for (i = 0; i < dots.length; i++) {
+				if (dots[i].circle) {
+					dots[i].circle.setMap(null);
+				}
+
+				if (dots[i].distance) {
+					dots[i].distance.setMap(null);
+				}
+			}
+
+			dots = [];
 		}
 
 	</script>
@@ -167,7 +221,8 @@
        		<span style="font-size: 36px; font-weight: 700;">트랙 게시판</span><br><br>
        		<form method="post" action="snsupdate" onsubmit="return check()">
        		<input type="hidden" name="pageNum"  value="${pageNum }">
-			<input type="hidden"  name="sns_no"  value=${board.sns_no }> 
+       		<input type="hidden" name="runner_data_no" id="runner_data_no">
+			<input type="hidden"  name="sns_no"  value=${board.sns_no }>
             	<div class="sns_title">
             		<span style="font-size: 24px; font-weight: 600;">제목</span>&nbsp;&nbsp;
                 	<input type="text" style="font-size: 20px; font-weight: 500; width: 60%;" maxlength="50" placeholder="제목을 입력하세요"  id="sns_subject" name="sns_subject" value="${board.sns_subject}">  
@@ -244,10 +299,10 @@
 		
 					//좌표생성
 					var coords = new kakao.maps.LatLng(${c[0].lat}, ${c[0].lng});
-					// 마커를 생성합니다
-					var marker = new kakao.maps.Marker({
-		    						position: coords
-								 });
+					// 시작점마커를 생성합니다
+					marker = new kakao.maps.Marker({
+						position: coords
+					});
 
 					// 마커가 지도 위에 표시되도록 설정합니다
 					marker.setMap(map);
@@ -307,8 +362,11 @@
 							// 지도에 표시합니다
 							distanceOverlay.setMap(map);
 						};
-	
-	
+						// 배열에 추가합니다
+						dots.push({
+							circle : circleOverlay,
+							distance : distanceOverlay
+						});
 					}
 				</script>
 		 	
