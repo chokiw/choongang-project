@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import com.example.demo.model.RecruitBoard;
 import com.example.demo.model.SnsBoard;
 import com.example.demo.model.Totalpage;
 
@@ -21,4 +22,8 @@ public interface UserPostDAO {
 	Totalpage[] getSnsboard(String userId);
 
 	Totalpage[] getMateboard(String userId);
+
+	SnsBoard getSns(int sns_no);
+
+	RecruitBoard getRecruit(int recruit_no);
 }

@@ -1,6 +1,8 @@
 package com.example.demo.controller;
 
+import java.sql.Date;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.springframework.stereotype.Controller;
@@ -44,29 +46,52 @@ public class UserPostController {
         
         Totalpage[] tp2 = userPostService.getMateboard(userId);
         
-        List<Totalpage> tp = new ArrayList<Totalpage>();
+        List<Totalpage> totalpage = new ArrayList<Totalpage>();
         
         for(Totalpage p1 : tp1) {
-        	tp.add(p1);
+        	totalpage.add(p1);
         }
         
         for(Totalpage p2 : tp2) {
-        	tp.add(p2);
+        	totalpage.add(p2);
         }
+        
+        Collections.sort(totalpage,(Totalpage a,Totalpage b)->{
+        	int result =1;
+        	Date aDate,bDate;
+        	if(a.getRecruit_no()==0) aDate=a.getSns_date();
+        	else aDate=a.getRecruit_date();
+        	
+        	if(b.getRecruit_no()==0) bDate=b.getSns_date();
+        	else bDate=b.getRecruit_date();
+        	
+        	if(aDate.compareTo(bDate)>0) result= -1;
+        	
+        	return result;
+        });
+        
+        
 
         final int rowPerPage = 10;
         int currentPage = Integer.parseInt(pageNum);
 
         // 사용자의 총 게시글 수
-        int total = userPostService.getTotalByUserId(userId);
-        int startRow = (currentPage - 1) * rowPerPage + 1;
+        int total = totalpage.size();        
+        int startRow = (currentPage - 1) * rowPerPage+1;
         int endRow = startRow + rowPerPage - 1;
 
         // 페이징 객체 생성
         PagingPgm pp = new PagingPgm(total, rowPerPage, currentPage);
 
         // 사용자 게시글 목록 가져오기
-        List<SnsBoard> list = userPostService.listByUserId(userId, startRow, endRow);
+        List list = new ArrayList();
+        
+        for(int i=0;i<rowPerPage;i++) {
+        	if(totalpage.get(startRow-1).getRecruit_no()==0) list.add(userPostService.getSns(totalpage.get(startRow-1).getSns_no()));
+        	else list.add(userPostService.getRecruit(totalpage.get(startRow-1).getRecruit_no()));
+        }
+        
+        
         int no = total - startRow + 1;
 
         // 모델에 데이터 추가
