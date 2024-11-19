@@ -33,8 +33,8 @@ public class SJLController {
 	// 모집 글쓰기
 	@RequestMapping("/sns_writing")
 	public String sns_writing(SnsBoard board, Model model) {
-
-		int result = service.updateSns(board);
+		
+		int result = service.insertSns(board);
 
 		model.addAttribute("result", result);
 		return "sns_writingresult";

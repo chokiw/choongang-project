@@ -83,9 +83,9 @@
 		user_distance=#{user_distance}, user_runtime=#{user_runtime} where
 		user_id=#{user_id}
 	</update>
-	<update id="updateSns" parameterType="sns">
-		update sns set runner_data_no=#{runner_data_no},sns_address1=#{sns_address1},sns_address2=#{sns_address2},
-					   sns_subject=#{sns_subject},sns_content=#{sns_content}
-					   where user_id=#{user_id}
-	</update>
+	<insert id="insertSns">
+		insert into sns values(sns_no_seq.nextval,#{runner_data_no},#{user_id},
+								#{sns_address1},#{sns_address2},#{sns_subject},
+								#{sns_content},sysdate,#{sns_proofshot},0,0,0)
+	</insert>
 </mapper>

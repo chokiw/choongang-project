@@ -71,8 +71,8 @@ public class SJLService {
 		dao.updateRunnerdata(runner);
 	}
 
-	public int updateSns(SnsBoard board) {
-		return dao.updateSns(board);
+	public int insertSns(SnsBoard board) {
+		return dao.insertSns(board);
 	}
 	
 	

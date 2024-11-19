@@ -39,5 +39,6 @@ public interface SJLDAO {
 
 	void updateRunnerdata(Runner runner);
 
-	int updateSns(SnsBoard board);
+	int insertSns(SnsBoard board);
+
 }
