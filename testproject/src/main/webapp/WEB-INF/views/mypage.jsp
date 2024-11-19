@@ -95,7 +95,21 @@
 
 				<div align="center">
 					<span class="content1">평균 페이스</span><br> <br> <span
-						class="content2">4'43"/KM</span>
+						class="content2">
+						<c:choose> 
+							<c:when test="${runner.user_distance==0}">
+								00'00"
+							</c:when> 
+							<c:when test="${runner.user_runtime==0}">
+								00'00"
+							</c:when> 
+							<c:otherwise>
+								<fmt:formatNumber type="number" maxFractionDigits="0" value="${runner.user_runtime*1000/runner.user_distance/60}"/>'
+                     			<fmt:formatNumber type="number" maxFractionDigits="0" value="${runner.user_runtime*1000/runner.user_distance%60}"/>"
+							</c:otherwise> 
+						</c:choose> 
+						
+						</span>
 					<!-- 평균 페이스 단위 수정 -->
 				</div>
 			</div>
