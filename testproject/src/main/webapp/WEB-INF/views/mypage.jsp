@@ -63,7 +63,7 @@
 
 					<!-- 알람 아이콘 -->
 					<div class="alert">
-						<a href="asd" class="bell"><span class="material-symbols-outlined" style="width:22px; height:22px">notifications</span></a>
+						<a href="asd" class="bell" ><span class="material-symbols-outlined large-icon" >notifications</span></a>
 
 						<!-- 알람확인표시 -->
 						<c:forEach var="alarm" items="${dbalarm}">

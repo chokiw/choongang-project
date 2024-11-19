@@ -32,4 +32,11 @@
     <select id="getMateboard" parameterType="String" resultType="totalpage">
     	select recruit_no,recruit_subject,recruit_date,recruit_readcount from recruit where user_id= #{user_id}
     </select>
+    
+    <select id="getSns" parameterType="int" resultType="sns">
+    	select * from sns where sns_no=#{sns_no}
+    </select>
+    <select id="getRecruit" parameterType="int" resultType="sns">
+    	select * from recruit where recruit_no=#{recruit_no}
+    </select>
 </mapper>

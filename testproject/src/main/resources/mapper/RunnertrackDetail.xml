@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.demo.dao.RunnertrackDetailDAO">
+	<select id="getRunnerData" parameterType="int" resultType="runner_data">
+		select * from runner_data where runner_data_no = #{runner_data_no}
+	</select>
+	<select id="getCoordData" parameterType="int" resultType="coordinate">
+		select * from coordinate where runner_data_no = #{runner_data_no} order by coordinate_no
+	</select>
+</mapper>

@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.dao.UserPostDAO;
+import com.example.demo.model.RecruitBoard;
 import com.example.demo.model.SnsBoard;
 import com.example.demo.model.Totalpage;
 
@@ -31,5 +32,13 @@ public class UserPostService {
 
 	public Totalpage[] getMateboard(String userId) {
 		return userPostDAO.getMateboard(userId);
+	}
+
+	public SnsBoard getSns(int sns_no) {
+		return userPostDAO.getSns(sns_no);
+	}
+
+	public RecruitBoard getRecruit(int recruit_no) {
+		return userPostDAO.getRecruit(recruit_no);
 	}
 }

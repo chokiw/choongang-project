@@ -40,41 +40,9 @@
         <main class="content">	
 			<div class="track">
                 <span style="font-size: 36px; font-weight: 700;">내가 쓴글 게시판</span><br><br>
-                <span style="color: gray;">내가 썼던 글 게시판</span>
+                <span style="color: gray;">내가 썼던 글을 한눈에 볼 수 있습니다.</span>
             </div>
-            <div class="locationbox">
-                <select>
-                    <option value="서울시">서울시</option>
-                </select>
-                <select>
-                    <option value="">지역선택</option>
-                    <option value="강남구">강남구</option>
-                    <option value="강남구">강동구</option>
-                    <option value="강남구">강북구</option>
-                    <option value="강남구">강서구</option>
-                    <option value="강남구">관악구</option>
-                    <option value="강남구">광진구</option>
-                    <option value="강남구">구로구</option>
-                    <option value="강남구">금천구</option>
-                    <option value="강남구">노원구</option>
-                    <option value="강남구">도봉구</option>
-                    <option value="강남구">동대문구</option>
-                    <option value="강남구">동작구</option>
-                    <option value="강남구">마포구</option>
-                    <option value="강남구">서대문구</option>
-                    <option value="강남구">서초구</option>
-                    <option value="강남구">성동구</option>
-                    <option value="강남구">성북구</option>
-                    <option value="강남구">송파구</option>
-                    <option value="강남구">양천구</option>
-                    <option value="강남구">영등포구</option>
-                    <option value="강남구">용산구</option>
-                    <option value="강남구">은평구</option>
-                    <option value="강남구">종로구</option>
-                    <option value="강남구">중구</option>
-                    <option value="강남구">중랑구</option>
-                </select>
-            </div>
+            
 
             <div id="board"></div>
 			

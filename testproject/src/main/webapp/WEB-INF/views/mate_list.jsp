@@ -121,6 +121,22 @@ function getsearchfisrt() {
 					<li><a href="javascript:getlist(${pp.endPage + 1})">다음</a></li>
 				</c:if>
 			</c:if>
+			
+			
+			<!-- 지역별 페이징 처리 -->
+			<c:if test="${not empty recruit_address1 && not empty recruit_address2}">
+				<c:if test="${pp.startPage > pp.pagePerBlk }">
+					<li><a href="javascript:getAddressList(${pp.startPage - 1},'${recruit_address1 }','${recruit_address2 }')">이전</a></li>
+				</c:if>
+				<c:forEach var="i" begin="${pp.startPage}" end="${pp.endPage}">
+					<li <c:if test="${pp.currentPage==i}">class="active"</c:if>><a
+						href="javascript:getAddressList(${i},'${recruit_address1 }'  ,  '${recruit_address2 }')">${i}</a></li>
+				</c:forEach>
+				<c:if test="${pp.endPage < pp.totalPage}">
+					<li><a href="javascript:getAddressList(${pp.endPage + 1},'${recruit_address1 }','${recruit_address2 }')">다음</a></li>
+				</c:if>
+			</c:if>
+			
 		</ul>
 
 		<select name="search"

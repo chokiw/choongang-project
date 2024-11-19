@@ -9,6 +9,7 @@ import lombok.Data;
 @Data
 @Alias("totalpage")
 public class Totalpage {
+	private String user_id;
 	private int recruit_no;
 	private String recruit_subject;
 	private Date recruit_date;

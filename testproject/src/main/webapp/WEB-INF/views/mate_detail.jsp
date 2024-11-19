@@ -271,7 +271,7 @@ $(function() {
         
         
         
-                <a class="delete" href="#"><i class="fa-solid fa-table-list"></i>&nbsp;글목록</a>
+                <a class="delete" href="javascript:history.back();"><i class="fa-solid fa-table-list"></i>&nbsp;글목록</a>
             </div>
             
             

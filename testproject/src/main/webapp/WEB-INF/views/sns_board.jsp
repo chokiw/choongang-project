@@ -46,14 +46,42 @@
 		$('#board').load(uri);
 	} 
 	
-	// 인기글 누를때 지역 select 초기화
-	function resetSelectValues() {
-	    $('#sns_address1').val(''); // 광역시 선택을 초기화
-	    $('#sns_address2').val(''); // 지역 선택을 초기화
-	}
+
 	
 	// 지역별로 글 리스트 이동
 	$(function() {
+		
+		// 광역시 선택일때 지역을 선택 못하게 하고 서울시를 선택하면 지역을 선택할 수 있게 한다.
+		 $('#sns_address1').change(function() {
+	            var city = $(this).val();
+	            var $district = $('#sns_address2');
+	            
+	            $district.empty().append('<option value="">지역선택</option>');
+	            
+	            if (city === "서울시") {
+	                var seoulDistricts = ["강남구", "강동구", "강북구", "강서구", "관악구", "광진구", "구로구", "금천구", "노원구", "도봉구", "동대문구", "동작구", "마포구", "서대문구", "서초구", "성동구", "성북구", "송파구", "양천구", "영등포구", "용산구", "은평구", "종로구", "중구", "중랑구"];
+	                seoulDistricts.forEach(function(district) {
+	                    $district.append('<option value="' + district + '">' + district + '</option>');
+	                });
+	                $district.prop('disabled', false);
+	            } else {
+	                $district.prop('disabled', true);
+	            }
+	        });
+		 
+		 
+		 // 인기글 누를때 지역 select 초기화 함수 수정
+	        window.resetSelectValues = function() {
+	            $('#sns_address1').val('');
+	            $('#sns_address2').empty().append('<option value="">지역선택</option>').prop('disabled', true);
+	        }
+		 
+	        // 페이지 로드 시 초기 상태 설정
+	        $('#sns_address2').prop('disabled', true);
+		
+		
+		
+		
 	    $('form').on('submit', function(e) {
 	        e.preventDefault();
 	        var formData = $(this).serialize();
@@ -111,7 +139,7 @@
                     <option value="">광역시선택</option> 
                     <option value="서울시">서울시</option>
                 </select>
-                <select id="sns_address2"  name="sns_address2">
+                <select id="sns_address2"  name="sns_address2"  disabled>
                     <option value="">지역선택</option>
                     <option value="강남구">강남구</option>
                     <option value="강동구" >강동구</option>

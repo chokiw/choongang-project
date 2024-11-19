@@ -19,25 +19,6 @@
     <script src="http://code.jquery.com/jquery-latest.js"></script>
     
     <title>RUNAWAY</title>
-    
-<script>
-	$(function() {
-    	$('#srlist').load('/srlist/num/${board.sns_no}')    	
-    	$('#repInsert').click(function() {
-    		if (!frm.sns_r_content.value) {
-    			alert('댓글 입력후에 클릭하시오');
-    			frm.sns_r_content.focus();
-    			return false;
-    		}
-    		var frmData = $('form').serialize();
-    		
-    		$.post('${path}/srInsert', frmData, function(data) {
-    			$('#srlist').html(data);
-    			frm.sns_r_content.value = '';
-    		});
-	});
-});
-    </script>
 </head>
 
 <body>
@@ -49,30 +30,13 @@
         <jsp:include page="side.jsp"></jsp:include>
         
         <main class="content">
-            <span style="font-size: 36px; font-weight: 700;">트랙 게시판</span><br><br>
+            <span style="font-size: 36px; font-weight: 700;">내 달린 트랙</span><br><br>
 
             <div class="sns_title">
-                <span style="font-size: 30px; font-weight: 600;">${board.sns_subject}</span>&nbsp;&nbsp;
-                <!-- select로 설정한 지역 -->
-                <span style="font-family: 'Gothic A1', sans-serif; color: #747474;">${board.sns_address1} ${board.sns_address2}</span>
+            	<span style="font-size: 30px; font-weight: 600;">
+                <fmt:formatDate value="${rd.runner_data_date}" pattern="yyyy-MM-dd HH:mm:ss" /></span>
             </div>
 
-            <div class="sns_writer">
-            	<!-- 이미지를 클릭 했을 때 userpage로 이동 -->
-            	<a href="${pageContext.request.contextPath}/userpage?user_id=${board.user_id}">
-                <img src="${pageContext.request.contextPath}/uimg/${userphoto}" class="myimg">
-                </a>
-                <!-- 텍스트를 클릭 했을 때 userpage로 이동 -->
-                <a href="${pageContext.request.contextPath}/userpage?user_id=${board.user_id}">
-                <span style="font-size: 14px; font-weight: 600; font-family: 'Gothic A1', sans-serif; margin-top: 15px; margin-left: 10px;">${nickname}</span>
-                </a>
-            </div>
-
-            <div class="date_read">
-                <span style="font-size: 14px; font-family: 'Gothic A1', sans-serif;"><fmt:formatDate value="${board.sns_date}" pattern="yyyy-MM-dd HH:mm:ss" /></span>
-                <span style="font-size: 14px; font-family: 'Gothic A1', sans-serif; float: right; font-weight: 600;">조회수
-                    : ${board.sns_readcount}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;추천수 : ${board.sns_good}</span>
-            </div>
             <hr><br><br>
             
             <div class="maincontent">
@@ -82,7 +46,7 @@
 						   			   mapOption = {
     								   		center : new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
 											// 지도의 확대 레벨
-											level: 3
+											level: 4
 										};
 
 					var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
@@ -195,108 +159,7 @@
            </div>
           </div>
 
-            <div style="margin-top: 20px; height: auto;">
-                <span style="font-size: 24px; font-family: 'Gothic A1', sans-serif;">${board.sns_content}</span>
-            </div>
-
-<!-- 추천 버튼 -->
-<div class="recomend_box">
-    <a href="#" class="recomend" onclick="toggleLike(event, ${board.sns_no})">
-        <br>
-        <c:choose>
-            <c:when test="${fn:length(goodList) > 0}">
-                <c:forEach var="good" items="${goodList}">
-                    <c:if test="${good.sns_no == board.sns_no && sessionScope.member.user_id == good.user_id}">
-                        <!-- 추천된 상태 -->
-                        <i class="fa-solid fa-fire" style="font-size: 32px; color: #ff0000;"></i>
-                    </c:if>
-                </c:forEach>
-            </c:when>
-            <c:otherwise>
-                <i class="fa-solid fa-fire" style="font-size: 32px; color: #333333;"></i>
-            </c:otherwise>
-        </c:choose>
-        <br>
-        <span class="run">RUN</span>
-    </a>
-</div>
-
-            
-<script>
-function toggleLike(event, sns_no) {
-    event.preventDefault(); // 이 줄을 활성화하여 새로고침 방지
-
-    fetch('/good/toggleGood?sns_no=' + sns_no, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/x-www-form-urlencoded'
-        }
-    }).then(response => response.json())
-      .then(data => {
-          console.log("좋아요 토글 결과:", data);
-          location.reload(); // 새로고침
-      })
-      .catch(error => {
-          console.error("오류 발생:", error);
-      });
-}
-
-</script>
-
-        
-
-             <!-- 수정, 삭제 글목록 -->
-            <!-- 로그인 아이디와 글쓴이가 다를때 수정, 삭제가 안보이게함 -->
-             <div class="action-buttons">
-                 <c:choose>
-            <c:when test="${member.user_id eq board.user_id}">
-                <a class="delete" href="sns_update?pageNum=${pageNum}&sns_no=${board.sns_no}" style="display: inline-block;">
-                    <i class="fa-solid fa-file-pen"></i>&nbsp;수정
-                </a>
-                
-                <!-- 삭제버튼 누르면 바로 삭제 완료 alet뜨게함 -->
-                <form method="post" action="snsdelete">
-                	<input type="hidden" name="pageNum"  value="${pageNum}">
-					<input type="hidden"  name="sns_no"  value=${board.sns_no }>                
-               		<button type="submit" class="delete button-style"><i class="fa-regular fa-trash-can"></i>&nbsp;삭제 </button>
-                </form>
-                
-            </c:when>
-            
-            <c:otherwise>
-                <a class="delete" href="sns_update?pageNum=${pageNum}&sns_no=${board.sns_no}" style="display: none;">
-                    <i class="fa-solid fa-file-pen"></i>&nbsp;수정
-                </a>
-                
-                <a class="delete" href="snsdelete" style="display: none;">
-                <i class="fa-regular fa-trash-can"></i>&nbsp;삭제
-                </a>
-            </c:otherwise>
-        </c:choose>
-        
-        
-        
-               
-                <a class="delete" href="javascript:history.back();"><i class="fa-solid fa-table-list"></i>&nbsp;글목록</a>
-            </div>
-            
-            
-            
-            
-                 
-            <!-- 댓글 입력 -->
-		<form name="frm" id="frm">
-			<input type="hidden" name=user_id value="${member.user_id}">
-			<input type="hidden" name="sns_no" value="${no }"> 댓글 :
-			<textarea rows="3" cols="50" name="sns_r_content"></textarea>
-			<input type="button" value="확인" id="repInsert">
-		</form>
-            
-  
-             <div id="srlist"></div>
         </main>
-        
-
     </div>
 
 </body>

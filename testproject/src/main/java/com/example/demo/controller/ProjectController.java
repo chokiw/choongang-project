@@ -324,7 +324,7 @@ public class ProjectController {
 	
 
 	@RequestMapping("/sns_detail")
-	public String sns_detail(@RequestParam(value = "pageNum") String pageNum,
+	public String sns_detail(@RequestParam(value = "pageNum", defaultValue = "1") String pageNum,
 	                         @RequestParam(value = "sns_no") String sns_no, 
 	                         Model model, HttpSession session) {
 	    // 글 정보 불러오기
