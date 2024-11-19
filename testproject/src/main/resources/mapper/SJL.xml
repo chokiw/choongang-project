@@ -68,4 +68,24 @@
 		insert into recruit_c values(recruit_c_no_seq.nextval,RECRUIT_NO_SEQ.currval,#{lat},#{lng})
 	</insert>
 	
+	<insert id="setRunnerdata" parameterType="runner_data">
+		insert into
+		runner_data values(runner_data_no_seq.nextval,#{user_id},
+		#{runner_data_distance},#{runner_data_time},
+		sysdate,0)
+	</insert>
+	<insert id="setCoordinate" parameterType="coordinate">
+		insert into coordinate
+		values(coordinate_no_seq.nextval,runner_data_no_seq.currval,#{lat},#{lng})
+	</insert>
+	<update id="updateRunnerdata" parameterType="runner">
+		update runner set
+		user_distance=#{user_distance}, user_runtime=#{user_runtime} where
+		user_id=#{user_id}
+	</update>
+	<insert id="insertSns">
+		insert into sns values(sns_no_seq.nextval,#{runner_data_no},#{user_id},
+								#{sns_address1},#{sns_address2},#{sns_subject},
+								#{sns_content},sysdate,#{sns_proofshot},0,0,0)
+	</insert>
 </mapper>

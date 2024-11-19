@@ -74,13 +74,12 @@ $(document).ready(function(){
 			t_path.push(Lat);
 			t_path.push(Lng);		
 		
-			console.log(t_path);
-			console.log(distance);
-			console.log(time);
 			var data="path="+t_path+"&distance="+distance+"&time="+time;
 			
 			$.post('${pageContext.request.contextPath}/runnerdata',
-					data,function(){});
+					data,function(res){
+					location.href="runnerdataresult?result="+res;
+			});
 		}
 	});
 });

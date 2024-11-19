@@ -67,13 +67,9 @@ public class ProjectController_juyoung {
 	@RequestMapping("/snsupdate")
 	public String snsupdate(@RequestParam(value = "pageNum")  String pageNum,   Model model, SnsBoard sns) {
 		
-		int sns_no = sns.getSns_no();
-		SnsBoard board = service.getboard(sns_no);
-		
-	
 		int update = service.updateboard(sns);
 		
-		model.addAttribute("sns_no",sns_no);
+		model.addAttribute("sns_no",sns.getSns_no());
 		model.addAttribute("update",update);
 		model.addAttribute("pageNum", pageNum);
 		return "snsupdateresult";
@@ -85,6 +81,7 @@ public class ProjectController_juyoung {
 		
 		int sns_no = sns.getSns_no();
 		SnsBoard board = service.getboard(sns_no);
+		
 		
 		int delete = service.deleteboard(sns);
 		

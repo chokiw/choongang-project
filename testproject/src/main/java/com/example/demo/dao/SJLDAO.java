@@ -32,5 +32,13 @@ public interface SJLDAO {
 	int setRecruitBoard(RecruitBoard board);
 
 	void setRecruitC(Recruit_c recruit_c);
+	
+	int setRunnerdata(Runner_data rd);
+
+	void setCoordinate(Coordinate coord);
+
+	void updateRunnerdata(Runner runner);
+
+	int insertSns(SnsBoard board);
 
 }

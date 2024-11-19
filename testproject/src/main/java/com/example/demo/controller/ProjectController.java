@@ -211,20 +211,7 @@ public class ProjectController {
 
 		}
 	}
-	//test용 서비스 ->지워도됌 최종때는 반드시 지워야함
-	@RequestMapping("/runnerdata")
-	public String runnerdata(@RequestParam(value = "path") String[] path,
-			@RequestParam(value = "distance") String distance, @RequestParam(value = "time") String time) {
-		System.out.println("runnerdata");
-		for (String s : path) {
-			System.out.println(s);
-		}
-
-		System.out.println(distance);
-		System.out.println(time);
-
-		return "mypage";
-	}
+	
 	
 	
 	//로그인 서비스

@@ -5,18 +5,18 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>글쓰기 결과</title>
 </head>
 <body>
 	<c:if test="${result==1}">
 		<script>
-			alert("모집 글쓰기 성공");
-			location.href="mate_board";
+			alert("글쓰기에 성공했습니다");
+			location.href="sns_board";
 		</script>
 	</c:if>
 	<c:if test="${result!=1}">
 		<script>
-			alert("모집 글쓰기 실패");
+			alert("글쓰기 실패");
 			history.go(-1);
 		</script>
 	</c:if>

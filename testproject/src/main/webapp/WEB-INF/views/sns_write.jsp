@@ -52,7 +52,7 @@
 		}
 		function setNo(runner_data_no) {
 			var data = "runner_data_no=" + runner_data_no;
-
+			$("#runner_data_no").val(runner_data_no);
 			$.post('${path}/getMyData', data, function(data) {
 				$("#defaultImg").hide();
 				$("#map").show();
@@ -186,7 +186,10 @@
         
         <main class="content">
        		<span style="font-size: 36px; font-weight: 700;">트랙 게시판</span><br><br>
-       		<form method="post" action="snswrite" onsubmit="return check()">
+       		<form method="post" action="/sns_writing" onsubmit="return check()">
+       		<input type="hidden" name="runner_data_no" id="runner_data_no">
+       		<input type="hidden" name="sns_proofshot" id="sns_proofshot" value="photo">
+       		<input type="hidden" name="user_id" id="user_id" value="${member.user_id}">
             	<div class="sns_title">
             		<span style="font-size: 24px; font-weight: 600;">제목</span>&nbsp;&nbsp;
                 	<input type="text" style="font-size: 20px; font-weight: 500; width: 60%;" maxlength="50" placeholder="제목을 입력하세요"  id="sns_subject" name="sns_subject">  

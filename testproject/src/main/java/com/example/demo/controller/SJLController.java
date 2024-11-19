@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
 import com.example.demo.model.Coordinate;
 import com.example.demo.model.Member;
@@ -20,6 +21,7 @@ import com.example.demo.model.SnsBoard;
 import com.example.demo.service.PagingPgm;
 import com.example.demo.service.SJLService;
 
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 
 @Controller
@@ -27,6 +29,16 @@ import lombok.RequiredArgsConstructor;
 @CrossOrigin(origins = "*")
 public class SJLController {
 	private final SJLService service;
+
+	// 모집 글쓰기
+	@RequestMapping("/sns_writing")
+	public String sns_writing(SnsBoard board, Model model) {
+		
+		int result = service.insertSns(board);
+
+		model.addAttribute("result", result);
+		return "sns_writingresult";
+	}
 
 	@RequestMapping("/getMyData")
 	@ResponseBody
@@ -95,9 +107,9 @@ public class SJLController {
 		RecruitBoard board = service.getrecruitD(Integer.parseInt(recruit_no));
 		// 맵에 경로 표현을 위한 테이터 불러오기
 		Recruit_c[] rc = service.getrecruitC(board.getRecruit_no());
-		//글쓴이 정보 불러오기
+		// 글쓴이 정보 불러오기
 		Runner r = service.getMember_SJL(board.getUser_id());
-		
+
 		model.addAttribute("r", r);
 		model.addAttribute("rc", rc);
 		model.addAttribute("pageNum", pageNum);
@@ -105,35 +117,72 @@ public class SJLController {
 
 		return "mate_detail";
 	}
-	
+
 	// 모집 글쓰기
 	@RequestMapping("/mate_write")
 	public String mate_write() {
-		
+
 		return "mate_write";
 	}
-	
+
 	// 모집 글쓰기
 	@RequestMapping("/mate_writing")
-	public String mate_writing(@RequestParam(value="coords") String[] coords,RecruitBoard board,Model model) {
+	public String mate_writing(@RequestParam(value = "coords") String[] coords, RecruitBoard board, Model model) {
 		board.setRecruit_remainnum(board.getRecruit_recruitnum());
 		board.setRecruit_del(0);
 		board.setRecruit_readcount(0);
-		Recruit_c[] rc = new Recruit_c[coords.length/2];
-		int cnt=0;
-		
-		int result=service.setRecruitBoard(board);
-		
-		for(int i=0; i<coords.length;i+=2) {
+		Recruit_c[] rc = new Recruit_c[coords.length / 2];
+		int cnt = 0;
+
+		int result = service.setRecruitBoard(board);
+
+		for (int i = 0; i < coords.length; i += 2) {
 			rc[cnt] = new Recruit_c();
 			rc[cnt].setLat(coords[i]);
-			rc[cnt].setLng(coords[i+1]);
+			rc[cnt].setLng(coords[i + 1]);
 			service.setRecruitC(rc[cnt]);
 			cnt++;
 		}
-		
-		model.addAttribute("result",result);
+
+		model.addAttribute("result", result);
 		return "mate_writingresult";
+	}
+
+	// 기록측정
+	@RequestMapping("/runnerdata")
+	@ResponseBody
+	public int runnerdata(@RequestParam(value = "path") String[] path,
+			@RequestParam(value = "distance") String distance, @RequestParam(value = "time") String time,
+			HttpSession session, Model model) {
+		Member member = (Member) session.getAttribute("member");
+		Runner_data rd = new Runner_data();
+		rd.setUser_id(member.getUser_id());
+		rd.setRunner_data_distance(distance);
+		rd.setRunner_data_time(Integer.toString(Integer.parseInt(distance)/100));
+
+		int result = service.setRunnerdata(rd);
+
+		for (int i = 0; i < path.length; i++) {
+			Coordinate coord = new Coordinate();
+			coord.setLat(path[i]);
+			coord.setLng(path[++i]);
+			service.setCoordinate(coord);
+		}
+
+		Runner runner = new Runner();
+
+		runner.setUser_distance(Integer.parseInt(distance) + runner.getUser_distance());
+		runner.setUser_runtime(Integer.parseInt(rd.getRunner_data_time()) + runner.getUser_runtime());
+		runner.setUser_id(member.getUser_id());
+		// 뛴거리와 시간 업데이트
+		service.updateRunnerdata(runner);
+		return result;
+	}
+	
+	@RequestMapping("/runnerdataresult")
+	public String runnerdataresult(@RequestParam(value="result") String result,Model model) {
+		model.addAttribute("result",Integer.parseInt(result));
+		return "runnerdataresult";
 	}
 
 }
