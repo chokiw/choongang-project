@@ -110,11 +110,17 @@ public class SJLController {
 		Recruit_c[] rc = service.getrecruitC(board.getRecruit_no());
 		// 글쓴이 정보 불러오기
 		Runner r = service.getMember_SJL(board.getUser_id());
+		// 글쓴 사람의 사진 불러오기
+		String userphoto = service.getUserPhotoB(Integer.parseInt(recruit_no));
+		// 글쓴 사람의 닉네임 불러오기
+		String nickname = service.getNickNameB(Integer.parseInt(recruit_no));
 
 		model.addAttribute("r", r);
 		model.addAttribute("rc", rc);
 		model.addAttribute("pageNum", pageNum);
 		model.addAttribute("board", board);
+		model.addAttribute("userphoto", userphoto);
+		model.addAttribute("nickname", nickname);
 
 		return "mate_detail";
 	}

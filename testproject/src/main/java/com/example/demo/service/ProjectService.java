@@ -93,4 +93,12 @@ public class ProjectService {
 		
 		return dao.routedata(sns);
 	}
+
+	public String getUserPhoto(int sns_no) {
+		return dao.getUserPhoto(sns_no);
+	}
+
+	public String getNickName(int sns_no) {
+		return dao.getNickName(sns_no);
+	}
 }

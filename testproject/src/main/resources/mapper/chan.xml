@@ -29,8 +29,8 @@
 
 	<!-- 참가 신청 알림 -->
 	<insert id="getalarmB" parameterType="alarm">
-		insert into alarm (alarm_no, user_id, recruit_no, alarm_content, alarm_date)
-		values (alarm_seq.nextval, #{user_id}, #{recruit_no}, #{alarm_content}, sysdate)
+		insert into alarm (alarm_no, user_id, recruit_no, alarm_content, alarm_date, alarm_subject)
+		values (alarm_seq.nextval, #{user_id}, #{recruit_no}, #{alarm_content}, sysdate, #{alarm_subject})
 	</insert>
 
 	<!-- 참가 신청 취소 -->
@@ -41,8 +41,12 @@
 
 	<!-- 신청 취소 알림 -->
 	<insert id="getcancelalarm" parameterType="alarm">
-		insert into alarm (alarm_no, user_id, recruit_no, alarm_content, alarm_date)
-		values (alarm_seq.nextval, #{user_id}, #{recruit_no}, #{alarm_content}, sysdate)
+		insert into alarm (alarm_no, user_id, recruit_no, alarm_content, alarm_date, alarm_subject)
+		values (alarm_seq.nextval, #{user_id}, #{recruit_no}, #{alarm_content}, sysdate, #{alarm_subject})
 	</insert>
+	
+	<select id="getMemberB" parameterType="String" resultType="runner">
+		select * from runner where user_id=#{user_id}
+	</select>
 
 </mapper>

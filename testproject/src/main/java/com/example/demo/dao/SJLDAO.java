@@ -41,4 +41,8 @@ public interface SJLDAO {
 
 	int insertSns(SnsBoard board);
 
+	String getUserPhotoB(int recruit_no);
+
+	String getNickNameB(int recruit_no);
+
 }

@@ -22,6 +22,10 @@
 	display: flex;
 }
 
+a:link {
+	text-decoration : none;
+}
+
 .myimg {
 	height: 40px;
 	width: 40px;

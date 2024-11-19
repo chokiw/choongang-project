@@ -206,5 +206,13 @@
 		)
 		WHERE ROWNUM &lt;= 3; -- 상위 3개만 선택
 	</select>
+	
+	<select id="getUserPhoto" parameterType="int" resultType="String">
+    select r.user_photo from sns s join runner r on s.user_id = r.user_id where s.sns_no = #{sns_no}
+	</select>
+	
+	<select id="getNickName" parameterType="int" resultType="String">
+    select r.user_nickname from sns s join runner r on s.user_id = r.user_id where s.sns_no = #{sns_no}
+	</select>
 
 </mapper>

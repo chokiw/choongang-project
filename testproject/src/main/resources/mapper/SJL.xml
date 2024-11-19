@@ -96,4 +96,13 @@
 								#{sns_address1},#{sns_address2},#{sns_subject},
 								#{sns_content},sysdate,#{sns_proofshot},0,0,0)
 	</insert>
+	
+	<select id="getUserPhotoB" parameterType="int" resultType="string">
+    select r.user_photo from recruit e join runner r on e.user_id = r.user_id where e.recruit_no = #{recruit_no}
+	</select>
+	
+	<select id="getNickNameB" parameterType="int" resultType="String">
+    select r.user_nickname from recruit e join runner r on e.user_id = r.user_id where e.recruit_no = #{recruit_no}
+	</select>
+	
 </mapper>
