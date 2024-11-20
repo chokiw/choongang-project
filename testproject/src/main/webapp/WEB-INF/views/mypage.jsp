@@ -1,188 +1,148 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html lang="ko">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Gothic+A1&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Gothic+A1&display=swap" rel="stylesheet">
-    <script src="http://code.jquery.com/jquery-latest.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <script src="https://kit.fontawesome.com/5e485453d8.js" crossorigin="anonymous"></script>
-    <link href="./css/mypage.css" rel="stylesheet">
-    <script src="./js/mynpage.js"></script>
-    <title>Document</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link
+	href="https://fonts.googleapis.com/css2?family=Bangers&family=Gothic+A1&display=swap"
+	rel="stylesheet">
+<link
+	href="https://fonts.googleapis.com/css2?family=Gothic+A1&display=swap"
+	rel="stylesheet">
+<script src="http://code.jquery.com/jquery-latest.js"></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<link rel="stylesheet"
+	href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+<link href="/css/icons.css" rel="stylesheet">
+<link href="/css/common.css" rel="stylesheet">
+<link href="/css/mypage.css" rel="stylesheet">
+<script src="/js/mypage.js"></script>
+<title>Document</title>
+
+
+
 
 </head>
 
 <body>
-    <div class="container">
-        <div class="head">
-            <!-- 페이지 제목 누르면 메인페이지로 이동 -->
-            <a href="mainpage" class="title">RUNAWAY</a>
+	<div class="container">
+
+		<!-- 탑 메뉴 -->
+		<jsp:include page="header.jsp"></jsp:include>
+
+		<!-- 사이드(왼쪽) 메뉴 -->
+		<jsp:include page="side.jsp"></jsp:include>
+
+		<main class="content">
+			<div class="track">
+				<span style="font-size: 36px; font-weight: 700;">마이페이지</span><br>
+				<br>
+			</div>
 
 
 
-            <!-- 마이페이지 버튼 -->
-            <div class="mypage">
-                <a href="mypage" class="mypage_text">마이페이지</a>
-            </div>
+			<div class="profilebox">
 
-            <!-- 로그아웃 버튼 -->
-            <div class="logout">
+				<img
+					src="${pageContext.request.contextPath}/uimg/${runner.user_photo}"
+					class="profileimg">
 
-                <a href="sadad" class="logout_text"> <i class="fa-solid fa-right-from-bracket"
-                        style="color: #f4efe2;"></i>&nbsp;&nbsp;로그아웃</a>
-            </div>
-
-        </div>
-
-
-        <div class="side" align="center">
-
-            <div class="sns">
-
-                <a href="sns_board" class="sns_text"><i class="fa-solid fa-person-running"
-                        style="font-size: 30px;"></i>&nbsp;&nbsp;&nbsp;&nbsp;트랙</a>
-            </div>
-
-            <div class="mate">
-
-                <a href="mate_board" class="mate_text"><i class="fa-solid fa-people-group"
-                        style="font-size: 30px;"></i>&nbsp;&nbsp;&nbsp;&nbsp;메이트</a>
-            </div>
-
-            <div class="record">
-
-                <a href="run" class="sns_text"><i class="fa-solid fa-stopwatch"
-                        style="font-size: 30px;"></i>&nbsp;&nbsp;&nbsp;&nbsp;기록</a>
-            </div>
-
-           
-        </div>
+				<div style="margin-top: 30px;">
+					<span class="nickname">${runner.user_nickname}</span> <span
+						class="gender">/ ${runner.user_gender}</span><br> <span
+						class="name">${runner.user_name}</span> <span class="phone">${runner.user_phone1}-${runner.user_phone2}-${runner.user_phone3}</span><br>
+					<span class="location">${runner.user_address1}
+						${runner.user_address2}</span>
 
 
+					<!-- 알람 아이콘 -->
+					<div class="alert">
+						<a href="asd" class="bell"><span class="material-symbols-outlined" style="width:22px; height:22px">notifications</span></a>
+
+						<!-- 알람확인표시 -->
+						<c:forEach var="alarm" items="${dbalarm}">
+							<c:if test="${alarm.alarm_date_readcount == 0}">
+								<div class="dot"></div>
+							</c:if>
+						</c:forEach>
+					</div>
+				</div>
+
+			</div>
 
 
+			<!-- 기록 박스 -->
+			<div class="recordbox">
+				<div align="center">
+					<span class="content1">총 달린 거리</span><br> <br> <span
+						class="content2">${runner.user_distance}</span>
+				</div>
 
+				<div class="crossline"></div>
 
+				<div align="center">
+					<span class="content1">총 달린 시간</span><br> <br> <span
+						class="content2">${runner.user_runtime}</span>
+				</div>
 
+				<div class="crossline"></div>
 
-        <div class="content">
-            <div class="track">
-                <span style="font-size: 36px; font-weight: 700;  font-family: 'Gothic A1', sans-serif;">마이
-                    페이지</span><br><br>
-            </div>
-
-            <!-- 알람 아이콘 -->
-            <div class="alert">
-                <a href="asd"><i class="fa-solid fa-bell"></i></a>
-                
-                <!-- 알람이 있으면 생기는 빨간색 점 없거나 읽으면 사라짐 -->
-                <div class="dot"></div>
-            </div>
-           
-
-
-            <div class="profilebox">
-              
-                <img src="/img/Penguins.jpg" class="profileimg">
-                
-                <div style="margin-top: 30px;">
-                    <span class="nickname">nickname 님</span><br>
-                    <span class="location">서울시 강남구</span>
-                   
-
-                </div>
-
-            </div>
-
-
-            <!-- 기록 박스 -->
-            <div class="recordbox">
-                <div align="center">
-                    <span class="content1">총 달린 거리</span><br><br>
-                    <span class="content2">40.23KM</span>
-                </div>
-
-                <div style="height: 100px; border-left: solid thin; margin-left: 50px; margin-right: 50px;"></div>
-
-                <div align="center">
-                    <span class="content1">총 달린 시간</span><br><br>
-                    <span class="content2">5:23:43</span>
-                </div>
-
-                <div style="height: 100px; border-left: solid thin; margin-left: 50px; margin-right: 50px;"></div>
-
-                <div align="center">
-                    <span class="content1">평균 페이스</span><br><br>
-                    <span class="content2">4'34"</span>
-                </div>
-            </div>
+				<div align="center">
+					<span class="content1">평균 페이스</span><br> <br> <span
+						class="content2">4'43"/KM</span>
+					<!-- 평균 페이스 단위 수정 -->
+				</div>
+			</div>
 
 
 
-            <!-- 메뉴판 -->
-            <table>
-                <colgroup>
-                    <col class="col1">
-                    <col class="col2">
-                </colgroup>
-                <tr>
-                    <td><i class="fa-solid fa-stopwatch"></i></td>
-                    <td>
-                        <a href="asd">내가 달린 트랙</a>
-                    </td>
-                </tr>
+			<!-- 메뉴판 -->
+			<table>
+				<colgroup>
+					<col class="col1">
+					<col class="col2">
+				</colgroup>
+				<tr>
+					<td><span class="material-symbols-outlined"> sprint </span></td>
+					<td><a href="runnertrack" class="mypagelist">내가 달린 트랙</a></td>
+				</tr>
 
-                <tr>
-                    <td><i class="fa-solid fa-pen"></i></td>
-                    <td>
-                        <a href="asd">내가 작성한 글</a>
-                    </td>
-                </tr>
+				<tr>
+					<td><span class="material-symbols-outlined">edit_document</span></td>
+					<td><a href="mywriting" class="mypagelist">내가 작성한 글</a></td>
+				</tr>
 
-                <tr>
-                    <td>
-                        <i class="fa-solid fa-fire"></i>
-                    </td>
-                    <td>
-                        <a href="asd">추천 누른 글</a>
-                    </td>
-                </tr>
+				<tr>
+					<td><span class="material-symbols-outlined"> recommend</span></td>
+					<td><a href="/liked_board" class="mypagelist">추천 누른 글</a></td>
 
-                <tr>
-                    <td><i class="fa-solid fa-bell"></i></td>
-                    <td>
-                        <a href=asd>알람</a>
-                    </td>
-                </tr>
+				</tr>
 
-                <tr>
-                    <td>
-                        <i class="fa-solid fa-user-pen"></i>
-                    </td>
-                    <td>
-                        <a href="asd">정보수정</a>
-                    </td>
-                </tr>
+				<tr>
+					<td><span class="material-symbols-outlined">notifications</span></td>
+					<td><a href="asd" class="mypagelist">알람</a></td>
+				</tr>
 
-                <tr>
-                    <td>
-                        <i class="fa-solid fa-user-slash"></i>
-                    </td>
-                    <td>
-                        <a href=asd>회원탈퇴</a>
-                    </td>
-                </tr>
-            </table>
+				<tr>
+					<td><span class="material-symbols-outlined">person_edit</span></td>
+					<td><a href="asd" class="mypagelist">정보수정</a></td>
+				</tr>
 
-        </div>
+				<tr>
+					<td>&nbsp;<span class="material-symbols-outlined">person_remove</span></td>
+					<td><a href="asd" class="mypagelist">회원탈퇴</a></td>
+				</tr>
+			</table>
 
-    </div>
+		</main>
+	</div>
 </body>
 
 </html>

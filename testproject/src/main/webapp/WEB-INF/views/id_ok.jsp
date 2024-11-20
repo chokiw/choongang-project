@@ -38,13 +38,14 @@ span {
 
 </head>
 
-<body align="center">
+<body >
 
-	<span>회원님의 아이디는 입니다.</span>
+	<form align="center">
+	<span>회원님의 아이디는 ${id } 입니다.</span>
 	<br>
 	<br>
-	<input type="button" value="확인" class="ok" onclick="close();" />
-
+	<input type="button" value="확인" class="ok"  onclick="window.close();" />
+	</form>
 </body>
 
 </html>

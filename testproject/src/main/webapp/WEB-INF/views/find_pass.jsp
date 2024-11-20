@@ -22,22 +22,24 @@
 </head>
 
 <body>
+<div align="center">
+    <form style="margin-top: 50px;" method="post" action="find_pass_ok">
 
-    <form align="center" style="margin-top: 50px;">
-
-        <span>아이디</span>&nbsp;&nbsp;
-        <input type="text" id="user_id" name="user_id" class="box" style="margin-right: 245px;"><br>
-        <div id="idcheck" class="alertmsg"></div><br>
+        <span>아이디</span><br><br>
+        <input type="text" id="user_id" name="user_id" class="box" style=" width: 280px;"><br><br>
+       
 
 
-        <span>주민등록 번호</span>&nbsp;&nbsp;
+        <span>주민등록 번호</span><br><br>
 
         <input type="text" size="6" maxlength="6" id="user_jumin1" name="user_jumin1" class="box">&nbsp; -
         &nbsp;<input type="password" size="7" maxlength="7" id="user_jumin2" name="user_jumin2" class="box"><br>
         <div id="jumincheck" class="alertmsg"></div><br>
 
         <input type="submit" id="pass_button" disabled value="비밀번호 찾기" class="passok">
+        <input type="button"  class="passok" value="취소" class="idok" onclick="window.close();">
     </form>
+    </div>
 </body>
 
 </html>

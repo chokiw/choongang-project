@@ -12,8 +12,8 @@
     <script src="http://code.jquery.com/jquery-latest.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://kit.fontawesome.com/5e485453d8.js" crossorigin="anonymous"></script>
-    <link href="./css/member.css" rel="stylesheet">
-    <script src="./js/member.js"></script>
+    <script src="/js/member.js"></script>
+    <link href="/css/member.css" rel="stylesheet">
     <title>회원가입</title>
 
 </head>
@@ -27,7 +27,7 @@
 
                 <span>아이디</span><br>
                 <input type="text" id="user_id" name="user_id" class="box">&nbsp;&nbsp;
-                <button type="button" id="dup_id" onclick="id_check()">중복확인</button><br>
+                <button type="button" id="dup_id" disabled onclick="id_check()">중복확인</button><br>
                 <div id="idcheck" class="alertmsg"></div> <br>
 
                 <span>비밀번호</span><br>
@@ -52,7 +52,7 @@
 
                 <span>닉네임</span><br>
                 <input type="text" id="user_nickname" name="user_nickname" class="box">&nbsp;
-                <button type="button" id="dup_nick" onclick="nickname_check()">중복확인</button><br>
+                <button type="button" id="dup_nick" disabled onclick="nickname_check()">중복확인</button><br>
                 <div id="nickcheck" class="alertmsg"></div><br>
 
                 <span>주민등록번호</span><br>

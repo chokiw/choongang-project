@@ -31,6 +31,8 @@ dependencies {
 	implementation 'org.glassfish.web:jakarta.servlet.jsp.jstl:3.0.0'
 	// jackson
 	implementation 'com.fasterxml.jackson.core:jackson-databind:2.15.2'
+	// email
+	implementation 'org.apache.commons:commons-email:1.5'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:3.0.3'
 	compileOnly 'org.projectlombok:lombok'

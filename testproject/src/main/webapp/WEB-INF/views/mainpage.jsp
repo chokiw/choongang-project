@@ -14,62 +14,26 @@
     <script src="http://code.jquery.com/jquery-latest.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://kit.fontawesome.com/5e485453d8.js" crossorigin="anonymous"></script>
-	<link href="./css/mainpage.css" rel="stylesheet">
-    <script src="./js/mainpage.js"></script>
+	<link href="/css/common.css" rel="stylesheet">
+	<link href="/css/mainpage.css" rel="stylesheet">
+    <script src="/js/mainpage.js"></script>
     <title>Document</title>
 </head>
 
 <body>
     <div class="container">
-        <div class="head">
-            <!-- 페이지 제목 누르면 메인페이지로 이동 -->
-            <a href="mainpage" class="title">RUNAWAY</a>
+        <!-- 탑 메뉴 -->
+        <jsp:include page="header.jsp"></jsp:include>
+        
+        <!-- 사이드(왼쪽) 메뉴 -->
+        <jsp:include page="side.jsp"></jsp:include>
 
 
-
-            <!-- 마이페이지 버튼 -->
-            <div class="mypage">
-                <a href="mypage" class="mypage_text">마이페이지</a>
-            </div>
-
-            <!-- 로그아웃 버튼 -->
-            <div class="logout">
-
-                <a href="sadad" class="logout_text"> <i class="fa-solid fa-right-from-bracket"
-                        style="color: #f4efe2;"></i>&nbsp;&nbsp;로그아웃</a>
-            </div>
-
-        </div>
-
-
-        <!-- 사이드 메뉴 -->
-        <div class="side" align="center">
-
-            <div class="sns">
-
-                <a href="sns_board" class="sns_text"><i class="fa-solid fa-person-running"
-                        style="font-size: 30px;"></i>&nbsp;&nbsp;&nbsp;&nbsp;트랙</a>
-            </div>
-
-            <div class="mate">
-
-                <a href="mate_board" class="mate_text"><i class="fa-solid fa-people-group"
-                        style="font-size: 30px;"></i>&nbsp;&nbsp;&nbsp;&nbsp;메이트</a>
-            </div>
-
-            <div class="record">
-
-                <a href="run" class="sns_text"><i class="fa-solid fa-stopwatch" style="font-size: 30px;"></i>&nbsp;&nbsp;&nbsp;&nbsp;기록</a>
-            </div>
-
-        </div>
-
-
-        <div class="content">
-
+        <!-- 메인 콘텐츠 -->
+         <main class="content">
             <div class="track">
                 <span style="font-size: 40px; font-weight: 700;">Best Runner</span>
-                <span style="float: right; opacity: 80%;">랭킹은 매주 수요일 6::00AM에 업데이트 됩니다.</span>
+                <span style="float: right; opacity: 80%; font-size: 14px;">랭킹은 현재 시간으로부터 7일전까지 데이터를 기준으로 정해집니다.</span>
                 <br><br>
                 <span style="color: gray;">이번주 가장 많이 달린 러너 입니다.</span>
                 <span></span>
@@ -77,53 +41,47 @@
 
 
 
-            <table>
-                <tr>
-                    <td>
-                        <div class="dot">1</div>
-                        <img src="/img/mancity.png"
-                            style="border-radius: 50%; width: 200px; height: 200px; border-style: ridge;">
-                    </td>
-                    <td>
-                        <div class="dot" style="margin-left: 20px;">2</div>
-                        <img src="/img/Penguins.jpg"
-                            style="border-radius: 50%; width: 150px; height: 150px; border-style: ridge;">
-                    </td>
-                    <td>
-                        <div class="dot" style="margin-left: 20px;">3</div>
-                        <img src="/img/Jellyfish.jpg"
-                            style="border-radius: 50%; width: 150px; height: 150px; border-style: ridge;">
-                    </td>
-                    </td>
-                    <td>
-                        <div class="dot" style="margin-left: 20px;">4</div>
-                        <img src="/img/Hydrangeas.jpg"
-                            style="border-radius: 50%; width: 150px; height: 150px; border-style: ridge;">
-                    </td>
-                    </td>
-                    <td>
-                        <div class="dot" style="margin-left: 20px;">5</div>
-                        <img src="/img/Tulips.jpg"
-                            style="border-radius: 50%; width: 150px; height: 150px; border-style: ridge;">
-                    </td>
-                    </td>
-                </tr>
+            <div class="runner-grid">
+                <div class="runner-item">
+                    <div class="dot">1</div>
+                    <img src="${pageContext.request.contextPath}/uimg/${userProfileimg1}" class="img1"
+                        style="border-radius: 50%; width: 200px; height: 200px; border-style: ridge;"><br>
+                    <span class="nickname2"><a href="asd" class="profile_go">${	userNickname1}</a></span>
+                    <span class="distance">${userDistance1}km</span>
+                </div>
 
-                <tr>
-                    <td><span class="nickname2"><a href="asd" class="profile_go">김김김님</a></span></td>
-                    <td><span class="nickname2"><a href="asd" class="profile_go">박박박님</a></span></td>
-                    <td><span class="nickname2"><a href="asd" class="profile_go">이이이님</a></span></td>
-                    <td><span class="nickname2"><a href="asd" class="profile_go">최최최님</a></span></td>
-                    <td><span class="nickname2"><a href="asd" class="profile_go">정정정님</a></span></td>
-                </tr>
-                <tr>
-                    <td><span class="distance">100km</span></td>
-                    <td><span class="distance">80km</span></td>
-                    <td><span class="distance">50km</span></td>
-                    <td><span class="distance">30km</span></td>
-                    <td><span class="distance">10km</span></td>
-                </tr>
-            </table>
+                <div class="runner-item">
+                    <div class="dot">2</div>
+                    <img src="${pageContext.request.contextPath}/uimg/${userProfileimg2}" class="img2"
+                        style="border-radius: 50%; width: 150px; height: 150px; border-style: ridge;"><br>
+                    <span class="nickname2"><a href="asd" class="profile_go">${	userNickname2}</a></span>
+                    <span class="distance">${userDistance2}km</span>
+                </div>
+
+                <div class="runner-item">
+                    <div class="dot">3</div>
+                    <img src="${pageContext.request.contextPath}/uimg/${userProfileimg3 }" class="img2"
+                        style="border-radius: 50%; width: 150px; height: 150px; border-style: ridge;"><br>
+                    <span class="nickname2"><a href="asd" class="profile_go">${	userNickname3}</a></span>
+                    <span class="distance">${userDistance3}km</span>
+                </div>
+
+                <div class="runner-item">
+                    <div class="dot">4</div>
+                    <img src="${pageContext.request.contextPath}/uimg/${userProfileimg4 }" class="img2"
+                        style="border-radius: 50%; width: 150px; height: 150px; border-style: ridge;"><br>
+                    <span class="nickname2"><a href="asd" class="profile_go">${	userNickname4}</a></span>
+                    <span class="distance">${userDistance4}km</span>
+                </div>
+
+                <div class="runner-item">
+                    <div class="dot">5</div>
+                    <img src="${pageContext.request.contextPath}/uimg/${userProfileimg5 }"  class="img2"
+                        style="border-radius: 50%; width: 150px; height: 150px; border-style: ridge;"><br>
+                    <span class="nickname2"><a href="asd" class="profile_go">${	userNickname5}</a></span>
+                    <span class="distance">${userDistance5}km</span>
+                </div>
+            </div>
 
 
 
@@ -137,37 +95,35 @@
 
 
             <div class="pricebox">
-                <div class="gold" id="track1" >
-                    <a href="asd"><img src="/img/Tulips.jpg" class="trackimg"></a> <br><br>
+                <div class="gold" id="track1">
+                    <a href="asd"><img src="/img/route.png" class="trackimg"></a> <br><br>
                     <span class="nickname">writer1님</span><br>
                     <span class="location">서울시 강남구</span><br>
                     <img src="https://cdn.pixabay.com/photo/2021/09/11/10/27/medal-6615190_1280.png"
-                    style="width: 50px; height: 60px; object-fit: fill;"><br>
-                    <span class="distance">34</span>                
+                        style="width: 50px; height: 60px; object-fit: fill;"><br>
+                    <span class="distance">34</span>
                 </div>
-                
+
                 <div class="gold" id="track2">
-                    <a href="asd"><img src="/img/Tulips.jpg"  class="trackimg"></a> <br><br>
+                    <a href="asd"><img src="/img/route.png" class="trackimg"></a> <br><br>
                     <span class="nickname">writer2님</span><br>
                     <span class="location">서울시 강서구</span><br>
                     <img src="https://cdn.pixabay.com/photo/2021/09/11/10/29/medal-6615195_1280.png"
                         style="width: 50px; height: 60px; object-fit: fill;"><br>
-                        <span class="distance">24</span>
+                    <span class="distance">24</span>
                 </div>
 
                 <div class="gold" id="track3">
-                    <a href="asd"><img src="/img/Tulips.jpg" class="trackimg"></a> <br><br>
+                    <a href="asd"><img src="/img/route.png" class="trackimg"></a> <br><br>
                     <span class="nickname">writer3님</span><br>
                     <span class="location">서울시 강북구</span><br>
                     <img src="https://cdn.pixabay.com/photo/2021/09/11/10/32/third-6615198_1280.png"
                         style="width: 50px; height: 60px; object-fit: fill;"><br>
-                        <span class="distance">17</span>
+                    <span class="distance">17</span>
                 </div>
 
             </div>
-
-
-        </div>
+        </main>
 
     </div>
 </body>

@@ -27,5 +27,7 @@ public class Runner {
 	private int user_distance;
 	private String user_gender;
 	private Date user_date;
+	
 
+	private String distance;	// 이거 원래 runner_data 테이블에 있는 runner_data_distance인데 project.xml에서 이름을 distance로 바꾸고 해서 이렇게 추가했습니다.
 }

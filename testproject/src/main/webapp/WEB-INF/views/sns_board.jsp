@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="path" value="${pageContext.request.contextPath }" />
 
@@ -7,124 +7,156 @@
 <html lang="ko">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Gothic+A1&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Gothic+A1&display=swap" rel="stylesheet">
-    <script src="http://code.jquery.com/jquery-latest.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <script src="https://kit.fontawesome.com/5e485453d8.js" crossorigin="anonymous"></script>
-   	<link href="/css/sns_board.css" rel="stylesheet">
-    <script src="/js/sns_board.js"></script>
-	<script type="text/javascript">
-    	$(function() {
-			//댓글목록 요청
-			$('#board').load('${path}/snslist');
-		});
-    </script>
-    <title>Document</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link
+	href="https://fonts.googleapis.com/css2?family=Bangers&family=Gothic+A1&display=swap"
+	rel="stylesheet">
+<link
+	href="https://fonts.googleapis.com/css2?family=Gothic+A1&display=swap"
+	rel="stylesheet">
+<script src="http://code.jquery.com/jquery-latest.js"></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script src="https://kit.fontawesome.com/5e485453d8.js"
+	crossorigin="anonymous"></script>
+<link href="/css/common.css" rel="stylesheet">
+<link href="/css/sns_board.css" rel="stylesheet">
+<script src="/js/sns_board.js"></script>
+<script type="text/javascript">
+	$(function() {
+		// sns게시글 요청
+		$('#board').load('${path}/snslist');
+	});
+		// sns 인기글 순으로 리스트 요청
+	 function getlist(pageNum) {
+		var best = '${best}';
+		if (best === 'true') {
+			getBestList(pageNum);
+		} else {
+			var uri = '${path}/snslist?pageNum=' + pageNum;
+			$('#board').load(uri);
+		}
+	}
+
+	function getBestList(pageNum) {
+		resetSelectValues();
+		var uri = '${path}/snslist/best?pageNum=' + pageNum;
+		$('#board').load(uri);
+	} 
+	
+	// 인기글 누를때 지역 select 초기화
+	function resetSelectValues() {
+	    $('#sns_address1').val(''); // 광역시 선택을 초기화
+	    $('#sns_address2').val(''); // 지역 선택을 초기화
+	}
+	
+	// 지역별로 글 리스트 이동
+	$(function() {
+	    $('form').on('submit', function(e) {
+	        e.preventDefault();
+	        var formData = $(this).serialize();
+	        
+	        $.ajax({
+	            url: '${path}/snslist_location',
+	            type: 'GET',
+	            data: formData,
+	            success: function(response) {
+	                $('#board').html(response);
+	            },
+	            error: function(xhr, status, error) {
+	                console.error("AJAX 요청 실패:", error);
+	            }
+	        });
+	    });
+	});
+
+	
+	function getAddressList(pageNum, sns_address1, sns_address2) {
+		
+		
+		var uri = '${path}/snslist_location?pageNum=' + pageNum+'&sns_address1='+sns_address1+'&sns_address2='+sns_address2;
+		$('#board').load(uri);
+	} 
+	
+	
+	
+	
+	
+</script>
+
+<title>Document</title>
 
 </head>
 
 <body>
-    <div class="container">
-        <div class="head">
-            <!-- 페이지 제목 누르면 메인페이지로 이동 -->
-            <a href="mainpage" class="title">RUNAWAY</a>
+	<div class="container">
+		<!-- 탑 메뉴 -->
+		<jsp:include page="header.jsp"></jsp:include>
 
+		<!-- 사이드(왼쪽) 메뉴 -->
+		<jsp:include page="side.jsp"></jsp:include>
 
-
-            <!-- 마이페이지 버튼 -->
-            <div class="mypage">
-                <a href="mypage" class="mypage_text">마이페이지</a>
-            </div>
-
-            <!-- 로그아웃 버튼 -->
-            <div class="logout">
-
-                <a href="sadad" class="logout_text"> <i class="fa-solid fa-right-from-bracket"
-                        style="color: #f4efe2;"></i>&nbsp;&nbsp;로그아웃</a>
-            </div>
-
-        </div>
-
-        <div class="side" align="center">
-
-            <div class="sns">
-
-                <a href="sns_board" class="sns_text"><i class="fa-solid fa-person-running"
-                        style="font-size: 30px;"></i>&nbsp;&nbsp;&nbsp;&nbsp;트랙</a>
-            </div>
-
-            <div class="mate">
-
-                <a href="mate_board" class="mate_text"><i class="fa-solid fa-people-group"
-                        style="font-size: 30px;"></i>&nbsp;&nbsp;&nbsp;&nbsp;메이트</a>
-            </div>
-
-            <div class="record">
-
-                <a href="run" class="sns_text"><i class="fa-solid fa-stopwatch"
-                        style="font-size: 30px;"></i>&nbsp;&nbsp;&nbsp;&nbsp;기록</a>
-            </div>
-
-           
-        </div>
-
-        <div class="content">
-            <div class="track">
-                <span style="font-size: 36px; font-weight: 700;">트랙 게시판</span><br><br>
-                <span style="color: gray;">자신이 달린 루트를 공유하고 상대방의 루트를 추천, 저장할 수 있습니다.</span>
-            </div>
-
-            <div class="locationbox">
-
-                <select>
+		<main class="content">
+			<div class="track">
+				<span style="font-size: 36px; font-weight: 700;">트랙 게시판</span><br>
+				<br> <span style="color: gray;">자신이 달린 루트를 공유하고 상대방의 루트를
+					추천, 저장할 수 있습니다.</span>
+			</div>
+			<br>
+			<div class="locationbox">
+			<form>
+				 <select id="sns_address1"   name="sns_address1">
+                    <option value="">광역시선택</option> 
                     <option value="서울시">서울시</option>
                 </select>
-                <select>
+                <select id="sns_address2"  name="sns_address2">
                     <option value="">지역선택</option>
                     <option value="강남구">강남구</option>
-                    <option value="강남구">강동구</option>
-                    <option value="강남구">강북구</option>
-                    <option value="강남구">강서구</option>
-                    <option value="강남구">관악구</option>
-                    <option value="강남구">광진구</option>
-                    <option value="강남구">구로구</option>
-                    <option value="강남구">금천구</option>
-                    <option value="강남구">노원구</option>
-                    <option value="강남구">도봉구</option>
-                    <option value="강남구">동대문구</option>
-                    <option value="강남구">동작구</option>
-                    <option value="강남구">마포구</option>
-                    <option value="강남구">서대문구</option>
-                    <option value="강남구">서초구</option>
-                    <option value="강남구">성동구</option>
-                    <option value="강남구">성북구</option>
-                    <option value="강남구">송파구</option>
-                    <option value="강남구">양천구</option>
-                    <option value="강남구">영등포구</option>
-                    <option value="강남구">용산구</option>
-                    <option value="강남구">은평구</option>
-                    <option value="강남구">종로구</option>
-                    <option value="강남구">중구</option>
-                    <option value="강남구">중랑구</option>
+                    <option value="강동구" >강동구</option>
+                    <option value="강북구">강북구</option>
+                    <option value="강서구">강서구</option>
+                    <option value="관악구">관악구</option>
+                    <option value="광진구">광진구</option>
+                    <option value="구로구">구로구</option>
+                    <option value="금천구">금천구</option>
+                    <option value="노원구">노원구</option>
+                    <option value="도봉구">도봉구</option>
+                    <option value="동대문구">동대문구</option>
+                    <option value="동작구">동작구</option>
+                    <option value="마포구">마포구</option>
+                    <option value="서대문구">서대문구</option>
+                    <option value="서초구">서초구</option>
+                    <option value="성동구">성동구</option>
+                    <option value="성북구">성북구</option>
+                    <option value="송파구">송파구</option>
+                    <option value="양천구">양천구</option>
+                    <option value="영등포구">영등포구</option>
+                    <option value="용산구">용산구</option>
+                    <option value="은평구">은평구</option>
+                    <option value="종로구">종로구</option>
+                    <option value="중구">중구</option>
+                    <option value="중랑구">중랑구</option>
                 </select>
+                <button type="submit">이동</button>
+                </form>	
 
 
-                <!-- 인기글 버튼 -->
-                <div class="hot">
-                    <a href="sd" class="hot_text"> <i class="fa-solid fa-fire"></i> 인기글</a>
-                </div>
-            </div>
+				<!-- 인기글 버튼 -->
+				<div class="hot">
+					<a href="javascript:getBestList(1)" class="hot_text"> <i
+						class="fa-solid fa-fire"></i> 인기글
+					</a>
+				</div>
+			</div>
 
-            <div id="board"></div>
-			
-            <a href="asd" class="write">글작성</a><br><br>
-        </div>
+			<div id="board"></div>
 
-    </div>
+			<a href="sns_write" class="write">글작성</a><br> <br>
+		</main>
+
+	</div>
 </body>
 
 </html>

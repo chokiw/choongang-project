@@ -1,117 +1,83 @@
 @charset "UTF-8";
 
+body {
+	margin: 0;
+	padding: 0;
+	font-family: 'Gothic A1', sans-serif;
+	background-color: #D9D9D9;
+}
+
 .member {
-	width: 600px;
-	height: 1000px;
-	margin-left: auto;
-	margin-right: auto;
+	width: 90%;
+	max-width: 600px;
+	margin: 20px auto;
 	background-color: white;
-	position: relative;
+	padding: 20px;
+	box-sizing: border-box;
 }
 
 .logo {
 	font-family: "Bangers", system-ui;
-	font-style: normal;
 	color: #cf3e00;
-	font-size: 60px;
+	font-size: 3rem;
 	font-weight: 800;
 	text-align: center;
 }
 
 .title {
-	font-size: 20px;
-	font-family: "Gothic A1", sans-serif;
+	font-size: 1.2rem;
 	font-weight: bold;
 	text-align: center;
+	margin-bottom: 20px;
 }
 
 .form {
-	width: 580px;
-	margin-left: 40px;
-	margin-right: auto;
+	width: 100%;
 }
 
 .imgform {
-	position: absolute;
-	top: 160px;
-	right: 40px;
-	width: 200px;
-	height: 250px;
+	width: 100%;
+	margin-bottom: 20px;
 }
 
-.box {
-	border-style: ridge;
+.box, .box1, .box2, .box3 {
+	width: 250px;
+	padding: 8px;
+	margin-bottom: 10px;
+	border: 1px solid gray;
 	border-radius: 5px;
-	border-width: 1px;
-	border-color: gray;
-	height: 20px;
-	width: 200px;
-	font-size: 18px;
-	font-family: "Gothic A1", sans-serif;
+	font-size: 1rem;
+	box-sizing: border-box;
 }
 
-.box1 {
-	border-style: ridge;
-	border-radius: 5px;
-	border-width: 1px;
-	border-color: gray;
-	height: 20px;
-	width: 150px;
-	font-size: 18px;
-	font-family: "Gothic A1", sans-serif;
-}
-
-.box2 {
-	border-style: ridge;
-	border-radius: 5px;
-	border-width: 1px;
-	border-color: gray;
-	height: 18px;
-	width: 80px;
-	font-size: 14px;
-	font-family: "Gothic A1", sans-serif;
-}
-
-.box3 {
-	border-style: ridge;
-	border-radius: 5px;
-	border-width: 1px;
-	border-color: gray;
-	height: 18px;
-	width: 100px;
-	font-size: 14px;
-	font-family: "Gothic A1", sans-serif;
+.box2, .box3 {
+	width: auto;
 }
 
 span {
-	font-size: 16px;
-	font-family: "Gothic A1", sans-serif;
+	font-size: 1rem;
 	font-weight: 600;
+	display: block;
+	margin-bottom: 5px;
 }
 
 input:focus {
 	outline: 2px solid #cf3e00;
-	;
 }
 
 .alertmsg {
-	display: none;
-	font-size: 12px;
+	font-size: 0.8rem;
 	font-weight: 600;
-	font-family: "Gothic A1", sans-serif;
 	margin-top: 5px;
+	color: red;
 }
 
 .profile_img {
-	border-radius: 50%;
 	width: 150px;
 	height: 150px;
-	border-style: ridge;
-	margin-top: 20px;
-	margin-left: auto;
-	margin-right: auto;
+	border-radius: 50%;
+	margin: 20px auto;
 	overflow: hidden;
-	/* 이미지가 div를 벗어나지 않도록 처리 */
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -121,17 +87,53 @@ input:focus {
 	width: 100%;
 	height: 100%;
 	object-fit: cover;
-	/* 이미지가 div 안에 맞게 채워지도록 */
 }
 
 .memberok {
-	width: 100px;
-	height: 50px;
+	width: 100%;
+	padding: 10px;
 	border-radius: 20px;
-	margin-top: 50px;
-	right: 240px;
-	position: absolute;
+	margin-top: 20px;
 	font-weight: 500;
-	font-family: "Gothic A1", sans-serif;
-	font-size: 18px;
+	font-size: 1rem;
+	background-color: #cf3e00;
+	color: white;
+	border: none;
+	cursor: pointer;
+}
+
+@media ( max-width : 768px) {
+	.member {
+		width: 95%;
+	}
+	.logo {
+		font-size: 2.5rem;
+	}
+	.title {
+		font-size: 1rem;
+	}
+	.box, .box1, .box2, .box3 {
+		font-size: 0.9rem;
+	}
+	span {
+		font-size: 0.9rem;
+	}
+}
+
+@media ( max-width : 480px) {
+	.member {
+		width: 100%;
+		margin: 0;
+		padding: 10px;
+	}
+	.box, .box1, .box2, .box3 {
+		font-size: 0.8rem;
+	}
+	span {
+		font-size: 0.8rem;
+	}
+	.profile_img {
+		width: 120px;
+		height: 120px;
+	}
 }

@@ -38,6 +38,7 @@
 
 	} else { // HTML5의 GeoLocation을 사용할 수 없을때 마커 표시 위치와 인포윈도우 내용을 설정합니다
 		var locPosition = new kakao.maps.LatLng(33.450701, 126.570667);
+		alert("현재위치를 불러오기에 실패했습니다.");
 		map.setCenter(locPosition);
 
 	}
@@ -56,6 +57,7 @@
 			});
 		} else { // HTML5의 GeoLocation을 사용할 수 없을때 마커 표시 위치와 인포윈도우 내용을 설정합니다
 			l_position = new kakao.maps.LatLng(33.450701, 126.570667);
+			alert("현재위치를 불러오기에 실패했습니다.");
 		}
 	
 		return l_position;
@@ -187,6 +189,7 @@
 
 	//시계 시작 - 재귀호출로 반복실행
 	function startClock() {
+		//측정을 시작할시 경로 그림 만들어서 띄워주기
 		if(time==0){
 			coords=where();
 			clickLine = new kakao.maps.Polyline({
