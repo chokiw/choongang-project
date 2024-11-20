@@ -151,7 +151,7 @@ function getAddressList(pageNum, sns_address1, sns_address2) {
 		<main class="content">
 			<div class="track">
 				<span style="font-size: 36px; font-weight: 700;">트랙 게시판</span><br>
-				<br> <span style="color: gray;">자신이 달린 루트를 공유하고 상대방의 루트를
+				 <span style="color: gray;">자신이 달린 루트를 공유하고 상대방의 루트를
 					추천, 저장할 수 있습니다.</span>
 			</div>
 			<br>
