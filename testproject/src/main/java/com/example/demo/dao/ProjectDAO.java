@@ -47,4 +47,8 @@ public interface ProjectDAO {
 
 	List<SnsBoard> routedata(SnsBoard sns);
 
+	String getUserPhoto(int sns_no);
+
+	String getNickName(int sns_no);
+
 }

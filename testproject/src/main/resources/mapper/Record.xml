@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.demo.dao.RecordDAO">
+	<!-- 측정후에 회원 아이디에 따라서 기록저장 -->
+	<insert id="setRunnerdata" parameterType="runner_data">
+		insert into
+		runner_data values(runner_data_no_seq.nextval,#{user_id},
+		#{runner_data_distance},#{runner_data_time},
+		sysdate,0)
+	</insert>
+	<!-- 측정 후에 경로 좌표값 저장 -->
+	<insert id="setCoordinate" parameterType="coordinate">
+		insert into coordinate
+		values(coordinate_no_seq.nextval,runner_data_no_seq.currval,#{lat},#{lng})
+	</insert>
+	<!-- 회원정보를 찾기위한 SQL  -->
+	<select id="getMember_SJL" parameterType="String"
+		resultType="runner">
+		select * from runner where user_id=#{user_id}
+	</select>
+	<!-- 회원 정보값을 최신화 하는 SQL(달린거리,측정 시간) -->
+	<update id="updateRunnerdata" parameterType="runner">
+		update runner set
+		user_distance=#{user_distance}, user_runtime=#{user_runtime} where
+		user_id=#{user_id}
+	</update>
+</mapper>

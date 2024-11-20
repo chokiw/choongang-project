@@ -9,7 +9,6 @@ import com.example.demo.model.Alarm;
 import com.example.demo.model.Apply;
 import com.example.demo.model.Runner;
 import com.example.demo.model.Runner_data;
-import com.example.demo.model.SnsBoard;
 
 import lombok.RequiredArgsConstructor;
 
@@ -27,20 +26,25 @@ public class JongChanService {
 		return dao.listRunnerTrack(runnerdata);
 	}
 
-	public void apply(Apply apply) {
+	public void getapply(Apply apply) {
 		dao.getapply(apply);
 	}
 
-	public void cancelapply(Apply apply) {
+	public void getcancelapply(Apply apply) {
 		dao.getcancelapply(apply);
 	}
 
-	public void alarmB(Alarm alarm) {
+	public void getalarmB(Alarm alarm) {
 		dao.getalarmB(alarm);
 	}
 
-	public void cancelalarm(Alarm alarm) {
+	public void getcancelalarm(Alarm alarm) {
 		dao.getcancelalarm(alarm);
 	}
+
+	public Runner getMemberB(String user_id) {
+		return dao.getMemberB(user_id);
+	}
+
 	
 }

@@ -21,7 +21,6 @@ public class MateReplyBoard {
 	
 	private String user_nickname; 
 	private String user_photo;
-	
-	
+	private String parent_nickname;
 	
 }

@@ -111,7 +111,7 @@ tr:hover {
 .alert {
     position: absolute;
     top: 0;
-    right: 0;
+    right: 200px;
     width: 50px;
     height: 50px;
     text-align: center;
@@ -128,6 +128,7 @@ tr:hover {
 .bell:visited{
 	color: black;
 }
+
 
 
 .dot {

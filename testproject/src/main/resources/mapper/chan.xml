@@ -4,50 +4,49 @@
 
 <mapper namespace="com.example.demo.dao.JongChanDAO">
 
-	<!-- runner_data에서 특정 id의 리스트 갯수 가져오기 -->
-	<select id="getRunnerTrack" parameterType="String"
-		resultType="int">
-		select count(*) from runner_data where user_id = #{user_id}
-	</select>
+<!-- runner_data에서 특정 id의 리스트 갯수 가져오기 -->
+<!-- 	<select id="getRunnerTrack" parameterType="String" -->
+<!-- 		resultType="int"> -->
+<!-- 		select count(*) from runner_data where user_id = #{user_id} -->
+<!-- 	</select> -->
 
-	<!-- runner_data에서 특정 id의 리스트 가져오기 -->
-	<select id="listRunnerTrack" parameterType="runner_data"
-		resultType="runner_data">
-		select * from (select a.*,rowNum rn from ( select * from
-		runner_data
-		where user_id = #{user_id}
-		order by runner_data_date desc) a
-		)
-		where rn between #{startRow} and #{endRow}
-	</select>
+<!-- runner_data에서 특정 id의 리스트 가져오기 -->
+<!-- 	<select id="listRunnerTrack" parameterType="runner_data" -->
+<!-- 		resultType="runner_data"> -->
+<!-- 		select * from (select a.*,rowNum rn from ( select * from -->
+<!-- 		runner_data -->
+<!-- 		where user_id = #{user_id} -->
+<!-- 		order by runner_data_date desc) a -->
+<!-- 		) -->
+<!-- 		where rn between #{startRow} and #{endRow} -->
+<!-- 	</select> -->
 
 	<!-- 참가 신청 -->
-	<insert id="getapply" parameterType="apply">
-		insert into apply (apply_no,
-		recruit_no, user_id, apply_date, apply_del)
-		values (apply_seq.nextval,
-		#{apply.recruit_no}, #{apply.user_id},
-		sysdate, #{apply.apply_del})
-	</insert>
+<!-- 	<insert id="getapply" parameterType="apply"> -->
+<!-- 		insert into apply (apply_no, recruit_no, user_id, apply_date, apply_del) -->
+<!-- 		values (apply_seq.nextval, #{recruit_no}, #{user_id}, sysdate, #{apply_del}) -->
+<!-- 	</insert> -->
 
 	<!-- 참가 신청 알림 -->
-	<insert id="getalarmB" parameterType="alarm">
-		insert into alarm (user_id, recruit_no, alarm_content, alarm_date)
-		values (#{alarm.user_id}, #{alarm.recruit_no}, #{alarm.alarm_content},
-		sysdate)
-	</insert>
+<!-- 	<insert id="getalarmB" parameterType="alarm"> -->
+<!-- 		insert into alarm (alarm_no, user_id, recruit_no, alarm_content, alarm_date, alarm_subject) -->
+<!-- 		values (alarm_seq.nextval, #{user_id}, #{recruit_no}, #{alarm_content}, sysdate, #{alarm_subject}) -->
+<!-- 	</insert> -->
 
 	<!-- 참가 신청 취소 -->
-	<update id="getcancelapply" parameterType="apply">
-		update apply set apply_del = #{apply.apply_del}, apply_date = sysdate
-		where recruit_no = #{apply.recruit_no} and user_id = #{apply.user_id}
-	</update>
+<!-- 	<update id="getcancelapply" parameterType="apply"> -->
+<!-- 		update apply set apply_del = #{apply_del}, apply_date = sysdate -->
+<!-- 		where recruit_no = #{recruit_no} and user_id = #{user_id} -->
+<!-- 	</update> -->
 
 	<!-- 신청 취소 알림 -->
-	<insert id="getcancelalarm" parameterType="alarm">
-		insert into alarm (user_id, recruit_no, alarm_content, alarm_date)
-		values (#{alarm.user_id}, #{alarm.recruit_no}, #{alarm.alarm_content},
-		sysdate)
-	</insert>
+<!-- 	<insert id="getcancelalarm" parameterType="alarm"> -->
+<!-- 		insert into alarm (alarm_no, user_id, recruit_no, alarm_content, alarm_date, alarm_subject) -->
+<!-- 		values (alarm_seq.nextval, #{user_id}, #{recruit_no}, #{alarm_content}, sysdate, #{alarm_subject}) -->
+<!-- 	</insert> -->
+	
+<!-- 	<select id="getMemberB" parameterType="String" resultType="runner"> -->
+<!-- 		select * from runner where user_id=#{user_id} -->
+<!-- 	</select> -->
 
 </mapper>

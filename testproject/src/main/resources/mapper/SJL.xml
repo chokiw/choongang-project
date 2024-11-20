@@ -14,78 +14,95 @@
 	</select>
 	
 	<!-- sns게시판 갯수 불러오기 -->
-	<select id="getrecruitTotal" parameterType="recruit" resultType="int">
-		select count(*) from recruit
-		<where>
-			<if test="keyword != null and search !='subcon'">
-				${search} like '%'||#{keyword}||'%'
-			</if>
-			<if test="keyword != null and search=='subcon'">
-				recruit_subject like '%'||#{keyword}||'%' or
-				recruit_content like
-				'%'||#{keyword}||'%'
-			</if>
-		</where>
-	</select>
+<!-- 	<select id="getrecruitTotal" parameterType="recruit" resultType="int"> -->
+<!-- 		select count(*) from recruit -->
+<!-- 		<where> -->
+<!-- 			<if test="keyword != null and search !='subcon'"> -->
+<!-- 				${search} like '%'||#{keyword}||'%' -->
+<!-- 			</if> -->
+<!-- 			<if test="keyword != null and search=='subcon'"> -->
+<!-- 				recruit_subject like '%'||#{keyword}||'%' or -->
+<!-- 				recruit_content like -->
+<!-- 				'%'||#{keyword}||'%' -->
+<!-- 			</if> -->
+ 				<!-- 지역별로 가져오게 조건 추가 --> 
+<!-- 			<if test="recruit_address2 != null"> -->
+<!-- 				recruit_address2  like '%'||#{recruit_address2}||'%' -->
+<!-- 			</if> -->
+<!-- 		</where> -->
+<!-- 	</select> -->
 
 	<!-- 페이지 처리에 의한 sns게시판 데이터리스트 불러오기 -->
-	<select id="recruitList" parameterType="recruit" resultType="recruit">
-		select * from (select a.*,rowNum rn from (
-		select * from recruit
-		<where>
-			<if test="keyword != null and search!='subcon'">
-				${search} like '%'||#{keyword}||'%'
-			</if>
-			<if test="keyword != null and search=='subcon'">
-				recruit_subject like '%'||#{keyword}||'%' or
-				recruit_content like
-				'%'||#{keyword}||'%'
-			</if>
-		</where>
-		order by recruit_no desc) a )
-		where rn between #{startRow} and #{endRow}
-	</select>
-	<select id="getrecruitD" parameterType="int" resultType="recruit">
-		select * from recruit where recruit_no = #{recruit_no}
-	</select>
+<!-- 	<select id="recruitList" parameterType="recruit" resultType="recruit"> -->
+<!-- 		select * from (select a.*,rowNum rn from ( -->
+<!-- 		select * from recruit -->
+<!-- 		<where> -->
+<!-- 			<if test="keyword != null and search!='subcon'"> -->
+<!-- 				${search} like '%'||#{keyword}||'%' -->
+<!-- 			</if> -->
+<!-- 			<if test="keyword != null and search=='subcon'"> -->
+<!-- 				recruit_subject like '%'||#{keyword}||'%' or -->
+<!-- 				recruit_content like -->
+<!-- 				'%'||#{keyword}||'%' -->
+<!-- 			</if> -->
+<!-- 				지역별로 가져오게 조건 추가 -->
+<!-- 			<if test="recruit_address2 != null"> -->
+<!-- 				recruit_address2  like '%'||#{recruit_address2}||'%' -->
+<!-- 			</if> -->
+<!-- 		</where> -->
+<!-- 		order by recruit_no desc) a ) -->
+<!-- 		where rn between #{startRow} and #{endRow} -->
+<!-- 	</select> -->
+<!-- 	<select id="getrecruitD" parameterType="int" resultType="recruit"> -->
+<!-- 		select * from recruit where recruit_no = #{recruit_no} -->
+<!-- 	</select> -->
 	
-	<select id="getrecruitC" parameterType="int" resultType="recruit_c">
-		select * from recruit_c where recruit_no = #{recruit_no} order by recruit_c_no
-	</select>
+<!-- 	<select id="getrecruitC" parameterType="int" resultType="recruit_c"> -->
+<!-- 		select * from recruit_c where recruit_no = #{recruit_no} order by recruit_c_no -->
+<!-- 	</select> -->
 	<!-- 세션값 설정을 위한 membetDTO생성 -->
-	<select id="getMember_SJL" parameterType="String"
-		resultType="runner">
-		select * from runner where user_id=#{user_id}
-	</select>
-	<insert id="setRecruitBoard" parameterType="recruit">
-		insert into recruit values(recruit_no_seq.nextval,#{user_id},#{recruit_d_day},
-									#{recruit_recruitnum},#{recruit_remainnum},#{recruit_subject},
-									#{recruit_content},#{recruit_address1},#{recruit_address2},
-									0,sysdate,0)
-	</insert>
+<!-- 	<select id="getMember_SJL" parameterType="String" -->
+<!-- 		resultType="runner"> -->
+<!-- 		select * from runner where user_id=#{user_id} -->
+<!-- 	</select> -->
+<!-- 	<insert id="setRecruitBoard" parameterType="recruit"> -->
+<!-- 		insert into recruit values(recruit_no_seq.nextval,#{user_id},#{recruit_d_day}, -->
+<!-- 									#{recruit_recruitnum},#{recruit_remainnum},#{recruit_subject}, -->
+<!-- 									#{recruit_content},#{recruit_address1},#{recruit_address2}, -->
+<!-- 									0,sysdate,0) -->
+<!-- 	</insert> -->
 	
-	<insert id="setRecruitC" parameterType="recruit_c">
-		insert into recruit_c values(recruit_c_no_seq.nextval,RECRUIT_NO_SEQ.currval,#{lat},#{lng})
-	</insert>
+<!-- 	<insert id="setRecruitC" parameterType="recruit_c"> -->
+<!-- 		insert into recruit_c values(recruit_c_no_seq.nextval,RECRUIT_NO_SEQ.currval,#{lat},#{lng}) -->
+<!-- 	</insert> -->
 	
-	<insert id="setRunnerdata" parameterType="runner_data">
-		insert into
-		runner_data values(runner_data_no_seq.nextval,#{user_id},
-		#{runner_data_distance},#{runner_data_time},
-		sysdate,0)
-	</insert>
-	<insert id="setCoordinate" parameterType="coordinate">
-		insert into coordinate
-		values(coordinate_no_seq.nextval,runner_data_no_seq.currval,#{lat},#{lng})
-	</insert>
-	<update id="updateRunnerdata" parameterType="runner">
-		update runner set
-		user_distance=#{user_distance}, user_runtime=#{user_runtime} where
-		user_id=#{user_id}
-	</update>
-	<insert id="insertSns">
-		insert into sns values(sns_no_seq.nextval,#{runner_data_no},#{user_id},
-								#{sns_address1},#{sns_address2},#{sns_subject},
-								#{sns_content},sysdate,#{sns_proofshot},0,0,0)
-	</insert>
+<!-- 	<insert id="setRunnerdata" parameterType="runner_data"> -->
+<!-- 		insert into -->
+<!-- 		runner_data values(runner_data_no_seq.nextval,#{user_id}, -->
+<!-- 		#{runner_data_distance},#{runner_data_time}, -->
+<!-- 		sysdate,0) -->
+<!-- 	</insert> -->
+<!-- 	<insert id="setCoordinate" parameterType="coordinate"> -->
+<!-- 		insert into coordinate -->
+<!-- 		values(coordinate_no_seq.nextval,runner_data_no_seq.currval,#{lat},#{lng}) -->
+<!-- 	</insert> -->
+<!-- 	<update id="updateRunnerdata" parameterType="runner"> -->
+<!-- 		update runner set -->
+<!-- 		user_distance=#{user_distance}, user_runtime=#{user_runtime} where -->
+<!-- 		user_id=#{user_id} -->
+<!-- 	</update> -->
+<!-- 	<insert id="insertSns"> -->
+<!-- 		insert into sns values(sns_no_seq.nextval,#{runner_data_no},#{user_id}, -->
+<!-- 								#{sns_address1},#{sns_address2},#{sns_subject}, -->
+<!-- 								#{sns_content},sysdate,#{sns_proofshot},0,0,0) -->
+<!-- 	</insert> -->
+	
+<!-- 	<select id="getUserPhotoB" parameterType="int" resultType="string"> -->
+<!--     select r.user_photo from recruit e join runner r on e.user_id = r.user_id where e.recruit_no = #{recruit_no} -->
+<!-- 	</select> -->
+	
+<!-- 	<select id="getNickNameB" parameterType="int" resultType="String"> -->
+<!--     select r.user_nickname from recruit e join runner r on e.user_id = r.user_id where e.recruit_no = #{recruit_no} -->
+<!-- 	</select> -->
+	
 </mapper>

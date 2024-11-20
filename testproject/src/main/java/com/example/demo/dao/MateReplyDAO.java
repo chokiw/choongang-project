@@ -20,7 +20,7 @@ public interface MateReplyDAO {
 	
 	void updateRe(MateReplyBoard rb);
 
-	int getMaxNum();
+	int getMaxNum(int recruit_no);
 
 	MateReplyBoard select(int rno);
 
@@ -53,6 +53,6 @@ public interface MateReplyDAO {
 
 	void srDelete(int sns_r_no);
 
-	int getSrMaxNum();
+	int getSrMaxNum(int sns_no);
 	
 }

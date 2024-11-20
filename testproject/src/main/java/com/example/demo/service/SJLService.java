@@ -74,6 +74,14 @@ public class SJLService {
 	public int insertSns(SnsBoard board) {
 		return dao.insertSns(board);
 	}
+
+	public String getUserPhotoB(int recruit_no) {
+		return dao.getUserPhotoB(recruit_no);
+	}
+
+	public String getNickNameB(int recruit_no) {
+		return dao.getNickNameB(recruit_no);
+	}
 	
 	
 }

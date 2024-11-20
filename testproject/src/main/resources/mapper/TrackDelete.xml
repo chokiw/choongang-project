@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.demo.dao.TrackDeleteDAO">
+	<!-- sns게시판 목록 가져오기 -->
+	<select id="getboard" parameterType="int" resultType="sns">
+		select *
+		from sns where sns_no=#{sns_no}
+	</select>
+	<!-- 게시글 삭제 -->
+	<delete id="deleteboard" parameterType="int">
+		delete from sns
+		where sns_no = #{sns_no}
+	</delete>
+</mapper>

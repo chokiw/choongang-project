@@ -13,6 +13,7 @@
   
   .pagination li a {
     text-decoration: none; /* 링크의 밑줄 제거 */
+    color: black;
  }
   
   .pagination .active a {
@@ -24,3 +25,12 @@
     padding: 5px;
     font-size: 14px;
  }
+ 
+.list a:link{
+	color: black;
+	text-decoration: none;
+}
+
+.list a:hover{
+	text-decoration: underline;
+}

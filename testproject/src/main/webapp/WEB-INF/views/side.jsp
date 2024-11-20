@@ -9,15 +9,15 @@
 	<div class="side-menu">
 		<div class="menu-item sns">
 			<a href="/sns_board" class="sns_text"><span
-				class="material-symbols-outlined"> sprint </span>&nbsp;&nbsp;&nbsp;&nbsp;트랙</a>
+				class="material-symbols-outlined large-icon"> sprint </span>&nbsp;&nbsp;&nbsp;&nbsp;트랙</a>
 		</div>
 		<div class="menu-item mate">
 			<a href="/mate_board" class="mate_text"><span
-				class="material-symbols-outlined"> groups </span>&nbsp;&nbsp;&nbsp;&nbsp;메이트</a>
+				class="material-symbols-outlined large-icon"> groups </span>&nbsp;&nbsp;&nbsp;&nbsp;메이트</a>
 		</div>
 		<div class="menu-item record">
 			<a href="/run" class="sns_text"><span
-				class="material-symbols-outlined"> pace </span>&nbsp;&nbsp;&nbsp;&nbsp;기록</a>
+				class="material-symbols-outlined large-icon"> pace </span>&nbsp;&nbsp;&nbsp;&nbsp;기록</a>
 		</div>
 	</div>
 </nav>
