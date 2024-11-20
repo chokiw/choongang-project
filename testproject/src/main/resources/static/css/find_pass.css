@@ -19,12 +19,11 @@ span {
 }
 
 .passok {
-	width: 120px;
+	width: 110px;
 	height: 50px;
 	border-radius: 20px;
-	margin-top: 30px;
-	
+	margin-top: 30px;	
 	font-weight: 500;
 	font-family: "Gothic A1", sans-serif;
-	font-size: 18px;
+	font-size: 14px;
 }
