@@ -202,14 +202,13 @@ body, html {
 		font-size: 14px;
 		text-align: center;
 	}
-	.menu-item i {
-		font-size: 24px;
-		margin-right: 0;
-		margin-bottom: 5px;
-	}
-	.menu-item span {
-		font-size: 14px;
-	}
+	  .large-icon {
+    font-size: 30px;  /* 작은 화면에서의 크기 */
+    margin-left: 10px;
+    font-variation-settings:
+     'opsz' 30
+  }
+	
 	.main-title {
 		font-size: 28px;
 	}
@@ -243,4 +242,9 @@ body, html {
 	.menu-item i {
 		font-size: 20px;
 	}
+	  .large-icon {
+    font-size: 30px;  /* 작은 화면에서의 크기 */
+    font-variation-settings:
+     'opsz' 30
+  }
 }

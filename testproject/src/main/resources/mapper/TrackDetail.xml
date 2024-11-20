@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.demo.dao.TrackDetailDAO">
+	<!-- sns게시판 목록 가져오기 -->
+	<select id="getboard" parameterType="int" resultType="sns">
+		select *
+		from sns where sns_no=#{sns_no}
+	</select>
+	<!-- 프사 클릭시 이동하게 하기위한 쿼리문 -->
+	<select id="getUserPhoto" parameterType="int"
+		resultType="String">
+		select r.user_photo from sns s join runner r on s.user_id = r.user_id where
+		s.sns_no = #{sns_no}
+	</select>
+	<!-- 닉네임 클릭시 이동하게 하기위한 쿼리문 -->
+	<select id="getNickName" parameterType="int" resultType="String">
+		select r.user_nickname from sns s join runner r on s.user_id = r.user_id
+		where s.sns_no = #{sns_no}
+	</select>
+	<!-- runner_date에서 특정 runner_date_no에 따라서 리스트 가져오기 -->
+	<select id="getrdata" parameterType="int"
+		resultType="runner_data">
+		select * from runner_data where
+		runner_data_no=#{runner_data_no}
+	</select>
+	<!-- coordinate에서 특정 runner_date_no에 따라서 리스트 가져오기 -->
+	<select id="getcdata" parameterType="int"
+		resultType="coordinate">
+		select * from coordinate where
+		runner_data_no=#{runner_data_no} order by coordinate_no
+	</select>
+	<!-- 추천 테이블 입력 -->
+	<insert id="good_insert" parameterType="map">
+		insert into good values(GOOD_NO_SEQ.nextval,#{sns_no},#{user_id},sysdate)
+	</insert>
+	<!-- 추천수 +1 -->
+	<update id="good_plus" parameterType="map">
+		update sns set sns_good = sns_good + 1 where sns_no=#{sns_no}
+	</update>
+	<!-- 추천수 테이블 삭제 -->
+	<delete id="good_delete" parameterType="map">
+		delete from good where user_id=#{user_id} and sns_no=#{sns_no}
+	</delete>
+	<!-- 추천 -1 -->
+	<update id="good_minus" parameterType="map">
+		update sns set sns_good = sns_good - 1 where sns_no=#{sns_no}
+	</update>
+	<!-- 추천수 확인 -->
+	<select id="checkGood" parameterType="map" resultType="int">
+		select Count(*) from good where user_id=#{user_id} and sns_no=#{sns_no}
+	</select>
+	<!-- 게시글 번호에 따라서 추천 튜플 가져오기 -->
+	<select id="get_good" parameterType="map" resultType="Good">
+		select * from good where sns_no=#{sns_no}
+	</select>
+</mapper>

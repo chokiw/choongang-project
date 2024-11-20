@@ -4,215 +4,194 @@
 
 <mapper namespace="com.example.demo.dao.ProjectDAO">
 
-	<resultMap id="sns"          type="sns">
-		<result property="sns_no"	      column="sns_no" />
-		<result property="runner_data_no"    	  column="runner_data_no" />
-		<result property="user_id"  column="user_id" />
-		<result property="sns_address1"    column="sns_address1" />
-		<result property="sns_address2"    column="sns_address2" />
-		<result property="sns_subject" column="sns_subject" />
-		<result property="sns_content" column="sns_content" />
-		<result property="sns_date" column="sns_date" />
-		<result property="sns_proofshot" column="sns_proofshot" />
-		<result property="sns_good" column="sns_good" />
-		<result property="sns_readcount" column="sns_readcount" />
-		<result property="sns_del" column="sns_del" />
-		<result property="keyword" column="keyword" />
-		<result property="search" column="search" />
-		<result property="startRow" column="startRow" />
-		<result property="endRow" column="endRow" />
-		<result property="user_nickname" column="user_nickname" />
-
-	</resultMap>
-
 	<!-- sns게시판 갯수 불러오기 -->
-	<select id="getTotal"  parameterType="sns" resultType="int">
-		select count(*) from sns
-		<where>
-			<if test="keyword != null and search !='subcon'">
-				${search} like '%'||#{keyword}||'%'
-			</if>
-			<if test="keyword != null and search=='subcon'">
-				sns_subject like '%'||#{keyword}||'%' or
-				sns_content like
-				'%'||#{keyword}||'%'
-			</if>
-			<if test="sns_address2 != null">
-				sns_address2  like '%'||#{sns_address2}||'%'
-			</if>
-		</where>
-	</select>
+<!-- 	<select id="getTotal"  parameterType="sns" resultType="int"> -->
+<!-- 		select count(*) from sns -->
+<!-- 		<where> -->
+<!-- 			<if test="keyword != null and search !='subcon'"> -->
+<!-- 				${search} like '%'||#{keyword}||'%' -->
+<!-- 			</if> -->
+<!-- 			<if test="keyword != null and search=='subcon'"> -->
+<!-- 				sns_subject like '%'||#{keyword}||'%' or -->
+<!-- 				sns_content like -->
+<!-- 				'%'||#{keyword}||'%' -->
+<!-- 			</if> -->
+<!-- 			<if test="sns_address2 != null"> -->
+<!-- 				sns_address2  like '%'||#{sns_address2}||'%' -->
+<!-- 			</if> -->
+<!-- 		</where> -->
+<!-- 	</select> -->
 
 	<!-- 페이지 처리에 의한 sns게시판 데이터리스트 불러오기 -->
-	<select id="list" parameterType="sns" resultMap="sns">
-		select * from (select a.*,rowNum rn from (
-		select * from sns
-		<where>
-			<if test="keyword != null and search!='subcon'">
-				${search} like '%'||#{keyword}||'%'
-			</if>
-			<if test="keyword != null and search=='subcon'">
-				sns_subject like '%'||#{keyword}||'%' or
-				sns_content like '%'||#{keyword}||'%'
-			</if>
-			<if test="sns_address2 != null">
-				sns_address2  like '%'||#{sns_address2}||'%'
-			</if>
-		</where>
-		order by sns_no desc) a )
-		where rn between #{startRow} and #{endRow}
-	</select>
+<!-- 	<select id="list" parameterType="sns" resultMap="sns"> -->
+<!-- 		select * from (select a.*,rowNum rn from ( -->
+<!-- 		select * from sns -->
+<!-- 		<where> -->
+<!-- 			<if test="keyword != null and search!='subcon'"> -->
+<!-- 				${search} like '%'||#{keyword}||'%' -->
+<!-- 			</if> -->
+<!-- 			<if test="keyword != null and search=='subcon'"> -->
+<!-- 				sns_subject like '%'||#{keyword}||'%' or -->
+<!-- 				sns_content like '%'||#{keyword}||'%' -->
+<!-- 			</if> -->
+<!-- 			<if test="sns_address2 != null"> -->
+<!-- 				sns_address2  like '%'||#{sns_address2}||'%' -->
+<!-- 			</if> -->
+<!-- 		</where> -->
+<!-- 		order by sns_no desc) a ) -->
+<!-- 		where rn between #{startRow} and #{endRow} -->
+<!-- 	</select> -->
 
 	<!-- 추천수가 많은 순으로 sns 게시판 목록 가져오기 -->
-	<select id="listBest" parameterType="sns" resultType="sns">
-		select * from (select a.*, rowNum rn from (
-		select * from sns
-		<where>
-			<if test="keyword != null and search!='subcon'">
-				${search} like '%'||#{keyword}||'%'
-			</if>
-			<if test="keyword != null and search=='subcon'">
-				sns_subject like '%'||#{keyword}||'%' or
-				sns_content like '%'||#{keyword}||'%'
-			</if>
-		</where>
+<!-- 	<select id="listBest" parameterType="sns" resultType="sns"> -->
+<!-- 		select * from (select a.*, rowNum rn from ( -->
+<!-- 		select * from sns -->
+<!-- 		<where> -->
+<!-- 			<if test="keyword != null and search!='subcon'"> -->
+<!-- 				${search} like '%'||#{keyword}||'%' -->
+<!-- 			</if> -->
+<!-- 			<if test="keyword != null and search=='subcon'"> -->
+<!-- 				sns_subject like '%'||#{keyword}||'%' or -->
+<!-- 				sns_content like '%'||#{keyword}||'%' -->
+<!-- 			</if> -->
+<!-- 		</where> -->
 		<!-- 수정: 추천 수 기준으로 내림차순 정렬하고, 추천 수가 동일한 경우 최신 작성일 기준으로 내림차순 정렬 (sns_date 
 			desc) -->
-		order by sns_good desc, sns_date desc
-		) a)
-		where rn between #{startRow} and #{endRow}
-	</select>
+<!-- 		order by sns_good desc, sns_date desc -->
+<!-- 		) a) -->
+<!-- 		where rn between #{startRow} and #{endRow} -->
+<!-- 	</select> -->
 
 	<!-- 회원가입을 위한 sql -->
-	<insert id="insert" parameterType="runner">
-		insert into runner
-		values(#{user_id},#{user_passwd},#{user_name},
-		#{user_nickname},#{user_jumin1},#{user_jumin2},
-		#{user_emailid},#{user_domain},#{user_phone1},
-		#{user_phone2},#{user_phone3},#{user_address1},
-		#{user_address2},#{user_photo},0,0,#{user_gender},sysdate)
-	</insert>
+<!-- 	<insert id="insert" parameterType="runner"> -->
+<!-- 		insert into runner -->
+<!-- 		values(#{user_id},#{user_passwd},#{user_name}, -->
+<!-- 		#{user_nickname},#{user_jumin1},#{user_jumin2}, -->
+<!-- 		#{user_emailid},#{user_domain},#{user_phone1}, -->
+<!-- 		#{user_phone2},#{user_phone3},#{user_address1}, -->
+<!-- 		#{user_address2},#{user_photo},0,0,#{user_gender},sysdate) -->
+<!-- 	</insert> -->
 
-	<!-- 세션값 설정을 위한 membetDTO생성 -->
-	<select id="getMember" parameterType="String"
-		resultType="runner">
-		select * from runner where user_id=#{user_id}
-	</select>
+<!-- 세션값 설정을 위한 membetDTO생성 -->
+<!-- 	<select id="getMember" parameterType="String" -->
+<!-- 		resultType="runner"> -->
+<!-- 		select * from runner where user_id=#{user_id} -->
+<!-- 	</select> -->
 
 	<!-- id확인 -->
-	<select id="idcheck" parameterType="String" resultType="int">
-		select
-		count(*) from runner where user_id=#{user_id}
-	</select>
+<!-- 	<select id="idcheck" parameterType="String" resultType="int"> -->
+<!-- 		select -->
+<!-- 		count(*) from runner where user_id=#{user_id} -->
+<!-- 	</select> -->
 	<!-- 닉네임확인 -->
-	<select id="nicknamecheck" parameterType="String"
-		resultType="int">
-		select count(*) from runner where
-		user_nickname=#{user_nickname}
-	</select>
+<!-- 	<select id="nicknamecheck" parameterType="String" -->
+<!-- 		resultType="int"> -->
+<!-- 		select count(*) from runner where -->
+<!-- 		user_nickname=#{user_nickname} -->
+<!-- 	</select> -->
 
 	<!-- sns게시판 목록 가져오기 -->
-	<select id="getboard" parameterType="int" resultType="sns">
-		select *
-		from sns where sns_no=#{sns_no}
-	</select>
+<!-- 	<select id="getboard" parameterType="int" resultType="sns"> -->
+<!-- 		select * -->
+<!-- 		from sns where sns_no=#{sns_no} -->
+<!-- 	</select> -->
 
 	<!-- runner_date에서 특정 runner_date_no에 따라서 리스트 가져오기 -->
-	<select id="getrdata" parameterType="int"
-		resultType="runner_data">
-		select * from runner_data where
-		runner_data_no=#{runner_data_no}
-	</select>
+<!-- 	<select id="getrdata" parameterType="int" -->
+<!-- 		resultType="runner_data"> -->
+<!-- 		select * from runner_data where -->
+<!-- 		runner_data_no=#{runner_data_no} -->
+<!-- 	</select> -->
 
 	<!-- coordinate에서 특정 runner_date_no에 따라서 리스트 가져오기 -->
-	<select id="getcdata" parameterType="int"
-		resultType="coordinate">
-		select * from coordinate where
-		runner_data_no=#{runner_data_no} order by coordinate_no
-	</select>
+<!-- 	<select id="getcdata" parameterType="int" -->
+<!-- 		resultType="coordinate"> -->
+<!-- 		select * from coordinate where -->
+<!-- 		runner_data_no=#{runner_data_no} order by coordinate_no -->
+<!-- 	</select> -->
 	<!-- runner_data에서 특정 id의 리스트 갯수 가져오기 -->
-	<select id="getTotalfromrd" parameterType="String"
-		resultType="int">
-		select count(*) from runner_data where user_id = #{user_id}
-	</select>
-	<!-- runner_data에서 특정 id의 리스트 가져오기 -->
-	<select id="listfromrd" parameterType="runner_data"
-		resultType="runner_data">
-		select *
-		from (select a.*,rowNum rn
-		from ( select *
-		from
-		runner_data
-		where user_id = #{user_id}
-		order by runner_data_date desc) a
-		)
-		where rn between #{startRow} and #{endRow}
-	</select>
+<!-- 	<select id="getTotalfromrd" parameterType="String" -->
+<!-- 		resultType="int"> -->
+<!-- 		select count(*) from runner_data where user_id = #{user_id} -->
+<!-- 	</select> -->
+<!-- runner_data에서 특정 id의 리스트 가져오기 -->
+<!-- 	<select id="listfromrd" parameterType="runner_data" -->
+<!-- 		resultType="runner_data"> -->
+<!-- 		select * -->
+<!-- 		from (select a.*,rowNum rn -->
+<!-- 		from ( select * -->
+<!-- 		from -->
+<!-- 		runner_data -->
+<!-- 		where user_id = #{user_id} -->
+<!-- 		order by runner_data_date desc) a -->
+<!-- 		) -->
+<!-- 		where rn between #{startRow} and #{endRow} -->
+<!-- 	</select> -->
 	<!-- 아이디 찾기 -->
-	<select id="findid" parameterType="runner" resultType="runner">
+<!-- 	<select id="findid" parameterType="runner" resultType="runner"> -->
 
-		select *
-		from runner where user_jumin1 = #{user_jumin1} and user_jumin2 =
-		#{user_jumin2}
+<!-- 		select * -->
+<!-- 		from runner where user_jumin1 = #{user_jumin1} and user_jumin2 = -->
+<!-- 		#{user_jumin2} -->
 
-	</select>
+<!-- 	</select> -->
 
 	<!-- 비번 찾기 -->
-	<select id="findpass" parameterType="runner" resultType="runner">
+<!-- 	<select id="findpass" parameterType="runner" resultType="runner"> -->
 
-		select *
-		from runner where user_id = #{user_id} and user_jumin1 =
-		#{user_jumin1} and user_jumin2 = #{user_jumin2}
+<!-- 		select * -->
+<!-- 		from runner where user_id = #{user_id} and user_jumin1 = -->
+<!-- 		#{user_jumin1} and user_jumin2 = #{user_jumin2} -->
 
-	</select>
+<!-- 	</select> -->
 
-	<select id="getAlarm" parameterType="String" resultType="alarm">
-		select *
-		from alarm where user_id = #{user_id}
-	</select>
+<!-- 	<select id="getAlarm" parameterType="String" resultType="alarm"> -->
+<!-- 		select * -->
+<!-- 		from alarm where user_id = #{user_id} -->
+<!-- 	</select> -->
 
 
 	<!-- 메인 페이지에서 가장 많이 달린 상위 5명 -->
-	<select id="rundata" parameterType="runner" resultType="runner">
-		SELECT * FROM (
-		SELECT r.user_id, r.user_nickname, r.user_photo, t.distance
-		FROM runner r
-		INNER JOIN (
-		SELECT
-		user_id,
-		SUM(runner_data_distance) AS distance
-		FROM
-		runner_data
-		WHERE
-		runner_data_date >= SYSDATE - 7 -- 최근 7일간의 데이터를 필터링
-		GROUP BY
-		user_id
-		) t ON r.user_id = t.user_id
-		ORDER BY t.distance DESC NULLS LAST
-		)
-		WHERE ROWNUM &lt;= 5 -- 상위 5개만 선택
-	</select>
+<!-- 	<select id="rundata" parameterType="runner" resultType="runner"> -->
+<!-- 		SELECT * FROM ( -->
+<!-- 		SELECT r.user_id, r.user_nickname, r.user_photo, t.distance -->
+<!-- 		FROM runner r -->
+<!-- 		INNER JOIN ( -->
+<!-- 		SELECT -->
+<!-- 		user_id, -->
+<!-- 		SUM(runner_data_distance) AS distance -->
+<!-- 		FROM -->
+<!-- 		runner_data -->
+<!-- 		WHERE -->
+<!-- 		runner_data_date >= SYSDATE - 7-->  
+<!-- 		GROUP BY -->
+<!-- 		user_id -->
+<!-- 		) t ON r.user_id = t.user_id -->
+<!-- 		ORDER BY t.distance DESC NULLS LAST -->
+<!-- 		) -->
+<!-- 		WHERE ROWNUM &lt;= 5 -->
+<!-- 	</select> -->
 
 
 	<!-- 메인페이지에서 추천수를 가장많이 받은 글 3개 -->
-	<select id="routedata" parameterType="sns" resultType="sns">
-		SELECT * FROM (
-		SELECT s.user_id, s.sns_good, s.sns_proofshot, s.sns_address1,
-		s.sns_address2, r.user_nickname
-		FROM sns s
-		INNER JOIN runner r ON s.user_id = r.user_id
-		WHERE s.sns_date >= SYSDATE - 7 -- 최근 7일간의 데이터를 필터링
-		ORDER BY s.sns_good DESC NULLS LAST
-		)
-		WHERE ROWNUM &lt;= 3; -- 상위 3개만 선택
-	</select>
+<!-- 	<select id="routedata" parameterType="sns" resultType="sns"> -->
+<!-- 		SELECT * FROM ( -->
+<!-- 		SELECT s.user_id, s.sns_good, s.sns_proofshot, s.sns_address1, -->
+<!-- 		s.sns_address2, r.user_nickname -->
+<!-- 		FROM sns s -->
+<!-- 		INNER JOIN runner r ON s.user_id = r.user_id -->
+<!-- 		WHERE s.sns_date >= SYSDATE - 7--> 
+<!-- 		ORDER BY s.sns_good DESC NULLS LAST -->
+<!-- 		) -->
+<!-- 		WHERE ROWNUM &lt;= 3; --> 
+<!-- 	</select> -->
 	
-	<select id="getUserPhoto" parameterType="int" resultType="String">
-    select r.user_photo from sns s join runner r on s.user_id = r.user_id where s.sns_no = #{sns_no}
-	</select>
+<!-- 	<select id="getUserPhoto" parameterType="int" resultType="String"> -->
+<!--     select r.user_photo from sns s join runner r on s.user_id = r.user_id where s.sns_no = #{sns_no} -->
+<!-- 	</select> -->
 	
-	<select id="getNickName" parameterType="int" resultType="String">
-    select r.user_nickname from sns s join runner r on s.user_id = r.user_id where s.sns_no = #{sns_no}
-	</select>
+<!-- 	<select id="getNickName" parameterType="int" resultType="String"> -->
+<!--     select r.user_nickname from sns s join runner r on s.user_id = r.user_id where s.sns_no = #{sns_no} -->
+<!-- 	</select> -->
 
 </mapper>

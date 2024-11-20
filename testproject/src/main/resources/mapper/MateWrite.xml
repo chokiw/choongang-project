@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.demo.dao.MateWriteDAO">
+	<!-- mate 게시판 글쓰기 -->
+	<insert id="setRecruitBoard" parameterType="recruit">
+		insert into recruit values(recruit_no_seq.nextval,#{user_id},#{recruit_d_day},
+									#{recruit_recruitnum},#{recruit_remainnum},#{recruit_subject},
+									#{recruit_content},#{recruit_address1},#{recruit_address2},
+									0,sysdate,0)
+	</insert>
+	<!-- 글쓰기 할때 설정한 경로 좌표값 저장 -->
+	<insert id="setRecruitC" parameterType="recruit_c">
+		insert into recruit_c values(recruit_c_no_seq.nextval,RECRUIT_NO_SEQ.currval,#{lat},#{lng})
+	</insert>
+</mapper>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.demo.dao.MytrackDAO">
+	<!-- runner_data에서 특정 id의 리스트 갯수 가져오기 -->
+	<select id="getRunnerTrack" parameterType="String"
+		resultType="int">
+		select count(*) from runner_data where user_id = #{user_id}
+	</select>
+	<!-- runner_data에서 특정 id의 리스트 가져오기 -->
+	<select id="listRunnerTrack" parameterType="runner_data"
+		resultType="runner_data">
+		select * from (select a.*,rowNum rn from ( select * from
+		runner_data
+		where user_id = #{user_id}
+		order by runner_data_date desc) a
+		)
+		where rn between #{startRow} and #{endRow}
+	</select>
+	<!-- 회원 측정 데이터 가져오기 -->
+	<select id="getRunnerData" parameterType="int" resultType="runner_data">
+		select * from runner_data where runner_data_no = #{runner_data_no}
+	</select>
+	<!-- 회원 경로 좌표값 가져오기 -->
+	<select id="getCoordData" parameterType="int" resultType="coordinate">
+		select * from coordinate where runner_data_no = #{runner_data_no} order by coordinate_no
+	</select>
+</mapper>

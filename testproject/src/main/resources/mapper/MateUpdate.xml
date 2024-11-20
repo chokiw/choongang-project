@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.demo.dao.MateUpdateDAO">
+	<!-- 메이트 게시판 목록 가져오기 -->
+	<select id="getrecruitD" parameterType="int" resultType="recruit">
+		select *
+		from recruit where recruit_no=#{recruit_no}
+	</select>
+	<!-- 경로 가져오기 -->
+	<select id="getrecruitC" parameterType="int" resultType="recruit_c">
+		select * from recruit_c where recruit_no = #{recruit_no} order by recruit_c_no
+	</select>
+	<!-- membetDTO생성 -->
+	<select id="getMember" parameterType="String"
+		resultType="runner">
+		select * from runner where user_id=#{user_id}
+	</select>
+	<!-- 메이트 게시판 수정 -->
+	<update id="updateRb" parameterType="recruit">
+		update recruit set recruit_subject = #{recruit_subject}, recruit_address1= #{recruit_address1}, recruit_address2 = #{recruit_address2}, recruit_content = #{recruit_content}, 
+		recruit_recruitnum = #{recruit_recruitnum}		where recruit_no = #{recruit_no}
+	</update>
+	<!-- 메이트게시판수정을 위한 전의 좌표값 삭제 -->
+	<delete id="deleteRc" parameterType="int" >
+		delete from recruit_c where recruit_no = #{recruit_no}
+	</delete>
+	<!-- 메이프 게시글의 경로 좌표값 저장 -->
+	<insert id="setRecruitC" parameterType="recruit_c">
+		insert into recruit_c values(recruit_c_no_seq.nextval,#{recruit_no},
+									#{lat},#{lng})
+	</insert>
+</mapper>

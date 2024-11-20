@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.demo.dao.MainpageDAO">
+	<!-- 메인 페이지에서 가장 많이 달린 상위 5명 -->
+	<select id="rundata" parameterType="runner" resultType="runner">
+		SELECT * FROM (
+		SELECT r.user_id, r.user_nickname, r.user_photo, t.distance
+		FROM runner r
+		INNER JOIN (
+		SELECT
+		user_id,
+		SUM(runner_data_distance) AS distance
+		FROM
+		runner_data
+		WHERE
+		runner_data_date >= SYSDATE - 7 -- 최근 7일간의 데이터를 필터링
+		GROUP BY
+		user_id
+		) t ON r.user_id = t.user_id
+		ORDER BY t.distance DESC NULLS LAST
+		)
+		WHERE ROWNUM &lt;= 5 -- 상위 5개만 선택
+	</select>
+	<select id="routedata" parameterType="sns" resultType="sns">
+		SELECT * FROM (
+		SELECT s.user_id, s.sns_good, s.sns_proofshot, s.sns_address1,
+		s.sns_address2, r.user_nickname
+		FROM sns s
+		INNER JOIN runner r ON s.user_id = r.user_id
+		WHERE s.sns_date >= SYSDATE - 7 -- 최근 7일간의 데이터를 필터링
+		ORDER BY s.sns_good DESC NULLS LAST
+		)
+		WHERE ROWNUM &lt;= 3; -- 상위 3개만 선택
+	</select>
+</mapper>
