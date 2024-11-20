@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.demo.dao.LoginDAO">
+	<!-- 아이디 찾기 -->
+	<select id="findid" parameterType="runner" resultType="runner">
+		select *
+		from runner where user_jumin1 = #{user_jumin1} and user_jumin2 =
+		#{user_jumin2}
+	</select>
+	<!-- 비번 찾기 -->
+	<select id="findpass" parameterType="runner" resultType="runner">
+		select *
+		from runner where user_id = #{user_id} and user_jumin1 =
+		#{user_jumin1} and user_jumin2 = #{user_jumin2}
+	</select>
+	<!-- 세션값 설정을 위한 membetDTO생성 -->
+	<select id="getMember" parameterType="String"
+		resultType="runner">
+		select * from runner where user_id=#{user_id}
+	</select>
+</mapper>

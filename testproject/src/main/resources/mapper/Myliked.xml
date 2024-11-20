@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.demo.dao.MylikedpageDAO">
+	<!-- 내가 좋아요 누른 글 총 갯수 -->
+	<select id="getTotalLiked" parameterType="String" resultType="int">
+		select count(*)
+		from good
+		where user_id = #{user_id}
+	</select>
+	<!-- 내가 좋아요 누른 글 목록 -->
+	<select id="getLikedPosts" parameterType="sns" resultType="sns">
+		select * from
+		(select rownum as rn,s.* 
+		from sns s where sns_no in (select sns_no from good where user_id = #{user_id}) 
+		order by sns_date desc) 
+		where rn between #{startRow} and #{endRow}
+	</select>
+</mapper>

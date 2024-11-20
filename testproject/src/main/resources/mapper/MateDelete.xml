@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.demo.dao.MateDeleteDao">
+	<!-- 메이트 게시판 목록 가져오기 -->
+	<select id="getrecruitD" parameterType="int" resultType="recruit">
+		select *
+		from recruit 
+		where recruit_no=#{recruit_no}
+	</select>
+	
+	<!-- 메이트게시판 삭제 -->
+	<delete id="deleterb" parameterType="int" >
+		delete from recruit where recruit_no = #{recruit_no}
+	</delete>
+</mapper>

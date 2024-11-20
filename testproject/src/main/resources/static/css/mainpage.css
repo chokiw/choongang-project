@@ -1,0 +1,356 @@
+.track {
+    margin-left: 50px;
+    margin-top: 14px;
+}
+
+.rankbox {
+    width: 100%;
+    max-width: 1300px;
+    height: auto;
+    border-style: solid;
+    margin: 20px auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+
+}
+
+
+
+
+.pricebox {
+    display: flex;
+    flex-wrap: wrap;
+    width: 1000px;
+    max-width: 1000px;
+    height: auto;
+    margin: 100px auto 0;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+}
+
+
+
+.gold {
+    width: 100%;
+    max-width: 400px;
+    height: auto;
+    margin: 0 25px 50px;
+    text-align: center;
+    flex-basis: 100%;
+    margin-bottom: 20px;
+}
+
+
+img {
+    object-fit: cover;
+    max-width: 100%;
+    height: auto;
+
+}
+
+
+.nickname {
+    font-family: "Gothic A1", sans-serif;
+    font-weight: 600;
+    font-style: normal;
+    font-size: 28px;
+    color: black;
+}
+
+.location {
+    font-family: "Gothic A1", sans-serif;
+    font-style: normal;
+    font-size: 16px;
+    color: darkgray;
+}
+
+#track1 {
+    padding-left: 200px;
+    padding-right: 200px;
+}
+
+
+
+.trackimg {
+    width: 400px;
+    max-width: 400px;
+    height: 300px;
+    border-style: ridge;
+    border-radius: 10%;
+    border-color: black;
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+
+}
+
+.trackimg:hover {
+    /* img 마우스 오버시*/
+    cursor: pointer;
+    transform: scale(1.5);
+    /* 마우스 오버시 이미지 크기를 1.1 배만큼 확대시킨다. */
+    -o-transform: scale(1.5);
+    -moz-transform: scale(1.5);
+    -webkit-transform: scale(1.5);
+    transition: transform .35s;
+    -o-transition: transform .35s;
+    -moz-transition: transform .35s;
+    -webkit-transition: transform .35s;
+    /* 마우스 오버시 이미지가 즉시 커지지않고 30.5 second 의 시간에 걸쳐 커진다 애니메이션 효과*/
+
+}
+
+.runner-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: flex-end;
+    width: 100%;
+}
+
+.runner-item {
+    flex: 1 1 18%;
+    /* 5개 항목을 가로로 배치하기 위해 약 20%에서 여백을 뺀 값 */
+    margin: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    position: relative;
+}
+
+.runner-item img {
+    border-radius: 50%;
+    width: 200px;
+    height: 200px;
+    border-style: ridge;
+    position: relative;
+    /* 추가 */
+}
+
+.dot {
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    margin-bottom: 10px;
+    background-color: goldenrod;
+    position: absolute;
+    z-index: 1;
+    margin-top: 4px;
+    margin-left: 10px;
+    display: flex;
+    justify-content: center;
+    color: white;
+    font-family: 'Paytone One';
+    font-size: 24px;
+    top: 0;
+    left: 0;
+}
+
+.nickname2 {
+    font-family: "Gothic A1", sans-serif;
+    font-style: normal;
+    font-size: 24px;
+    color: gray;
+}
+
+.distance {
+    font-family: "Bangers", system-ui;
+    font-size: 30px;
+    font-style: normal;
+    letter-spacing: 1px;
+}
+
+a {
+    text-decoration: none;
+}
+
+.profile_go:link {
+    color: gray;
+}
+
+.profile_go:visited {
+    color: gray;
+}
+
+.profile_go:hover {
+    text-decoration: underline;
+}
+
+@media (max-width: 1200px) {
+
+    .track {
+        margin-left: 20px;
+    }
+
+    .rankbox,
+    .pricebox {
+        width: 95%;
+    }
+
+    table {
+        width: 95%;
+    }
+
+
+}
+
+
+@media (max-width: 768px) {
+    .track {
+        margin-left: 15px;
+        font-size: 16px;
+    }
+
+    .track span:first-child {
+        font-size: 32px;
+    }
+
+    .gold {
+        max-width: 90%;
+        margin: 0 auto 40px;
+    }
+
+    .nickname {
+        font-size: 22px;
+    }
+
+    .location {
+        font-size: 14px;
+    }
+
+    .pricebox {
+        width: 95%;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .trackimg {
+        max-width: 100%;
+        height: auto;
+        max-height: 250px;
+    }
+
+    .nickname2 {
+        font-size: 18px;
+    }
+
+    .distance {
+        font-size: 24px;
+    }
+
+    .runner-grid {
+        justify-content: space-around;
+    }
+
+    .runner-item {
+        flex-basis: calc(50% - 20px);
+        margin-bottom: 30px;
+    }
+
+    .runner-item:nth-child(4),
+    .runner-item:nth-child(5) {
+        flex-basis: calc(50% - 20px);
+    }
+
+    .img1 {
+        width: 150px;
+        height: 150px;
+    }
+
+    .img2 {
+        width: 120px;
+        height: 120px;
+    }
+
+    #track1 {
+        padding-left: 50px;
+        padding-right: 50px;
+    }
+
+    .dot {
+        width: 35px;
+        height: 35px;
+        font-size: 20px;
+        top: 0;
+        left: 10px;
+    }
+}
+
+@media (max-width: 425px) {
+
+    .track {
+        margin-left: 10px;
+        font-size: 14px;
+    }
+
+    .track span:first-child {
+        font-size: 28px;
+    }
+
+    .gold {
+        width: 100%;
+        max-width: 300px;
+        margin: 0 auto 30px;
+        padding: 10px;
+        box-sizing: border-box;
+    }
+
+    .nickname {
+        font-size: 18px;
+    }
+
+    
+
+    .pricebox {
+        width: 100%;
+        padding: 0 10px;
+        box-sizing: border-box;
+    }
+
+    .trackimg {
+        width: 100%;
+        height: auto;
+        max-width: 250px;
+        object-fit: cover;
+    }
+
+    .nickname, .location, .distance {
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+    }
+
+    .dot {
+        width: 30px;
+        height: 30px;
+        font-size: 16px;
+        top: -5px;
+        left: 5px;
+    }
+
+    .runner-grid {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .runner-item {
+        flex-basis: 100%;
+        width: 80%;
+        margin: 0 auto 30px;
+    }
+
+    .img1, .img2 {
+        width: 80%;
+        height: 80%;
+    }
+
+     #track1 {
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+}

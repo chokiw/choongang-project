@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.demo.dao.TrackboardDAO">
+	<!-- 추천수가 많은 순으로 sns 게시판 목록 가져오기 -->
+	<select id="listBest" parameterType="sns" resultType="sns">
+		select * from (select a.*, rowNum rn from (
+		select * from sns
+		<where>
+			<if test="keyword != null and search!='subcon'">
+				${search} like '%'||#{keyword}||'%'
+			</if>
+			<if test="keyword != null and search=='subcon'">
+				sns_subject like '%'||#{keyword}||'%' or
+				sns_content like
+				'%'||#{keyword}||'%'
+			</if>
+		</where>
+		order by sns_good desc, sns_date desc
+		) a)
+		where rn between #{startRow}
+		and #{endRow}
+	</select>
+
+	<!-- sns게시판 갯수 불러오기 -->
+	<select id="getTotal" parameterType="sns" resultType="int">
+		select count(*) from sns
+		<where>
+			<if test="keyword != null and search !='subcon'">
+				${search} like '%'||#{keyword}||'%'
+			</if>
+			<if test="keyword != null and search=='subcon'">
+				sns_subject like '%'||#{keyword}||'%' or
+				sns_content like
+				'%'||#{keyword}||'%'
+			</if>
+			<if test="sns_address2 != null">
+				sns_address2 like '%'||#{sns_address2}||'%'
+			</if>
+		</where>
+	</select>
+
+	<!-- 페이지 처리에 의한 sns게시판 데이터리스트 불러오기 -->
+	<select id="list" parameterType="sns" resultType="sns">
+		select * from (select a.*,rowNum rn from (
+		select * from sns
+		<where>
+			<if test="keyword != null and search!='subcon'">
+				${search} like '%'||#{keyword}||'%'
+			</if>
+			<if test="keyword != null and search=='subcon'">
+				sns_subject like '%'||#{keyword}||'%' or
+				sns_content like '%'||#{keyword}||'%'
+			</if>
+			<if test="sns_address2 != null">
+				sns_address2 like '%'||#{sns_address2}||'%'
+			</if>
+		</where>
+		order by sns_no desc) a )
+		where rn between #{startRow} and #{endRow}
+	</select>
+</mapper>

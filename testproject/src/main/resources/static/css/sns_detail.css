@@ -1,0 +1,272 @@
+.sns_title, .sns_writer, .date_read {
+	margin-left: 0;
+	padding: 0 20px;
+}
+
+.sns_title {
+	height: 50px;
+	width: auto;
+	margin-top: 20px;
+	margin-left: 50px;
+	align-items: flex-end;
+	display: flex;
+}
+
+.sns_writer {
+	height: 40px;
+	width: auto;
+	margin-left: 50px;
+	margin-top: 20px;
+	display: flex;
+}
+
+.myimg {
+	height: 40px;
+	width: 40px;
+	border-radius: 50%;
+}
+
+.date_read {
+	height: 40px;
+	margin-left: 100px;
+	justify-content: space-between;
+	display: flex;
+}
+
+.maincontent {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	gap: 300px;
+	margin: 20px 0;
+}
+
+.image-container {
+	width: 100%;
+	max-width: 800px;
+	margin: 0;
+	height: 600px;
+	border: 2px solid #000;
+	overflow: hidden;
+}
+
+.content-info {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+}
+
+.content1 {
+	font-size: 28px;
+	font-family: "Gothic A1", sans-serif;
+	font-style: normal;
+	color: #747474;
+}
+
+.content2 {
+	font-size: 50px;
+	font-weight: 700;
+	font-family: "Bangers", system-ui;
+	letter-spacing: 5px;
+}
+
+.recomend_box {
+	text-align: center;
+}
+
+.recomend {
+	border-style: ridge;
+	border-radius: 50%;
+	height: 100px;
+	width: 100px;
+	display: inline-block;
+	text-align: center;
+	background: linear-gradient(to bottom, white 50%, #d92929 50%);
+	background-size: 10% 200%;
+	background-position: top;
+	transition: background-position 0.5s;
+	text-decoration: none;
+	color: black;
+	margin-top: 20px;
+}
+
+.recomended{
+	border-radius: 50%;
+	height: 100px;
+	width: 100px;
+	display: inline-block;
+	text-align: center;
+	background: #d92929;
+	text-decoration: none;
+	color: black;
+	margin-top: -20px;
+}
+
+.recomend:hover {
+	background-position: bottom;
+}
+
+.run {
+	font-family: "Bangers", system-ui;
+	color: #ffc107;
+	font-size: 24px;
+}
+
+.action-buttons {
+	display: flex;
+	justify-content: flex-end;
+	gap: 10px;
+	margin-top: 20px;
+}
+
+.delete {
+	text-decoration: none;
+	color: #333333;
+	font-size: 18px;
+	font-family: 'Gothic A1', sans-serif;
+	cursor: pointer;
+	display: inline-block;
+}
+
+.button-style {
+	background: none;
+	border: none;
+	padding: 0;
+	margin: 0;
+	font: inherit;
+	color: inherit;
+	font-size: 18.2px;
+	font-style: normal;
+}
+
+.material-symbols-outlined {
+    vertical-align: middle;
+}
+
+.action-buttons {
+	display: flex;
+	align-items: center;
+	gap: 10px; /* 버튼 사이의 간격 */
+}
+
+/* 호버 효과 (선택적) */
+.delete:hover, .button-style:hover {
+	color: #007bff; /* 호버 시 색상 변경 */
+}
+
+@media ( max-width : 1200px) {
+	.maincontent {
+		flex-direction: column;
+		align-items: center;
+		gap: 50px;
+	}
+	.image-container {
+		padding-bottom: 85%;
+		max-width: 85%;
+	}
+	.content-info {
+		width: 100%;
+	}
+}
+
+@media ( max-width : 768px) {
+	.sns_title, .sns_writer, .date_read {
+		margin-left: 0;
+		padding: 0 20px;
+	}
+	.image-container {
+		width: 85%;
+	}
+	.content1 {
+		font-size: 20px;
+	}
+	.content2 {
+		font-size: 32px;
+	}
+	.action-buttons {
+		flex-wrap: wrap;
+	
+	}
+	
+}
+
+@media ( max-width : 425px) {
+	.sns_title, .sns_writer, .date_read {
+		padding: 0 10px;
+	}
+	.content1 {
+		font-size: 18px;
+	}
+	.content2 {
+		font-size: 28px;
+	}
+	.image-container {
+		width: 80%;
+	}
+}
+
+.dot {
+	overflow: hidden;
+	float: left;
+	width: 12px;
+	height: 12px;
+	background:
+		url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/mini_circle.png');
+}
+
+.dotOverlay {
+	position: relative;
+	bottom: 10px;
+	border-radius: 6px;
+	border: 1px solid #ccc;
+	border-bottom: 2px solid #ddd;
+	float: left;
+	font-size: 12px;
+	padding: 5px;
+	background: #fff;
+}
+
+.dotOverlay:nth-of-type(n) {
+	border: 0;
+	box-shadow: 0px 1px 2px #888;
+}
+
+.number {
+	font-weight: bold;
+	color: #ee6152;
+}
+
+.dotOverlay:after {
+	content: '';
+	position: absolute;
+	margin-left: -6px;
+	left: 50%;
+	bottom: -8px;
+	width: 11px;
+	height: 8px;
+	background:
+		url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/vertex_white_small.png')
+}
+
+.distanceInfo {
+	position: relative;
+	top: 5px;
+	left: 5px;
+	list-style: none;
+	margin: 0;
+}
+
+.distanceInfo .label {
+	display: inline-block;
+	width: 50px;
+}
+
+.distanceInfo:after {
+	content: none;
+}
+
+.image-container {
+	width: 90%;
+}

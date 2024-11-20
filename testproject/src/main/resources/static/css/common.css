@@ -1,0 +1,250 @@
+body, html {
+	margin: 0;
+	padding: 0;
+	font-family: 'Gothic A1', sans-serif;
+}
+
+.container {
+	display: grid;
+	grid-template-columns: 300px 1fr;
+	grid-template-rows: auto auto 1fr;
+	min-height: 100vh;
+	gap: 0;
+}
+
+.head {
+	grid-column: 1/-1;
+	grid-row: 1/2;
+	background-color: #305346;
+	padding: 10px 20px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	position: sticky;
+	top: 0;
+	z-index: 1000;
+}
+
+.title {
+	font-family: "Bangers", system-ui;
+	color: #cf3e00;
+	font-size: 60px;
+	text-decoration: none;
+}
+
+.header-buttons {
+	display: flex;
+	gap: 20px;
+}
+
+.mypage, .logout {
+	padding: 5px 10px;
+	background-color: #305346;
+	border-radius: 5px;
+	transition: background-color 0.3s;
+}
+
+.mypage:hover, .logout:hover {
+	background-color: gray;
+}
+
+.mypage_text {
+	display: flex;
+	align-items: center;
+	color: #f4efe2;
+	text-decoration: none;
+	font-weight: 600;
+}
+
+.mypage_text img {
+	margin-right: 5px;
+}
+
+.logout_text {
+	display: flex;
+	align-items: center;
+	color: #f4efe2;
+	text-decoration: none;
+	font-weight: 600;
+	margin-top: 4.3px;
+}
+
+.side {
+	grid-column: 1/2;
+	grid-row: 2/3;
+	padding: 20px;
+	position: sticky;
+	top: 100px;
+	height: calc(100vh - 100px);
+	overflow-y: auto;
+	width: 180px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border-right-color: #b4b4b4;
+	border-right-style: groove;
+	border-right-width: 1px;
+	border-left-color: #b4b4b4;
+	border-left-style: groove;
+	border-left-width: 1px;
+	margin-left: 40px;
+}
+
+.side-menu {
+	display: flex;
+	flex-direction: column;
+	gap: 100px;
+	width: 100%;
+	align-items: center;
+}
+
+.menu-item {
+	width: 140px;
+	height: 40px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border-radius: 5px;
+	transition: background-color 0.3s;
+	margin-left: 0px;
+}
+
+.menu-item:hover {
+	background-color: #b4b4b4;
+}
+
+.menu-item a {
+	color: black;
+	text-decoration: none;
+	font-weight: 600;
+	font-size: 22px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	height: 100%;
+}
+
+.menu-item i {
+	margin-right: 10px;
+}
+
+.content {
+	grid-column: 2/3;
+	grid-row: 2/3;
+	padding: 20px;
+	box-sizing: border-box;
+}
+
+@media ( max-width : 1200px) {
+	.container {
+		grid-template-columns: 1fr;
+	}
+	.side {
+		grid-column: 1/-1;
+		grid-row: 2/3;
+		position: static;
+		width: 100%;
+		height: auto;
+		padding: 10px;
+		justify-content: center;
+		margin-left: 0px;
+		border-right-width: 0px;
+		border-left-width: 0px;
+		border-bottom-width: 1px;
+		border-bottom-style: ridge;
+		border-bottom-color: #b4b4b4;
+	}
+	.side-menu {
+		flex-direction: row;
+		justify-content: space-around;
+		gap: 20px;
+	}
+	.menu-item {
+		margin-left: 0;
+		/* 작은 화면에서는 여백 제거 */
+	}
+	.content {
+		grid-column: 1/-1;
+		grid-row: 3/4;
+		padding: 10px;
+	}
+}
+
+@media ( max-width : 768px) {
+	.head {
+		flex-direction: column;
+		align-items: flex-start;
+	}
+	.header-buttons {
+		margin-top: 10px;
+	}
+	.title {
+		font-size: 40px;
+	}
+	
+	.side {
+		height: auto;
+		padding: 5px;
+		margin-left: 0px;
+	}
+	.side-menu {
+		flex-direction: row;
+		justify-content: space-between;
+		width: 100%;
+	}
+	.menu-item {
+		width: 30%;
+		height: auto;
+	}
+	.menu-item a {
+		flex-direction: column;
+		font-size: 14px;
+		text-align: center;
+	}
+	  .large-icon {
+    font-size: 30px;  /* 작은 화면에서의 크기 */
+    margin-left: 10px;
+    font-variation-settings:
+     'opsz' 30
+  }
+	
+	.main-title {
+		font-size: 28px;
+	}
+	.side-content h2 {
+		font-size: 24px;
+	}
+	.content {
+		padding: 5px;
+		/* 더 작은 화면에서 패딩 더 줄임 */
+	}
+}
+
+@media ( max-width : 425px) {
+	.title {
+		font-size: 30px;
+	}
+	.side {
+		height: 100px;
+		display: flex;
+		align-items: center;
+		margin-left: 0px;
+	}
+	.side-menu {
+		flex-direction: row;
+		justify-content: space-between;
+		width: 100%;
+	}
+	.menu-item a {
+		font-size: 12px;
+	}
+	.menu-item i {
+		font-size: 20px;
+	}
+	  .large-icon {
+    font-size: 30px;  /* 작은 화면에서의 크기 */
+    font-variation-settings:
+     'opsz' 30
+  }
+}

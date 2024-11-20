@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.demo.dao.MypageDAO">
+	<!-- 회원정보를 알기 위한 쿼리문 -->
+	<select id="getMember" parameterType="String"
+		resultType="runner">
+		select * from runner where user_id=#{user_id}
+	</select>
+	<!-- 알람페이지 조회수를 알아내서 알람이 있으면 회원이름 옆 종에 빨간점을 띄워서 알려주기 위해서 사용 -->
+	<select id="getAlarm" parameterType="String" resultType="alarm">
+		select *
+		from alarm where user_id = #{user_id}
+	</select>
+</mapper>
