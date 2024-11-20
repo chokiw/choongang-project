@@ -102,6 +102,12 @@ input:focus {
 	cursor: pointer;
 }
 
+#submit_button:disabled {
+    background-color: #cccccc;
+    color: #666666;
+    cursor: not-allowed;
+}
+
 @media ( max-width : 768px) {
 	.member {
 		width: 95%;
