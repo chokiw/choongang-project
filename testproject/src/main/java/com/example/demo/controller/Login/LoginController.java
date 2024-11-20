@@ -1,11 +1,8 @@
 package com.example.demo.controller.Login;
 
 import org.apache.commons.mail.HtmlEmail;
-<<<<<<< HEAD
-=======
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
->>>>>>> 852749dbb8e1bc775bc9fbd8ad439c3fac4a5c07
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;

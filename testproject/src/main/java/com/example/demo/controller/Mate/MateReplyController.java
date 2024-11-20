@@ -13,7 +13,6 @@ import com.example.demo.model.MateReplyBoard;
 import com.example.demo.model.Member;
 import com.example.demo.model.RecruitBoard;
 import com.example.demo.service.MateReplyServiceImpl;
-import com.example.demo.service.ProjectService;
 
 
 @Controller

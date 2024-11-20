@@ -80,10 +80,6 @@ public class MateDetailController {
 		
 		if("start".equals(applyType)) {
 			
-			apply.setApply_del(0);
-			alarm.setAlarm_content("참가신청이 완료 되었습니다.");
-			alarm.setAlarm_subject("참가신청 알림");
-			
 			// 글쓴 사람에게 알림 추가
 			Alarm writerAlarm = new Alarm();
 			writerAlarm.setUser_id(writer_id);

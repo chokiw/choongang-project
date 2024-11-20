@@ -42,37 +42,37 @@ $(function(){
 	   })
 })
     
-    $(function(){
-    	$('#recruit_r_content').keyup(function(){
-    		bytecheck(this);
-    	});
-    });
+//     $(function(){
+//     	$('#recruit_r_content').keyup(function(){
+//     		bytecheck(this);
+//     	});
+//     });
     
     
     
-    function bytecheck(obj){
-    	var txt = $(obj).val();
-		var text = byteCount(txt);
-    	$('#bytecount').text(text);
+//     function bytecheck(obj){
+//     	var txt = $(obj).val();
+// 		var text = byteCount(txt);
+//     	$('#bytecount').text(text);
 
-    }        
+//     }        
     
-    function byteCount(str) {
-  		let count = 0;
-  		for (let i = 0; i < str.length; i++) {
-    		let charCode = str.charCodeAt(i);
-    	if (charCode <= 0x7f) {
-      		count += 1;
-    	} else if (charCode <= 0x7ff) {
-      		count += 2;
-    	} else if (charCode <= 0xffff) {
-      		count += 3;
-    	} else {
-      		count += 4;
-    	  }
-  		}
-  		return count;
-	}
+//     function byteCount(str) {
+//   		let count = 0;
+//   		for (let i = 0; i < str.length; i++) {
+//     		let charCode = str.charCodeAt(i);
+//     	if (charCode <= 0x7f) {
+//       		count += 1;
+//     	} else if (charCode <= 0x7ff) {
+//       		count += 2;
+//     	} else if (charCode <= 0xffff) {
+//       		count += 3;
+//     	} else {
+//       		count += 4;
+//     	  }
+//   		}
+//   		return count;
+// 	}
     
 $(function() {
 	$('#rlist').load('/rlist/num/${board.recruit_no}')
