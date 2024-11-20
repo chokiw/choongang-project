@@ -37,7 +37,6 @@ tr:hover {
 }
 
 .col1,
-.col5,
 .col6 {
     width: 80px;
 }
@@ -110,7 +109,6 @@ select {
     }
 
     .col1,
-    .col5,
     .col6 {
         width: auto;
     }

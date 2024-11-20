@@ -67,8 +67,22 @@
 						<td>${board.user_id}</td>
 						<td><a
 							href="sns_detail?pageNum=${pageNum}&sns_no=${board.sns_no}">${board.sns_subject}</a></td>
-						<td><fmt:formatDate value="${board.sns_date}"
-								pattern="yyyy-MM-dd HH:mm:ss" /></td>
+							
+						<td>
+						<c:set var="now" value="<%=new java.util.Date()%>" /> <fmt:formatDate
+								var="today" value="${now}" pattern="yyyyMMdd" /> <fmt:formatDate
+								var="postDate" value="${board.sns_date}" pattern="yyyyMMdd" />
+
+							<c:choose>
+								<c:when test="${today eq postDate}">
+									<fmt:formatDate value="${board.sns_date}" pattern="HH:mm" />
+								</c:when>
+								<c:otherwise>
+									<fmt:formatDate value="${board.sns_date}" pattern="yyyy-MM-dd" />
+								</c:otherwise>
+							</c:choose>
+						</td>
+															
 						<td>${board.sns_readcount}</td>
 						<td>${board.sns_good}</td>
 					</tr>
