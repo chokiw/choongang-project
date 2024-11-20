@@ -124,6 +124,14 @@ label.action-button {
     width: 800px;
 }
 
+#map {
+	width: 800px;
+	margin: 0;
+	height: 600px;
+	border: 2px solid #000;
+	overflow: hidden;
+}
+
 .content-info {
     display: flex;
     flex-direction: column;
@@ -203,6 +211,11 @@ input[type=number] {
     .mate_count{
         margin-left: 5px;
     }
+    
+    #map {
+		padding-bottom: 85%;
+		max-width: 85%;
+	}
 
 }
 
@@ -222,6 +235,10 @@ input[type=number] {
     .content2 {
         font-size: 32px;
     }
+    
+     #map {
+		width: 85%;
+	}
 
     .button-container {
         flex-direction: column;
@@ -251,7 +268,10 @@ input[type=number] {
     .content2 {
         font-size: 28px;
     }
-
+	
+	  #map {
+		width: 90%;
+	}
   
 
 }

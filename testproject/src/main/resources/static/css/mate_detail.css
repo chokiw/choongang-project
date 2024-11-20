@@ -22,10 +22,6 @@
 	display: flex;
 }
 
-a:link {
-	text-decoration : none;
-}
-
 .myimg {
 	height: 40px;
 	width: 40px;
@@ -142,6 +138,10 @@ a:link {
 	font-style: normal;
 }
 
+.material-symbols-outlined {
+    vertical-align: middle;
+}
+
 .action-buttons {
 	display: flex;
 	align-items: center;
@@ -164,7 +164,7 @@ a:link {
 	}
 	.image-container {
 		padding-bottom: 85%;
-		max-width: 100%;
+		max-width: 85%;
 	}
 }
 
@@ -191,10 +191,10 @@ a:link {
 	}
 	.action-buttons {
 		flex-wrap: wrap;
-		justify-content: center;
+		
 	}
 	.image-container {
-		width: 100%;
+		width: 85%;
 	}
 }
 
@@ -271,5 +271,5 @@ a:link {
 }
 
 .image-container {
-	width: 80%;
+	width: 90%;
 }

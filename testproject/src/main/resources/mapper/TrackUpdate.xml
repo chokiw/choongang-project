@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.demo.dao.TrackUpdateDAO">
+	<!-- sns게시판 목록 가져오기 -->
+	<select id="getboard" parameterType="int" resultType="sns">
+		select *
+		from sns where sns_no=#{sns_no}
+	</select>
+	<!-- runner_date에서 특정 runner_date_no에 따라서 리스트 가져오기 -->
+	<select id="getrdata" parameterType="int"
+		resultType="runner_data">
+		select * from runner_data where
+		runner_data_no=#{runner_data_no}
+	</select>
+	<!-- coordinate에서 특정 runner_date_no에 따라서 리스트 가져오기 -->
+	<select id="getcdata" parameterType="int"
+		resultType="coordinate">
+		select * from coordinate where
+		runner_data_no=#{runner_data_no} order by coordinate_no
+	</select>
+	<!-- 트랙 게시판 수정 -->
+	<update id="updateboard" parameterType="sns">
+		update sns set runner_data_no=#{runner_data_no}, sns_address1= #{sns_address1}, sns_address2 = #{sns_address2}, sns_subject = #{sns_subject},sns_content = #{sns_content} where sns_no = #{sns_no}
+	</update>
+</mapper>
