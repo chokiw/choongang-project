@@ -15,7 +15,7 @@
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script src="https://kit.fontawesome.com/5e485453d8.js" crossorigin="anonymous"></script>
-<link href="/css/sns_board.css" rel="stylesheet">
+<link href="/css/sns_write_list.css" rel="stylesheet">
 <link href="/css/snslist.css" rel="stylesheet">
 
 <script src="http://code.jquery.com/jquery-latest.js"></script>
@@ -30,22 +30,21 @@ function goback(runner_data_no){
 <title>Insert title here</title>
 </head>
 <body>
-	<div align="center">
-		<h2>게시판 목록</h2>
-		<table>
+	<div>
+	<h2 align="center">트랙 목록</h2>
+		<table class="list">
 			<colgroup>
                     <col class="col1">
                     <col class="col2">
                     <col class="col3">
                     <col class="col4">
-                    <col class="col5">
-                    <col class="col6">
                 </colgroup>
+               
 			<tr>
-				<td>번호</td>
-				<td>날짜</td>
-				<td>거리</td>
-				<td>시간</td>
+				<th>번호</th>
+				<th>날짜</th>
+				<th>거리</th>
+				<th>시간</th>
 			</tr>
 			<c:if test="${empty list}">
 				<tr>
