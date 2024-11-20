@@ -71,12 +71,13 @@ function getsearchfisrt() {
 				<th>작성자</th>
 				<th>제목</th>
 				<th>작성일</th>
+				<th>지역</th>
 				<th>조회수</th>
 				<th>추천수</th>
 			</tr>
 			<c:if test="${empty list}">
 				<tr>
-					<td colspan="5">데이터가 없습니다</td>
+					<td colspan="7">데이터가 없습니다</td>
 				</tr>
 			</c:if>
 			<c:if test="${not empty list}">
@@ -89,6 +90,7 @@ function getsearchfisrt() {
 							href="sns_detail?pageNum=${pageNum}&sns_no=${board.sns_no}">${board.sns_subject}</a></td>
 						<td><fmt:formatDate value="${board.sns_date}"
 								pattern="yyyy-MM-dd HH:mm:ss" /></td>
+						<td>${board.sns_address1 }<br>${board.sns_address2 }</td>
 						<td>${board.sns_readcount}</td>
 						<td>${board.sns_good}</td>
 

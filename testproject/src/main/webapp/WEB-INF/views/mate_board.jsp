@@ -94,6 +94,7 @@
                 <span style="font-size: 36px; font-weight: 700;">메이트 게시판</span><br><br>
                 <span style="color: gray;">함께 달리고 싶은 사람을 모집하고 신청할 수 있습니다.</span>
             </div>
+            <br><!--줄바꿈 추가 -->
 
             <div class="locationbox">
 	<form>

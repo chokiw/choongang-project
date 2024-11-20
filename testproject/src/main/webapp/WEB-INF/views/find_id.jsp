@@ -29,7 +29,7 @@
         &nbsp;<input type="password" size="7" maxlength="7" id="user_jumin2" name="user_jumin2" class="box"><br>
         <div id="jumincheck" class="alertmsg"></div><br>
 
-        <input type="submit"  class="idok" id="id_button" disabled value="아이디 찾기" >
+        <input type="submit"  class="idok" id="id_button" disabled value="아이디찾기" >
         <input type="button"  class="idok" value="취소" class="idok" onclick="window.close();">
     </form>
 </body>

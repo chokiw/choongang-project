@@ -54,28 +54,6 @@
 	overflow: hidden;
 }
 
-.content-info {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-	text-align: center;
-}
-
-.content1 {
-	font-size: 28px;
-	font-family: "Gothic A1", sans-serif;
-	font-style: normal;
-	color: #747474;
-}
-
-.content2 {
-	font-size: 50px;
-	font-weight: 700;
-	font-family: "Bangers", system-ui;
-	letter-spacing: 5px;
-}
-
 .button-container {
 	display: flex;
 	justify-content: center;
@@ -139,7 +117,7 @@
 }
 
 .material-symbols-outlined {
-    vertical-align: middle;
+	vertical-align: middle;
 }
 
 .action-buttons {
@@ -159,9 +137,6 @@
 		align-items: center;
 		gap: 50px;
 	}
-	.content-info {
-		width: 100%;
-	}
 	.image-container {
 		padding-bottom: 85%;
 		max-width: 85%;
@@ -172,9 +147,6 @@
 	.main-title {
 		font-size: 28px;
 	}
-	.side-content h2 {
-		font-size: 24px;
-	}
 	.content {
 		padding: 3px;
 		/* 더 작은 화면에서 패딩 더 줄임 */
@@ -183,15 +155,8 @@
 		margin-left: 0;
 		padding: 0 20px;
 	}
-	.content1 {
-		font-size: 20px;
-	}
-	.content2 {
-		font-size: 32px;
-	}
 	.action-buttons {
 		flex-wrap: wrap;
-		
 	}
 	.image-container {
 		width: 85%;
@@ -201,12 +166,6 @@
 @media ( max-width : 425px) {
 	.sns_title, .sns_writer, .date_read {
 		padding: 0 10px;
-	}
-	.content1 {
-		font-size: 18px;
-	}
-	.content2 {
-		font-size: 28px;
 	}
 }
 
@@ -251,23 +210,6 @@
 	height: 8px;
 	background:
 		url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/vertex_white_small.png')
-}
-
-.distanceInfo {
-	position: relative;
-	top: 5px;
-	left: 5px;
-	list-style: none;
-	margin: 0;
-}
-
-.distanceInfo .label {
-	display: inline-block;
-	width: 50px;
-}
-
-.distanceInfo:after {
-	content: none;
 }
 
 .image-container {

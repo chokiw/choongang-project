@@ -214,8 +214,9 @@
 								<c:if
 									test="${good.sns_no == board.sns_no && sessionScope.member.user_id == good.user_id}">
 									<!-- 추천된 상태 -->
+									<!-- 추천된 상태일때 색이 버튼의 색이 채워져있도록 변경 -->
 									<div class="recomended">
-										<span class="material-symbols-outlined large-icon"
+										<span class="material-symbols-outlined large-icon-hot"
 											style="margin-top: 20px;">local_fire_department </span><br>
 										<span class="run">RUN</span>
 									</div>
@@ -223,7 +224,7 @@
 							</c:forEach>
 						</c:when>
 						<c:otherwise>
-							<span class="material-symbols-outlined large-icon">local_fire_department</span>
+							<span class="material-symbols-outlined large-icon-hot">local_fire_department</span>
 							<br>
 							<span class="run">RUN</span>
 						</c:otherwise>
@@ -244,10 +245,7 @@ function toggleLike(event, sns_no) {
     }).then(response => response.json())
       .then(data => {
           console.log("좋아요 토글 결과:", data);
-          
-
-          
-          
+                    
           location.reload(); // 새로고침
       })
       .catch(error => {

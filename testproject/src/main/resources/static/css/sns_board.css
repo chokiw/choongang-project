@@ -28,11 +28,21 @@
     align-items: center;
 }
 
+.hot.active {
+	background-color:  #cf3e00;
+}
+
+
 .hot_text {
     font-weight: 600;
     text-decoration: none;
     color: #cf3e00;
 }
+
+.hot_text.active {
+	color: white;
+}
+
 
 table {
     border-collapse: collapse;

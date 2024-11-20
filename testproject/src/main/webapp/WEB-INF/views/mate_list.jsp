@@ -70,6 +70,7 @@ function getsearchfisrt() {
 				<th>작성자</th>
 				<th>제목</th>
 				<th>작성일</th>
+				<th>지역</th>
 				<th>조회수</th>
 			</tr>
 			<c:if test="${empty list}">
@@ -87,6 +88,7 @@ function getsearchfisrt() {
 							href="mate_detail?pageNum=${pageNum}&recruit_no=${board.recruit_no}">${board.recruit_subject}</a></td>
 						<td><fmt:formatDate value="${board.recruit_date}"
 								pattern="yyyy-MM-dd HH:mm:ss" /></td>
+						<td>${board.recruit_address1 }<br>${board.recruit_address2 }</td>
 						<td>${board.recruit_readcount}</td>
 					</tr>
 					<c:set var="no1" value="${no1 - 1}"></c:set>

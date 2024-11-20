@@ -25,28 +25,49 @@
 <link href="/css/sns_board.css" rel="stylesheet">
 <script src="/js/sns_board.js"></script>
 <script type="text/javascript">
-	$(function() {
+
+var isBestList = false; // 전역 변수로 선언(인기글 목록을 불러오지 않음)
+	$(function() {	
 		// sns게시글 요청
 		$('#board').load('${path}/snslist');
 	});
 		// sns 인기글 순으로 리스트 요청
 	 function getlist(pageNum) {
+		 isBestList = false; // 일반 게시글 목록 상태로 설정
 		var best = '${best}';
 		if (best === 'true') {
 			getBestList(pageNum);
 		} else {
 			var uri = '${path}/snslist?pageNum=' + pageNum;
 			$('#board').load(uri);
+			// active 클래스를 hot 요소에서 제거
+	        $('.hot').removeClass('active');
+	        $('.hot_text').removeClass('active');
 		}
 	}
-
-	function getBestList(pageNum) {
-		resetSelectValues();
-		var uri = '${path}/snslist/best?pageNum=' + pageNum;
-		$('#board').load(uri);
-	} 
 	
+	 
+		
+	 function getBestList(pageNum) {
+		 isBestList = !isBestList; // 상태 토글
+		    if (!isBestList) {
+	
+		        var uri = '${path}/snslist?pageNum=' + pageNum;
+		        $('#board').load(uri);
+		        $('.hot').removeClass('active');
+		        $('.hot_text').removeClass('active');
+		    } else {
+		        // 인기글 목록으로 전환
+		        isBestList = true;
+		        resetSelectValues();
+		        var uri = '${path}/snslist/best?pageNum=' + pageNum;
+		        $('#board').load(uri);
+		        $('.hot').addClass('active');
+		        $('.hot_text').addClass('active');
+		    }
+		}
 
+	
 	
 	// 지역별로 글 리스트 이동
 	$(function() {
@@ -92,6 +113,12 @@
 	            data: formData,
 	            success: function(response) {
 	                $('#board').html(response);
+	                isBestList = false; // 일반 게시글 목록 상태로 설정
+	                
+	                
+	             // active 클래스를 hot 요소에서 제거
+	                $('.hot').removeClass('active');
+	                $('.hot_text').removeClass('active');	             
 	            },
 	            error: function(xhr, status, error) {
 	                console.error("AJAX 요청 실패:", error);
@@ -173,8 +200,7 @@
 
 				<!-- 인기글 버튼 -->
 				<div class="hot">
-					<a href="javascript:getBestList(1)" class="hot_text"> <i
-						class="fa-solid fa-fire"></i> 인기글
+					<a href="javascript:getBestList(1)" class="hot_text">  인기글
 					</a>
 				</div>
 			</div>
