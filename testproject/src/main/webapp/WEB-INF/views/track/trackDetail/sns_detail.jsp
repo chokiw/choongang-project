@@ -65,18 +65,32 @@
 			</div>
 
 			<div class="sns_writer">
-				<!-- 이미지를 클릭 했을 때 userpage로 이동 -->
-				<a
-					href="${pageContext.request.contextPath}/userpage?user_id=${board.user_id}">
-					<img src="${pageContext.request.contextPath}/uimg/${userphoto}"
-					class="myimg">
+				<!-- 서버에서 현재 로그인한 사용자 ID를 가져온다 -->
+				<c:set var="userID" value="${board.user_id}"/>
+				<c:set var="loginID" value="${sessionScope.member.user_id}"/>
+				
+				<c:choose>
+					<c:when test="${userID == loginID}">
+				
+					<!-- 자신의 글일 경우 mypage로 이동 -->
+					<a href="${pageContext.request.contextPath}/mypage">
+						<img src="${pageContext.request.contextPath}/uimg/${userphoto}" class="myimg">
+					</a>
+					<a href="${pageContext.request.contextPath}/mypage">
+					<span style="font-size: 14px; font-weight: 600; font-family: 'Gothic A1', sans-serif; margin-top: 15px; margin-left: 10px;">${nickname}</span>
+					</a>
+				</c:when>
+				<c:otherwise>
+				
+				<!-- 다른 사용자의 글일 경우 userpage로 이동 -->
+				<a href="${pageContext.request.contextPath}/userpage?user_id=${board.user_id}">
+					<img src="${pageContext.request.contextPath}/uimg/${userphoto}" class="myimg">
 				</a>
-				<!-- 텍스트를 클릭 했을 때 userpage로 이동 -->
-				<a class="userpage"
-					href="${pageContext.request.contextPath}/userpage?user_id=${board.user_id}">
-					<span
-					style="font-size: 14px; font-weight: 600; font-family: 'Gothic A1', sans-serif; margin-top: 15px; margin-left: 10px;">${nickname}</span>
+				<a href="${pageContext.request.contextPath}/userpage?user_id=${board.user_id}">
+				<span style="font-size: 14px; font-weight: 600; font-family: 'Gothic A1', sans-serif; margin-top: 15px; margin-left: 10px;">${nickname}</span>
 				</a>
+				</c:otherwise>
+				</c:choose>
 			</div>
 
 			<div class="date_read">
@@ -273,8 +287,8 @@ function toggleLike(event, sns_no) {
 					<c:when test="${member.user_id eq board.user_id}">
 						<a class="delete"
 							href="sns_update?pageNum=${pageNum}&sns_no=${board.sns_no}"
-							style="display: inline-block;"> <span
-							class="material-symbols-outlined"> edit_note </span>&nbsp;수정
+							style="display: inline-block;"> <i
+							class="fa-solid fa-file-pen"></i>&nbsp;수정
 						</a>
 
 						<!-- 삭제버튼 누르면 바로 삭제 완료 alet뜨게함 -->
@@ -282,8 +296,7 @@ function toggleLike(event, sns_no) {
 							<input type="hidden" name="pageNum" value="${pageNum}"> <input
 								type="hidden" name="sns_no" value=${board.sns_no }>
 							<button type="submit" class="delete button-style">
-								<span
-							class="material-symbols-outlined"> delete </span>&nbsp;삭제
+								<i class="fa-regular fa-trash-can"></i>&nbsp;삭제
 							</button>
 						</form>
 
@@ -292,12 +305,11 @@ function toggleLike(event, sns_no) {
 					<c:otherwise>
 						<a class="delete"
 							href="sns_update?pageNum=${pageNum}&sns_no=${board.sns_no}"
-							style="display: none;"> <span
-							class="material-symbols-outlined"> edit_note </span>&nbsp;수정
+							style="display: none;"> <i class="fa-solid fa-file-pen"></i>&nbsp;수정
 						</a>
 
-						<a class="delete" href="snsdelete" style="display: none;"> <span
-							class="material-symbols-outlined"> delete </span>&nbsp;삭제
+						<a class="delete" href="snsdelete" style="display: none;"> <i
+							class="fa-regular fa-trash-can"></i>&nbsp;삭제
 						</a>
 					</c:otherwise>
 				</c:choose>
@@ -305,8 +317,8 @@ function toggleLike(event, sns_no) {
 
 
 
-				<a class="delete" href="javascript:history.back();"><span
-					class="material-symbols-outlined"> format_list_bulleted </span>&nbsp;글목록</a>
+				<a class="delete" href="javascript:history.back();"><i
+					class="fa-solid fa-table-list"></i>&nbsp;글목록</a>
 			</div>
 
 			<!-- 댓글 입력 -->

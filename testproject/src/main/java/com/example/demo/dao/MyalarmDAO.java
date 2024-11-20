@@ -16,4 +16,7 @@ public interface MyalarmDAO {
 	Alarm getDetail(int alarm_no);
 }
 
+	String getWriterID(int recruit_no);
+}
+
 

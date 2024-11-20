@@ -44,9 +44,22 @@
 		update apply set apply_del = #{apply_del}, apply_date = sysdate
 		where recruit_no = #{recruit_no} and user_id = #{user_id}
 	</update>
+	
 	<!-- 신청 취소 알림 -->
 	<insert id="getcancelalarm" parameterType="alarm">
 		insert into alarm (alarm_no, user_id, recruit_no, alarm_content, alarm_date, alarm_subject)
 		values (alarm_seq.nextval, #{user_id}, #{recruit_no}, #{alarm_content}, sysdate, #{alarm_subject})
 	</insert>
+		
+	<!-- 글 작성한 사람의 ID 조회 -->
+	<select id="getWriter_id" parameterType="int" resultType="String">
+    	select user_id from recruit where recruit_no = #{recruit_no}
+	</select>
+	
+	<!-- 중복 신청 방지를 위한 참가 후 참가 버튼 비활성화 -->
+	<select id="isAlreadyApplied" parameterType="map" resultType="int">
+    select count(*) from apply where recruit_no = #{recruit_no} and
+    		user_id = #{user_id} and apply_del = 0
+	</select>
+	
 </mapper>

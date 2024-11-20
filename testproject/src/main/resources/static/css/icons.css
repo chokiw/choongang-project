@@ -28,10 +28,11 @@
      'opsz' 36
 }
 
-/* 추천버튼 누를때 나오는 아이콘 */
-.large-icon-hot {
-	font-size: 36px;
-	font-variation-settings: 'opsz' 36
+.large-icon-recomended {
+  font-size: 36px;
+  
+   font-variation-settings:
+     'opsz' 36
 }
 
 

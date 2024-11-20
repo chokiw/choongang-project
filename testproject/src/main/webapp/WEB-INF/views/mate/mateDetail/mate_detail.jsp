@@ -65,31 +65,64 @@ $(function() {
 					type : "POST",
 					data : {
 						recruit_no : ${board.recruit_no},
-						user_id : "${member.user_id}",
+						user_id : "${sessionScope.member.user_id}",
 						applyType : "start"
 					},
 					success : function(response){
-						alert("참가신청 완료 되었습니다.");
-						location.reload();
+						if (response == -1){
+							alert("글쓴이는 참가 신청이 불가합니다.");
+						}else{
+							alert("참가신청 완료 되었습니다.");
+							location.reload();
+						}
 					}
 				});
 			});
 				
 			$("#stop1").click(function(){
 				$.ajax({
-					url: "${pageContext.request.contextPath}/apply/cancel",
+					url: "${pageContext.request.contextPath}/apply",
 					type : "POST",
 					data : {
 						recruit_no : ${board.recruit_no},
-						user_id : "${member.user_id}",
+						user_id : "${sessionScope.member.user_id}",
 						applyType : "stop"
 					},
 					success : function(response){
-						alert("신청이 취소 되었습니다.");
-						location.reload();
+						if (response == -1){
+							alert("글쓴이는 참가 취소가 불가합니다.");
+						}else{
+							alert("신청이 취소 되었습니다.");
+							location.reload();
+						}
 					}
 				});
 			});
+		});
+		
+		$(document).ready(function () {
+		    $.ajax({
+		        url: "${pageContext.request.contextPath}/checkapply",
+		        type: "GET",
+		        data: {
+		            recruit_no: ${board.recruit_no},
+		            user_id: "${sessionScope.member.user_id}"
+		        },
+		        success: function (isApplied) {
+		        	console.log("isApplied:", isApplied);
+		            if (isApplied) {
+		                // 이미 신청한 경우: 참가신청 비활성화, 참가취소 활성화
+		                console.log("참가신청 버튼 비활성화");
+		                $("#start1").prop("disabled", true);
+		                $("#stop1").prop("disabled", false);
+		            } else {
+		                // 신청하지 않은 경우: 참가신청 활성화, 참가취소 비활성화
+		                console.log("참가신청 버튼 활성화");
+		                $("#start1").prop("disabled", false);
+		                $("#stop1").prop("disabled", true);
+		            }
+		        }
+		    });
 		});
     </script>
 </head>
@@ -111,10 +144,35 @@ $(function() {
                 <span style="font-family: 'Gothic A1', sans-serif; color: #747474;">${board.recruit_address1} ${board.recruit_address2}</span>
             </div>
             <div class="sns_writer">
-                <img src="${pageContext.request.contextPath}/uimg/${member.user_photo }" class="myimg">
-                <span
-                    style="font-size: 14px; font-weight: 600; font-family: 'Gothic A1', sans-serif; margin-top: 15px; margin-left: 10px;">${member.user_nickname}</span>
-            </div>
+            
+            	<!-- 서버에서 현재 로그인한 사용자 ID를 가져온다 -->
+				<c:set var="userID" value="${board.user_id}"/>
+				<c:set var="loginID" value="${sessionScope.member.user_id}"/>
+            	
+            	<c:choose>
+					<c:when test="${userID == loginID}">
+				
+					<!-- 자신의 글일 경우 mypage로 이동 -->
+					<a href="${pageContext.request.contextPath}/mypage">
+						<img src="${pageContext.request.contextPath}/uimg/${userphoto}" class="myimg">
+					</a>
+					<a href="${pageContext.request.contextPath}/mypage">
+					<span style="font-size: 14px; font-weight: 600; font-family: 'Gothic A1', sans-serif; margin-top: 15px; margin-left: 10px;">${nickname}</span>
+					</a>
+				</c:when>
+				<c:otherwise>
+				
+				<!-- 다른 사용자의 글일 경우 userpage로 이동 -->
+				<a href="${pageContext.request.contextPath}/userpage?user_id=${board.user_id}">
+					<img src="${pageContext.request.contextPath}/uimg/${userphoto}" class="myimg">
+				</a>
+				<a href="${pageContext.request.contextPath}/userpage?user_id=${board.user_id}">
+				<span style="font-size: 14px; font-weight: 600; font-family: 'Gothic A1', sans-serif; margin-top: 15px; margin-left: 10px;">${nickname}</span>
+				</a>
+				</c:otherwise>
+				</c:choose>
+			</div>
+			
             <div class="date_read">
                 <span style="font-size: 14px; font-family: 'Gothic A1', sans-serif;">2024-11-01 12:34</span>
                 <span style="font-size: 14px; font-family: 'Gothic A1', sans-serif; float: right; font-weight: 600;">조회수

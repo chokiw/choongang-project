@@ -83,6 +83,13 @@
 	margin-top: 20px;
 }
 
+button:disabled {
+    background-color: #d3d3d3; /* 회색 */
+    color: #a9a9a9; /* 텍스트 회색 */
+    cursor: not-allowed; /* 마우스 커서 변경 */
+    border: 1px solid #d3d3d3; /* 테두리도 회색 */
+}
+
 .action-button {
 	padding: 10px 20px;
 	font-size: 18px;

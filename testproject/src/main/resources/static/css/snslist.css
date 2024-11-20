@@ -34,7 +34,3 @@
 .list a:hover{
 	text-decoration: underline;
 }
-
-.list a:visited{
-	color: black;
-}

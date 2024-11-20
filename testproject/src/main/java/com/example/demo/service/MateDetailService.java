@@ -51,4 +51,14 @@ public class MateDetailService {
 	public void getcancelalarm(Alarm alarm) {
 		dao.getcancelalarm(alarm);
 	}
+
+	public String getWriter_id(int recruit_no) {
+		return dao.getWriter_id(recruit_no);
+	}
+
+	public boolean isAlreadyApplied(int recruit_no, String user_id) {
+		return dao.isAlreadyApplied(recruit_no, user_id) > 0;
+	}
+
+
 }
