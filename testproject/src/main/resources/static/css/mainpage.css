@@ -88,21 +88,6 @@ img {
 
 }
 
-.trackimg:hover {
-    /* img 마우스 오버시*/
-    cursor: pointer;
-    transform: scale(1.5);
-    /* 마우스 오버시 이미지 크기를 1.1 배만큼 확대시킨다. */
-    -o-transform: scale(1.5);
-    -moz-transform: scale(1.5);
-    -webkit-transform: scale(1.5);
-    transition: transform .35s;
-    -o-transition: transform .35s;
-    -moz-transition: transform .35s;
-    -webkit-transition: transform .35s;
-    /* 마우스 오버시 이미지가 즉시 커지지않고 30.5 second 의 시간에 걸쳐 커진다 애니메이션 효과*/
-
-}
 
 .runner-grid {
     display: flex;
@@ -132,7 +117,7 @@ img {
     /* 추가 */
 }
 
-.dot {
+.dotm {
     border-radius: 50%;
     width: 40px;
     height: 40px;
@@ -272,7 +257,7 @@ a {
         padding-right: 50px;
     }
 
-    .dot {
+    .dotm {
         width: 35px;
         height: 35px;
         font-size: 20px;
@@ -324,7 +309,7 @@ a {
         overflow-wrap: break-word;
     }
 
-    .dot {
+    .dotm {
         width: 30px;
         height: 30px;
         font-size: 16px;
@@ -353,4 +338,67 @@ a {
         padding-right: 0;
     }
 
+}
+.dot {
+	overflow: hidden;
+	float: left;
+	width: 12px;
+	height: 12px;
+	background:
+		url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/mini_circle.png');
+}
+
+.dotOverlay {
+	position: relative;
+	bottom: 10px;
+	border-radius: 6px;
+	border: 1px solid #ccc;
+	border-bottom: 2px solid #ddd;
+	float: left;
+	font-size: 12px;
+	padding: 5px;
+	background: #fff;
+}
+
+.dotOverlay:nth-of-type(n) {
+	border: 0;
+	box-shadow: 0px 1px 2px #888;
+}
+
+.number {
+	font-weight: bold;
+	color: #ee6152;
+}
+
+.dotOverlay:after {
+	content: '';
+	position: absolute;
+	margin-left: -6px;
+	left: 50%;
+	bottom: -8px;
+	width: 11px;
+	height: 8px;
+	background:
+		url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/vertex_white_small.png')
+}
+
+.distanceInfo {
+	position: relative;
+	top: 5px;
+	left: 5px;
+	list-style: none;
+	margin: 0;
+}
+
+.distanceInfo .label {
+	display: inline-block;
+	width: 50px;
+}
+
+.distanceInfo:after {
+	content: none;
+}
+
+.image-container {
+	width: 90%;
 }
