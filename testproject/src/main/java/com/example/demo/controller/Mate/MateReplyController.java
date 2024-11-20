@@ -28,19 +28,11 @@ public class MateReplyController {
 						@SessionAttribute(name = "member", required = false) Member member,
 						Model model) {
 		
-//		System.out.println("rlist in");
 		
 		RecruitBoard board = rbs.rgetdetail(num);
-		
-//		System.out.println("board no : "+ board.getRecruit_no());
-//		System.out.println("board writer : "+board.getUser_id());
-//		System.out.println("sesseion user id : " + member.getUser_id());
 					
 		List<MateReplyBoard> rlist = rbs.list(num);	// 댓글 목록			
 
-//		System.out.println("rlist : " + rlist);
-		
-		
 		model.addAttribute("rlist", rlist);
 		model.addAttribute("board", board);
 		return "/mate/mateDetail/rlist";		// 웹브라우저에 출력되는 결과가 callback함수로 리턴된다.
@@ -53,22 +45,9 @@ public class MateReplyController {
 	@RequestMapping("/sInsert")
 	public String sInsert(MateReplyBoard rb, Model model) {		
 	
-//		System.out.println("sinsert in");	
-		
-//		System.out.println("댓글 번호 : " + rb.getRecruit_r_no());
-//		System.out.println("게시판 번호 : " + rb.getRecruit_no());
 		
 		int recruit_r_no = rb.getRecruit_r_no();
-		
-//		int recruit_r_count = 0, recruit_r_level = 0, recruit_r_step = 0;
-		
-//		System.out.println("부모 댓글번호 : "+ recruit_r_no);
-		
-		
-		
-		int number = rbs.getMaxNum();		// count 최대값+1		count = ref
-//		System.out.println("number : " + number);
-		
+		int number = rbs.getMaxNum(rb.getRecruit_no());		// count 최대값+1		count = ref
 		MateReplyBoard reboard = rbs.select(recruit_r_no);	// reboard 부모 댓글
 		
 
@@ -94,16 +73,8 @@ public class MateReplyController {
 				
 				
 			} else {	// 대댓을 달 때
-				System.out.println("대댓 작성");
 				
 				int child = rbs.getChild(reboard);						// 자식댓글중에 가장 마지막 step을 가져옴
-				
-				System.out.println("child : " + child);
-				
-				System.out.println("reboard step : " +reboard.getRecruit_r_step());
-				
-				System.out.println("reboard_r_del : " + rb.getRecruit_r_del());
-				
 				
 				if (child == 0)
 					rb.setRecruit_r_step(reboard.getRecruit_r_step()+1);	// 새로 작성하는 댓글에 step 부여
@@ -113,7 +84,6 @@ public class MateReplyController {
 					rb.setRecruit_r_step(child);
 				}
 				
-				System.out.println("새댓 step : "+rb.getRecruit_r_step());
 				
 				rb.setRecruit_r_ref(reboard.getRecruit_r_ref());		// 같은 ref 부여	
 				
@@ -126,23 +96,11 @@ public class MateReplyController {
 		}else {
 			rb.setRecruit_r_ref(number);
 			
-
-			System.out.println("자신의 r_no로 count 값 설정" + rb.getRecruit_r_no() + "," + rb.getRecruit_r_ref());
-				
 		}
 			
 		int result = rbs.insert(rb);
 		
-		if(result == 1 ) System.out.println("댓글 작성성공");
-			else System.out.println("댓글작성 실패");
-		
-			 
-			 
-			 
-			 
-			 
-			 
-			return "redirect:rlist/num/" + rb.getRecruit_no();		// 댓글 목록 요청
+		return "redirect:rlist/num/" + rb.getRecruit_no();		// 댓글 목록 요청
 	}
 					
 
@@ -151,7 +109,6 @@ public class MateReplyController {
 	@RequestMapping("/repDelete")
 	public String delete(MateReplyBoard rb, Model model) {
 		
-//		System.out.println("redelete in");
 		
 		rbs.delete(rb.getRecruit_r_no());
 		return "redirect:rlist/num/" + rb.getRecruit_no();		// 댓글 목록 요청
@@ -163,10 +120,5 @@ public class MateReplyController {
 		rbs.update(rb);
 		return "redirect:rlist/num/" + rb.getRecruit_no();		// 댓글 목록 요청
 	}
-	
-	
-	
-	
-	
 	
 }

@@ -20,7 +20,7 @@ public interface MateReplyDAO {
 	
 	void updateRe(MateReplyBoard rb);
 
-	int getMaxNum();
+	int getMaxNum(int recruit_no);
 
 	MateReplyBoard select(int rno);
 
@@ -31,28 +31,5 @@ public interface MateReplyDAO {
 	int getChild(MateReplyBoard reboard);
 
 	RecruitBoard rgetdetail(int num);
-	
-	
-	
-
-	SnsReplyBoard srgetDetail(int num);
-
-	List<SnsReplyBoard> srList(int num);
-
-	SnsReplyBoard srSelect(int sns_r_no);
-
-	int getSrMaxNum2(int sns_r_no);
-
-	int getSrChild(SnsReplyBoard reboard);
-
-	void updateSrStep(SnsReplyBoard srb);
-
-	int srInsert(SnsReplyBoard srb);
-
-	void srUpdate(SnsReplyBoard srb);
-
-	void srDelete(int sns_r_no);
-
-	int getSrMaxNum();
 	
 }

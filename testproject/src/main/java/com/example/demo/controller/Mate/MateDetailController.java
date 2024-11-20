@@ -95,6 +95,11 @@ public class MateDetailController {
 			service.getapply(apply);
 			service.getalarmB(alarm);
 			service.getalarmB(writerAlarm);
+			apply.setApply_del(0);
+			alarm.setAlarm_content("참가신청이 완료 되었습니다.");
+			alarm.setAlarm_subject("참가신청 알림");
+			service.getapply(apply);
+			service.getalarmB(alarm);
 			result = 1;
 				
 		}else if("stop".equals(applyType)) {

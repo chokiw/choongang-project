@@ -18,6 +18,10 @@ public class SnsReplyBoard {
 	private int sns_r_ref;
 	private int sns_r_del;
 	private int sns_r_parent;
+
+	private String user_nickname;
+	private String user_photo;
+	private String parent_nickname;
 	
 	
 }

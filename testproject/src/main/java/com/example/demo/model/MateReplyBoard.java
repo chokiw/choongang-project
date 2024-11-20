@@ -19,5 +19,8 @@ public class MateReplyBoard {
 	private int recruit_r_del;
 	private int recruit_r_parent;
 	
+	private String user_nickname; 
+	private String user_photo;
+	private String parent_nickname;
 	
 }

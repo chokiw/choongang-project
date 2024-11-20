@@ -21,25 +21,26 @@
 <link href="/css/common.css" rel="stylesheet">
 <link href="/css/sns_detail.css" rel="stylesheet">
 <link href="/css/icons.css" rel="stylesheet">
+<link href="/css/srlist.css" rel="stylesheet">
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 
 <title>RUNAWAY</title>
 
 <script>
-	$(function() {
-    	$('#srlist').load('/srlist/num/${board.sns_no}')    	
-    	$('#repInsert').click(function() {
-    		if (!frm.sns_r_content.value) {
-    			alert('댓글 입력후에 클릭하시오');
-    			frm.sns_r_content.focus();
-    			return false;
-    		}
-    		var frmData = $('form').serialize();
-    		
-    		$.post('${path}/srInsert', frmData, function(data) {
-    			$('#srlist').html(data);
-    			frm.sns_r_content.value = '';
-    		});
+$(function() {
+	$('#srlist').load('/srlist/num/${board.sns_no}')    	
+	$('#repInsert').click(function() {
+		if (!frm.sns_r_content.value) {
+			alert('댓글 입력후에 클릭하시오');
+			frm.sns_r_content.focus();
+			return false;
+		}
+		var frmData = $('form').serialize();
+		
+		$.post('/srInsert', frmData, function(data) {
+			$('#srlist').html(data);
+			frm.sns_r_content.value = '';
+		});
 	});
 });
     </script>
@@ -320,15 +321,29 @@ function toggleLike(event, sns_no) {
 				<a class="delete" href="javascript:history.back();"><i
 					class="fa-solid fa-table-list"></i>&nbsp;글목록</a>
 			</div>
-
-			<!-- 댓글 입력 -->
-			<form name="frm" id="frm">
-				<input type="hidden" name=user_id value="${member.user_id}">
-				<input type="hidden" name="sns_no" value="${no }"> 댓글 :
-				<textarea rows="3" cols="50" name="sns_r_content"></textarea>
-				<input type="button" value="확인" id="repInsert">
-			</form>
 			<div id="srlist"></div>
+			
+			<!-- 댓글 입력 -->
+
+			<form name="frm" id="frm">
+                <input type="hidden" name=user_id value="${member.user_id}">  
+                <input type="hidden" name="sns_no" value="${board.sns_no }">              
+        	<table class="reboardwrite">
+            	<td colspan="2">
+                <div class="re_writebox">
+                    <span class="nickname">${member.user_nickname}</span>
+                    <textarea rows="4" cols="50" class="re_write" id="sns_r_content" name="sns_r_content"
+                        placeholder="댓글을 남겨보세요" maxlength='1000'></textarea>
+
+                    <div style="position: absolute; right: 1%; top: 0; color: #b4b4b4; font-size: 14px;">
+                    </div>
+                    <div class="buttonbox">
+                        <input type="button" id="repInsert" class="action-button save" value="등록"></button>
+                    </div>
+                </div>
+            	</td>
+        	 </table>
+   	 		 </form>      
 		</main>
 	</div>
 
