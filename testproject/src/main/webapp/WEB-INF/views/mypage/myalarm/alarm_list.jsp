@@ -31,6 +31,10 @@ function getlist(pageNum){
 	$('#alarm').load(uri);
 }
 
+
+
+
+
 </script>
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <meta charset="UTF-8">
@@ -62,7 +66,7 @@ function getlist(pageNum){
  				<c:forEach var="board" items="${list}">
  					<tr> 
  						<td>${no1}</td> 
- 						<td><a href="alarm_detail?pageNum=${pageNum}&alarm_no=${board.alarm_no}">${board.alarm_subject}</a></td>
+ 						<td><a href="alarm_detail?pageNum=${pageNum}&alarm_no=${board.alarm_no}" onclick="openPopup(this.href); return false;">${board.alarm_subject}</a></td>
  						
 						<td>
 						<c:set var="now" value="<%=new java.util.Date()%>" /> <fmt:formatDate

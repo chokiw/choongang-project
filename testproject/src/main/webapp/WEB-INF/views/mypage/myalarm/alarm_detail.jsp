@@ -15,47 +15,37 @@
     <script src="http://code.jquery.com/jquery-latest.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://kit.fontawesome.com/5e485453d8.js" crossorigin="anonymous"></script>
-   	<link href="/css/common.css" rel="stylesheet">
-   	<link href="/css/sns_board.css" rel="stylesheet">
-    <link href="/css/mate_detail.css" rel="stylesheet">
     <script src="/js/sns_board.js"></script>
-    <script src="http://code.jquery.com/jquery-latest.js"></script>    
+    <script src="http://code.jquery.com/jquery-latest.js"></script> 
+
  
     <title>Document</title>
+    
+    <script>
+    function goback(runner_data_no){
+    	console.log(runner_data_no);
+    	   window.opener.setNo(runner_data_no);
+    	   window.close();
+    	}
+    
+    </script>
 
 </head>
 
 <body>
-    <div class="container">
-        <!-- 탑 메뉴 -->
-        <jsp:include page="${path}/WEB-INF/views/header.jsp"></jsp:include>
-        
-        <!-- 사이드(왼쪽) 메뉴 -->
-        <jsp:include page="${path}/WEB-INF/views/side.jsp"></jsp:include>
-
-        <main class="content">
-            <div class="track">
-                <span style="font-size: 36px; font-weight: 700;">나의 참가 리스트</span><br><br>
-                <span style="color: gray;">나의 참가 리스트입니다.</span>
-            </div>
-			<br>
-			<div class="sns_writer">
-                <img src="${pageContext.request.contextPath}/uimg/${member.user_photo }" class="myimg">
-                <span
-                    style="font-size: 14px; font-weight: 600; font-family: 'Gothic A1', sans-serif; margin-top: 15px; margin-left: 10px;">${member.user_nickname}</span>
-            </div>
-          
-            <hr><br><br>
-         	       
-			${alarm.alarm_content}<br><br>
+    
             
-			<a href="mate_detail?pageNum=${pageNum}&recruit_no=${alarm.recruit_no}">이곳을 누르면 참가신청한 글로 이동합니다.</a>
+         	  <div align="center" style="margin-top:50px;;"> 
+         	  			<span style="font-family: 'Bangers', system-ui; color: #cf3e00; font-size: 80px;">RUNAWAY</span><br><br>
+						<span style="font-size:18px;">${alarm.alarm_content}</span><br>
             
-			
+					<span style="font-size:18px;"><a href=" JAVASCRIPT:goback('mate_detail?pageNum=${pageNum}&recruit_no=${alarm.recruit_no}')">이곳을 누르면 참가신청한 글로 이동합니다.</a></span>
+            
+			</div>    
       
-        </main>
+        
 
-    </div>
+   
 </body>
 
 </html>
