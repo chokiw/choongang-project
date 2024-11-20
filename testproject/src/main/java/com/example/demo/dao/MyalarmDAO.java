@@ -14,7 +14,6 @@ public interface MyalarmDAO {
 	List<Alarm> alarmList(Alarm alarm);
 
 	Alarm getDetail(int alarm_no);
-}
 
 	String getWriterID(int recruit_no);
 }
