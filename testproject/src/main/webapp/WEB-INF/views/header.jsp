@@ -16,7 +16,7 @@
 			</a>
 		</div>
 		<div class="logout">
-			<a href="/logout" class="logout_text"> <span
+			<a href="/logout1" class="logout_text"> <span
 				class="material-symbols-outlined"> logout </span>&nbsp; 로그아웃
 			</a>
 		</div>

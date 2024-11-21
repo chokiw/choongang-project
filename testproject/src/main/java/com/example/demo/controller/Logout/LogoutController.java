@@ -10,7 +10,7 @@ import jakarta.servlet.http.HttpSession;
 @Controller
 @CrossOrigin(origins = "*")
 public class LogoutController {
-	@RequestMapping("/logout")
+	@RequestMapping("/logout1")
 	public String logout(HttpSession session, Model model) {
 		System.out.println("logout");
 		session.invalidate(); // 세션 무효화하여 로그아웃 처리

@@ -4,6 +4,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.example.demo.model.Member;
+
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
@@ -18,9 +20,9 @@ public class SessionCheckInter implements HandlerInterceptor {
 	public boolean preHandle(HttpServletRequest request, 
 			HttpServletResponse response, Object handler) throws Exception {
 		HttpSession session = request.getSession();
-		String id = (String)session.getAttribute("member");
-		if (id == null || id.equals(""))  {		
-			response.sendRedirect("loginpage");	// 세션이 없으면 로그인 폼으로 이동
+		Member member = (Member)session.getAttribute("member");
+		if (member == null )  {		
+			response.sendRedirect("/loginpage");	// 세션이 없으면 로그인 폼으로 이동
 			return false;
 		}
 		return true;
