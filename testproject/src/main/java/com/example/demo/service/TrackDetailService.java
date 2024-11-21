@@ -68,4 +68,8 @@ public class TrackDetailService {
 	public Coordinate[] getcdata(int runner_data_no) {
 		return dao.getcdata(runner_data_no);
 	}
+
+	public void read(String sns_no) {
+		dao.read(sns_no);
+	}
 }

@@ -69,4 +69,8 @@ public class MateDetailService {
 		dao.updateRemainNum(recruit_no, remainNum);
 	}
 
+	public void read(String recruit_no) {
+		dao.read(recruit_no);
+	}
+
 }

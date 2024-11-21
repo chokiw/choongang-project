@@ -55,4 +55,7 @@
 	<select id="get_good" parameterType="map" resultType="Good">
 		select * from good where sns_no=#{sns_no}
 	</select>
+	<update id="read">
+		update sns set sns_readcount = sns_readcount+1 where sns_no = #{sns_no}
+	</update>
 </mapper>

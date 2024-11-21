@@ -38,4 +38,6 @@ public interface MateDetailDAO {
 	
 	void updateRemainNum(@Param("recruit_no") int recruit_no,@Param("remainNum") int remainNum);
 
+	void read(String recruit_no);
+
 }

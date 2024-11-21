@@ -41,6 +41,8 @@ public class MyalarmController {
 		alarm.setUser_id(member.getUser_id());
 
 		int total = service.getTotal(alarm);
+		
+		System.out.println(total);
 
 		int startRow = (currentPage - 1) * rowPerPage + 1;
 		int endRow = startRow + rowPerPage - 1;
@@ -52,6 +54,8 @@ public class MyalarmController {
 		int no = total - (currentPage -1) * rowPerPage;
 
 		List<Alarm> list = service.alarmList(alarm);
+		
+		System.out.println("list : " + list);
 
 		model.addAttribute("list", list);
 		model.addAttribute("pageNum", pageNum);
@@ -80,6 +84,8 @@ public class MyalarmController {
 		String writer_id = service.getWriterID(alarm.getRecruit_no());
 		
 		boolean isWriter = writer_id.equals(member.getUser_id());
+		
+		service.read(alarm_no);
 
 		model.addAttribute("alarm", alarm);
 		model.addAttribute("isWriter", isWriter);

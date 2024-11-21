@@ -43,6 +43,8 @@ public class TrackDetailController {
 		Runner_data rd = service.getrdata(board.getRunner_data_no());
 		// 좌표값 불러오기
 		Coordinate[] c = service.getcdata(board.getRunner_data_no());
+		
+		service.read(sns_no);
 
 		model.addAttribute("rd", rd);
 		model.addAttribute("c", c);

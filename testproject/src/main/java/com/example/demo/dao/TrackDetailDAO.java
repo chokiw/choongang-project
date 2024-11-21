@@ -35,4 +35,6 @@ public interface TrackDetailDAO {
 
    int good_plus(@Param("user_id") String user_id, @Param("sns_no") int sns_no);
 
+   void read(String sns_no);
+
 }

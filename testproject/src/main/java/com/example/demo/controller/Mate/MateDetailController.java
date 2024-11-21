@@ -40,6 +40,8 @@ public class MateDetailController {
 		String userphoto = service.getUserPhotoB(Integer.parseInt(recruit_no));
 		// 글쓴 사람의 닉네임 불러오기
 		String nickname = service.getNickNameB(Integer.parseInt(recruit_no));
+		
+		service.read(recruit_no);
 
 		model.addAttribute("r", r);
 		model.addAttribute("rc", rc);
