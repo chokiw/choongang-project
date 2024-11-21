@@ -104,6 +104,9 @@ $(function() {
 					success : function(response){
 						if (response == -1){
 							alert("글쓴이는 참가 신청이 불가합니다.");
+						}else if(response == -2){
+							alert("모집 정원이 초과되었습니다.");
+							location.reload();
 						}else{
 							alert("참가신청 완료 되었습니다.");
 							location.reload();
@@ -120,7 +123,8 @@ $(function() {
 					data : {
 						recruit_no : ${board.recruit_no},
 						user_id : "${sessionScope.member.user_id}",
-						applyType : "stop"
+						applyType : "stop",
+						recruitnum : ${board.recruit_recruitnum}
 					},
 					success : function(response){
 						if (response == -1){
@@ -129,8 +133,8 @@ $(function() {
 							alert("신청이 취소 되었습니다.");
 							location.reload();
 						}
-
 					}
+
 				});
 			});
 		});
@@ -144,13 +148,17 @@ $(function() {
 		        },
 		        success: function (isApplied) {
 		        	console.log("isApplied:", isApplied);
+		        	//모집 인원 확인
+		        	const remainNum = ${board.recruit_remainnum};
+		        	if(remainNum <= 0){
+		        		$("#start1").prop("disabled",true);
+		        	}
+		        	
 		            if (isApplied) {
-		                // 이미 신청한 경우: 참가신청 비활성화, 참가취소 활성화
 		                console.log("참가신청 버튼 비활성화");
 		                $("#start1").prop("disabled", true);
 		                $("#stop1").prop("disabled", false);
 		            } else {
-		                // 신청하지 않은 경우: 참가신청 활성화, 참가취소 비활성화
 		                console.log("참가신청 버튼 활성화");
 		                $("#start1").prop("disabled", false);
 		                $("#stop1").prop("disabled", true);
@@ -208,7 +216,7 @@ $(function() {
             <div class="date_read">
                 <span style="font-size: 14px; font-family: 'Gothic A1', sans-serif;">2024-11-01 12:34</span>
                 <span style="font-size: 14px; font-family: 'Gothic A1', sans-serif; float: right; font-weight: 600;">조회수
-                    : ${board.recruit_readcount}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;모집인원 : ${board.recruit_recruitnum}/${board.recruit_remainnum}</span>
+                    : ${board.recruit_readcount}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;모집인원 : ${board.recruit_remainnum}/${board.recruit_recruitnum}</span>
             </div>
             <hr><br><br>
             <div class="maincontent">

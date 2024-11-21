@@ -11,7 +11,7 @@
 	</select>
 	
 	<!-- 메이트게시판 삭제 -->
-	<delete id="deleterb" parameterType="int" >
-		delete from recruit where recruit_no = #{recruit_no}
-	</delete>
+	<update id="deleteRecruit" parameterType="int">
+		update recruit set recruit_del where recruit_no = #{recruit_no}
+	</update>
 </mapper>

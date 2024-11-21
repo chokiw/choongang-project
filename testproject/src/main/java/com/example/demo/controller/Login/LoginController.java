@@ -115,7 +115,7 @@ public class LoginController {
 
 		Runner dbrunner = service.getMember(runner.getUser_id());
 
-		if (passwordEncoder.matches(runner.getUser_passwd(), dbrunner.getUser_passwd())) {
+		if (dbrunner !=null &&passwordEncoder.matches(runner.getUser_passwd(), dbrunner.getUser_passwd())) {
 			result = 1;
 			Member member = new Member();
 			member.setUser_id(dbrunner.getUser_id());

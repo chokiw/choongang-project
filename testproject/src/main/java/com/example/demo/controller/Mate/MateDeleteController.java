@@ -24,7 +24,7 @@ public class MateDeleteController {
 		int recruit_no = rb.getRecruit_no();
 		RecruitBoard board = service.getrecruitD(recruit_no);
 
-		int delete = service.deleterb(rb.getRecruit_no());
+		int delete = service.deleteRecruit(recruit_no);
 
 		model.addAttribute("recruit_no", recruit_no);
 		model.addAttribute("delete", delete);
