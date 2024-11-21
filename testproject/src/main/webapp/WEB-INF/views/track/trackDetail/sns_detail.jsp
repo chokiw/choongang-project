@@ -259,23 +259,28 @@ $(function() {
 
 
 			<script>
-function toggleLike(event, sns_no) {
-    event.preventDefault(); // 이 줄을 활성화하여 새로고침 방지
+			   function toggleLike(event, sns_no) {
+		             event.preventDefault(); // 새로고침 방지
 
-    fetch('/good/toggleGood?sns_no=' + sns_no, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/x-www-form-urlencoded'
-        }
-    }).then(response => response.json())
-      .then(data => {
-          console.log("좋아요 토글 결과:", data);
-          location.reload(); // 새로고침
-      })
-      .catch(error => {
-          console.error("오류 발생:", error);
-      });
-}
+		             fetch('/toggleGood', {
+		                 method: 'POST',
+		                 headers: {
+		                     'Content-Type': 'application/x-www-form-urlencoded'
+		                 },
+		                 body: 'sns_no=' + encodeURIComponent(sns_no) // 데이터를 body에 전달
+		             })
+		             .then(response => response.json())
+		             .then(data => {
+		                 console.log("좋아요 토글 결과:", data);
+		                 location.reload(); // 새로고침
+		             })
+		             .catch(error => {
+		                 console.error("오류 발생:", error);
+		             });
+		         }
+
+
+		</script>
 
 </script>
 
