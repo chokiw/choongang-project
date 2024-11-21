@@ -9,8 +9,7 @@
 		from sns where sns_no=#{sns_no}
 	</select>
 	<!-- 게시글 삭제 -->
-	<delete id="deleteboard" parameterType="int">
-		delete from sns
-		where sns_no = #{sns_no}
-	</delete>
+	<update id="deleteboard" parameterType="int">	
+		update sns set sns_del = 1 where sns_no = #{sns_no}
+	</update>
 </mapper>

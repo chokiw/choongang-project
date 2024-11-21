@@ -12,6 +12,6 @@
 	
 	<!-- 메이트게시판 삭제 -->
 	<update id="deleteRecruit" parameterType="int">
-		update recruit set recruit_del where recruit_no = #{recruit_no}
+		update recruit set recruit_del = 1 where recruit_no = #{recruit_no}
 	</update>
 </mapper>

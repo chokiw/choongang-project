@@ -16,6 +16,7 @@
 				sns_content like
 				'%'||#{keyword}||'%'
 			</if>
+			and sns_del = 0			
 		</where>
 		order by sns_good desc, sns_date desc
 		) a)
@@ -38,6 +39,7 @@
 			<if test="sns_address2 != null">
 				sns_address2 like '%'||#{sns_address2}||'%'
 			</if>
+			and sns_del = 0		
 		</where>
 	</select>
 
@@ -56,6 +58,7 @@
 			<if test="sns_address2 != null">
 				sns_address2 like '%'||#{sns_address2}||'%'
 			</if>
+			and sns_del = 0
 		</where>
 		order by sns_no desc) a )
 		where rn between #{startRow} and #{endRow}

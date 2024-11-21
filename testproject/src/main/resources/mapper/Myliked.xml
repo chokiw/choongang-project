@@ -5,16 +5,27 @@
 <mapper namespace="com.example.demo.dao.MylikedpageDAO">
 	<!-- 내가 좋아요 누른 글 총 갯수 -->
 	<select id="getTotalLiked" parameterType="String" resultType="int">
-		select count(*)
-		from good
-		where user_id = #{user_id}
+<!-- 		select count(*) -->
+<!-- 		from good -->
+<!-- 		where user_id = #{user_id} -->
+	SELECT 
+                                  
+    	count(s.sns_del)
+	FROM (
+	    select * from good
+	) g
+		LEFT JOIN sns s ON g.sns_no = s.sns_no
+		
+	WHERE g.user_id = #{user_id} and s.sns_del=0		
+
 	</select>
 	<!-- 내가 좋아요 누른 글 목록 -->
 	<select id="getLikedPosts" parameterType="sns" resultType="sns">
 		select * from
 		(select rownum as rn,s.* 
-		from sns s where sns_no in (select sns_no from good where user_id = #{user_id}) 
+		from sns s where sns_no in (select sns_no from good where user_id = #{user_id} and sns_del = 0) 
 		order by sns_date desc) 
 		where rn between #{startRow} and #{endRow}
+		and sns_del = 0
 	</select>
 </mapper>
