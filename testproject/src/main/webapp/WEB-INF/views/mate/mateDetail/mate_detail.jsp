@@ -20,6 +20,7 @@
     <link href="/css/common.css" rel="stylesheet">
     <link href="/css/mate_detail.css" rel="stylesheet">
     <script src="/js/mate_detail.js"></script>
+    <link href="/css/srlist.css" rel="stylesheet">
     <script src="http://code.jquery.com/jquery-latest.js"></script>
     <title>Document</title>
     <script type="text/javascript">
@@ -41,6 +42,38 @@ $(function(){
 	   })
 })
     
+//     $(function(){
+//     	$('#recruit_r_content').keyup(function(){
+//     		bytecheck(this);
+//     	});
+//     });
+    
+    
+    
+//     function bytecheck(obj){
+//     	var txt = $(obj).val();
+// 		var text = byteCount(txt);
+//     	$('#bytecount').text(text);
+
+//     }        
+    
+//     function byteCount(str) {
+//   		let count = 0;
+//   		for (let i = 0; i < str.length; i++) {
+//     		let charCode = str.charCodeAt(i);
+//     	if (charCode <= 0x7f) {
+//       		count += 1;
+//     	} else if (charCode <= 0x7ff) {
+//       		count += 2;
+//     	} else if (charCode <= 0xffff) {
+//       		count += 3;
+//     	} else {
+//       		count += 4;
+//     	  }
+//   		}
+//   		return count;
+// 	}
+    
 $(function() {
 	$('#rlist').load('/rlist/num/${board.recruit_no}')
 	
@@ -52,7 +85,7 @@ $(function() {
 		}
 		var frmData = $('form').serialize();
 		
-		$.post('${path}/sInsert', frmData, function(data) {
+		$.post('/sInsert', frmData, function(data) {
 			$('#rlist').html(data);
 			frm.recruit_r_content.value = '';
 		});
@@ -65,31 +98,65 @@ $(function() {
 					type : "POST",
 					data : {
 						recruit_no : ${board.recruit_no},
-						user_id : "${member.user_id}",
+						user_id : "${sessionScope.member.user_id}",
 						applyType : "start"
 					},
 					success : function(response){
-						alert("참가신청 완료 되었습니다.");
-						location.reload();
+						if (response == -1){
+							alert("글쓴이는 참가 신청이 불가합니다.");
+						}else{
+							alert("참가신청 완료 되었습니다.");
+							location.reload();
+						}
+
 					}
 				});
 			});
 				
 			$("#stop1").click(function(){
 				$.ajax({
-					url: "${pageContext.request.contextPath}/apply/cancel",
+					url: "${pageContext.request.contextPath}/apply",
 					type : "POST",
 					data : {
 						recruit_no : ${board.recruit_no},
-						user_id : "${member.user_id}",
+						user_id : "${sessionScope.member.user_id}",
 						applyType : "stop"
 					},
 					success : function(response){
-						alert("신청이 취소 되었습니다.");
-						location.reload();
+						if (response == -1){
+							alert("글쓴이는 참가 취소가 불가합니다.");
+						}else{
+							alert("신청이 취소 되었습니다.");
+							location.reload();
+						}
+
 					}
 				});
 			});
+		});
+		$(document).ready(function () {
+		    $.ajax({
+		        url: "${pageContext.request.contextPath}/checkapply",
+		        type: "GET",
+		        data: {
+		            recruit_no: ${board.recruit_no},
+		            user_id: "${sessionScope.member.user_id}"
+		        },
+		        success: function (isApplied) {
+		        	console.log("isApplied:", isApplied);
+		            if (isApplied) {
+		                // 이미 신청한 경우: 참가신청 비활성화, 참가취소 활성화
+		                console.log("참가신청 버튼 비활성화");
+		                $("#start1").prop("disabled", true);
+		                $("#stop1").prop("disabled", false);
+		            } else {
+		                // 신청하지 않은 경우: 참가신청 활성화, 참가취소 비활성화
+		                console.log("참가신청 버튼 활성화");
+		                $("#start1").prop("disabled", false);
+		                $("#stop1").prop("disabled", true);
+		            }
+		        }
+		    });
 		});
     </script>
 </head>
@@ -111,10 +178,33 @@ $(function() {
                 <span style="font-family: 'Gothic A1', sans-serif; color: #747474;">${board.recruit_address1} ${board.recruit_address2}</span>
             </div>
             <div class="sns_writer">
-                <img src="${pageContext.request.contextPath}/uimg/${member.user_photo }" class="myimg">
-                <span
-                    style="font-size: 14px; font-weight: 600; font-family: 'Gothic A1', sans-serif; margin-top: 15px; margin-left: 10px;">${member.user_nickname}</span>
-            </div>
+            	<!-- 서버에서 현재 로그인한 사용자 ID를 가져온다 -->
+				<c:set var="userID" value="${board.user_id}"/>
+				<c:set var="loginID" value="${sessionScope.member.user_id}"/>
+            	
+            	<c:choose>
+					<c:when test="${userID == loginID}">
+				
+					<!-- 자신의 글일 경우 mypage로 이동 -->
+					<a href="${pageContext.request.contextPath}/mypage">
+						<img src="${pageContext.request.contextPath}/uimg/${userphoto}" class="myimg">
+					</a>
+					<a href="${pageContext.request.contextPath}/mypage">
+					<span style="font-size: 14px; font-weight: 600; font-family: 'Gothic A1', sans-serif; margin-top: 15px; margin-left: 10px;">${nickname}</span>
+					</a>
+				</c:when>
+				<c:otherwise>
+				
+				<!-- 다른 사용자의 글일 경우 userpage로 이동 -->
+				<a href="${pageContext.request.contextPath}/userpage?user_id=${board.user_id}">
+					<img src="${pageContext.request.contextPath}/uimg/${userphoto}" class="myimg">
+				</a>
+				<a href="${pageContext.request.contextPath}/userpage?user_id=${board.user_id}">
+				<span style="font-size: 14px; font-weight: 600; font-family: 'Gothic A1', sans-serif; margin-top: 15px; margin-left: 10px;">${nickname}</span>
+				</a>
+				</c:otherwise>
+				</c:choose>
+			</div>
             <div class="date_read">
                 <span style="font-size: 14px; font-family: 'Gothic A1', sans-serif;">2024-11-01 12:34</span>
                 <span style="font-size: 14px; font-family: 'Gothic A1', sans-serif; float: right; font-weight: 600;">조회수
@@ -267,18 +357,30 @@ $(function() {
                 <a class="delete" href="javascript:history.back();"><span
 					class="material-symbols-outlined"> format_list_bulleted </span>&nbsp;글목록</a>
             </div>
-            
+            <div id="rlist"></div>
             
             <!-- 댓글 입력 -->
-		<form name="frm" id="frm">
-			<input type="hidden" name=user_id value="${member.user_id}">
-			<input type="hidden" name="recruit_no" value="${no }"> 댓글 :
-			<textarea rows="3" cols="50" name="recruit_r_content"></textarea>
-			<input type="button" value="확인" id="repInsert">
-		</form>
-            
-            
-            <div id="rlist"></div>
+			<form name="frm" id="frm">
+                <input type="hidden" name=user_id value="${member.user_id}">  
+                <input type="hidden" name="recruit_no" value="${board.recruit_no }">              
+        	<table class="reboardwrite">
+            	<td colspan="2">
+                <div class="re_writebox">
+                    <span class="nickname">${member.user_nickname}</span>
+                    <textarea rows="4" cols="50" class="re_write" id="recruit_r_content" name="recruit_r_content"
+                        placeholder="댓글을 남겨보세요" maxlength="1000"></textarea>
+
+                    <div style="position: absolute; right: 1%; top: 0; color: #b4b4b4; font-size: 14px;">
+                        <span id="bytecount">0</span><span>/ 500Byte</span>
+                    </div>
+                    <div class="buttonbox">
+                        <input type="button" id="repInsert" class="action-button save" value="등록"></button>
+                    </div>
+                </div>
+            	</td>
+
+        	</table>
+    		</form>
         </main>
     </div>
 </body>

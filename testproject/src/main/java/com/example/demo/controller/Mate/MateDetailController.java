@@ -54,28 +54,44 @@ public class MateDetailController {
 	public Integer apply(@RequestParam(value="recruit_no") int recruit_no,
 						@RequestParam(value="user_id") String user_id,
 					   @RequestParam(value="applyType") String applyType) {
+				
+		// 글쓴 사람의 user_id 가져오기
+		String writer_id = service.getWriter_id(recruit_no);
 		
-		Date date = new Date(System.currentTimeMillis());
+		// 글쓴 사람은 참가 신청 못하게 하는 코드
+		if (writer_id != null && writer_id.equals(user_id)) {
+	        return -1;
+	    }
+		
 				
 		Apply apply = new Apply();
 		apply.setRecruit_no(recruit_no);
 		apply.setUser_id(user_id);
-		apply.setApply_date(date);
 		
 		
 		Alarm alarm = new Alarm();
 		alarm.setUser_id(user_id);
 		alarm.setRecruit_no(recruit_no);
-		alarm.setAlarm_date(date);
 		
 		int result = 0;
 		
 		if("start".equals(applyType)) {
+			
 			apply.setApply_del(0);
 			alarm.setAlarm_content("참가신청이 완료 되었습니다.");
 			alarm.setAlarm_subject("참가신청 알림");
+			
+			// 글쓴 사람에게 알림 추가
+			Alarm writerAlarm = new Alarm();
+			writerAlarm.setUser_id(writer_id);
+			writerAlarm.setRecruit_no(recruit_no);
+			writerAlarm.setAlarm_subject("작성하신 글에 참가신청 알림입니다.");
+			writerAlarm.setAlarm_content(user_id + "님이 참가 신청하셨습니다.");
+			
 			service.getapply(apply);
 			service.getalarmB(alarm);
+			service.getalarmB(writerAlarm);
+			
 			result = 1;
 				
 		}else if("stop".equals(applyType)) {
@@ -89,6 +105,14 @@ public class MateDetailController {
 		
 		
 		return result;
+	}
+	
+	@RequestMapping("/checkapply")
+	@ResponseBody
+	public boolean checkapply(@RequestParam(value="recruit_no") int recruit_no,
+	                          @RequestParam(value="user_id") String user_id) {
+	    
+		return service.isAlreadyApplied(recruit_no, user_id);
 	}
 
 }

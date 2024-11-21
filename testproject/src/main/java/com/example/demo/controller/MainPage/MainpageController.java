@@ -1,5 +1,6 @@
 package com.example.demo.controller.MainPage;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Controller;
@@ -7,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.example.demo.model.Coordinate;
 import com.example.demo.model.Runner;
 import com.example.demo.model.Runner_data;
 import com.example.demo.model.SnsBoard;
@@ -52,8 +54,28 @@ public class MainpageController {
 		model.addAttribute("rundata", rundata);
 
 		// 추천수를 가장 많이 받은 글 3개
-		//List<SnsBoard> routedata = service.routedata(sns);
-
+		List<SnsBoard> routedata = service.routedata();
+		int RankNum = routedata.size();
+		List<Runner_data> rankRd = new ArrayList<Runner_data>();
+		List<Runner> rankUd = new ArrayList<Runner>();
+		for(int i=0;i<RankNum;i++) {
+			
+			rankRd.add(service.getRankRd(routedata.get(i).getRunner_data_no()));
+			rankUd.add(service.getRankUd(routedata.get(i).getUser_id()));
+		}
+		
+		List<Coordinate[]> c = new ArrayList<Coordinate[]>();
+		for(int i=0;i<RankNum;i++) {
+			c.add(service.getRankCd(routedata.get(i).getRunner_data_no()));
+		}
+		
+		model.addAttribute("RankNum",RankNum);
+		model.addAttribute("routedata",routedata);
+		model.addAttribute("rankRd",rankRd);
+		model.addAttribute("rankUd",rankUd);
+		for(int i=0;i<RankNum;i++) {
+			model.addAttribute("c"+i,c.get(i));
+		}
 		return "/mainpage/mainpage";
 	}
 }

@@ -25,4 +25,8 @@ public class MyalarmService {
 	public Alarm getDetail(int alarm_no) {
 		return dao.getDetail(alarm_no);
 	}
+
+	public String getWriterID(int recruit_no) {
+		return dao.getWriterID(recruit_no);
+	}
 }

@@ -32,51 +32,77 @@
 	<div class="container">
 
 		<!-- 탑 메뉴 -->
-        <jsp:include page="${path}/WEB-INF/views/header.jsp"></jsp:include>
-        
-        <!-- 사이드(왼쪽) 메뉴 -->
-        <jsp:include page="${path}/WEB-INF/views/side.jsp"></jsp:include>
+		<jsp:include page="${path}/WEB-INF/views/header.jsp"></jsp:include>
 
-	<main class="content">
-		<div class="track">
-			<span style="font-size: 36px; font-weight: 700;">${runner.user_nickname}의 페이지</span><br><br>
-		</div>
+		<!-- 사이드(왼쪽) 메뉴 -->
+		<jsp:include page="${path}/WEB-INF/views/side.jsp"></jsp:include>
 
-		<div class="profilebox">
-
-			<img src="${pageContext.request.contextPath}/uimg/${runner.user_photo}" class="profileimg">
-
-			<div style="margin-top: 30px;">
-				<span class="nickname">${runner.user_nickname} 님</span><br> <span
-					class="location">${runner.user_address1} ${runner.user_address2}</span>
+		<main class="content">
+			<div class="track">
+				<span style="font-size: 25px; font-weight: 700;">${runner.user_nickname}의
+					페이지</span><br>
+				<br>
 			</div>
 
-		</div>
+			<div class="profilebox">
 
+				<img
+					src="${pageContext.request.contextPath}/uimg/${runner.user_photo}"
+					class="profileimg">
 
-		<!-- 기록 박스 -->
-		<div class="recordbox">
-			<div align="center">
-				<span class="content1">총 달린 거리</span><br>
-				<br> <span class="content2">${runner.user_distance}</span>
+				<div style="margin-top: 30px;">
+					<span class="nickname">${runner.user_nickname} 님</span><br> <span
+						class="location">${runner.user_address1}
+						${runner.user_address2}</span>
+				</div>
+
 			</div>
 
-			<div class="crossline"></div>
 
-			<div align="center">
-				<span class="content1">총 달린 시간</span><br>
-				<br> <span class="content2">${runner.user_runtime}</span>
+			<!-- 기록 박스 -->
+			<div class="recordbox">
+				<div align="center">
+					<span class="content1">총 달린 거리</span><br> <br> <span
+						class="content2">${runner.user_distance}</span>
+				</div>
+
+				<div class="crossline"></div>
+
+				<div align="center">
+					<span class="content1">총 달린 시간</span><br><br>
+					<span class="content2">
+						<fmt:formatNumber type="number" maxFractionDigits="0" value="${runner.user_runtime/(60*60)}"/>시
+						<fmt:formatNumber type="number" maxFractionDigits="0" value="${(runner.user_runtime-(runner.user_runtime/(60*60)))/60}"/>분
+                     	<fmt:formatNumber type="number" maxFractionDigits="0" value="${runner.user_runtime%60}"/>초
+					</span>
+				</div>
+
+				<div class="crossline"></div>
+
+				<div align="center">
+					<span class="content1">평균 페이스</span><br><br>
+					<span class="content2">
+					<c:choose>
+							<c:when test="${runner.user_distance==0}">
+								00'00"
+							</c:when>
+							<c:when test="${runner.user_runtime==0}">
+								00'00"
+							</c:when>
+							<c:otherwise>
+								<fmt:formatNumber type="number" maxFractionDigits="0"
+									value="${runner.user_runtime*1000/runner.user_distance/60}" />'
+                     			<fmt:formatNumber type="number"
+									maxFractionDigits="0"
+									value="${runner.user_runtime*1000/runner.user_distance%60}" />"
+							</c:otherwise>
+						</c:choose>
+					</span>
+
+				</div>
 			</div>
 
-			<div class="crossline"></div>
-
-			<div align="center">
-				<span class="content1">평균 페이스</span><br>
-				<br> <span class="content2">4'34"/KM</span>
-			</div>
-		</div>
-
-	</main>
+		</main>
 
 	</div>
 </body>

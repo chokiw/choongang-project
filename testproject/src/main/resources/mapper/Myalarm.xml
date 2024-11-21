@@ -11,12 +11,17 @@
 	<!-- 알람 게시판 목록 -->
 	<select id="alarmList" parameterType="alarm" resultType="alarm">
 		select * from (select a.*, rowNum rn from (
-		select * from alarm order by alarm_no desc) a)
+		select * from alarm where user_id = #{user_id} order by alarm_no desc) a)
 		where rn between #{startRow} and #{endRow}
 	</select>
 	<!-- 알람 게시판 글정보 구하기 -->
 	<select id="getDetail" parameterType="int" resultType="alarm">
 		select *
 		from alarm where alarm_no = #{alarm_no}
+	</select>
+	
+	<!-- 글쓴 사람의 ID를 가져온다 -->
+	<select id="getWriterID" parameterType="int" resultType="string">
+    select user_id from recruit where recruit_no = #{recruit_no}
 	</select>
 </mapper>

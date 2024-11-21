@@ -1,6 +1,7 @@
 package com.example.demo.dao;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import com.example.demo.model.Alarm;
 import com.example.demo.model.Apply;
@@ -28,5 +29,9 @@ public interface MateDetailDAO {
 	void getcancelapply(Apply apply);
 
 	void getcancelalarm(Alarm alarm);
+
+	String getWriter_id(int recruit_no);
+
+	int isAlreadyApplied(@Param("recruit_no")int recruit_no, @Param("user_id")String user_id);
 
 }

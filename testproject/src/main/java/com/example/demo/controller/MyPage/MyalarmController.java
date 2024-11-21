@@ -31,7 +31,14 @@ public class MyalarmController {
 		if (pageNum == null || pageNum.equals("")) {
 			pageNum = "1";
 		}
+		
 		int currentPage = Integer.parseInt(pageNum);
+		
+		if(member == null) {
+			return "redirect:/login";
+		}
+		
+		alarm.setUser_id(member.getUser_id());
 
 		int total = service.getTotal(alarm);
 
@@ -42,7 +49,7 @@ public class MyalarmController {
 
 		alarm.setStartRow(startRow);
 		alarm.setEndRow(endRow);
-		int no = total - startRow + 1;
+		int no = total - (currentPage -1) * rowPerPage;
 
 		List<Alarm> list = service.alarmList(alarm);
 
@@ -62,13 +69,21 @@ public class MyalarmController {
 	
 	//알람 디테일 페이지로 이동
 	@RequestMapping("alarm_detail")
-	public String alarm_detail(@RequestParam(value = "pageNum") String pageNum, @RequestParam("alarm_no") int alarm_no,
+	public String alarm_detail(@RequestParam(value = "pageNum") String pageNum,
+			@RequestParam("alarm_no") int alarm_no,
+			@SessionAttribute(name = "member", required = false) Member member,
 			Model model) {
 
-
 		Alarm alarm = service.getDetail(alarm_no);
+		
+		// 해당 글의 작성자 ID 가져오기
+		String writer_id = service.getWriterID(alarm.getRecruit_no());
+		
+		boolean isWriter = writer_id.equals(member.getUser_id());
 
 		model.addAttribute("alarm", alarm);
+		model.addAttribute("isWriter", isWriter);
+		model.addAttribute("pageNum", pageNum);
 
 		return "mypage/myalarm/alarm_detail";
 	}

@@ -1,6 +1,8 @@
 package com.example.demo.controller.Login;
 
 import org.apache.commons.mail.HtmlEmail;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -20,6 +22,8 @@ import lombok.RequiredArgsConstructor;
 @CrossOrigin(origins = "*")
 public class LoginController {
 	private final LoginService service;
+	@Autowired
+	PasswordEncoder passwordEncoder;
 
 	// 로그인 페이지로 이동
 	@RequestMapping("/loginpage")
@@ -111,7 +115,7 @@ public class LoginController {
 
 		Runner dbrunner = service.getMember(runner.getUser_id());
 
-		if (dbrunner.getUser_passwd().equals(runner.getUser_passwd())) {
+		if (passwordEncoder.matches(runner.getUser_passwd(), dbrunner.getUser_passwd())) {
 			result = 1;
 			Member member = new Member();
 			member.setUser_id(dbrunner.getUser_id());
