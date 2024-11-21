@@ -83,8 +83,16 @@ function getsearchfisrt() {
 					<tr>
 						<td>${no1}</td>
 						<td>${board.user_id}</td>
-						<td><a
-							href="mate_detail?pageNum=${pageNum}&recruit_no=${board.recruit_no}">${board.recruit_subject}</a></td>
+						<td>
+						<c:choose>
+							<c:when test="${board.recruit_del == 1}">
+								<span>삭제된 글입니다.</span>
+							</c:when>
+							<c:otherwise>
+						<a href="mate_detail?pageNum=${pageNum}&recruit_no=${board.recruit_no}">${board.recruit_subject}</a>					
+						</c:otherwise>
+						</c:choose>
+						</td>
 						<td><fmt:formatDate value="${board.recruit_date}"
 								pattern="yyyy-MM-dd HH:mm:ss" /></td>
 						<td>${board.recruit_readcount}</td>

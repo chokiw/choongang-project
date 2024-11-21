@@ -30,6 +30,12 @@ public class MateDetailController {
 			@RequestParam(value = "recruit_no") String recruit_no, Model model) {
 		// 글정보 불러오기
 		RecruitBoard board = service.getrecruitD(Integer.parseInt(recruit_no));
+		
+		// 삭제된 글 확인
+		if(board.getRecruit_del() == 1) {
+			return "redirect:/mate_board";
+		}
+		
 		// 맵에 경로 표현을 위한 테이터 불러오기
 		Recruit_c[] rc = service.getrecruitC(board.getRecruit_no());
 		// 글쓴이 정보 불러오기
@@ -62,48 +68,77 @@ public class MateDetailController {
 		if (writer_id != null && writer_id.equals(user_id)) {
 	        return -1;
 	    }
-		
-		Date date = new Date(System.currentTimeMillis());
-				
-		Apply apply = new Apply();
-		apply.setRecruit_no(recruit_no);
-		apply.setUser_id(user_id);
-		apply.setApply_date(date);
-		
-		
-		Alarm alarm = new Alarm();
-		alarm.setUser_id(user_id);
-		alarm.setRecruit_no(recruit_no);
-		alarm.setAlarm_date(date);
+						
 		
 		int result = 0;
+		int remainNum = service.getRemainNum(recruit_no);
+		
 		
 		if("start".equals(applyType)) {
-			
+			if(remainNum <= 0) {
+				return -2;
+			}
+			// 참가 신청 등록
+			Apply apply = new Apply();
+			apply.setRecruit_no(recruit_no);
+			apply.setUser_id(user_id);
+			apply.setApply_date(new Date(System.currentTimeMillis()));
 			apply.setApply_del(0);
-			alarm.setAlarm_content("참가신청이 완료 되었습니다.");
+			
+			Alarm alarm = new Alarm();
+			alarm.setUser_id(user_id);
+			alarm.setRecruit_no(recruit_no);
+			alarm.setAlarm_date(new Date(System.currentTimeMillis()));
 			alarm.setAlarm_subject("참가신청 알림");
+			alarm.setAlarm_content("참가신청이 완료 되었습니다.");
 			
 			// 글쓴 사람에게 알림 추가
 			Alarm writerAlarm = new Alarm();
 			writerAlarm.setUser_id(writer_id);
 			writerAlarm.setRecruit_no(recruit_no);
-			writerAlarm.setAlarm_date(date);
+			writerAlarm.setAlarm_date(new Date(System.currentTimeMillis()));
 			writerAlarm.setAlarm_subject("작성하신 글에 참가신청 알림입니다.");
 			writerAlarm.setAlarm_content(user_id + "님이 참가 신청하셨습니다.");
 			
 			service.getapply(apply);
 			service.getalarmB(alarm);
 			service.getalarmB(writerAlarm);
-			result = 1;
+			
+			// 모집 인원 감소
+			service.updateRemainNum(recruit_no, remainNum -1);
+			
+			result = 1;	// 성공
 				
 		}else if("stop".equals(applyType)) {
+			
+			// 참가 신청 취소
+			Apply apply = new Apply();
+			apply.setRecruit_no(recruit_no);
+			apply.setUser_id(user_id);
 			apply.setApply_del(1);
-			alarm.setAlarm_content("신청이 취소 되었습니다.");
+			
+			// 알림 등록
+			Alarm alarm = new Alarm();
+			alarm.setUser_id(user_id);
+			alarm.setRecruit_no(recruit_no);
+			alarm.setAlarm_date(new Date(System.currentTimeMillis()));
 			alarm.setAlarm_subject("참가취소 알림");
+			alarm.setAlarm_content("참가신청이 완료 되었습니다.");
+			
+			Alarm writerAlarm = new Alarm();
+			writerAlarm.setUser_id(writer_id);
+			writerAlarm.setRecruit_no(recruit_no);
+			writerAlarm.setAlarm_date(new Date(System.currentTimeMillis()));
+			writerAlarm.setAlarm_subject("작성하신 글에 참가취소 알림입니다.");
+			writerAlarm.setAlarm_content(user_id + "님이 참가 취소하셨습니다.");
+			
 			service.getcancelapply(apply);
 			service.getcancelalarm(alarm);
-			result = 2;
+			service.getalarmB(writerAlarm);
+			
+			service.updateRemainNum(recruit_no, remainNum + 1);
+			
+			result = 2;	// 성공
 		}
 		
 		

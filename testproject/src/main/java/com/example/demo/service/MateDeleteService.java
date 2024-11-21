@@ -16,7 +16,7 @@ public class MateDeleteService {
 		return dao.getrecruitD(recruit_no);
 	}
 
-	public int deleterb(int recruit_no) {
-		return dao.deleterb(recruit_no);
+	public int deleteRecruit(int recruit_no) {
+		return dao.deleteRecruit(recruit_no);
 	}
 }	

@@ -62,4 +62,12 @@
     		user_id = #{user_id} and apply_del = 0
 	</select>
 	
+	<select id="getRemainNum" parameterType="int" resultType="int">
+    select recruit_remainnum from recruit where recruit_no = #{recruit_no}
+	</select>
+
+	<update id="updateRemainNum" parameterType="map">
+    update recruit set recruit_remainnum = #{remainNum} where recruit_no = #{recruit_no}
+	</update>
+	
 </mapper>

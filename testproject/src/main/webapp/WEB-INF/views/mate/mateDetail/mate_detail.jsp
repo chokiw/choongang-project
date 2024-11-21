@@ -71,6 +71,8 @@ $(function() {
 					success : function(response){
 						if (response == -1){
 							alert("글쓴이는 참가 신청이 불가합니다.");
+						}else if(response == -2){
+							alert("모집 정원이 초과되었습니다.")
 						}else{
 							alert("참가신청 완료 되었습니다.");
 							location.reload();
@@ -110,13 +112,19 @@ $(function() {
 		        },
 		        success: function (isApplied) {
 		        	console.log("isApplied:", isApplied);
+		        	
+		        	// 모집 인원 확인
+		        	const remainNum = ${board.recruit_remainnum};
+		        	if (remainNum <= 0){
+		        		$("#start1").prop("disabled", true);
+		        	}
+		        	
+		        	// 참가 상태에 따라 버튼 활성화/비활성화
 		            if (isApplied) {
-		                // 이미 신청한 경우: 참가신청 비활성화, 참가취소 활성화
 		                console.log("참가신청 버튼 비활성화");
 		                $("#start1").prop("disabled", true);
 		                $("#stop1").prop("disabled", false);
 		            } else {
-		                // 신청하지 않은 경우: 참가신청 활성화, 참가취소 비활성화
 		                console.log("참가신청 버튼 활성화");
 		                $("#start1").prop("disabled", false);
 		                $("#stop1").prop("disabled", true);

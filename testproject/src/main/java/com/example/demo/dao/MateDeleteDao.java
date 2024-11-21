@@ -9,6 +9,6 @@ public interface MateDeleteDao {
 
 	RecruitBoard getrecruitD(int recruit_no);
 
-	int deleterb(int recruit_no);
+	int deleteRecruit(int recruit_no);
 
 }

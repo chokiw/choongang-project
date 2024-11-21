@@ -34,4 +34,8 @@ public interface MateDetailDAO {
 
 	int isAlreadyApplied(@Param("recruit_no")int recruit_no, @Param("user_id")String user_id);
 
+	int getRemainNum(int recruit_no);
+
+	void updateRemainNum(@Param("recruit_no")int recruit_no, @Param("remainNum") int remainNum);
+
 }
