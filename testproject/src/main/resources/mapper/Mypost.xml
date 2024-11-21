@@ -5,10 +5,12 @@
 <mapper namespace="com.example.demo.dao.MypostDAO">
 	<!-- 내가쓴 트랙 정보글 가져오기 -->
 	<select id="getSnsboard" parameterType="String" resultType="totalpage">
-    	select sns_no,sns_subject,sns_date,sns_readcount from sns where user_id= #{user_id}
+    	select sns_no,sns_subject,sns_date,sns_readcount from sns where user_id= #{user_id} 
+    	and sns_del = 0
     </select>
     <!-- 내가쓴 메이트 정보글 가져오기 -->
     <select id="getMateboard" parameterType="String" resultType="totalpage">
-    	select recruit_no,recruit_subject,recruit_date,recruit_readcount from recruit where user_id= #{user_id}
+    	select recruit_no,recruit_subject,recruit_date,recruit_readcount from recruit where user_id= #{user_id} 
+    	and recruit_del =0
     </select>
 </mapper>

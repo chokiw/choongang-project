@@ -19,6 +19,7 @@
 			<if test="recruit_address2 != null">
 				recruit_address2 like '%'||#{recruit_address2}||'%'
 			</if>
+			and recruit_del = 0
 		</where>
 	</select>
 	<!-- 페이지 처리에 의한 sns게시판 데이터리스트 불러오기 -->
@@ -38,6 +39,7 @@
 			<if test="recruit_address2 != null">
 				recruit_address2  like '%'||#{recruit_address2}||'%'
 			</if>
+			and recruit_del = 0			
 		</where>
 		order by recruit_no desc) a )
 		where rn between #{startRow} and #{endRow}

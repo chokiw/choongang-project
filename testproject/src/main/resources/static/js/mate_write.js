@@ -55,6 +55,15 @@ function check() {
 		$("#recruit_d_day").val("").focus();
 		return false;
 	}
+		
+	var currentday = new Date();
+	var recruitDday = new Date($.trim($("#recruit_d_day").val()));
+	if ( recruitDday < currentday){
+		alert("과거입니다.");
+		$("#recruit_d_day").val("").focus();
+		return false;
+	}
+	
 
 	if ($.trim($("#recruit_content").val()) == "") {
 		alert("내용을 입력하세요!");
