@@ -49,7 +49,7 @@
 			<c:when test="${isWriter}">
 				<span style="font-size: 18px;"><a
 					href=" JAVASCRIPT:goback('mate_detail?pageNum=${pageNum}&recruit_no=${alarm.recruit_no}')">이곳을
-						누르면 참가신청한 글로 이동합니다.</a></span>
+						누르면 작성하신 글로 이동합니다.</a></span>
 			</c:when>
 
 			<%-- 내가 다른 사람의 글에 참가 신청한 경우 --%>
