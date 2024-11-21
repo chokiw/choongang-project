@@ -1,0 +1,251 @@
+.reboard {
+            border-collapse: collapse;
+            margin-left: auto;
+            margin-right: auto;
+            width: 100%;
+            max-width: 1200px;
+            margin-top: 50px;
+            table-layout: fixed;
+        }
+
+        .reboard th,
+        .re td {
+            padding: 8px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .reboardwrite {
+            border-collapse: collapse;
+            margin-left: auto;
+            margin-right: auto;
+            width: 100%;
+            max-width: 1200px;
+            margin-top: 50px;
+            table-layout: fixed;
+        }
+
+        .reboardwrite:th,
+        .reboardrite:td {
+            padding: 8px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .reboard_col1 {
+            width: 45px;
+        }
+
+        .re_image {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin: 0 auto;
+        }
+
+        .re_writer {
+            font-size: 14px;
+            font-family: 'Gothic A1', sans-serif;
+            font-weight: 600;
+            color: black;
+            text-decoration: none;
+        }
+
+        .re_writer:visited {
+            color: black;
+        }
+
+        .re_content {
+            font-size: 14px;
+            font-family: 'Gothic A1', sans-serif;
+        }
+
+        .re_date {
+            font-size: 12px;
+            font-family: 'Gothic A1', sans-serif;
+            color: #b4b4b4;
+        }
+
+        .block {
+            text-align: right;
+            display: inline;
+            float: right;
+        }
+
+        .re_delete1,.re_delete2,.re_delete3 {
+            text-decoration: none;
+            color: #b4b4b4;
+            font-size: 12px;
+        }
+
+        .re_delete:hover{
+            text-decoration: underline;
+            cursor: pointer;
+        }
+
+        .re_re_write{
+            text-decoration: none;
+            color: #b4b4b4;
+            font-size: 12px;
+        }
+
+        .re_re_write:hover{
+            text-decoration: underline;
+            cursor: pointer;
+            
+        }
+
+       
+
+        .re_delete:hover{
+            text-decoration: underline;
+        }
+
+        /* 댓글 작성폼 css */
+
+        .re_writebox {
+            width: 100%;
+            border-color: #b4b4b4;
+            border-width: 2px;
+            border-style: solid;
+            height: 160px;
+            opacity: 80%;
+            border-radius: 5px;
+            position: relative;
+        }
+        .re_re_writebox {
+            width: 100%;
+            border-color: #b4b4b4;
+            border-width: 2px;
+            border-style: solid;
+            height: 140px;
+            opacity: 80%;
+            border-radius: 5px;
+            position: relative;
+        }
+
+        .nickname {
+            margin-left: 2%;
+            margin-top: 5px;
+            font-weight: 600;
+        }
+
+        .re_write {
+            width: 95%;
+            margin-left: 2%;
+            margin-right: 2%;
+            resize: none;
+            border-style: none;
+            margin-top: 1%;
+            height: 80px;
+            font-size: 14px;
+            font-family: 'Gothic A1', sans-serif;
+        }
+        .re_write:focus {
+        	border: none;
+        	outline: none;
+    	}
+
+        .buttonbox {
+            position: absolute;
+            bottom: 4px;
+            right: 4px;
+            margin-top: 1%;
+        }
+
+        .action-button {
+            padding: 5px 20px;
+            font-size: 14px;
+            font-weight: bold;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.1s;
+            color: white;
+            height: 30px;
+        }
+
+        .action-button:hover {
+            transform: scale(1.05);
+        }
+
+        .action-button:active {
+            transform: scale(0.95);
+        }
+
+        .save {
+            background-color: #4CAF50;
+            color: white;
+        }
+        .cancle {
+			background-color: #f44336;
+            color: white;
+            margin-left: 10px; 
+        }
+
+        .save:disabled {
+            background-color: #cccccc;
+            color: #666666;
+            cursor: not-allowed;
+        }
+
+        @media screen and (max-width: 1200px) {
+            .reboard, .reboardwrite {
+                max-width: 90%;
+            }
+        }
+
+        @media screen and (max-width: 768px) {
+            .reboard, .reboardwrite {
+                max-width: 95%;
+            }
+
+            .re_writer {
+                font-size: 13px;
+            }
+
+            .re_content {
+                font-size: 13px;
+            }
+
+            .re_date {
+                font-size: 11px;
+            }
+
+            .re_delete {
+                font-size: 11px;
+            }
+        }
+
+        @media screen and (max-width: 425px) {
+            .reboard, .reboardwrite {
+                max-width: 100%;
+            }
+
+            .col1 {
+                width: 35px;
+            }
+
+            .re_image {
+                width: 30px;
+                height: 30px;
+            }
+
+            .re_writer {
+                font-size: 12px;
+            }
+
+            .re_content {
+                font-size: 12px;
+            }
+
+            .re_date {
+                font-size: 10px;
+            }
+
+            .re_delete {
+                font-size: 10px;
+            }
+        }
+        .reply-indent td {
+            padding-left: 40px;
+            /* 대댓글 들여쓰기 */
+        }

@@ -15,129 +15,451 @@
     <link href="https://fonts.googleapis.com/css2?family=Gothic+A1&display=swap" rel="stylesheet">
     <script src="http://code.jquery.com/jquery-latest.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <script src="https://kit.fontawesome.com/5e485453d8.js" crossorigin="anonymous"></script>
-    <link href="/css/sns_board.css" rel="stylesheet">
+<!--     <script src="https://kit.fontawesome.com/5e485453d8.js" crossorigin="anonymous"></script> -->
     <title>Document</title>
+    <style>
+        .reboard {
+            border-collapse: collapse;
+            margin-left: auto;
+            margin-right: auto;
+            width: 100%;
+            max-width: 1200px;
+            margin-top: 50px;
+            table-layout: fixed;
+        }
+
+        .reboard th,
+        .re td {
+            padding: 8px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .reboardwrite {
+            border-collapse: collapse;
+            margin-left: auto;
+            margin-right: auto;
+            width: 100%;
+            max-width: 1200px;
+            margin-top: 50px;
+            table-layout: fixed;
+        }
+
+        .reboardwrite:th,
+        .reboardrite:td {
+            padding: 8px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .reboard_col1 {
+            width: 45px;
+        }
+
+        .re_image {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin: 0 auto;
+        }
+
+        .re_writer {
+            font-size: 14px;
+            font-family: 'Gothic A1', sans-serif;
+            font-weight: 600;
+            color: black;
+            text-decoration: none;
+        }
+
+        .re_writer:visited {
+            color: black;
+        }
+
+        .re_content {
+            font-size: 14px;
+            font-family: 'Gothic A1', sans-serif;
+        }
+
+        .re_date {
+            font-size: 12px;
+            font-family: 'Gothic A1', sans-serif;
+            color: #b4b4b4;
+        }
+
+        .block {
+            text-align: right;
+            display: inline;
+            float: right;
+        }
+
+        .re_delete1,.re_delete2,.re_delete3 {
+            text-decoration: none;
+            color: #b4b4b4;
+            font-size: 12px;
+        }
+
+        .re_delete:hover{
+            text-decoration: underline;
+            cursor: pointer;
+        }
+
+        .re_re_write{
+            text-decoration: none;
+            color: #b4b4b4;
+            font-size: 12px;
+        }
+
+        .re_re_write:hover{
+            text-decoration: underline;
+            cursor: pointer;
+            
+        }
+
+       
+
+        .re_delete:hover{
+            text-decoration: underline;
+        }
+
+        /* 댓글 작성폼 css */
+
+        .re_writebox {
+            width: 100%;
+            border-color: #b4b4b4;
+            border-width: 2px;
+            border-style: solid;
+            height: 160px;
+            opacity: 80%;
+            border-radius: 5px;
+            position: relative;
+        }
+        .re_re_writebox {
+            width: 100%;
+            border-color: #b4b4b4;
+            border-width: 2px;
+            border-style: solid;
+            height: 140px;
+            opacity: 80%;
+            border-radius: 5px;
+            position: relative;
+        }
+
+        .nickname {
+            margin-left: 2%;
+            margin-top: 5px;
+            font-weight: 600;
+        }
+
+        .re_write {
+            width: 95%;
+            margin-left: 2%;
+            margin-right: 2%;
+            resize: none;
+            border-style: none;
+            margin-top: 1%;
+            height: 80px;
+            font-size: 14px;
+            font-family: 'Gothic A1', sans-serif;
+        }
+        .re_write:focus {
+        	border: none;
+        	outline: none;
+    	}
+
+        .buttonbox {
+            position: absolute;
+            bottom: 4px;
+            right: 4px;
+            margin-top: 1%;
+        }
+
+        .action-button {
+            padding: 5px 20px;
+            font-size: 14px;
+            font-weight: bold;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.1s;
+            color: white;
+            height: 30px;
+        }
+
+        .action-button:hover {
+            transform: scale(1.05);
+        }
+
+        .action-button:active {
+            transform: scale(0.95);
+        }
+
+        .save {
+            background-color: #4CAF50;
+            color: white;
+        }
+        .cancle {
+			background-color: #f44336;
+            color: white;
+            margin-left: 10px; 
+        }
+
+        .save:disabled {
+            background-color: #cccccc;
+            color: #666666;
+            cursor: not-allowed;
+        }
+
+        @media screen and (max-width: 1200px) {
+            .reboard, .reboardwrite {
+                max-width: 90%;
+            }
+        }
+
+        @media screen and (max-width: 768px) {
+            .reboard, .reboardwrite {
+                max-width: 95%;
+            }
+
+            .re_writer {
+                font-size: 13px;
+            }
+
+            .re_content {
+                font-size: 13px;
+            }
+
+            .re_date {
+                font-size: 11px;
+            }
+
+            .re_delete {
+                font-size: 11px;
+            }
+        }
+
+        @media screen and (max-width: 425px) {
+            .reboard, .reboardwrite {
+                max-width: 100%;
+            }
+
+            .col1 {
+                width: 35px;
+            }
+
+            .re_image {
+                width: 30px;
+                height: 30px;
+            }
+
+            .re_writer {
+                font-size: 12px;
+            }
+
+            .re_content {
+                font-size: 12px;
+            }
+
+            .re_date {
+                font-size: 10px;
+            }
+
+            .re_delete {
+                font-size: 10px;
+            }
+        }
+        .reply-indent td {
+            padding-left: 40px;
+            /* 대댓글 들여쓰기 */
+        }
+    </style>
 
     <script>
-    $(function() {
-		$('.edit1').click(function() {	   // 수정 버튼 클릭
-			var id  = $(this).attr('id');  // rno
-			var txt = $.trim($('#td_'+id).text()); // replytext
-			$('#td_'+id).html("<textarea rows='3' cols='30' id='tt_"+id+"'>"+txt+"</textarea>");
-			$('#btn_'+id).html(
-			   "<input type='button' value='확인' onclick='up("+id+")'> "
-			  +"<input type='button' value='취소' onclick='lst()'>");
-		});
-	});
+    var $textarea = $("#sns_r_content");
+    var $submitButton = $("#writereply");
+    
+    function fn_chk_byte(obj) {
+        var limitByte = 2000;
+        var totalByte = 0;
+        var message = $(obj).val();
+
+        for (var i = 0; i < message.length; i++) {
+            var currentByte = message.charCodeAt(i);                 
+            if (currentByte > 128) {
+                totalByte += 2;
+            } else {
+                totalByte++;
+            }
+        }
+
+        $("#messagebyte").text(totalByte);
+
+        if (totalByte > limitByte) {
+            alert(limitByte + "Byte 까지 입력가능합니다.");               
+
+            $submitButton.prop('disabled', totalByte > limitByte);
+
+            return false;                      
+        }
+    }   
+    
+    $textarea.on('input', function () {
+        fn_chk_byte(this);
+    });  
 	
-	function up(id) {
-		var replytext = $('#tt_'+id).val();
-		var formData = "recruit_r_no="+id+'&recruit_r_content='+replytext
-			+"&recruit_no=${board.recruit_no}";
+	function re_re_write2(rno){
+		$('.re_'+rno).toggle();
+	}
+
+	function byteCount(str) {
+// 		alert(str);
+  		let count = 0;
+  		for (let i = 0; i < str.length; i++) {
+    		let charCode = str.charCodeAt(i);
+    	if (charCode <= 0x7f) {
+      		count += 1;
+    	} else if (charCode <= 0x7ff) {
+      		count += 2;
+    	} else if (charCode <= 0xffff) {
+      		count += 3;
+    	} else {
+      		count += 4;
+    	  }
+  		}
+  		return count;
+	}
+
+	
+	function reInsert(rno){
+// 		alert(rno);
+		var user_id = $('.user_id').val();			// 세션id
+		var recruit_no = $('.recruit_no').val();	// 글번호		
+		
+// 		alert(user_id);
+// 		alert(recruit_no);
+		var recruit_r_content = $('#txt_'+rno).val();			
+		var byteLength = byteCount(recruit_r_content);
+		
+// 		alert("byte length : " + byteLength);
+		
+		if(recruit_r_content == ''){
+			alert('댓글 입력후에 클릭하시오');
+			$('#txt_'+rno).focus();				
+			return false;
+		} 
+				
+		if (byteLength > 1000) {
+			alert('1000Byte 까지 입력가능합니다.');
+		    return false;
+		}
+		
+		var formData = "user_id="+user_id+"&recruit_r_no="+rno+'&recruit_r_content='+recruit_r_content
+		+"&recruit_no="+recruit_no;		
+		$.post('${path}/sInsert', formData, function(data){
+			$('#rlist').html(data);
+		})
+	}
+	
+	function re_update(rno){
+		var txt = $.trim($('#rtxt_'+rno).text());
+		$('#td_'+rno).html("<div class='re_writebox'><textarea rows='3' cols='30' class='re_write' maxlength='1000' name='sns_r_content' id='tt_"+rno+"'>"+txt+"</textarea>"+
+				"<div style='position: absolute; right: 1%; top: 0; color: #b4b4b4; font-size: 14px;'>"+
+				"<span id='messagebyte'>0 </span><span>/ 2000Byte</span></div>"+
+				"<div class='buttonbox'>"+
+			
+				"<input type='button' id='writereply' class='action-button save' value='수정' onclick='javascript:reUpdate("+rno+")'></button><input type='button' id='writereply' class='action-button cancle' value='취소' onclick='lst()'></button></div></div>");					
+	}
+	
+	function reUpdate(rno){
+		var replytext = $('#tt_'+rno).val();
+		var formData = "recruit_r_no="+rno+'&recruit_r_content='+replytext+"&recruit_no=${board.recruit_no}";
 		$.post('${path}/repUpdate',formData, function(data) { // 댓글 수정 요청(콜백함수)
 			$('#rlist').html(data);
 		});
 	}
 	
 	function lst() {
-		$('#rlist').load('/rlist/num/${recruit.recruit_no}');
-	}
-		
-	function del(recruit_r_no,recruit_no) {
+		$('#rlist').load('/rlist/num/${board.recruit_no}');
+	}	
+	
+	function re_delete(recruit_r_no, recruit_no){
 		if(!confirm('삭제하시겠습니까?')){
 			return false;
 		   }
 		var formData="recruit_r_no="+recruit_r_no+"&recruit_no="+recruit_no;
 			$.post('${path}/repDelete', formData , function(data) {	// 댓글 삭제 요청
 			$('#rlist').html(data);	
-		})			
-	}	
-	
-	function re(recruit_r_no,recruit_no) {
-		
-		var formData="recruit_r_no="+recruit_r_no+"&recruit_no="+recruit_no;
-			
-			$.post('${path}/sInsert', formData , function(data) {	// 댓글 삭제 요청
-			$('#rlist').html(data);	
-		})			
-	}				
-	
-	$(function() {
-		$('.rbt').click(function() {
-			var id  = $(this).attr('id');
-			$('.'+id).toggle();			
-		});
-	});
-	
-	function rep(rno) {		// rno = recruit_r_no
-			var user_id = $('.user_id').val();			// 세션id
-			var recruit_no = $('.recruit_no').val();	// 글번호		
-		if($('.txt_'+rno).val() == ''){
-			alert('댓글 입력후에 클릭하시오');
-			$('.txt_'+rno).focus();				
-			return false;
-		}else{
-			var recruit_r_content = $('.txt_'+rno).val();
-		}			
-		var reData = 'user_id='+user_id+'&recruit_no='+recruit_no+'&recruit_r_no='+rno+'&recruit_r_content='+recruit_r_content;
-		$.post('${path}/sInsert', reData, function(data) {
-			$('#rlist').html(data);
-			frm.replytext.value = '';
-		}); 	
-	}	
-	
+		})		
+	}
 	
     </script>
-
-<script src="http://code.jquery.com/jquery-latest.js"></script>
 
 </head>
 
 <body>
-  <div align="center">
 	<input type="hidden" class=user_id value="${member.user_id}">
 	<input type="hidden" class=recruit_no value="${board.recruit_no}">
-		<h2 class="text-primary">댓글</h2>
-		<table>
-			<tr>
-				<td>작성자</td>
-				<td>내용</td>
-				<td>수정일</td>
-			</tr>
-			<c:forEach var="rb" items="${rlist}">
-				<c:set var = "i" value= "${i+1 }"/>
-				<tr>
-					<td>${rb.user_id}</td>
-					<td id="td_${rb.recruit_r_no}" >
-					<c:if test="${ rb.recruit_r_level > 0}">
-						<c:forEach begin="1" end="${rb.recruit_r_level }">
-							&nbsp;&nbsp;&nbsp;&nbsp;
-						</c:forEach>
-					</c:if>
-						 ${rb.recruit_r_content}
-					</td>
-					<td>${rb.recruit_r_date}</td>
-					<td id="btn_${rb.recruit_r_no}">
-						<c:if test="${rb.user_id==member.user_id}">
-							<input type="button" value="수정" class="edit1" id="${rb.recruit_r_no}">
-							<input type="button" value="삭제"	 onclick="del(${rb.recruit_r_no},${rb.recruit_no})">
-						</c:if>						
-						<input type="button" value="댓글"	 class="rbt" id="rbtn_${rb.recruit_r_no}">
-					</td>
-				</tr>
-				<tbody class="rbtn_${rb.recruit_r_no}" style="display: none" >
+
+	<table class="reboard">
+		<colgroup>
+           	<col class="reboard_col1">
+           	<col class="reboard_col2">
+        </colgroup>
+        		
+		<c:forEach var="rb" items="${rlist}">
+			<c:set var = "i" value= "${i+1 }"/>
+			
+				<c:if test="${rb.recruit_r_level > 0 }">
+					<tr class="reply-indent">
+				</c:if>
+				<c:if test="${rb.recruit_r_level == 0 }">
 					<tr>
-						<td colspan="4">												
-							<textarea rows="3" cols="50" class="txt_${rb.recruit_r_no}"></textarea>
-							<input type="button" value="댓글입력" onclick="rep(${rb.recruit_r_no})"> 						
-						</td>					
-					</tr>							
-				</tbody>
+				</c:if>
+					<td><img class="re_image" src="${pageContext.request.contextPath}/uimg/${rb.user_photo}" alt="User Avatar"></td>
+					<td id="td_${rb.recruit_r_no }">
+						<a href="userpage?user_id=${rb.user_id }" class="re_writer">${rb.user_nickname}</a><br>
+				    
+						<c:if test="${rb.recruit_r_del == 1 }">							
+							<span class="re_content" id="rtxt_${rb.recruit_r_no }">삭제된 댓글입니다.</span>					
+						</c:if>								
+						<c:if test="${rb.recruit_r_del == 0 }">
+							<c:if test="${rb.parent_nickname == null }">
+								<span class="re_content" id="rtxt_${rb.recruit_r_no }">${rb.recruit_r_content }</span>
+							</c:if>
+							<c:if test="${rb.parent_nickname != null }">
+								to. ${rb.parent_nickname } <span class="re_content" id="rtxt_${rb.recruit_r_no }">${rb.recruit_r_content }</span>
+							</c:if>														
+						</c:if>
+							<br>
+						<span class="re_date">${rb.recruit_r_date }</span>&nbsp;
+						
+						<c:if test="${rb.recruit_r_del == 0 }">
+						<a href="javascript:re_re_write2(${rb.recruit_r_no })" class="re_re_write" >답글쓰기</a>
+						</c:if>
 							
+							
+					<c:if test="${member.user_id == rb.user_id && rb.recruit_r_del == 0}">
+						<div class="block">
+							<a class="re_delete1" href="javascript:re_update(${rb.recruit_r_no })">수정</a>&nbsp;&nbsp;
+                    		<a class="re_delete2" href="javascript:re_delete(${rb.recruit_r_no },${rb.recruit_no })">삭제</a>&nbsp;&nbsp;
+						</div>
+					</c:if>		                      						
+					</td>	
+				</tr>
+					<tbody class="re_${rb.recruit_r_no }" style="display: none" >
+						<td colspan="2">
+                			<div class="re_writebox">
+                    		<span class="nickname">${sessionScope.member.user_nickname }</span>
+                   				<textarea rows="4" cols="50" class="re_write" id="txt_${rb.recruit_r_no }" name="sns_r_content"
+                        			placeholder="댓글을 남겨보세요" maxlength="1000"></textarea>
+                    			<div style="position: absolute; right: 1%; top: 0; color: #b4b4b4; font-size: 14px;">
+                    			</div>
+                    			<div class="buttonbox">
+                        			<input type="button" id="writereply" class="action-button save" value="등록" onclick="javascript:reInsert(${rb.recruit_r_no})"></button>                        			
+                    			</div>
+                			</div>
+            			</td>			
+					</tbody>							
 			</c:forEach>
-		</table>
-	</div>
+		</table>		       
+  
 </body>
 
 </html>

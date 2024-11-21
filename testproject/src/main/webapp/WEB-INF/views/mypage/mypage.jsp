@@ -147,12 +147,12 @@
 
 				<tr>
 					<td><span class="material-symbols-outlined">person_edit</span></td>
-					<td><a href="asd" class="mypagelist">정보수정</a></td>
+					<td><a href="memberedit" class="mypagelist">정보수정</a></td>
 				</tr>
 
 				<tr>
 					<td>&nbsp;<span class="material-symbols-outlined">person_remove</span></td>
-					<td><a href="asd" class="mypagelist">회원탈퇴</a></td>
+					<td><a href="withdraw" class="mypagelist">회원탈퇴</a></td>
 				</tr>
 			</table>
 

@@ -14,7 +14,7 @@
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script src="https://kit.fontawesome.com/5e485453d8.js" crossorigin="anonymous"></script>
-<link href="/css/sns_board.css" rel="stylesheet">
+<link href="/css/userpostlist.css" rel="stylesheet">
 <link href="/css/snslist.css" rel="stylesheet">
 <script type="text/javascript">
 
@@ -63,13 +63,46 @@ function getlist(pageNum){
                         <c:if test="${post.recruit_no==0 }">
                         	<td>트랙</td>
                         	<td><a href="sns_detail?sns_no=${post.sns_no}">${post.sns_subject}</a></td>
-                        	<td><fmt:formatDate value="${post.sns_date}" pattern="yyyy-MM-dd HH:mm:ss" /></td>
+                        	
+                        	<td>
+                        	<c:set var="now" value="<%=new java.util.Date()%>" /> <fmt:formatDate
+								var="today" value="${now}" pattern="yyyyMMdd" /> <fmt:formatDate
+								var="postDate" value="${post.sns_date}" pattern="yyyyMMdd" />
+
+							<c:choose>
+								<c:when test="${today eq postDate}">
+									<fmt:formatDate value="${post.sns_date}" pattern="HH:mm" />
+								</c:when>
+								<c:otherwise>
+									<fmt:formatDate value="${post.sns_date}" pattern="yyyy-MM-dd" />
+								</c:otherwise>
+							</c:choose>
+                        	</td>
+                        	
                         	<td>${post.sns_readcount}</td>
                         </c:if>
                         <c:if test="${post.recruit_no!=0 }">
                         	<td>모집</td>
                         	<td><a href="mate_detail?recruit_no=${post.recruit_no}">${post.recruit_subject}</a></td>
-                        	<td><fmt:formatDate value="${post.recruit_date}" pattern="yyyy-MM-dd HH:mm:ss" /></td>
+                        	
+                        	
+                        	<td>
+                        	<c:set var="now" value="<%=new java.util.Date()%>" /> 
+						<fmt:formatDate var="today" value="${now}" pattern="yyyyMMdd" />
+						<fmt:formatDate var="postDate" value="${post.recruit_date}" pattern="yyyyMMdd"  />
+
+							<c:choose>
+								<c:when test="${today eq postDate}">
+									<fmt:formatDate value="${post.recruit_date}" pattern="HH:mm"  />
+								</c:when>
+								<c:otherwise>
+									<fmt:formatDate value="${post.recruit_date}" pattern="yyyy-MM-dd" />
+								</c:otherwise>
+							</c:choose>
+                        	
+                        	</td>
+                        	
+                        	
                         	<td>${post.recruit_readcount}</td>
                         </c:if>
 					</tr>

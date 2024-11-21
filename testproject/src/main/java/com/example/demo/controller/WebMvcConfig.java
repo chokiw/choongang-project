@@ -12,6 +12,22 @@ public class WebMvcConfig implements WebMvcConfigurer {
 	@Override   // 인터셉터가 동작할 url 패턴 등록
 	public void addInterceptors(InterceptorRegistry registry) {
 		registry.addInterceptor(interceptor)
-				.addPathPatterns("/member_edit.do");
+				.addPathPatterns("/mainpage")
+				.addPathPatterns("/mypage")
+				.addPathPatterns("/runnertrack")
+				.addPathPatterns("/mywriting")
+				.addPathPatterns("/liked_board")
+				.addPathPatterns("/alarm_page")
+				.addPathPatterns("/mate_board")
+				.addPathPatterns("/mate_write")
+				.addPathPatterns("/mate_detail")
+				.addPathPatterns("/mate_update")
+				.addPathPatterns("/sns_board")
+				.addPathPatterns("/sns_detail")
+				.addPathPatterns("/sns_update")
+				.addPathPatterns("/sns_write")
+				.addPathPatterns("/userpage")
+				.addPathPatterns("/run")
+				.addPathPatterns("/logout1");
 	}
 }

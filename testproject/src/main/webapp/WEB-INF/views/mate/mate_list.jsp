@@ -64,13 +64,16 @@ function getsearchfisrt() {
 				<col class="col3">
 				<col class="col4">
 				<col class="col5">
+				<col class="col6">
+				
 			</colgroup>
 			<tr>
 				<th>번호</th>
 				<th>작성자</th>
 				<th>제목</th>
 				<th>작성일</th>
-				<th>조회수</th>
+				<th>지역</th>
+				<th>모집인원</th>
 			</tr>
 			<c:if test="${empty list}">
 				<tr>
@@ -83,19 +86,28 @@ function getsearchfisrt() {
 					<tr>
 						<td>${no1}</td>
 						<td>${board.user_id}</td>
+						<td><a
+							href="mate_detail?pageNum=${pageNum}&recruit_no=${board.recruit_no}">${board.recruit_subject}</a></td>
+							
+							
 						<td>
-						<c:choose>
-							<c:when test="${board.recruit_del == 1}">
-								<span>삭제된 글입니다.</span>
-							</c:when>
-							<c:otherwise>
-						<a href="mate_detail?pageNum=${pageNum}&recruit_no=${board.recruit_no}">${board.recruit_subject}</a>					
-						</c:otherwise>
-						</c:choose>
+						<c:set var="now" value="<%=new java.util.Date()%>" /> 
+						<fmt:formatDate var="today" value="${now}" pattern="yyyyMMdd" />
+						<fmt:formatDate var="postDate" value="${board.recruit_date}" pattern="yyyyMMdd"  />
+
+							<c:choose>
+								<c:when test="${today eq postDate}">
+									<fmt:formatDate value="${board.recruit_date}" pattern="HH:mm"  />
+								</c:when>
+								<c:otherwise>
+									<fmt:formatDate value="${board.recruit_date}" pattern="yyyy-MM-dd"  />
+								</c:otherwise>
+							</c:choose>
 						</td>
-						<td><fmt:formatDate value="${board.recruit_date}"
-								pattern="yyyy-MM-dd HH:mm:ss" /></td>
-						<td>${board.recruit_readcount}</td>
+								
+						<td>${board.recruit_address1}&nbsp;${board.recruit_address2}</td>	
+						<!-- 조회수 대신 모집인원  -->	
+						<td>${board.recruit_recruitnum}명</td>
 					</tr>
 					<c:set var="no1" value="${no1 - 1}"></c:set>
 				</c:forEach>

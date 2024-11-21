@@ -36,8 +36,7 @@
 	</insert>
 	<!-- 참가 신청 알림 -->
 	<insert id="getalarmB" parameterType="alarm">
-		insert into alarm (alarm_no, user_id, recruit_no, alarm_content, alarm_date, alarm_subject)
-		values (alarm_seq.nextval, #{user_id}, #{recruit_no}, #{alarm_content}, sysdate, #{alarm_subject})
+		insert into alarm values (alarm_seq.nextval, #{user_id}, #{recruit_no}, #{alarm_content}, sysdate ,0,0,#{alarm_subject})
 	</insert>
 	<!-- 참가 신청 취소 -->
 	<update id="getcancelapply" parameterType="apply">
@@ -63,11 +62,11 @@
 	</select>
 	
 	<select id="getRemainNum" parameterType="int" resultType="int">
-    select recruit_remainnum from recruit where recruit_no = #{recruit_no}
+		select recruit_remainnum from recruit where recruit_no = #{recruit_no}
 	</select>
-
+	
 	<update id="updateRemainNum" parameterType="map">
-    update recruit set recruit_remainnum = #{remainNum} where recruit_no = #{recruit_no}
+		update recruit set recruit_remainnum = #{remainNum} where recruit_no = #{recruit_no}
 	</update>
 	
 </mapper>

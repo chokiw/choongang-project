@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.demo.dao.TrackReplyDAO">
+
+	<!-- Use type aliases to avoid typing the full classname every time. -->
+	<resultMap id="srbResult"          type="srb">
+		<result property="sns_r_no"	      	column="sns_r_no" />
+		<result property="sns_no"    	  	column="sns_no" />
+		<result property="user_id"  	  	column="user_id" />
+		<result property="sns_r_step"     	column="sns_r_step" />
+		<result property="sns_r_level"    	column="sns_r_level" />
+		<result property="sns_r_content"  	column="sns_r_content" />
+		<result property="sns_r_date" 	  	column="sns_r_date" />
+		<result property="sns_r_ref" 	  	column="sns_r_ref" />
+		<result property="sns_r_del" 	  	column="sns_r_del" />
+		<result property="sns_r_parent"   	column="sns_r_parent" />
+		<result property="user_nickname"  	column="user_nickname" />
+		<result property="user_photo"     	column="user_photo" />
+		<result property="parent_nickname"  column="parent_nickname" />
+	</resultMap>
+
+	
+	<select id="srList" parameterType="int" resultMap="srbResult">				
+	SELECT 
+    	s1.*,                               
+    	at1.user_nickname AS user_nickname, 
+    	at1.user_photo AS user_photo,       
+    	at2.user_nickname AS parent_nickname
+	FROM (
+	    SELECT r.*,  
+        	ROW_NUMBER() OVER (ORDER BY r.sns_r_ref, r.sns_r_step) AS rn  
+    	FROM sns_r r
+	) s1
+		LEFT JOIN runner at1 ON s1.user_id = at1.user_id 
+		LEFT JOIN sns_r s2 ON s1.sns_r_parent = s2.sns_r_no  
+		LEFT JOIN runner at2 ON s2.user_id = at2.user_id  
+	WHERE s1.sns_no = #{num}
+
+	</select>
+	
+	
+	<select id="srSelect" parameterType="int" resultMap="srbResult">	
+		select * from sns_r where sns_r_no=#{rno}
+	</select>
+
+	
+	<insert id="srInsert" parameterType="srb" >
+			insert into sns_r values (
+			sns_r_no_seq.nextval,
+			#{sns_no},
+			#{user_id},
+			#{sns_r_step},
+			#{sns_r_level},
+			#{sns_r_content},
+			sysdate,
+			#{sns_r_ref},
+			#{sns_r_del},
+			#{sns_r_parent}
+			)
+	</insert>
+	
+	
+	
+	<update id="update" parameterType="rb">
+		update recruit_r set recruit_r_content=#{recruit_r_content},
+			recruit_r_date=sysdate where recruit_r_no=#{recruit_r_no} 
+	</update>
+	<update id="srUpdate" parameterType="rb">
+		update sns_r set sns_r_content=#{sns_r_content},
+			sns_r_date=sysdate where sns_r_no=#{sns_r_no} 
+	</update>
+	
+	
+	<update id="srDelete" parameterType="int">
+		update sns_r set sns_r_del = 1 where sns_r_no = #{sns_r_no}
+	</update>
+	
+	
+	
+	<select id="getSrMaxNum" resultType="int">
+		select nvl(max(sns_r_ref),0)+1 from sns_r where sns_no=#{sns_no}
+	</select>
+
+	<select id="getSrMaxNum2" resultType="int">
+		select nvl(max(sns_r_step), 0)+1 from sns_r where sns_r_parent= #{sns_r_no} 
+	</select>	
+	
+	<update id="updateSrStep" parameterType="srb">
+		update sns_r set sns_r_step = sns_r_step + 1 
+			where sns_r_ref=#{sns_r_ref} and sns_r_step >= #{sns_r_step}	
+	</update>
+	
+	<select id="getSrChild" parameterType="int">
+		    select nvl(min(sns_r_step),0) from sns_r where sns_r_step > #{sns_r_step} 
+		    	and sns_r_level &lt;= #{sns_r_level} and sns_r_ref = #{sns_r_ref} order by sns_r_step		
+	</select>		
+		
+	<select id="srgetDetail" parameterType="int" resultType="sns">
+		select * from sns where sns_no=#{no}
+	</select>
+	
+</mapper>

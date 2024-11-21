@@ -4,6 +4,7 @@ import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -25,6 +26,8 @@ import lombok.RequiredArgsConstructor;
 @CrossOrigin(origins = "*")
 public class MemberController {
 	private final MemberService service;
+	@Autowired
+	org.springframework.security.crypto.password.PasswordEncoder passwordEncoder;
 	
 	@RequestMapping("/member")
 	public String member() {
@@ -97,6 +100,10 @@ public class MemberController {
 		}
 
 		runner.setUser_photo(newfilename);
+		
+		String encPasswd = passwordEncoder.encode(runner.getUser_passwd());
+		
+		runner.setUser_passwd(encPasswd);
 
 		result = service.insert(runner);
 

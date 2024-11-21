@@ -31,6 +31,10 @@ function getlist(pageNum){
 	$('#alarm').load(uri);
 }
 
+
+
+
+
 </script>
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <meta charset="UTF-8">
@@ -62,9 +66,23 @@ function getlist(pageNum){
  				<c:forEach var="board" items="${list}">
  					<tr> 
  						<td>${no1}</td> 
- 						<td><a href="alarm_detail?pageNum=${pageNum}&alarm_no=${board.alarm_no}">${board.alarm_subject}</a></td>
-						<td><fmt:formatDate value="${board.alarm_date}" 
- 								pattern="yyyy-MM-dd HH:mm:ss" /></td> 
+ 						<td><a href="alarm_detail?pageNum=${pageNum}&alarm_no=${board.alarm_no}" onclick="openPopup(this.href); return false;">${board.alarm_subject}</a></td>
+ 						
+						<td>
+						<c:set var="now" value="<%=new java.util.Date()%>" /> <fmt:formatDate
+								var="today" value="${now}" pattern="yyyyMMdd" /> <fmt:formatDate
+								var="postDate" value="${board.alarm_date}" pattern="yyyyMMdd" />
+
+							<c:choose>
+								<c:when test="${today eq postDate}">
+									<fmt:formatDate value="${board.alarm_date}" pattern="HH:mm" />
+								</c:when>
+								<c:otherwise>
+									<fmt:formatDate value="${board.alarm_date}" pattern="yyyy-MM-dd" />
+								</c:otherwise>
+							</c:choose>
+ 						</td> 
+ 								
  						<td>${board.alarm_date_readcount}</td> 
  					</tr>
  					<c:set var="no1" value="${no1 - 1}"></c:set>

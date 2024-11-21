@@ -60,6 +60,7 @@ public class MateDetailService {
 		return dao.isAlreadyApplied(recruit_no, user_id) > 0;
 	}
 
+
 	public int getRemainNum(int recruit_no) {
 		return dao.getRemainNum(recruit_no);
 	}
@@ -67,6 +68,5 @@ public class MateDetailService {
 	public void updateRemainNum(int recruit_no, int remainNum) {
 		dao.updateRemainNum(recruit_no, remainNum);
 	}
-
 
 }

@@ -65,12 +65,14 @@ function getsearchfisrt() {
 				<col class="col4">
 				<col class="col5">
 				<col class="col6">
+				<col class="col7">
 			</colgroup>
 			<tr>
 				<th>번호</th>
 				<th>작성자</th>
 				<th>제목</th>
 				<th>작성일</th>
+				<th>지역</th>
 				<th>조회수</th>
 				<th>추천수</th>
 			</tr>
@@ -87,8 +89,24 @@ function getsearchfisrt() {
 						<td>${board.user_id}</td>
 						<td><a
 							href="sns_detail?pageNum=${pageNum}&sns_no=${board.sns_no}">${board.sns_subject}</a></td>
-						<td><fmt:formatDate value="${board.sns_date}"
-								pattern="yyyy-MM-dd HH:mm:ss" /></td>
+
+						
+						<!-- 글을 작성한 날짜가 오늘이면 시,분만 나오고 하루가 지나면 년,월,일이 나오게 한다. -->
+						<td><c:set var="now" value="<%=new java.util.Date()%>" /> <fmt:formatDate
+								var="today" value="${now}" pattern="yyyyMMdd" /> <fmt:formatDate
+								var="postDate" value="${board.sns_date}" pattern="yyyyMMdd" />
+
+							<c:choose>
+								<c:when test="${today eq postDate}">
+									<fmt:formatDate value="${board.sns_date}" pattern="HH:mm" />
+								</c:when>
+								<c:otherwise>
+									<fmt:formatDate value="${board.sns_date}" pattern="yyyy-MM-dd" />
+								</c:otherwise>
+							</c:choose></td>
+
+
+						<td>${board.sns_address1}&nbsp;${board.sns_address2}</td>
 						<td>${board.sns_readcount}</td>
 						<td>${board.sns_good}</td>
 
@@ -113,7 +131,8 @@ function getsearchfisrt() {
 			</c:if>
 
 			<!-- 전체 목록의 페이징 처리 -->
-			<c:if test="${empty keyword && empty  sns_address1  && empty  sns_address2 }">
+			<c:if
+				test="${empty keyword && empty  sns_address1  && empty  sns_address2 }">
 				<c:if test="${pp.startPage > pp.pagePerBlk }">
 					<c:choose>
 						<c:when test="${best}">
@@ -149,14 +168,16 @@ function getsearchfisrt() {
 			<!-- 지역별 페이징 처리 -->
 			<c:if test="${not empty sns_address1 && not empty sns_address2}">
 				<c:if test="${pp.startPage > pp.pagePerBlk }">
-					<li><a href="javascript:getAddressList(${pp.startPage - 1},'${sns_address1 }','${sns_address2 }')">이전</a></li>
+					<li><a
+						href="javascript:getAddressList(${pp.startPage - 1},'${sns_address1 }','${sns_address2 }')">이전</a></li>
 				</c:if>
 				<c:forEach var="i" begin="${pp.startPage}" end="${pp.endPage}">
 					<li <c:if test="${pp.currentPage==i}">class="active"</c:if>><a
 						href="javascript:getAddressList(${i},'${sns_address1 }'  ,  '${sns_address2 }')">${i}</a></li>
 				</c:forEach>
 				<c:if test="${pp.endPage < pp.totalPage}">
-					<li><a href="javascript:getAddressList(${pp.endPage + 1},'${sns_address1 }','${sns_address2 }')">다음</a></li>
+					<li><a
+						href="javascript:getAddressList(${pp.endPage + 1},'${sns_address1 }','${sns_address2 }')">다음</a></li>
 				</c:if>
 			</c:if>
 

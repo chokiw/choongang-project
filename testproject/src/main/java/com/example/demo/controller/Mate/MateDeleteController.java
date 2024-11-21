@@ -23,8 +23,7 @@ public class MateDeleteController {
 
 		int recruit_no = rb.getRecruit_no();
 		RecruitBoard board = service.getrecruitD(recruit_no);
-		
-		// recruit_del 컬럼을 1로 업데이트
+
 		int delete = service.deleteRecruit(recruit_no);
 
 		model.addAttribute("recruit_no", recruit_no);
