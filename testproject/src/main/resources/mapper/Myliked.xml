@@ -8,8 +8,7 @@
 <!-- 		select count(*) -->
 <!-- 		from good -->
 <!-- 		where user_id = #{user_id} -->
-	SELECT 
-                                  
+	SELECT                                   
     	count(s.sns_del)
 	FROM (
 	    select * from good

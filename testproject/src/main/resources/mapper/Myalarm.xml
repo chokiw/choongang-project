@@ -7,12 +7,28 @@
 	<select id="getTotal" parameterType="alarm" resultType="int">
 		select
 		count(*) from alarm
+		where user_id=#{user_id}
 	</select>
 	<!-- 알람 게시판 목록 -->
 	<select id="alarmList" parameterType="alarm" resultType="alarm">
-		select * from (select a.*, rowNum rn from (
-		select * from alarm where user_id = #{user_id} order by alarm_no desc) a)
-		where rn between #{startRow} and #{endRow}
+<!-- 		select * from (select a.*, rowNum rn from ( -->
+<!-- 		select * from alarm where user_id = #{user_id} order by alarm_no desc) a) -->
+<!-- 		where rn between #{startRow} and #{endRow} -->
+
+SELECT a.*, r.*
+FROM (
+    SELECT a.*, ROWNUM rn
+    FROM (
+        SELECT * 
+        FROM alarm 
+        WHERE user_id = #{user_id}
+        ORDER BY alarm_no DESC
+    ) a
+) b  
+INNER JOIN recruit r ON b.recruit_no = r.recruit_no
+WHERE b.rn BETWEEN #{startRow} AND #{endRow} 
+AND r.recruit_del = 0;
+
 	</select>
 	<!-- 알람 게시판 글정보 구하기 -->
 	<select id="getDetail" parameterType="int" resultType="alarm">
