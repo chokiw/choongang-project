@@ -191,7 +191,7 @@
        		<input type="hidden" name="sns_proofshot" id="sns_proofshot" value="photo">
        		<input type="hidden" name="user_id" id="user_id" value="${member.user_id}">
             	<div class="sns_title">
-            		<span style="font-size: 24px; font-weight: 600;">제목</span>&nbsp;&nbsp;
+            		<span style="font-size: 24px; font-weight: 600;">제목 :</span>&nbsp;&nbsp;
                 	<input type="text" style="font-size: 20px; font-weight: 500; width: 60%;" maxlength="50" placeholder="제목을 입력하세요"  id="sns_subject" name="sns_subject">  
             	</div>
             

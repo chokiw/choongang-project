@@ -42,7 +42,7 @@
 			<form method="post" action="mate_writing" onsubmit="return check()">
 			<input type="hidden" name=user_id id="user_id" value="${member.user_id}">
 				<div class="recruit_title">
-					<span style="font-size: 24px; font-weight: 600;">제목</span>&nbsp;&nbsp;
+					<span style="font-size: 24px; font-weight: 600;">제목 :</span>&nbsp;&nbsp;
 					<input type="text"
 						style="font-size: 20px; font-weight: 500; width: 60%;"
 						maxlength="50" id="recruit_subject" name="recruit_subject"

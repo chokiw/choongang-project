@@ -29,7 +29,7 @@
         }
 
         .reboard th,
-        .re td {
+        .reboard td {
             padding: 8px;
             border-bottom: 1px solid #ddd;
         }
@@ -396,7 +396,7 @@
 <body>
 	<input type="hidden" class=user_id value="${member.user_id}">
 	<input type="hidden" class=recruit_no value="${board.recruit_no}">
-
+	<h2 style="margin-left:auto; margin-right:auto;">댓글</h2>
 	<table class="reboard">
 		<colgroup>
            	<col class="reboard_col1">
@@ -424,7 +424,7 @@
 								<span class="re_content" id="rtxt_${rb.recruit_r_no }">${rb.recruit_r_content }</span>
 							</c:if>
 							<c:if test="${rb.parent_nickname != null }">
-								to. ${rb.parent_nickname } <span class="re_content" id="rtxt_${rb.recruit_r_no }">${rb.recruit_r_content }</span>
+								<span style="color:blue; font-size:13px; font-weight:600;">${rb.parent_nickname }</span> <span class="re_content" id="rtxt_${rb.recruit_r_no }">${rb.recruit_r_content }</span>
 							</c:if>														
 						</c:if>
 							<br>

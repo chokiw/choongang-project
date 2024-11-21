@@ -57,8 +57,20 @@ function goback(runner_data_no){
 					<fmt:parseNumber value="${board.runner_data_time}" var="time"/>
 					<tr>
 						<td>${no1}</td>
-						<td><a href="JAVASCRIPT:goback(${board.runner_data_no})"><fmt:formatDate value="${board.runner_data_date}"
-							pattern="yyyy-MM-dd HH:mm:ss" /></a></td>
+						<td><a href="JAVASCRIPT:goback(${board.runner_data_no})">
+							<c:set var="now" value="<%=new java.util.Date()%>" /> <fmt:formatDate
+                        var="today" value="${now}" pattern="yyyyMMdd" /> <fmt:formatDate
+                        var="postDate" value="${board.runner_data_date}" pattern="yyyyMMdd" />
+
+                     <c:choose>
+                        <c:when test="${today eq postDate}">
+                           <fmt:formatDate value="${board.runner_data_date}" pattern="HH:mm" />
+                        </c:when>
+                        <c:otherwise>
+                           <fmt:formatDate value="${board.runner_data_date}" pattern="yyyy-MM-dd" />
+                        </c:otherwise>
+                     </c:choose>
+							</a></td>
 						<td>${board.runner_data_distance}M</td>
 						<td>
 							<fmt:formatNumber type="number" maxFractionDigits="0" value="${time/(60*60)}"/>시

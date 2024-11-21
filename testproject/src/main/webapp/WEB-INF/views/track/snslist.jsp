@@ -87,7 +87,7 @@ function getsearchfisrt() {
 				<c:forEach var="board" items="${list }">
 					<tr>
 						<td>${no1}</td>
-						<td>${board.user_id}</td>
+						<td>${board.user_nickname}</td>
 						<td><a
 							href="sns_detail?pageNum=${pageNum}&sns_no=${board.sns_no}">${board.sns_subject}</a></td>
 
@@ -186,7 +186,7 @@ function getsearchfisrt() {
 
 
 		</ul>
-
+	<div style="display:flex; justify-content: center;">
 		<select name="search"
 			style="width: 100px; height: 30px; font-size: 14px;">
 			<option value="">검색</option>
@@ -195,7 +195,8 @@ function getsearchfisrt() {
 			<option value="sns_content">내용</option>
 			<option value="subcon">제목+내용</option>
 		</select> <input type="text" id="keyword" name="keyword">
-		<button type="button" onclick="getsearchfisrt()">확인</button>
+		<button type="button" class="search" onclick="getsearchfisrt()"><span class="material-symbols-outlined">search</span></button>
+	</div>
 	</div>
 </body>
 </html>

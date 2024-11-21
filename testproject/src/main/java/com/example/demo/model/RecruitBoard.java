@@ -30,5 +30,7 @@ public class RecruitBoard {
 	// page
 	private int startRow;
 	private int endRow;
+	
+	private String user_nickname;
 
 }
