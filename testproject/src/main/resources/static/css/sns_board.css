@@ -1,42 +1,39 @@
 .main-title {
-    font-size: 48px;
-    font-weight: 700;
-    margin-bottom: 20px;
+	font-size: 48px;
+	font-weight: 700;
+	margin-bottom: 20px;
 }
 
 .content-wrapper {
-    display: flex;
-    gap: 20px;
-    flex-wrap: wrap;
+	display: flex;
+	gap: 20px;
+	flex-wrap: wrap;
 }
 
-.track,
-.locationbox {
-    margin-left: 50px;
+.track, .locationbox {
+	margin-left: 50px;
 }
-
 
 .hot {
-    float: right;
-    margin-right: 60px;
-    width: 80px;
-    height: 30px;
-    border: 1px solid;
-    border-radius: 5px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+	float: right;
+	margin-right: 60px;
+	width: 80px;
+	height: 30px;
+	border: 1px solid;
+	border-radius: 5px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
 .hot.active {
-	background-color:  #cf3e00;
+	background-color: #cf3e00;
 }
 
-
 .hot_text {
-    font-weight: 600;
-    text-decoration: none;
-    color: #cf3e00;
+	font-weight: 600;
+	text-decoration: none;
+	color: #cf3e00;
 }
 
 .hot_text.active {
@@ -44,132 +41,122 @@
 }
 
 table {
-    border-collapse: collapse;
-    width: 1200px;
-    margin-top: 50px;
-    margin-left: auto;
-    margin-right: auto;
+	border-collapse: collapse;
+	width: 1200px;
+	margin-top: 50px;
+	margin-left: auto;
+	margin-right: auto;
 }
 
-th,
-td {
-    padding: 8px;
-    text-align: center;
-    border-bottom: 1px solid #ddd;
+th, td {
+	padding: 8px;
+	text-align: center;
+	border-bottom: 1px solid #ddd;
 }
 
 tr:hover {
-    background-color: #b4b4b4;
+	background-color: #b4b4b4;
 }
 
-.col1,
-.col6
+.col1, .col6
 .col7 {
-    width: 80px;
+	width: 80px;
 }
 
-.col3{
-   width: 300px;
+.col3 {
+	width: 300px;
 }
-
-
 
 .write {
-    text-decoration: none;
-    width: fit-content;
-    margin-left: auto;
-    margin-right: 50px;
-    background-color: #82c8a0;
-    color: white;
-    padding: 5px 15px;
-    display: block;
-    border: 1px solid rgba(0, 0, 0, 0.21);
-    border-bottom: 4px solid rgba(0, 0, 0, 0.21);
-    border-radius: 4px;
-    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.15);
-
+	text-decoration: none;
+	width: fit-content;
+	margin-left: auto;
+	margin-right: 50px;
+	background-color: #82c8a0;
+	color: white;
+	padding: 5px 15px;
+	display: block;
+	border: 1px solid rgba(0, 0, 0, 0.21);
+	border-bottom: 4px solid rgba(0, 0, 0, 0.21);
+	border-radius: 4px;
+	text-shadow: 0 1px 0 rgba(0, 0, 0, 0.15);
 }
 
 .write:hover {
-    background-color: #7AB9A2;
+	background-color: #7AB9A2;
 }
 
 select {
-    width: 150px;
-    padding: 6px 10px;
-    font-size: 0.9rem;
-    border: 1px solid #333;
-    border-radius: 0;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    outline: none;
+	width: 150px;
+	padding: 6px 10px;
+	font-size: 0.9rem;
+	border: 1px solid #333;
+	border-radius: 0;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+	outline: none;
 }
 
 .detail {
-    color: black;
-    text-decoration: none;
+	color: black;
+	text-decoration: none;
 }
 
 .detail:hover {
-    text-decoration: underline;
+	text-decoration: underline;
 }
 
-
-
-@media (max-width: 1200px) {
-
-    .track,
-    .locationbox {
-        margin-left: 0;
-    }
-
-    .hot {
-        float: none;
-        margin-right: 0;
-        margin-top: 10px;
-    }
-
-    table {
-        width: 100%;
-    }
-
+.search {
+	height: 28px;
+	width: 43px;
+	background-color: #E1ECF4;
+	color: #7aa7f4;
+	border-color: #7aa7f4;
+	border-width: 1px;
+	border-radius: 5px;
+	font-weight: 600;
 }
 
-
-@media (max-width: 768px) {
-
-    table {
-        font-size: 14px;
-    }
-
-    .col1,
-    .col6,
-    .col7 {
-        width: auto;
-    }
-
+.search:hover {
+	background-color: #b3d3ea;
 }
 
-@media (max-width: 425px) {
+@media ( max-width : 1200px) {
+	.track, .locationbox {
+		margin-left: 0;
+	}
+	.hot {
+		float: none;
+		margin-right: 0;
+		margin-top: 10px;
+	}
+	table {
+		width: 100%;
+	}
+}
 
-    .track span:first-child {
-        font-size: 24px;
-    }
+@media ( max-width : 768px) {
+	table {
+		font-size: 14px;
+	}
+	.col1, .col6, .col7 {
+		width: auto;
+	}
+}
 
-    .locationbox select {
-        width: 100%;
-        margin-bottom: 10px;
-    }
-
-    table {
-        font-size: 12px;
-    }
-
-    .col2,
-    .col3,
-    .col4 {
-        display: none;
-    }
-
+@media ( max-width : 425px) {
+	.track span:first-child {
+		font-size: 24px;
+	}
+	.locationbox select {
+		width: 100%;
+		margin-bottom: 10px;
+	}
+	table {
+		font-size: 12px;
+	}
+	.col2, .col3, .col4 {
+		display: none;
+	}
 }

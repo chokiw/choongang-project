@@ -78,7 +78,7 @@ $(function() {
 					<a href="${pageContext.request.contextPath}/mypage">
 						<img src="${pageContext.request.contextPath}/uimg/${userphoto}" class="myimg">
 					</a>
-					<a href="${pageContext.request.contextPath}/mypage">
+					<a class="userpage" href="${pageContext.request.contextPath}/mypage">
 					<span style="font-size: 14px; font-weight: 600; font-family: 'Gothic A1', sans-serif; margin-top: 15px; margin-left: 10px;">${nickname}</span>
 					</a>
 				</c:when>
@@ -88,7 +88,7 @@ $(function() {
 				<a href="${pageContext.request.contextPath}/userpage?user_id=${board.user_id}">
 					<img src="${pageContext.request.contextPath}/uimg/${userphoto}" class="myimg">
 				</a>
-				<a href="${pageContext.request.contextPath}/userpage?user_id=${board.user_id}">
+				<a class="userpage" href="${pageContext.request.contextPath}/userpage?user_id=${board.user_id}">
 				<span style="font-size: 14px; font-weight: 600; font-family: 'Gothic A1', sans-serif; margin-top: 15px; margin-left: 10px;">${nickname}</span>
 				</a>
 				</c:otherwise>
@@ -294,8 +294,8 @@ $(function() {
 					<c:when test="${member.user_id eq board.user_id}">
 						<a class="delete"
 							href="sns_update?pageNum=${pageNum}&sns_no=${board.sns_no}"
-							style="display: inline-block;"> <i
-							class="fa-solid fa-file-pen"></i>&nbsp;수정
+							style="display: inline-block;"><span
+                     class="material-symbols-outlined"> edit_note </span> &nbsp;수정
 						</a>
 
 						<!-- 삭제버튼 누르면 바로 삭제 완료 alet뜨게함 -->
@@ -303,7 +303,8 @@ $(function() {
 							<input type="hidden" name="pageNum" value="${pageNum}"> <input
 								type="hidden" name="sns_no" value=${board.sns_no }>
 							<button type="submit" class="delete button-style">
-								<i class="fa-regular fa-trash-can"></i>&nbsp;삭제
+								<span
+                     class="material-symbols-outlined"> delete </span>&nbsp;삭제
 							</button>
 						</form>
 
@@ -312,11 +313,12 @@ $(function() {
 					<c:otherwise>
 						<a class="delete"
 							href="sns_update?pageNum=${pageNum}&sns_no=${board.sns_no}"
-							style="display: none;"> <i class="fa-solid fa-file-pen"></i>&nbsp;수정
+							style="display: none;"><span
+                     class="material-symbols-outlined"> edit_note </span>&nbsp;수정
 						</a>
 
-						<a class="delete" href="snsdelete" style="display: none;"> <i
-							class="fa-regular fa-trash-can"></i>&nbsp;삭제
+						<a class="delete" href="snsdelete" style="display: none;"><span
+                     class="material-symbols-outlined"> delete </span>&nbsp;삭제
 						</a>
 					</c:otherwise>
 				</c:choose>
@@ -324,8 +326,8 @@ $(function() {
 
 
 
-				<a class="delete" href="javascript:history.back();"><i
-					class="fa-solid fa-table-list"></i>&nbsp;글목록</a>
+				<a class="delete" href="javascript:history.back();"><span
+               class="material-symbols-outlined"> format_list_bulleted </span>&nbsp;글목록</a>
 			</div>
 			<div id="srlist"></div>
 			

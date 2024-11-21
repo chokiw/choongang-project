@@ -3,45 +3,46 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.example.demo.dao.MateBoardDAO">
-	<!-- sns게시판 갯수 불러오기 -->
-	<select id="getrecruitTotal" parameterType="recruit" resultType="int">
-		select count(*) from recruit
-		<where>
-			<if test="keyword != null and search !='subcon'">
-				${search} like '%'||#{keyword}||'%'
-			</if>
-			<if test="keyword != null and search=='subcon'">
-				recruit_subject like '%'||#{keyword}||'%' or
-				recruit_content like
-				'%'||#{keyword}||'%'
-			</if>
-			<!-- 지역별로 가져오게 조건 추가 -->
-			<if test="recruit_address2 != null">
-				recruit_address2 like '%'||#{recruit_address2}||'%'
-			</if>
-			and recruit_del = 0
-		</where>
-	</select>
-	<!-- 페이지 처리에 의한 sns게시판 데이터리스트 불러오기 -->
-	<select id="recruitList" parameterType="recruit" resultType="recruit">
-		select * from (select a.*,rowNum rn from (
-		select * from recruit
-		<where>
-			<if test="keyword != null and search!='subcon'">
-				${search} like '%'||#{keyword}||'%'
-			</if>
-			<if test="keyword != null and search=='subcon'">
-				recruit_subject like '%'||#{keyword}||'%' or
-				recruit_content like
-				'%'||#{keyword}||'%'
-			</if>
-				<!-- 지역별로 가져오게 조건 추가 -->
-			<if test="recruit_address2 != null">
-				recruit_address2  like '%'||#{recruit_address2}||'%'
-			</if>
-			and recruit_del = 0			
-		</where>
-		order by recruit_no desc) a )
-		where rn between #{startRow} and #{endRow}
-	</select>
+	 <!-- 메이트게시판 갯수 불러오기 -->
+   <select id="getrecruitTotal" parameterType="recruit" resultType="int">
+      select count(*) from recruit
+       INNER JOIN runner ON recruit.user_id = runner.user_id
+      <where>
+         <if test="keyword != null and search !='subcon'">
+            ${search} like '%'||#{keyword}||'%'
+         </if>
+         <if test="keyword != null and search=='subcon'">
+            recruit_subject like '%'||#{keyword}||'%' or
+            recruit_content like
+            '%'||#{keyword}||'%'
+         </if>
+         <!-- 지역별로 가져오게 조건 추가 -->
+         <if test="recruit_address2 != null">
+            recruit_address2 like '%'||#{recruit_address2}||'%'
+         </if>
+      </where>
+   </select>
+	<!-- 페이지 처리에 의한 메이트게시판 데이터리스트 불러오기 -->
+   <select id="recruitList" parameterType="recruit" resultType="recruit">
+      select * from (select a.*,rowNum rn from (
+       SELECT recruit.*, runner.user_nickname
+            FROM recruit
+            INNER JOIN runner ON recruit.user_id = runner.user_id
+      <where>
+         <if test="keyword != null and search!='subcon'">
+            ${search} like '%'||#{keyword}||'%'
+         </if>
+         <if test="keyword != null and search=='subcon'">
+            recruit_subject like '%'||#{keyword}||'%' or
+            recruit_content like
+            '%'||#{keyword}||'%'
+         </if>
+            <!-- 지역별로 가져오게 조건 추가 -->
+         <if test="recruit_address2 != null">
+            recruit_address2  like '%'||#{recruit_address2}||'%'
+         </if>
+      </where>
+      order by recruit_no desc) a )
+      where rn between #{startRow} and #{endRow}
+   </select>
 </mapper>

@@ -84,10 +84,10 @@
 }
 
 button:disabled {
-    background-color: #d3d3d3; /* 회색 */
-    color: #a9a9a9; /* 텍스트 회색 */
-    cursor: not-allowed; /* 마우스 커서 변경 */
-    border: 1px solid #d3d3d3; /* 테두리도 회색 */
+	background-color: #d3d3d3; /* 회색 */
+	color: #a9a9a9; /* 텍스트 회색 */
+	cursor: not-allowed; /* 마우스 커서 변경 */
+	border: 1px solid #d3d3d3; /* 테두리도 회색 */
 }
 
 .action-button {
@@ -146,7 +146,7 @@ button:disabled {
 }
 
 .material-symbols-outlined {
-    vertical-align: middle;
+	vertical-align: middle;
 }
 
 .action-buttons {
@@ -158,6 +158,19 @@ button:disabled {
 /* 호버 효과 (선택적) */
 .delete:hover, .button-style:hover {
 	color: #007bff; /* 호버 시 색상 변경 */
+}
+/* 상대방 마이페이지 들어갈때 링크 css */
+.userpage:link {
+	color: black;
+	text-decoration: none;
+}
+
+.userpage:hover {
+	text-decoration: underline;
+}
+
+.userpage:visited {
+	color: black;
 }
 
 @media ( max-width : 1200px) {
@@ -198,7 +211,6 @@ button:disabled {
 	}
 	.action-buttons {
 		flex-wrap: wrap;
-		
 	}
 	.image-container {
 		width: 85%;

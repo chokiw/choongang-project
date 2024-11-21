@@ -1,36 +1,41 @@
 @charset "UTF-8";
 
-  .pagination {
-    display: flex; /* 페이지 번호를 가로로 배치 */
-    justify-content: center;
-    list-style-type: none; /* 기본 bullet point 제거 */
-    padding: 0; /* 기본 패딩 제거 */
- }
-  
-  .pagination li {
-    margin: 0 5px; /* 페이지 번호 간격 조정 */
- }
-  
-  .pagination li a {
-    text-decoration: none; /* 링크의 밑줄 제거 */
-    color: black;
- }
-  
-  .pagination .active a {
-    font-weight: 600; /* 현재 페이지 강조 표시 */
-    color: blue; /* 강조 표시 색상 */
- }
-  input[name="keyword"] {
-    height: 15px; /* 원하는 높이로 설정하세요 */
-    padding: 5px;
-    font-size: 14px;
- }
- 
-.list a:link{
+.pagination {
+	display: flex; /* 페이지 번호를 가로로 배치 */
+	justify-content: center;
+	list-style-type: none; /* 기본 bullet point 제거 */
+	padding: 0; /* 기본 패딩 제거 */
+}
+
+.pagination li {
+	margin: 0 5px; /* 페이지 번호 간격 조정 */
+}
+
+.pagination li a {
+	text-decoration: none; /* 링크의 밑줄 제거 */
+	color: black;
+}
+
+.pagination .active a {
+	font-weight: 600; /* 현재 페이지 강조 표시 */
+	color: blue; /* 강조 표시 색상 */
+}
+
+input[name="keyword"] {
+	height: 15px; /* 원하는 높이로 설정하세요 */
+	padding: 5px;
+	font-size: 14px;
+}
+
+.list a:link {
 	color: black;
 	text-decoration: none;
 }
 
-.list a:hover{
+.list a:hover {
 	text-decoration: underline;
+}
+
+.list a:visited{
+   color: black;
 }
