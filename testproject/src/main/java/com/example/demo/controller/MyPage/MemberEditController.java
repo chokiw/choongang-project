@@ -55,9 +55,6 @@ public class MemberEditController {
 		String newfilename = "";
 		String path = session.getServletContext().getRealPath("uimg");
 //		System.out.println("mf=" + mf);
-		System.out.println("filename=" + filename); 	// filename="Koala.jpg"
-		System.out.println("size=" + size);
-		System.out.println("Path=" + path);
 		
 		if (size > 0) { // 첨부파일이 전송된 경우
 
@@ -65,13 +62,10 @@ public class MemberEditController {
 			Date d = new Date();
 			SimpleDateFormat sd = new SimpleDateFormat("_yyyyMMdd_HH_mm_ss");
 			String newdate = sd.format(d);
-			System.out.println("newdate:"+newdate);  
 			
 			String extension = filename.substring(filename.lastIndexOf("."), filename.length());
-			System.out.println("extension:"+extension);  // extension: .jpg
 
 			newfilename = runner.getUser_id() + newdate + extension;
-			System.out.println("newfilename:"+newfilename);		
 
 			// 용량 초과시
 			if (size > 100000) { // 100KB
