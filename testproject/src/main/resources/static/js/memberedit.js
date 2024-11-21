@@ -51,7 +51,7 @@ $(document).ready(function() {
 			profileImgDiv.empty(); // 기존 이미지 제거
 			let defaultImage = $('<img>').attr('src', 'https://cdn.pixabay.com/photo/2021/07/02/04/48/user-6380868_1280.png');
 			profileImgDiv.append(defaultImage); // 기본 이미지 삽입
-
+			$("#basicPhoto").val("basic");
 			$("input[type='file']").val('');
 	});
 
