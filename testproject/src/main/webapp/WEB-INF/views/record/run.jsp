@@ -8,6 +8,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Gothic+A1&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Gothic+A1&display=swap" rel="stylesheet">
@@ -64,8 +65,8 @@ $(document).ready(function(){
 	$('#store').click(function(){
 		if(t_path!=null) {
 			coords = where();
-		    var Lat=coords.getLat()+(sec/10000);
-		    var Lng=coords.getLng()+(sec/10000);
+		    var Lat=coords.getLat();
+		    var Lng=coords.getLng();
 		    coords=new kakao.maps.LatLng(Lat, Lng);
 		    path = clickLine.getPath();
 		    path.push(coords);

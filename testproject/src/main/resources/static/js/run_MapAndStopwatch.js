@@ -171,7 +171,7 @@
 		    clickLine.setPath(path);
 		    draw(clickLine.getPath());
 		    map.setCenter(coords);
-			if((sec%10)==0) {
+			if(sec==29 || sec==59) {
 				t_path.push(Lat);
 				t_path.push(Lng);		
 			}

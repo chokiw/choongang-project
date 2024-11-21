@@ -38,6 +38,7 @@ function getlist(pageNum){
 </script>
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <meta charset="UTF-8">
+<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
 <title>Insert title here</title>
 </head>
 <body>

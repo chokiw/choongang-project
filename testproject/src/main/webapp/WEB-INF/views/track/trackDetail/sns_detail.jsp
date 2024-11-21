@@ -11,6 +11,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
 <link
 	href="https://fonts.googleapis.com/css2?family=Bangers&family=Gothic+A1&display=swap"
 	rel="stylesheet">
@@ -233,7 +234,8 @@ $(function() {
 			<!-- 추천 버튼 -->
 			<div class="recomend_box">
 				<a href="#" class="recomend"
-					onclick="toggleLike(event, ${board.sns_no})"> <br> <c:choose>
+					onclick="toggleLike(event, ${board.sns_no})"> <br> 
+					<c:choose>
 						<c:when test="${fn:length(goodList) > 0}">
 							<c:forEach var="good" items="${goodList}">
 								<c:if
@@ -269,7 +271,6 @@ $(function() {
 		                 },
 		                 body: 'sns_no=' + encodeURIComponent(sns_no) // 데이터를 body에 전달
 		             })
-		             .then(response => response.json())
 		             .then(data => {
 		                 console.log("좋아요 토글 결과:", data);
 		                 location.reload(); // 새로고침

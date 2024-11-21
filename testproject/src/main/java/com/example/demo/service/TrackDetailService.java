@@ -28,18 +28,19 @@ public class TrackDetailService {
 	
 	@Transactional
     public boolean toggleGood(String user_id, int sns_no) {
-        boolean hasLiked = dao.checkGood(user_id, sns_no) > 0;
-        System.out.println("user_id: " + user_id + ", sns_no: " + sns_no);
-
+        boolean hasLiked = true;
+        if(dao.checkGood(user_id, sns_no) > 0) {
+        	hasLiked=true;
+        }else hasLiked=false;
         if (hasLiked) {
             int deleteResult = dao.good_delete(user_id, sns_no);
             int minusResult = dao.good_minus(user_id, sns_no);
-
             if (deleteResult > 0 && minusResult > 0) {
                 return false; // 추천 취소 상태
             } else {
                 throw new RuntimeException("좋아요 취소에 실패했습니다.");
             }
+            
         } else {
             int insertResult = dao.good_insert(user_id, sns_no);
             int plusResult = dao.good_plus(user_id, sns_no);

@@ -27,6 +27,7 @@ function getlist(pageNum){
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 
 <meta charset="UTF-8">
+<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
 <title>User's Post List</title>
 </head>
 <body>
