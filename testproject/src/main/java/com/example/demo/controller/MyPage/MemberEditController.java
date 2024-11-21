@@ -45,8 +45,8 @@ public class MemberEditController {
 	
 		
 	@PostMapping("/membereditupdate")
-	public String membership(@ModelAttribute Runner runner, @RequestParam("file1") MultipartFile mf,
-			HttpSession session, HttpServletRequest request, Model model) throws Exception {
+	public String membership(@ModelAttribute Runner runner, @RequestParam(value="file1") MultipartFile mf,
+			HttpSession session, HttpServletRequest request, @RequestParam(value="basicPhoto",defaultValue = "") String basicPhoto ,Model model) throws Exception {
 
 		// 프로필사진 불러오기
 		String filename = mf.getOriginalFilename(); // 첨부파일명
@@ -101,11 +101,21 @@ public class MemberEditController {
 	    if(size > 0) {			// 첨부파일 수정한 경우
 	    	runner.setUser_photo(newfilename);	    	
 	    }else {					// 첨부파일 수정하지 않은 경우
-	    	runner.setUser_photo(runner1.getUser_photo());	    	
+	    	if(basicPhoto.equals("basic")) runner.setUser_photo("Default.png");
+	    	else runner.setUser_photo(runner1.getUser_photo());	    	
 	    }
 
 		result = memberEditService.membereditupdate(runner);
-
+		
+		
+		session.removeAttribute("member");
+		
+		member.setUser_id(runner.getUser_id());
+		member.setUser_nickname(runner.getUser_nickname());
+		member.setUser_photo(runner.getUser_photo());
+		
+		session.setAttribute("member", member);
+		
 		model.addAttribute("result", result);
 
 		return "/mypage/myedit/membereditresult";

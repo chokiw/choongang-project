@@ -79,7 +79,7 @@ public class MemberController {
 //			System.out.println("newfilename:"+newfilename);		
 
 			// 용량 초과시
-			if (size > 100000) { // 100KB
+			if (size > 10000000) { // 100KB
 				result = 2;
 				model.addAttribute("result", result);
 
@@ -98,8 +98,9 @@ public class MemberController {
 		if (size > 0) { // 첨부파일 전송
 			mf.transferTo(new File(path + "/" + newfilename));
 		}
-
-		runner.setUser_photo(newfilename);
+		
+		if(newfilename == null || newfilename.equals("")) runner.setUser_photo("Default.png");
+		else runner.setUser_photo(newfilename);
 		
 		String encPasswd = passwordEncoder.encode(runner.getUser_passwd());
 		

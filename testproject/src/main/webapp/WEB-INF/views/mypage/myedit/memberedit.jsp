@@ -64,6 +64,7 @@
       <form method="post" action="/membereditupdate"
          enctype="multipart/form-data" id="edit_form"
          onsubmit="return confirmWithdraw() && check()">
+         <input type="hidden" id="basicPhoto" name="basicPhoto" value="">
          <div class="form" id="form_content">
 
             <!-- <span>아이디</span><br>  -->
@@ -79,7 +80,7 @@
                         style="width: 150px; height: 150px; border-radius: 50%;">
                   </c:if>
                   <c:if test="${memberinfo.user_photo == null}">
-                      <img src="https://cdn.pixabay.com/photo/2021/07/02/04/48/user-6380868_1280.png"
+                      <img src="/uimg/Default.png"
                           id="user_photo"
                           style="width: 150px; height: 150px; border-radius: 50%;">
                   </c:if>
