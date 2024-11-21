@@ -115,7 +115,20 @@ select {
     text-decoration: underline;
 }
 
+.search{
+		margin-top: 10px;
+        height: 28px;
+        width: 43px;
+        background-color: #E1ECF4;
+        color: #7aa7f4;
+        border-color: #7aa7f4;
+        border-width: 1px;
+        border-radius: 5px;
+    }
 
+.search:hover{
+        background-color: #b3d3ea;
+    }
 
 @media (max-width: 1200px) {
 

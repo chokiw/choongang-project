@@ -189,7 +189,7 @@ function getAddressList(pageNum, sns_address1, sns_address2) {
                     <option value="중구">중구</option>
                     <option value="중랑구">중랑구</option>
                 </select>
-                <button type="submit">이동</button>
+                <button type="submit" class="search">이동</button>
                 </form>	
 
 

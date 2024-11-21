@@ -194,7 +194,9 @@ function getsearchfisrt() {
 			<option value="sns_content">내용</option>
 			<option value="subcon">제목+내용</option>
 		</select> <input type="text" id="keyword" name="keyword">
-		<button type="button" onclick="getsearchfisrt()">확인</button>
+		<button type="button"  class="search" onclick="getsearchfisrt()"><span class="material-symbols-outlined">
+search
+</span></button>	
 	</div>
 </body>
 </html>
