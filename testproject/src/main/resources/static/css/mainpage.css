@@ -216,8 +216,8 @@ a {
 
     .trackimg {
         max-width: 100%;
-        height: auto;
-        max-height: 250px;
+        height: 250px;
+       
     }
 
     .nickname2 {
@@ -299,7 +299,7 @@ a {
 
     .trackimg {
         width: 100%;
-        height: auto;
+        height: 250px;
         max-width: 250px;
         object-fit: cover;
     }

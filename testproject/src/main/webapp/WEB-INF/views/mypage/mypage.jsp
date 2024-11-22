@@ -80,7 +80,7 @@
 			<div class="recordbox">
 				<div align="center">
 					<span class="content1">총 달린 거리</span><br> <br> <span
-						class="content2">${runner.user_distance}</span>
+						class="content2"> <fmt:formatNumber value="${runner.user_distance / 1000}" pattern="#,##0.00"/>km</span>
 				</div>
 
 				<div class="crossline"></div>
