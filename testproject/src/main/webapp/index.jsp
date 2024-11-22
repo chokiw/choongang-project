@@ -8,7 +8,7 @@
 </head>
 <body>
 	<script type="text/javascript">
-		location.href="loginpage";
+		location.href="/loginpage";
 	</script>
 </body>
 </html>

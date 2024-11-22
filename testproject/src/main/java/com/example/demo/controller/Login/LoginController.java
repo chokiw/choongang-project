@@ -6,6 +6,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -28,19 +29,20 @@ public class LoginController {
 	// 로그인 페이지로 이동
 	@RequestMapping("/loginpage")
 	public String loginpage() {
-		return "/login/login";
+		System.out.println("loginpage");
+		return "login/login";
 	}
 
 	// 아이디 찾기 창으로 이동
 	@RequestMapping("/find_id")
 	public String find_id() {
-		return "/login/find_id";
+		return "login/find_id";
 	}
 
 	// 비번찾기창으로 이동
 	@RequestMapping("/find_pass")
 	public String find_pass() {
-		return "/login/find_pass";
+		return "login/find_pass";
 	}
 
 	// 아이디 찾기 액션
@@ -49,12 +51,12 @@ public class LoginController {
 		Runner run = service.findid(runner);
 
 		if (run == null) {
-			return "/login/id_result";
+			return "login/id_result";
 		} else {
 			String id = run.getUser_id();
 
 			model.addAttribute("id", id);
-			return "/login/id_ok";
+			return "login/id_ok";
 		}
 	}
 
