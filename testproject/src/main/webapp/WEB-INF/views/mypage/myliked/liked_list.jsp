@@ -64,7 +64,7 @@
 				<c:forEach var="board" items="${likedPosts}">
 					<tr>
 						<td>${no1}</td>
-						<td>${board.user_id}</td>
+						<td>${board.user_nickname}</td>
 						<td><a
 							href="sns_detail?pageNum=${pageNum}&sns_no=${board.sns_no}">${board.sns_subject}</a></td>
 							

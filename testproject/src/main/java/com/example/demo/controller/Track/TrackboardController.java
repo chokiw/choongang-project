@@ -86,7 +86,7 @@ public class TrackboardController {
 	}
 	
 	@RequestMapping("/snslist")
-	public String snslist(@RequestParam(value = "pageNum", defaultValue = "1") String pageNum, SnsBoard sns,
+	public String snslist(@RequestParam(value = "pageNum", defaultValue = "1") String pageNum, SnsBoard sns, 
 			Model model) {
 		final int rowPerPage = 10;
 		if (pageNum == null || pageNum.equals("")) {
@@ -109,7 +109,10 @@ public class TrackboardController {
 		int no = total - startRow + 1;
 		//System.out.println("no:" + no);
 		//불러온 게시판 데이터 리스트에 담기
+		
+		
 		List<SnsBoard> list = service.list(sns);
+		
 		model.addAttribute("list", list);
 		model.addAttribute("pageNum", pageNum);
 		model.addAttribute("no", no);
@@ -119,6 +122,7 @@ public class TrackboardController {
 		model.addAttribute("keyword", sns.getKeyword());
 		model.addAttribute("sns_address1", sns.getSns_address1());
 		model.addAttribute("sns_address2", sns.getSns_address2());
+		
 		return "track/snslist";
 	}
 }

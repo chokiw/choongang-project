@@ -10,11 +10,30 @@
 		where user_id = #{user_id}
 	</select>
 	<!-- 내가 좋아요 누른 글 목록 -->
-	<select id="getLikedPosts" parameterType="sns" resultType="sns">
+<!-- 	<select id="getLikedPosts" parameterType="sns" resultType="sns">
 		select * from
 		(select rownum as rn,s.* 
 		from sns s where sns_no in (select sns_no from good where user_id = #{user_id}) 
 		order by sns_date desc) 
 		where rn between #{startRow} and #{endRow}
-	</select>
+	</select> -->
+	
+	<select id="getLikedPosts" parameterType="sns" resultType="sns">
+    SELECT * FROM (
+        SELECT ROWNUM AS rn, subquery.*
+        FROM (
+            SELECT s.*, r.user_nickname
+            FROM sns s
+            INNER JOIN runner r ON s.user_id = r.user_id
+            WHERE s.sns_no IN (
+                SELECT sns_no 
+                FROM good 
+                WHERE user_id = #{user_id}
+            )
+            ORDER BY s.sns_date DESC
+        ) subquery
+    )
+    WHERE rn BETWEEN #{startRow} AND #{endRow}
+</select>
+	
 </mapper>

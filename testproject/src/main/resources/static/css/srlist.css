@@ -55,6 +55,7 @@
 
         .re_content {
             font-size: 14px;
+            word-wrap: break-word; /* 긴 단어가 있을 때 줄 바꿈 */
             font-family: 'Gothic A1', sans-serif;
         }
 

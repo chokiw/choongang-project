@@ -56,7 +56,7 @@ function getsearchfisrt() {
 </head>
 <body>
 	<div align="center">
-		<h2>게시판 목록</h2>
+		
 		<table class="list">
 			<colgroup>
 				<col class="col1">
@@ -85,7 +85,7 @@ function getsearchfisrt() {
 				<c:forEach var="board" items="${list }">
 					<tr>
 						<td>${no1}</td>
-						<td>${board.user_id}</td>
+						<td>${board.user_nickname}</td>
 						<td><a
 							href="mate_detail?pageNum=${pageNum}&recruit_no=${board.recruit_no}">${board.recruit_subject}</a></td>
 							
@@ -159,15 +159,18 @@ function getsearchfisrt() {
 			
 		</ul>
 
+<div style="display:flex; justify-content: center;">
 		<select name="search"
 			style="width: 100px; height: 30px; font-size: 14px;">
 			<option value="">검색</option>
-			<option value="user_id">아이디</option>
+			<option value="user_nickname">작성자</option>
 			<option value="recruit_subject">제목</option>
 			<option value="recruit_content">내용</option>
 			<option value="subcon">제목+내용</option>
 		</select> <input type="text" id="keyword" name="keyword">
-		<button type="button" onclick="getsearchfisrt()">확인</button>
+		<button type="button" class="search" onclick="getsearchfisrt()"><span class="material-symbols-outlined">search</span></button>
+	</div>
+		
 	</div>
 </body>
 </html>

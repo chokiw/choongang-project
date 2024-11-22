@@ -7,16 +7,7 @@
 	<select id="listBest" parameterType="sns" resultType="sns">
 		select * from (select a.*, rowNum rn from (
 		select * from sns
-		<where>
-			<if test="keyword != null and search!='subcon'">
-				${search} like '%'||#{keyword}||'%'
-			</if>
-			<if test="keyword != null and search=='subcon'">
-				sns_subject like '%'||#{keyword}||'%' or
-				sns_content like
-				'%'||#{keyword}||'%'
-			</if>
-		</where>
+		
 		order by sns_good desc, sns_date desc
 		) a)
 		where rn between #{startRow}
@@ -25,7 +16,9 @@
 
 	<!-- sns게시판 갯수 불러오기 -->
 	<select id="getTotal" parameterType="sns" resultType="int">
-		select count(*) from sns
+		select count(*)
+		 FROM sns
+   		 INNER JOIN runner ON sns.user_id = runner.user_id
 		<where>
 			<if test="keyword != null and search !='subcon'">
 				${search} like '%'||#{keyword}||'%'
@@ -42,7 +35,7 @@
 	</select>
 
 	<!-- 페이지 처리에 의한 sns게시판 데이터리스트 불러오기 -->
-	<select id="list" parameterType="sns" resultType="sns">
+	<!-- <select id="list" parameterType="sns" resultType="sns">
 		select * from (select a.*,rowNum rn from (
 		select * from sns
 		<where>
@@ -59,5 +52,30 @@
 		</where>
 		order by sns_no desc) a )
 		where rn between #{startRow} and #{endRow}
-	</select>
+	</select> -->
+	
+	<!-- user_nickname값을 포함한 조인문 사용 -->
+	<select id="list" parameterType="sns" resultType="sns">
+    SELECT * FROM (
+        SELECT a.*, ROWNUM rn FROM (
+            SELECT sns.*, runner.user_nickname
+            FROM sns
+            INNER JOIN runner ON sns.user_id = runner.user_id
+            <where>
+                <if test="keyword != null and search != 'subcon'">
+                    ${search} LIKE '%'||#{keyword}||'%'
+                </if>
+                <if test="keyword != null and search == 'subcon'">
+                    (sns.sns_subject LIKE '%'||#{keyword}||'%' OR
+                    sns.sns_content LIKE '%'||#{keyword}||'%')
+                </if>
+                <if test="sns_address2 != null">
+                    AND sns.sns_address2 LIKE '%'||#{sns_address2}||'%'
+                </if>
+            </where>
+            ORDER BY sns.sns_no DESC
+        ) a
+    )
+    WHERE rn BETWEEN #{startRow} AND #{endRow}
+</select>
 </mapper>

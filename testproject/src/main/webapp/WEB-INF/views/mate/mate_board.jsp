@@ -91,9 +91,9 @@
 
         <main class="content">
             <div class="track">
-                <span style="font-size: 36px; font-weight: 700;">메이트 게시판</span><br><br>
+                <span style="font-size: 36px; font-weight: 700;">메이트 게시판</span><br>
                 <span style="color: gray;">함께 달리고 싶은 사람을 모집하고 신청할 수 있습니다.</span>
-            </div>
+            </div><br>
 
             <div class="locationbox">
 	<form>
@@ -129,7 +129,7 @@
                     <option value="중구">중구</option>
                     <option value="중랑구">중랑구</option>
                 </select>
-                 <button type="submit">이동</button>
+                 <button type="submit" class="search">이동</button>
 				</form>	
             </div>
             <div id="board">

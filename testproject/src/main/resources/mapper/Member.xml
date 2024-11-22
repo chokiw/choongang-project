@@ -21,6 +21,6 @@
 		#{user_nickname},#{user_jumin1},#{user_jumin2},
 		#{user_emailid},#{user_domain},#{user_phone1},
 		#{user_phone2},#{user_phone3},#{user_address1},
-		#{user_address2},#{user_photo},0,0,#{user_gender},sysdate)
+		#{user_address2},#{user_photo},0,0,#{user_gender},sysdate,0)
 	</insert>
 </mapper>

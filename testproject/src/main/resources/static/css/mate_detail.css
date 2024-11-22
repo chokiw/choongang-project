@@ -160,6 +160,20 @@ button:disabled {
 	color: #007bff; /* 호버 시 색상 변경 */
 }
 
+/* 상대방 마이페이지 들어갈때 링크 css */
+.userpage:link{
+	color: black;
+	text-decoration: none;
+}
+
+.userpage:hover{
+	text-decoration: underline;
+}
+
+.userpage:visited{
+	color: black;
+}
+
 @media ( max-width : 1200px) {
 	.maincontent {
 		flex-direction: column;
